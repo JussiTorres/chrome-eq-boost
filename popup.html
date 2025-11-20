@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chrome EQ Boost</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- SECCIÓN DE ENCABEZADO Y ESTADO -->
+        <h3>🎧 EQ & Volumen Boost</h3>
+        <p id="statusMessage" class="status-message">Inicializando...</p>
+
+        <!-- SECCIÓN DE CONTROLES GENERALES -->
+        <div class="control-group general-controls">
+            <div class="toggle-switch">
+                <label for="toggleEnabled">
+                    <input type="checkbox" id="toggleEnabled" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label">Extensión Habilitada</span>
+            </div>
+            
+            <button id="resetButton" class="reset-button">
+                Restablecer EQ & Vol.
+            </button>
+        </div>
+
+        <hr>
+
+        <!-- SECCIÓN DE VOLUMEN -->
+        <h4 class="section-title">Volumen (Preamp)</h4>
+        <div class="eq-control volume-control">
+            <input type="range" id="volumeSlider" min="0.0" max="4.0" step="0.05" value="1.0">
+            <span id="volumeValue" class="value-display">100%</span>
+        </div>
+
+        <hr>
+
+        <!-- SECCIÓN DE ECUALIZADOR -->
+        <h4 class="section-title">Ecualizador (-12dB a +12dB)</h4>
+
+        <div class="eq-control">
+            <label for="bassSlider">Graves (100 Hz)</label>
+            <input type="range" id="bassSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
+            <span id="bassValue" class="value-display">0 dB</span>
+        </div>
+
+        <div class="eq-control">
+            <label for="midSlider">Medios (1000 Hz)</label>
+            <input type="range" id="midSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
+            <span id="midValue" class="value-display">0 dB</span>
+        </div>
+
+        <div class="eq-control">
+            <label for="trebleSlider">Agudos (8000 Hz)</label>
+            <input type="range" id="trebleSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
+            <span id="trebleValue" class="value-display">0 dB</span>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
