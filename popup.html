@@ -13,53 +13,57 @@
         <h3>🎧 EQ & Volumen Boost</h3>
         <p id="statusMessage" class="status-message">Inicializando...</p>
 
-        <div class="control-group general-controls">
-            <div class="toggle-switch">
-                <label class="toggle-label">Extensión Habilitada</label>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggleEnabled" checked>
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <button id="resetButton" class="reset-button">
-                Restablecer EQ & Vol.
+        <div id="tabConflictPanel" style="display: none; background: #fff3cd; padding: 10px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #ffeeba;">
+            <p style="margin: 0; color: #856404; font-size: 0.9em; text-align: center;">
+                🔊 Otra pestaña está siendo amplificada.
+            </p>
+            <button id="takeOverBtn" style="width: 100%; margin-top: 8px; background: #f59e0b; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                Usar en esta pestaña
             </button>
         </div>
 
-        <hr>
+        <div id="mainControls">
+            <div class="control-group general-controls">
+                <div class="toggle-switch">
+                    <label class="toggle-label">Extensión Habilitada</label>
+                    <label class="switch">
+                        <input type="checkbox" id="toggleEnabled">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <button id="resetButton" class="reset-button">Restablecer EQ & Vol.</button>
+            </div>
 
-        <h4 class="section-title">Volumen (Preamp)</h4>
-        <div class="eq-control volume-control">
-            <input type="range" id="volumeSlider" min="0.0" max="4.0" step="0.05" value="1.0">
-            <span id="volumeValue" class="value-display">100%</span>
-        </div>
+            <hr>
+            <h4 class="section-title">Volumen (Preamp)</h4>
+            <div class="eq-control volume-control">
+                <input type="range" id="volumeSlider" min="0.0" max="4.0" step="0.05" value="1.0">
+                <span id="volumeValue" class="value-display">100%</span>
+            </div>
 
-        <hr>
+            <hr>
 
-        <h4 class="section-title">Ecualizador (-12dB a +12dB)</h4>
+            <h4 class="section-title">Ecualizador (-12dB a +12dB)</h4>
 
-        <div class="eq-control">
-            <label for="bassSlider">Graves (100 Hz)</label>
-            <input type="range" id="bassSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
-            <span id="bassValue" class="value-display">0 dB</span>
-        </div>
+            <div class="eq-control">
+                <label for="bassSlider">Graves (100 Hz)</label>
+                <input type="range" id="bassSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
+                <span id="bassValue" class="value-display">0 dB</span>
+            </div>
 
-        <div class="eq-control">
-            <label for="midSlider">Medios (1000 Hz)</label>
-            <input type="range" id="midSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
-            <span id="midValue" class="value-display">0 dB</span>
-        </div>
+            <div class="eq-control">
+                <label for="midSlider">Medios (1000 Hz)</label>
+                <input type="range" id="midSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
+                <span id="midValue" class="value-display">0 dB</span>
+            </div>
 
-        <div class="eq-control">
-            <label for="trebleSlider">Agudos (8000 Hz)</label>
-            <input type="range" id="trebleSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
-            <span id="trebleValue" class="value-display">0 dB</span>
+            <div class="eq-control">
+                <label for="trebleSlider">Agudos (8000 Hz)</label>
+                <input type="range" id="trebleSlider" min="-12.0" max="12.0" step="0.5" value="0.0">
+                <span id="trebleValue" class="value-display">0 dB</span>
+            </div>
         </div>
     </div>
-
     <script src="popup.js"></script>
 </body>
-
 </html>

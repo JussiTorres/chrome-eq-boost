@@ -1,4 +1,4 @@
-// service_worker.js - Lógica estándar segura
+// service_worker.js - Gestión de ID de Pestaña
 
 async function ensureOffscreen() {
     if (await chrome.offscreen.hasDocument?.()) return;
@@ -20,6 +20,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
                         sendResponse({ success: false });
                         return;
                     }
+                    
+                    // === CAMBIO: Guardar quién es el dueño ===
+                    chrome.storage.local.set({ capturingTabId: msg.tabId });
+                    // ========================================
+
                     chrome.runtime.sendMessage({
                         type: 'INCOMING_STREAM',
                         streamId: streamId
@@ -31,10 +36,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
                 sendResponse({ success: false });
             }
         })();
-        return true; // Indica respuesta asíncrona
+        return true;
     }
 
     if (msg.type === 'STOP_CAPTURE') {
+        // === CAMBIO: Liberar al dueño ===
+        chrome.storage.local.remove('capturingTabId');
+        // ================================
         chrome.runtime.sendMessage({ type: 'STOP_CAPTURE' });
     }
 });

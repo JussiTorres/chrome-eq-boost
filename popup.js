@@ -1,4 +1,4 @@
-// popup.js - FINAL BLINDADO (Timing Fix)
+// popup.js - GESTIÓN DE VENTANAS PERFECCIONADA
 
 const sliderConfigs = [
     { id: 'volumeSlider', display: 'volumeValue', type: 'UPDATE_GAIN', storageKey: 'volumeLevel', default: 1.0, multiplier: 100, suffix: '%' },
@@ -37,110 +37,115 @@ function updateStatusUI(success, isEnabled) {
         return;
     }
 
-    sliders.forEach(s => s.disabled = false);
+    // Solo habilitamos sliders si NO estamos en modo conflicto (ver lógica abajo)
+    const conflictPanel = document.getElementById('tabConflictPanel');
+    if (conflictPanel.style.display === 'none') {
+        sliders.forEach(s => s.disabled = false);
+    }
 
     if (success) {
         status.textContent = "Ecualizador Activo";
-        status.style.color = '#22c55e'; // Verde
+        status.style.color = '#22c55e'; 
     } else {
-        // Solo ponemos naranja si no está ya en verde para evitar parpadeos
         if (status.textContent !== "Ecualizador Activo") {
             status.textContent = "Captura iniciada. Esperando audio...";
-            status.style.color = '#f59e0b'; // Naranja
+            status.style.color = '#f59e0b'; 
         }
     }
 }
 
-// Variable global para controlar el polling y evitar duplicados
 let pollingInterval = null;
 
 function startPolling() {
-    if (pollingInterval) clearInterval(pollingInterval); // Limpiar anterior si existe
-
+    if (pollingInterval) clearInterval(pollingInterval);
     let attempts = 0;
-    const maxAttempts = 40; // ~20 segundos (más paciencia)
-
+    
     pollingInterval = setInterval(() => {
         attempts++;
-        
-        // Usamos el canal privado
         chrome.runtime.sendMessage({ type: 'TARGET_OFFSCREEN_PING' }, (response) => {
-            if (chrome.runtime.lastError || !response) {
-                // Offscreen no listo, seguimos intentando
-                return;
-            }
-
+            if (chrome.runtime.lastError || !response) return;
             if (response.success === true) {
-                // ¡ÉXITO!
                 clearInterval(pollingInterval);
                 pollingInterval = null;
                 updateStatusUI(true, true);
             } 
-            // Si responde false, seguimos esperando
         });
-
-        if (attempts >= maxAttempts) {
-            clearInterval(pollingInterval);
-            pollingInterval = null;
-            // Solo mostramos error si sigue habilitado visualmente
-            if (document.getElementById('toggleEnabled').checked) {
-                const status = document.getElementById('statusMessage');
-                if (status.textContent !== "Ecualizador Activo") {
-                    status.textContent = "Tiempo de espera agotado. Recarga la página.";
-                    status.style.color = '#ef4444';
-                }
-            }
-        }
-    }, 500); // Revisar cada 0.5 segundos
+        if (attempts >= 40) clearInterval(pollingInterval);
+    }, 500);
 }
 
 async function startCaptureProcess() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab) return;
 
-    // 1. Ponemos UI en espera visualmente
     updateStatusUI(false, true); 
-    
-    // 2. Iniciamos polling INMEDIATAMENTE (sin esperar respuesta del SW)
     startPolling();
 
-    // 3. Enviamos la orden de captura
-    chrome.runtime.sendMessage({ type: 'START_CAPTURE', tabId: tab.id }, (response) => {
-        if (chrome.runtime.lastError) {
-            console.error("Error captura:", chrome.runtime.lastError);
-        }
-    });
+    chrome.runtime.sendMessage({ type: 'START_CAPTURE', tabId: tab.id });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const toggle = document.getElementById('toggleEnabled');
+    const conflictPanel = document.getElementById('tabConflictPanel');
+    const takeOverBtn = document.getElementById('takeOverBtn');
 
-    chrome.storage.local.get(['volumeLevel', 'bassLevel', 'midLevel', 'trebleLevel', 'isEnabled'], (data) => {
-        // Cargar sliders
-        sliderConfigs.forEach(config => {
-            const saved = data[config.storageKey] ?? config.default;
-            const slider = document.getElementById(config.id);
-            slider.value = saved;
-            updateDisplay(config.id, config.display, saved, config.multiplier, config.suffix);
+    const [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const data = await chrome.storage.local.get(['volumeLevel', 'bassLevel', 'midLevel', 'trebleLevel', 'isEnabled', 'capturingTabId']);
+    
+    const savedTabId = data.capturingTabId;
+    const isEnabledGlobal = data.isEnabled !== false;
+
+    // === CAMBIO CLAVE: Cargar sliders SIEMPRE al inicio ===
+    sliderConfigs.forEach(config => {
+        const saved = data[config.storageKey] ?? config.default;
+        const slider = document.getElementById(config.id);
+        slider.value = saved;
+        updateDisplay(config.id, config.display, saved, config.multiplier, config.suffix);
+    });
+    // ======================================================
+
+    // Lógica de Conflicto
+    if (isEnabledGlobal && savedTabId && savedTabId !== currentTab.id) {
+        // MODO CONFLICTO
+        conflictPanel.style.display = 'block';
+        toggle.checked = false; 
+        document.getElementById('statusMessage').textContent = "Controlando otra pestaña";
+        
+        // Deshabilitar sliders visualmente
+        document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = true);
+        
+        takeOverBtn.addEventListener('click', () => {
+            conflictPanel.style.display = 'none';
+            
+            // === CAMBIO: Habilitar sliders INMEDIATAMENTE al tomar control ===
+            document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = false);
+            // ================================================================
+
+            send({ type: 'STOP_CAPTURE' });
+            
+            setTimeout(() => {
+                toggle.checked = true;
+                chrome.storage.local.set({ isEnabled: true });
+                startCaptureProcess();
+            }, 200);
         });
 
-        const isEnabled = data.isEnabled !== false;
-        if (toggle) toggle.checked = isEnabled;
+    } else {
+        // MODO NORMAL
+        if (toggle) toggle.checked = isEnabledGlobal;
 
-        if (isEnabled) {
-            // Verificación inicial
+        if (isEnabledGlobal) {
             chrome.runtime.sendMessage({ type: 'TARGET_OFFSCREEN_PING' }, (response) => {
                 if (response && response.success) {
                     updateStatusUI(true, true);
                 } else {
-                    // Si no está listo, iniciamos reconexión suave
                     startCaptureProcess();
                 }
             });
         } else {
             updateStatusUI(false, false);
         }
-    });
+    }
 
     // Listeners Sliders
     sliderConfigs.forEach(config => {
@@ -153,25 +158,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // === TOGGLE CON RETRASO DE SEGURIDAD ===
+    // Toggle Listener
     if (toggle) {
         toggle.addEventListener('change', async () => {
             const isEnabled = toggle.checked;
+            
+            if (isEnabled) conflictPanel.style.display = 'none';
+
             chrome.storage.local.set({ isEnabled });
 
             if (isEnabled) {
-                updateStatusUI(false, true); // Poner naranja visualmente
-                
-                // LIMPIEZA PREVENTIVA: Aseguramos que cualquier stream anterior muera
+                updateStatusUI(false, true); 
                 send({ type: 'STOP_CAPTURE' });
-
-                // PAUSA DE 100ms: Vital para que el navegador libere el audio antes de pedirlo de nuevo
-                setTimeout(() => {
-                    startCaptureProcess();
-                }, 100);
-
+                setTimeout(() => startCaptureProcess(), 100);
             } else {
-                if (pollingInterval) clearInterval(pollingInterval); // Matar polling
+                if (pollingInterval) clearInterval(pollingInterval);
                 send({ type: 'STOP_CAPTURE' });
                 send({ type: 'TOGGLE_ENABLED', value: false });
                 updateStatusUI(false, false);
@@ -179,26 +180,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Reset Button
+    // Reset Listener
     document.getElementById('resetButton').addEventListener('click', () => {
         sliderConfigs.forEach(config => {
-            const slider = document.getElementById(config.id);
-            slider.value = config.default;
-            updateDisplay(config.id, config.display, config.default, config.multiplier, config.suffix);
-            send({ type: config.type, value: config.default });
-            chrome.storage.local.set({ [config.storageKey]: config.default });
-        });
-
-        if (!toggle.checked) {
-            toggle.checked = true;
-            chrome.storage.local.set({ isEnabled: true });
-            // Forzamos el ciclo completo
-            updateStatusUI(false, true);
-            setTimeout(() => startCaptureProcess(), 50);
-        } else {
-            // Si ya estaba activo, solo hacemos polling para confirmar estado
-            startPolling();
-        }
+             const slider = document.getElementById(config.id);
+             slider.value = config.default;
+             updateDisplay(config.id, config.display, config.default, config.multiplier, config.suffix);
+             send({ type: config.type, value: config.default });
+             chrome.storage.local.set({ [config.storageKey]: config.default });
+         });
+         
+         if (!toggle.checked) {
+             conflictPanel.style.display = 'none';
+             toggle.checked = true;
+             // Asegurar que se habiliten al resetear
+             document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = false);
+             
+             chrome.storage.local.set({ isEnabled: true });
+             updateStatusUI(false, true);
+             setTimeout(() => startCaptureProcess(), 50);
+         }
     });
 
     chrome.runtime.onMessage.addListener((msg) => {
@@ -206,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
             chrome.storage.local.get('isEnabled', (data) => {
                 const currentEnabled = data.isEnabled !== false;
                 if (msg.success && currentEnabled) {
-                    if (pollingInterval) clearInterval(pollingInterval); // Ya llegó, paramos polling
+                    if (pollingInterval) clearInterval(pollingInterval);
                     updateStatusUI(true, true);
                 }
             });
