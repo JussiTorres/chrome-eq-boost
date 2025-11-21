@@ -1,41 +1,37 @@
-// service_worker.js - Versión FINAL que SÍ funciona (Chrome 131+ Nov 2025)
-
-chrome.runtime.onInstalled.addListener(() => {
-    console.log("EQ Boost instalado");
-});
+// service_worker.js - Lógica estándar segura
 
 async function ensureOffscreen() {
     if (await chrome.offscreen.hasDocument?.()) return;
-    
     await chrome.offscreen.createDocument({
         url: 'offscreen.html',
-        reasons: ['AUDIO_PLAYBACK'],  // ← Razón correcta
-        justification: 'Procesar audio de pestaña con Web Audio API'
+        reasons: ['AUDIO_PLAYBACK'],
+        justification: 'Audio Processing'
     });
 }
 
-chrome.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.type === 'START_CAPTURE') {
-        await ensureOffscreen();
-
-        chrome.tabCapture.getMediaStreamId({
-            targetTabId: msg.tabId
-        }, (streamId) => {
-            if (chrome.runtime.lastError || !streamId) {
+        (async () => {
+            try {
+                await ensureOffscreen();
+                chrome.tabCapture.getMediaStreamId({ targetTabId: msg.tabId }, (streamId) => {
+                    if (chrome.runtime.lastError || !streamId) {
+                        console.warn("Error stream:", chrome.runtime.lastError);
+                        sendResponse({ success: false });
+                        return;
+                    }
+                    chrome.runtime.sendMessage({
+                        type: 'INCOMING_STREAM',
+                        streamId: streamId
+                    });
+                    sendResponse({ success: true });
+                });
+            } catch (e) {
+                console.error(e);
                 sendResponse({ success: false });
-                return;
             }
-
-            // Enviamos el streamId al offscreen
-            chrome.runtime.sendMessage({
-                type: 'INCOMING_STREAM',
-                streamId: streamId
-            });
-
-            sendResponse({ success: true });
-        });
-
-        return true; // respuesta asíncrona
+        })();
+        return true; // Indica respuesta asíncrona
     }
 
     if (msg.type === 'STOP_CAPTURE') {
