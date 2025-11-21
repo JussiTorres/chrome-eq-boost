@@ -13,7 +13,10 @@
   "permissions": [
     "activeTab",
     "scripting",
-    "storage" 
+    "storage",
+    "tabCapture",  
+    "offscreen",    
+    "tabs"          
   ],
   "host_permissions": [
     "<all_urls>" 

@@ -1,179 +1,162 @@
 body {
-    width: 300px; /* Un poco más ancho para mejor espacio */
-    padding: 12px;
+    width: 320px;
+    padding: 16px;
     font-family: 'Inter', Arial, sans-serif;
     background-color: #f7f9fb;
     color: #333;
     margin: 0;
+    box-sizing: border-box;
 }
 
-.container {
-    padding: 5px;
-}
+.container { padding: 5px; }
 
 h3 {
     text-align: center;
-    color: #1e3a8a; /* Azul oscuro */
-    padding-bottom: 8px;
-    margin-bottom: 15px;
-    font-size: 1.4em;
+    color: #1e3a8a;
+    margin: 0 0 12px 0;
+    font-size: 1.45em;
     font-weight: 700;
 }
 
-.section-title {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 1em;
-    font-weight: 600;
-    color: #4b5563; /* Gris oscuro */
+.status-message {
+    text-align: center;
+    font-size: 0.88em;
+    color: #9ca3af;
+    margin: 8px 0 12px;
+    min-height: 20px;
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background: #e5e7eb; /* Línea separadora suave */
-    margin: 15px 0;
-}
-
-/* Controles de EQ y Volumen */
-.eq-control {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-}
-
-.eq-control label {
-    font-size: 0.9em;
-    margin-bottom: 4px;
-    color: #6b7280;
-}
-
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none; /* CORRECCIÓN APLICADA AQUÍ para el estándar CSS */
-    width: 100%;
-    height: 8px;
-    background: #d1d5db;
-    border-radius: 4px;
-    outline: none;
-    transition: opacity .2s;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none; /* Recomendado también para el thumb */
-    width: 18px;
-    height: 18px;
-    background: #3b82f6; /* Azul brillante */
-    border: 2px solid #ffffff;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.value-display {
-    font-weight: 700;
-    text-align: right;
-    display: block;
-    font-size: 0.9em;
-    color: #1f2937;
-    margin-top: 4px;
-}
-
-/* Botón de Reset */
-.reset-button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    background-color: #ef4444; /* Rojo para acción de reset */
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s, transform 0.1s;
-    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
-}
-
-.reset-button:hover {
-    background-color: #dc2626;
-}
-
-.reset-button:active {
-    transform: translateY(1px);
-}
-
-/* Estilos para el Toggle Switch (Interruptor) */
-.general-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 5px 0;
-}
-
+/* ==================== TOGGLE CORREGIDO Y ÚNICO ==================== */
 .toggle-switch {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    padding: 5px;
-    background-color: #ffffff;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 16px;
 }
 
 .toggle-label {
-    font-size: 1em;
     font-weight: 600;
-    color: #3b82f6;
-    margin-right: auto;
-    margin-left: 10px;
+    color: #1e3a8a;
+    font-size: 1.02em;
 }
 
-.toggle-switch input[type="checkbox"] {
-    display: none;
-}
-
-.toggle-switch .slider {
+.switch {
     position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
     cursor: pointer;
-    width: 40px;
-    height: 20px;
+    top: 0; left: 0; right: 0; bottom: 0;
     background-color: #ccc;
     transition: .4s;
-    border-radius: 20px;
+    border-radius: 34px;
 }
 
-.toggle-switch .slider:before {
+.slider:before {
     position: absolute;
     content: "";
-    height: 16px;
-    width: 16px;
+    height: 22px;
+    width: 22px;
     left: 2px;
     bottom: 2px;
     background-color: white;
     transition: .4s;
     border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-.toggle-switch input:checked + .slider {
-    background-color: #22c55e; /* Verde brillante cuando está activo */
+input:checked + .slider {
+    background-color: #22c55e;
 }
 
-.toggle-switch input:checked + .slider:before {
-    transform: translateX(20px);
+input:checked + .slider:before {
+    transform: translateX(22px);
 }
 
-.status-message {
-    text-align: center;
-    font-size: 0.85em;
-    color: #9ca3af;
-    margin-bottom: 5px;
+/* ==================== FIN TOGGLE ==================== */
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #e5e7eb;
+    margin: 18px 0;
 }
 
-/* Estado de deshabilitado */
-input[type="range"]:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+.section-title {
+    margin: 20px 0 10px;
+    font-size: 1.02em;
+    font-weight: 600;
+    color: #4b5563;
 }
+
+.eq-control {
+    margin-bottom: 16px;
+}
+
+.eq-control label {
+    font-size: 0.9em;
+    margin-bottom: 6px;
+    color: #555;
+    display: block;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #d1d5db;
+    border-radius: 6px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #3b82f6;
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.value-display {
+    font-weight: 700;
+    text-align: right;
+    font-size: 0.95em;
+    color: #1f2937;
+    margin-top: 6px;
+}
+
+.reset-button {
+    width: 100%;
+    padding: 11px;
+    margin-top: 12px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s;
+}
+
+.reset-button:hover { background: #dc2626; }
+
+input[type="range"]:disabled { opacity: 0.4; cursor: not-allowed; }
