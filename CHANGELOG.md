@@ -2,6 +2,20 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.2.1] - 2025-11-21
+### Fixed
+- **Audio Sync:** Fixed critical bug where initial volume/EQ values were not applied until the user interacted with a slider. Added forced synchronization on startup.
+- **Security/UX:** Patched a logic loophole where the "Reset" button remained active during Tab Conflicts. It is now disabled alongside the sliders to prevent accidental stream overriding.
+- **Garbage Collection:** The extension now automatically clears capture state from storage if the captured tab is closed externally.
+
+## [1.2.0] - 2025-11-21
+### Added
+- **Smart Tab Ownership:** The extension now tracks which tab is being captured.
+- **Conflict Resolution UI:** A new panel appears if you open the extension on a different tab, allowing you to "Take Over" the audio control instantly.
+
+### Changed
+- **UI/UX:** Sliders now load their visual state immediately upon opening the popup, providing better feedback.
+
 ## [1.1.1] - 2025-11-21
 ### Fixed
 - **Critical Race Condition:** Fixed "Waiting for audio..." infinite loop. Implemented a private communication channel (`TARGET_OFFSCREEN_PING`) and polling logic to prevent `content.js` interference.

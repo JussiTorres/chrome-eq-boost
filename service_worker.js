@@ -1,4 +1,4 @@
-// service_worker.js - Gestión de ID de Pestaña
+// service_worker.js - Gestión de ID y Limpieza Automática
 
 async function ensureOffscreen() {
     if (await chrome.offscreen.hasDocument?.()) return;
@@ -21,9 +21,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
                         return;
                     }
                     
-                    // === CAMBIO: Guardar quién es el dueño ===
+                    // Guardar quién es el dueño
                     chrome.storage.local.set({ capturingTabId: msg.tabId });
-                    // ========================================
 
                     chrome.runtime.sendMessage({
                         type: 'INCOMING_STREAM',
@@ -40,9 +39,27 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
 
     if (msg.type === 'STOP_CAPTURE') {
-        // === CAMBIO: Liberar al dueño ===
+        // Liberar al dueño manualmente
         chrome.storage.local.remove('capturingTabId');
-        // ================================
         chrome.runtime.sendMessage({ type: 'STOP_CAPTURE' });
     }
+});
+
+// === NUEVO: Detectar cierre de pestaña ===
+chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
+    chrome.storage.local.get(['capturingTabId'], (result) => {
+        if (result.capturingTabId === tabId) {
+            // La pestaña que controlábamos se cerró. Limpiamos todo.
+            console.log(`Pestaña capturada (${tabId}) cerrada. Limpiando estado.`);
+            
+            // 1. Borrar el ID fantasma
+            chrome.storage.local.remove('capturingTabId');
+            
+            // 2. Resetear el toggle visualmente para la próxima vez
+            chrome.storage.local.set({ isEnabled: false });
+
+            // 3. Avisar al Offscreen que pare todo
+            chrome.runtime.sendMessage({ type: 'STOP_CAPTURE' });
+        }
+    });
 });

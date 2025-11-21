@@ -1,4 +1,4 @@
-// popup.js - GESTIÓN DE VENTANAS PERFECCIONADA
+// popup.js - VERSIÓN 1.2.1 (Fix de Sincronización Inicial de Audio)
 
 const sliderConfigs = [
     { id: 'volumeSlider', display: 'volumeValue', type: 'UPDATE_GAIN', storageKey: 'volumeLevel', default: 1.0, multiplier: 100, suffix: '%' },
@@ -8,7 +8,7 @@ const sliderConfigs = [
 ];
 
 function send(msg) {
-    chrome.runtime.sendMessage(msg).catch(() => {});
+    chrome.runtime.sendMessage(msg).catch(() => { });
 }
 
 function updateDisplay(sliderId, displayId, value, multiplier, suffix) {
@@ -22,6 +22,19 @@ function updateDisplay(sliderId, displayId, value, multiplier, suffix) {
         }
     }
 }
+
+// === NUEVA FUNCIÓN: Forzar envío de valores al motor de audio ===
+function syncAudioEngine() {
+    // Recorre todos los sliders y envía su valor actual al Offscreen
+    sliderConfigs.forEach(config => {
+        const slider = document.getElementById(config.id);
+        if (slider && !slider.disabled) {
+            send({ type: config.type, value: parseFloat(slider.value) });
+        }
+    });
+    console.log("Audio sincronizado con UI");
+}
+// ===============================================================
 
 function updateStatusUI(success, isEnabled) {
     const status = document.getElementById('statusMessage');
@@ -37,7 +50,6 @@ function updateStatusUI(success, isEnabled) {
         return;
     }
 
-    // Solo habilitamos sliders si NO estamos en modo conflicto (ver lógica abajo)
     const conflictPanel = document.getElementById('tabConflictPanel');
     if (conflictPanel.style.display === 'none') {
         sliders.forEach(s => s.disabled = false);
@@ -45,11 +57,11 @@ function updateStatusUI(success, isEnabled) {
 
     if (success) {
         status.textContent = "Ecualizador Activo";
-        status.style.color = '#22c55e'; 
+        status.style.color = '#22c55e';
     } else {
         if (status.textContent !== "Ecualizador Activo") {
             status.textContent = "Captura iniciada. Esperando audio...";
-            status.style.color = '#f59e0b'; 
+            status.style.color = '#f59e0b';
         }
     }
 }
@@ -59,16 +71,22 @@ let pollingInterval = null;
 function startPolling() {
     if (pollingInterval) clearInterval(pollingInterval);
     let attempts = 0;
-    
+
     pollingInterval = setInterval(() => {
         attempts++;
         chrome.runtime.sendMessage({ type: 'TARGET_OFFSCREEN_PING' }, (response) => {
             if (chrome.runtime.lastError || !response) return;
+
+            // Si el motor responde "Estoy listo"
             if (response.success === true) {
                 clearInterval(pollingInterval);
                 pollingInterval = null;
                 updateStatusUI(true, true);
-            } 
+
+                // === FIX: Sincronizar valores inmediatamente ===
+                syncAudioEngine();
+                // ==============================================
+            }
         });
         if (attempts >= 40) clearInterval(pollingInterval);
     }, 500);
@@ -78,7 +96,7 @@ async function startCaptureProcess() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab) return;
 
-    updateStatusUI(false, true); 
+    updateStatusUI(false, true);
     startPolling();
 
     chrome.runtime.sendMessage({ type: 'START_CAPTURE', tabId: tab.id });
@@ -91,38 +109,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const data = await chrome.storage.local.get(['volumeLevel', 'bassLevel', 'midLevel', 'trebleLevel', 'isEnabled', 'capturingTabId']);
-    
+
     const savedTabId = data.capturingTabId;
     const isEnabledGlobal = data.isEnabled !== false;
 
-    // === CAMBIO CLAVE: Cargar sliders SIEMPRE al inicio ===
+    // Cargar sliders visualmente
     sliderConfigs.forEach(config => {
         const saved = data[config.storageKey] ?? config.default;
         const slider = document.getElementById(config.id);
         slider.value = saved;
         updateDisplay(config.id, config.display, saved, config.multiplier, config.suffix);
     });
-    // ======================================================
 
     // Lógica de Conflicto
     if (isEnabledGlobal && savedTabId && savedTabId !== currentTab.id) {
-        // MODO CONFLICTO
         conflictPanel.style.display = 'block';
-        toggle.checked = false; 
+        toggle.checked = false;
         document.getElementById('statusMessage').textContent = "Controlando otra pestaña";
-        
-        // Deshabilitar sliders visualmente
+
+        // 1. Bloquear Sliders
         document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = true);
-        
+
+        // === 2. NUEVO: Bloquear también el botón Reset (CERRAR LA PUERTA TRASERA) ===
+        document.getElementById('resetButton').disabled = true;
+        // ==========================================================================
+
         takeOverBtn.addEventListener('click', () => {
             conflictPanel.style.display = 'none';
-            
-            // === CAMBIO: Habilitar sliders INMEDIATAMENTE al tomar control ===
+
+            // Desbloquear Sliders
             document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = false);
-            // ================================================================
+
+            // === 3. NUEVO: Desbloquear botón Reset al tomar control ===
+            document.getElementById('resetButton').disabled = false;
+            // ==========================================================
 
             send({ type: 'STOP_CAPTURE' });
-            
             setTimeout(() => {
                 toggle.checked = true;
                 chrome.storage.local.set({ isEnabled: true });
@@ -131,13 +153,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
     } else {
-        // MODO NORMAL
         if (toggle) toggle.checked = isEnabledGlobal;
 
         if (isEnabledGlobal) {
             chrome.runtime.sendMessage({ type: 'TARGET_OFFSCREEN_PING' }, (response) => {
                 if (response && response.success) {
                     updateStatusUI(true, true);
+                    // === FIX: Sincronizar también si ya estaba activo ===
+                    // (Por si abres y cierras el popup rápido)
+                    // syncAudioEngine(); <--- Opcional aquí, pero recomendado si notas lag
                 } else {
                     startCaptureProcess();
                 }
@@ -162,13 +186,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (toggle) {
         toggle.addEventListener('change', async () => {
             const isEnabled = toggle.checked;
-            
             if (isEnabled) conflictPanel.style.display = 'none';
-
             chrome.storage.local.set({ isEnabled });
 
             if (isEnabled) {
-                updateStatusUI(false, true); 
+                updateStatusUI(false, true);
                 send({ type: 'STOP_CAPTURE' });
                 setTimeout(() => startCaptureProcess(), 100);
             } else {
@@ -183,23 +205,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Reset Listener
     document.getElementById('resetButton').addEventListener('click', () => {
         sliderConfigs.forEach(config => {
-             const slider = document.getElementById(config.id);
-             slider.value = config.default;
-             updateDisplay(config.id, config.display, config.default, config.multiplier, config.suffix);
-             send({ type: config.type, value: config.default });
-             chrome.storage.local.set({ [config.storageKey]: config.default });
-         });
-         
-         if (!toggle.checked) {
-             conflictPanel.style.display = 'none';
-             toggle.checked = true;
-             // Asegurar que se habiliten al resetear
-             document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = false);
-             
-             chrome.storage.local.set({ isEnabled: true });
-             updateStatusUI(false, true);
-             setTimeout(() => startCaptureProcess(), 50);
-         }
+            const slider = document.getElementById(config.id);
+            slider.value = config.default;
+            updateDisplay(config.id, config.display, config.default, config.multiplier, config.suffix);
+            send({ type: config.type, value: config.default });
+            chrome.storage.local.set({ [config.storageKey]: config.default });
+        });
+
+        if (!toggle.checked) {
+            conflictPanel.style.display = 'none';
+            toggle.checked = true;
+            document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = false);
+            chrome.storage.local.set({ isEnabled: true });
+            updateStatusUI(false, true);
+            setTimeout(() => startCaptureProcess(), 50);
+        } else {
+            // Si ya estaba prendido, forzamos sync para que el reset se sienta inmediato
+            syncAudioEngine();
+        }
     });
 
     chrome.runtime.onMessage.addListener((msg) => {
@@ -209,6 +232,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (msg.success && currentEnabled) {
                     if (pollingInterval) clearInterval(pollingInterval);
                     updateStatusUI(true, true);
+
+                    // === FIX: Sincronización final asegurada ===
+                    // Si el mensaje llega por broadcast, también sincronizamos
+                    syncAudioEngine();
+                    // ===========================================
                 }
             });
         }
