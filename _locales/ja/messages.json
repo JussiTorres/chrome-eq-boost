@@ -1,0 +1,50 @@
+{
+  "ext_name": {
+    "message": "EQ & Volume Boost"
+  },
+  "status_loading": {
+    "message": "初期化中..."
+  },
+  "status_active": {
+    "message": "イコライザー稼働中"
+  },
+  "status_disabled": {
+    "message": "拡張機能が無効です。"
+  },
+  "status_waiting": {
+    "message": "キャプチャ開始。音声を待機中..."
+  },
+  "toggle_label": {
+    "message": "拡張機能を有効化"
+  },
+  "button_reset": {
+    "message": "EQと音量をリセット"
+  },
+  "section_volume": {
+    "message": "音量 (プリアンプ)"
+  },
+  "section_eq": {
+    "message": "イコライザー (-12dB ~ +12dB)"
+  },
+  "label_bass": {
+    "message": "低音 (100 Hz)"
+  },
+  "label_mids": {
+    "message": "中音 (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "高音 (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 別のタブで増幅中です。"
+  },
+  "button_takeover": {
+    "message": "このタブで使用"
+  },
+  "settings_title": {
+    "message": "設定"
+  },
+  "status_conflict": {
+    "message": "別のタブを制御中"
+  }
+}

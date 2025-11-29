@@ -1,0 +1,50 @@
+{
+  "ext_name": {
+    "message": "EQ & Volume Boost"
+  },
+  "status_loading": {
+    "message": "Initializing..."
+  },
+  "status_active": {
+    "message": "Equalizer Active"
+  },
+  "status_disabled": {
+    "message": "Extension disabled."
+  },
+  "status_waiting": {
+    "message": "Capture started. Waiting for audio..."
+  },
+  "toggle_label": {
+    "message": "Extension Enabled"
+  },
+  "button_reset": {
+    "message": "Reset EQ & Vol."
+  },
+  "section_volume": {
+    "message": "Volume (Preamp)"
+  },
+  "section_eq": {
+    "message": "Equalizer (-12dB to +12dB)"
+  },
+  "label_bass": {
+    "message": "Bass (100 Hz)"
+  },
+  "label_mids": {
+    "message": "Mids (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "Treble (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 Another tab is being amplified."
+  },
+  "button_takeover": {
+    "message": "Use on this tab"
+  },
+  "settings_title": {
+    "message": "Settings"
+  },
+  "status_conflict": {
+    "message": "Controlling another tab"
+  }
+}

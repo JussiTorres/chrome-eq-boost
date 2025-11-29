@@ -1,4 +1,4 @@
-// popup.js - VERSIÓN 1.2.1 (Fix de Sincronización Inicial de Audio)
+// popup.js - VERSIÓN 1.2.2 (Multilenguaje + Audio Sync Fix)
 
 const sliderConfigs = [
     { id: 'volumeSlider', display: 'volumeValue', type: 'UPDATE_GAIN', storageKey: 'volumeLevel', default: 1.0, multiplier: 100, suffix: '%' },
@@ -6,6 +6,33 @@ const sliderConfigs = [
     { id: 'midSlider', display: 'midValue', type: 'UPDATE_MID', storageKey: 'midLevel', default: 0.0, multiplier: 1, suffix: ' dB' },
     { id: 'trebleSlider', display: 'trebleValue', type: 'UPDATE_TREBLE', storageKey: 'trebleLevel', default: 0.0, multiplier: 1, suffix: ' dB' }
 ];
+
+// === LÓGICA DE TRADUCCIÓN (i18n) ===
+let currentMessages = {};
+
+async function loadLanguage(locale) {
+    try {
+        // Usamos getURL para obtener la ruta absoluta dentro de la extensión
+        const url = chrome.runtime.getURL(`_locales/${locale}/messages.json`);
+        const response = await fetch(url);
+        const messages = await response.json();
+        currentMessages = messages;
+        applyTranslations();
+    } catch (e) {
+        console.error("Error cargando idioma:", e);
+    }
+}
+
+function applyTranslations() {
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (currentMessages[key]) {
+            el.textContent = currentMessages[key].message;
+        }
+    });
+}
+// ====================================
 
 function send(msg) {
     chrome.runtime.sendMessage(msg).catch(() => { });
@@ -23,9 +50,8 @@ function updateDisplay(sliderId, displayId, value, multiplier, suffix) {
     }
 }
 
-// === NUEVA FUNCIÓN: Forzar envío de valores al motor de audio ===
+// Función: Forzar envío de valores al motor de audio
 function syncAudioEngine() {
-    // Recorre todos los sliders y envía su valor actual al Offscreen
     sliderConfigs.forEach(config => {
         const slider = document.getElementById(config.id);
         if (slider && !slider.disabled) {
@@ -34,7 +60,6 @@ function syncAudioEngine() {
     });
     console.log("Audio sincronizado con UI");
 }
-// ===============================================================
 
 function updateStatusUI(success, isEnabled) {
     const status = document.getElementById('statusMessage');
@@ -44,7 +69,8 @@ function updateStatusUI(success, isEnabled) {
     if (toggle) toggle.checked = isEnabled;
 
     if (!isEnabled) {
-        status.textContent = "Extensión desactivada.";
+        // Usamos la traducción si está disponible, si no un fallback
+        status.textContent = currentMessages.status_disabled ? currentMessages.status_disabled.message : "Extensión desactivada.";
         status.style.color = '#9ca3af';
         sliders.forEach(s => s.disabled = true);
         return;
@@ -56,11 +82,12 @@ function updateStatusUI(success, isEnabled) {
     }
 
     if (success) {
-        status.textContent = "Ecualizador Activo";
+        status.textContent = currentMessages.status_active ? currentMessages.status_active.message : "Ecualizador Activo";
         status.style.color = '#22c55e';
     } else {
-        if (status.textContent !== "Ecualizador Activo") {
-            status.textContent = "Captura iniciada. Esperando audio...";
+        const activeMsg = currentMessages.status_active ? currentMessages.status_active.message : "Ecualizador Activo";
+        if (status.textContent !== activeMsg) {
+            status.textContent = currentMessages.status_waiting ? currentMessages.status_waiting.message : "Captura iniciada. Esperando audio...";
             status.style.color = '#f59e0b';
         }
     }
@@ -77,15 +104,11 @@ function startPolling() {
         chrome.runtime.sendMessage({ type: 'TARGET_OFFSCREEN_PING' }, (response) => {
             if (chrome.runtime.lastError || !response) return;
 
-            // Si el motor responde "Estoy listo"
             if (response.success === true) {
                 clearInterval(pollingInterval);
                 pollingInterval = null;
                 updateStatusUI(true, true);
-
-                // === FIX: Sincronizar valores inmediatamente ===
                 syncAudioEngine();
-                // ==============================================
             }
         });
         if (attempts >= 40) clearInterval(pollingInterval);
@@ -107,8 +130,53 @@ document.addEventListener('DOMContentLoaded', async () => {
     const conflictPanel = document.getElementById('tabConflictPanel');
     const takeOverBtn = document.getElementById('takeOverBtn');
 
+    // Elementos de Settings
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsPanel = document.getElementById('settingsPanel');
+    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+    const languageSelect = document.getElementById('languageSelect');
+
+    // Listeners del Panel de Configuración
+    settingsBtn.addEventListener('click', () => settingsPanel.classList.remove('hidden'));
+    closeSettingsBtn.addEventListener('click', () => settingsPanel.classList.add('hidden'));
+
     const [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    const data = await chrome.storage.local.get(['volumeLevel', 'bassLevel', 'midLevel', 'trebleLevel', 'isEnabled', 'capturingTabId']);
+    // Recuperamos también 'preferredLocale'
+    const data = await chrome.storage.local.get(['volumeLevel', 'bassLevel', 'midLevel', 'trebleLevel', 'isEnabled', 'capturingTabId', 'preferredLocale']);
+
+    // === INICIALIZAR IDIOMA ===
+    const savedLocale = data.preferredLocale || 'en';
+    if (languageSelect) {
+        languageSelect.value = savedLocale;
+
+        // Listener para cambio de idioma en tiempo real
+        languageSelect.addEventListener('change', async (e) => {
+            const newLocale = e.target.value;
+            chrome.storage.local.set({ preferredLocale: newLocale });
+
+            // 1. Cargar el nuevo idioma (esto pondrá "Inicializando..." por un milisegundo)
+            await loadLanguage(newLocale);
+
+            // 2. CORRECCIÓN: Forzar actualización inmediata del estado visual
+            // Preguntamos al Toggle si está prendido
+            const isEnabled = document.getElementById('toggleEnabled').checked;
+
+            // Si está prendido, preguntamos al motor si el audio fluye
+            if (isEnabled) {
+                chrome.runtime.sendMessage({ type: 'TARGET_OFFSCREEN_PING' }, (response) => {
+                    const success = response && response.success;
+                    updateStatusUI(success, true); // Esto corregirá el texto a "Activo"
+                });
+            } else {
+                // Si está apagado, simplemente actualizamos a "Desactivado" en el nuevo idioma
+                updateStatusUI(false, false);
+            }
+        });
+    }
+
+    // Cargar traducciones iniciales
+    await loadLanguage(savedLocale);
+    // ==========================
 
     const savedTabId = data.capturingTabId;
     const isEnabledGlobal = data.isEnabled !== false;
@@ -125,24 +193,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (isEnabledGlobal && savedTabId && savedTabId !== currentTab.id) {
         conflictPanel.style.display = 'block';
         toggle.checked = false;
-        document.getElementById('statusMessage').textContent = "Controlando otra pestaña";
+        
+        // === CORRECCIÓN AQUÍ ===
+        // Usamos la nueva clave "status_conflict" ("Controlando otra pestaña")
+        document.getElementById('statusMessage').textContent = currentMessages.status_conflict ? currentMessages.status_conflict.message : "Controlling another tab";
+        // =======================
 
-        // 1. Bloquear Sliders
         document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = true);
-
-        // === 2. NUEVO: Bloquear también el botón Reset (CERRAR LA PUERTA TRASERA) ===
         document.getElementById('resetButton').disabled = true;
-        // ==========================================================================
 
+        // ... resto del código ...
         takeOverBtn.addEventListener('click', () => {
             conflictPanel.style.display = 'none';
-
-            // Desbloquear Sliders
             document.querySelectorAll('input[type="range"]').forEach(s => s.disabled = false);
-
-            // === 3. NUEVO: Desbloquear botón Reset al tomar control ===
             document.getElementById('resetButton').disabled = false;
-            // ==========================================================
 
             send({ type: 'STOP_CAPTURE' });
             setTimeout(() => {
@@ -159,9 +223,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             chrome.runtime.sendMessage({ type: 'TARGET_OFFSCREEN_PING' }, (response) => {
                 if (response && response.success) {
                     updateStatusUI(true, true);
-                    // === FIX: Sincronizar también si ya estaba activo ===
-                    // (Por si abres y cierras el popup rápido)
-                    // syncAudioEngine(); <--- Opcional aquí, pero recomendado si notas lag
+                    // Opcional: syncAudioEngine();
                 } else {
                     startCaptureProcess();
                 }
@@ -220,7 +282,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateStatusUI(false, true);
             setTimeout(() => startCaptureProcess(), 50);
         } else {
-            // Si ya estaba prendido, forzamos sync para que el reset se sienta inmediato
             syncAudioEngine();
         }
     });
@@ -232,11 +293,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (msg.success && currentEnabled) {
                     if (pollingInterval) clearInterval(pollingInterval);
                     updateStatusUI(true, true);
-
-                    // === FIX: Sincronización final asegurada ===
-                    // Si el mensaje llega por broadcast, también sincronizamos
                     syncAudioEngine();
-                    // ===========================================
                 }
             });
         }

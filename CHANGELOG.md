@@ -2,6 +2,17 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.2.2] - 2025-11-28
+### Fixed
+- **Logic:** Implemented dynamic string replacement without requiring extension reload.
+- **Fix:** Resolved hardcoded strings in Tab Conflict mode ('status_conflict').
+- **UX:** Added state re-validation when switching languages to ensure status text remains accurate.
+
+### Added
+- **UI:** Added a 'Settings' overlay panel with real-time language selector.
+- **Feat:** Add Multi-language Support and Settings Panel (v1.2.2).
+- **i18n:** Implemented full localization support for 8 languages (En, Es, De, Fr, It, Ja, Hi, Zh_CN).
+
 ## [1.2.1] - 2025-11-21
 ### Fixed
 - **Audio Sync:** Fixed critical bug where initial volume/EQ values were not applied until the user interacted with a slider. Added forced synchronization on startup.

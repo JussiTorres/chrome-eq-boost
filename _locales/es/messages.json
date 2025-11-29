@@ -1,0 +1,50 @@
+{
+  "ext_name": {
+    "message": "EQ & Volumen Boost"
+  },
+  "status_loading": {
+    "message": "Inicializando..."
+  },
+  "status_active": {
+    "message": "Ecualizador Activo"
+  },
+  "status_disabled": {
+    "message": "Extensión desactivada."
+  },
+  "status_waiting": {
+    "message": "Captura iniciada. Esperando audio..."
+  },
+  "toggle_label": {
+    "message": "Extensión Habilitada"
+  },
+  "button_reset": {
+    "message": "Restablecer EQ & Vol."
+  },
+  "section_volume": {
+    "message": "Volumen (Preamp)"
+  },
+  "section_eq": {
+    "message": "Ecualizador (-12dB a +12dB)"
+  },
+  "label_bass": {
+    "message": "Graves (100 Hz)"
+  },
+  "label_mids": {
+    "message": "Medios (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "Agudos (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 Otra pestaña está siendo amplificada."
+  },
+  "button_takeover": {
+    "message": "Usar en esta pestaña"
+  },
+  "settings_title": {
+    "message": "Configuración"
+  },
+  "status_conflict": {
+    "message": "Controlando otra pestaña"
+  }
+}

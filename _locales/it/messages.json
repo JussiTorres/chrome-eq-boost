@@ -1,0 +1,50 @@
+{
+  "ext_name": {
+    "message": "EQ & Volume Boost"
+  },
+  "status_loading": {
+    "message": "Inizializzazione..."
+  },
+  "status_active": {
+    "message": "Equalizzatore Attivo"
+  },
+  "status_disabled": {
+    "message": "Estensione disattivata."
+  },
+  "status_waiting": {
+    "message": "Cattura avviata. In attesa dell'audio..."
+  },
+  "toggle_label": {
+    "message": "Estensione Abilitata"
+  },
+  "button_reset": {
+    "message": "Reimposta EQ & Vol."
+  },
+  "section_volume": {
+    "message": "Volume (Preamp)"
+  },
+  "section_eq": {
+    "message": "Equalizzatore (da -12dB a +12dB)"
+  },
+  "label_bass": {
+    "message": "Bassi (100 Hz)"
+  },
+  "label_mids": {
+    "message": "Medi (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "Alti (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 Un'altra scheda è amplificata."
+  },
+  "button_takeover": {
+    "message": "Usa su questa scheda"
+  },
+  "settings_title": {
+    "message": "Impostazioni"
+  },
+  "status_conflict": {
+    "message": "Controllo di un'altra scheda"
+  }
+}

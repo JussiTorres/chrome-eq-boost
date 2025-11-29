@@ -1,0 +1,50 @@
+{
+  "ext_name": {
+    "message": "EQ & Volume Boost"
+  },
+  "status_loading": {
+    "message": "正在初始化..."
+  },
+  "status_active": {
+    "message": "均衡器已激活"
+  },
+  "status_disabled": {
+    "message": "扩展已禁用。"
+  },
+  "status_waiting": {
+    "message": "捕获已开始。等待音频..."
+  },
+  "toggle_label": {
+    "message": "启用扩展"
+  },
+  "button_reset": {
+    "message": "重置 EQ 和音量"
+  },
+  "section_volume": {
+    "message": "音量 (前置放大)"
+  },
+  "section_eq": {
+    "message": "均衡器 (-12dB 至 +12dB)"
+  },
+  "label_bass": {
+    "message": "低音 (100 Hz)"
+  },
+  "label_mids": {
+    "message": "中音 (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "高音 (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 另一个标签页正在增强中。"
+  },
+  "button_takeover": {
+    "message": "在此标签页上使用"
+  },
+  "settings_title": {
+    "message": "设置"
+  },
+  "status_conflict": {
+    "message": "正在控制另一个标签页"
+  }
+}
