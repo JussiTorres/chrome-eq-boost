@@ -45,7 +45,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     }
 });
 
-// === NUEVO: Detectar cierre de pestaña ===
+// Detectar cierre de pestaña ===
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
     chrome.storage.local.get(['capturingTabId'], (result) => {
         if (result.capturingTabId === tabId) {
@@ -62,4 +62,17 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
             chrome.runtime.sendMessage({ type: 'STOP_CAPTURE' });
         }
     });
+});
+
+// === NUEVO: Limpieza al iniciar Chrome (Fix Bug "Estado Fantasma") ===
+chrome.runtime.onStartup.addListener(() => {
+    console.log("Chrome iniciando. Limpiando estado de audio antiguo.");
+    chrome.storage.local.remove('capturingTabId');
+    chrome.storage.local.set({ isEnabled: false });
+});
+
+// También limpiar al instalar o actualizar la extensión
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.storage.local.remove('capturingTabId');
+    chrome.storage.local.set({ isEnabled: false });
 });
