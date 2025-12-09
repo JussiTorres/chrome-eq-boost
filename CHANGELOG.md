@@ -2,6 +2,13 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.2.3] - 2025-12-09
+### Fixed
+- **Startup Cleanup:** Fixed a bug where the extension retained "active" state after a browser restart. Added `onStartup` listeners in Service Worker to clear stale storage data.
+
+### Added
+- **UI:** Added a sticky footer in the Settings panel with developer credits and version info.
+
 ## [1.2.2] - 2025-11-28
 ### Fixed
 - **Logic:** Implemented dynamic string replacement without requiring extension reload.
