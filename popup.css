@@ -288,3 +288,24 @@ input[type="range"]:disabled {
     flex-grow: 1;
     /* Ocupa el resto del espacio */
 }
+
+/* Estilos para el logo en el encabezado */
+.brand-logo {
+    /* Altura máxima para que no sea muy alto */
+    max-height: 40px; 
+    /* Ancho automático para mantener la proporción */
+    width: auto;
+    /* Ancho máximo para que no se salga en pantallas pequeñas, opcional */
+    max-width: 75%; 
+    /* Asegura que se renderice nítido */
+    display: block;
+}
+
+/* Ajuste fino para el contenedor del encabezado si es necesario */
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Un poco de padding vertical para que respire */
+    padding: 15px 20px; 
+}
