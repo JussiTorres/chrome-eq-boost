@@ -15,13 +15,13 @@
     "message": "捕获已开始。等待音频..."
   },
   "toggle_label": {
-    "message": "启用扩展"
+    "message": "已启用"
   },
   "button_reset": {
     "message": "重置 EQ 和音量"
   },
   "section_volume": {
-    "message": "音量 (前置放大)"
+    "message": "音量 (前级)"
   },
   "section_eq": {
     "message": "均衡器 (-12dB 至 +12dB)"
