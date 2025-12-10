@@ -20,6 +20,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
                         sendResponse({ success: false });
                         return;
                     }
+
+                    if (msg.type === 'STREAM_ENDED_EXTERNALLY') {
+                        console.log("Limpiando estado por corte de audio.");
+                        chrome.storage.local.remove('capturingTabId');
+                        chrome.storage.local.set({ isEnabled: false });
+                        // No necesitamos sendResponse
+                    }
                     
                     // Guardar quién es el dueño
                     chrome.storage.local.set({ capturingTabId: msg.tabId });
@@ -51,10 +58,10 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
         if (result.capturingTabId === tabId) {
             // La pestaña que controlábamos se cerró. Limpiamos todo.
             console.log(`Pestaña capturada (${tabId}) cerrada. Limpiando estado.`);
-            
+
             // 1. Borrar el ID fantasma
             chrome.storage.local.remove('capturingTabId');
-            
+
             // 2. Resetear el toggle visualmente para la próxima vez
             chrome.storage.local.set({ isEnabled: false });
 

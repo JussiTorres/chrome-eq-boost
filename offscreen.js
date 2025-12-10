@@ -1,8 +1,9 @@
-// offscreen.js - VERSIÓN FINAL ESTÉTICA 100% + FUNCIONAL (21 Nov 2025)
+// offscreen.js - VERSIÓN CON DETECTOR DE SILENCIO (Audio Activity Detection)
 
 let audioContext = null;
 let sourceNode = null;
 let gainNode = null;
+let analyser = null; // <--- NUEVO: El "Oído"
 let bass, mid, treble, compressor;
 
 function createFilter(type, freq) {
@@ -30,10 +31,20 @@ async function startProcessing(streamId) {
             }
         });
 
+        stream.getAudioTracks()[0].onended = () => {
+            console.log("Stream cortado externamente");
+            chrome.runtime.sendMessage({ type: 'STREAM_ENDED_EXTERNALLY' });
+        };
+
         audioContext = new AudioContext();
-        await audioContext.resume(); // por si acaso
+        await audioContext.resume();
 
         sourceNode = audioContext.createMediaStreamSource(stream);
+        
+        // === NUEVO: Crear Analizador para detectar silencio ===
+        analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256; // Pequeño y rápido
+        // =====================================================
 
         bass = createFilter('lowshelf', 100);
         mid = createFilter('peaking', 1000);
@@ -43,6 +54,10 @@ async function startProcessing(streamId) {
         compressor.threshold.value = -10;
         compressor.ratio.value = 12;
 
+        // Conectamos: Fuente -> Analizador -> Filtros -> Destino
+        // El analizador "mira" el audio crudo antes de los efectos
+        sourceNode.connect(analyser); 
+        
         sourceNode.connect(bass)
             .connect(mid)
             .connect(treble)
@@ -56,7 +71,7 @@ async function startProcessing(streamId) {
         mid.gain.value = data.midLevel ?? 0;
         treble.gain.value = data.trebleLevel ?? 0;
 
-        // Forzamos running con un kick silencioso (inaudible)
+        // Kick de arranque
         const kick = audioContext.createOscillator();
         kick.frequency.value = 0;
         const g = audioContext.createGain();
@@ -73,19 +88,30 @@ async function startProcessing(streamId) {
     }
 }
 
-// SOLO CAMBIA EL LISTENER AL FINAL:
-
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.type === 'INCOMING_STREAM') startProcessing(msg.streamId);
 
-    // === CANAL PRIVADO AJUSTADO ===
+    // === PING MEJORADO: Ahora reporta si hay audio real ===
     if (msg.type === 'TARGET_OFFSCREEN_PING') {
-        // Solo decimos true si el contexto existe Y no está cerrado
         const isReady = audioContext && audioContext.state !== 'closed';
-        sendResponse({ success: !!isReady });
+        let isPlayingAudio = false;
+
+        if (isReady && analyser) {
+            const dataArray = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(dataArray);
+            // Sumamos la energía de todas las frecuencias
+            const volumeSum = dataArray.reduce((a, b) => a + b, 0);
+            // Si la suma es mayor a 0, hay sonido
+            isPlayingAudio = volumeSum > 0;
+        }
+
+        sendResponse({ 
+            success: !!isReady, 
+            audioDetected: isPlayingAudio // <--- DATO NUEVO
+        });
         return false;
     }
-    // ==============================
+    // =====================================================
 
     if (msg.type === 'UPDATE_GAIN' && gainNode) gainNode.gain.value = parseFloat(msg.value);
     if (msg.type === 'UPDATE_BASS' && bass) bass.gain.value = parseFloat(msg.value);

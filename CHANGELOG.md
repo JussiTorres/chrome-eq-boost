@@ -2,12 +2,19 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
-## [1.2.3] - 2025-12-09
-### Fixed
-- **Startup Cleanup:** Fixed a bug where the extension retained "active" state after a browser restart. Added `onStartup` listeners in Service Worker to clear stale storage data.
-
+## [1.2.3] - 2025-12-10
 ### Added
-- **UI:** Added a sticky footer in the Settings panel with developer credits and version info.
+- **Audio Activity Detection:** Implemented an `AnalyserNode` in the audio engine to detect real-time silence. The UI now distinguishes between "Active" (Green) and "Waiting for audio..." (Orange).
+- **Auto-Shutdown:** The extension now automatically powers off and resets its state if the audio stream is terminated externally or if Chrome's battery saver kills the process.
+- **Branding:** Replaced text header with the official "Chrome EQ Boost" logo and refined UI spacing.
+- **UI Footer:** Added a sticky footer in the Settings panel with developer credits and version info.
+
+### Fixed
+- **Ghost State Logic:** Implemented "Ghost Buster" checks on startup. The popup now verifies if the audio engine is truly alive before showing an "Active" state, preventing false positives.
+- **Startup Cleanup:** Fixed a bug where the extension retained "active" state after a browser restart. Added `onStartup` listeners in Service Worker to clear stale storage data.
+- **Conflict Resolution:** The main toggle switch now intelligently handles "Take Over" actions. Toggling it ON in a conflict scenario now automatically claims the audio stream for the current tab.
+- **UX/Safety:** The "Reset EQ & Vol" button is now strictly locked (disabled) when the extension is off or in conflict mode, preventing accidental resets.
+- **UI Polish:** Removed unsightly scrollbars across all languages and fixed startup flickering issues where status text was missing.
 
 ## [1.2.2] - 2025-11-28
 ### Fixed
