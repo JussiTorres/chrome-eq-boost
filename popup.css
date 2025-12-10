@@ -1,3 +1,12 @@
+/**
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres (Zyntra Labs)
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
+ */
+
+/* === Base & Layout === */
 body {
     width: 320px;
     padding: 16px;
@@ -21,6 +30,66 @@ h3 {
     font-weight: 700;
 }
 
+hr {
+    border: 0;
+    height: 1px;
+    background: #e5e7eb;
+    margin: 18px 0;
+}
+
+/* === Header & Branding === */
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 2px 10px 2px;
+    margin-bottom: 5px;
+}
+
+.header-bar h3 {
+    margin: 0;
+}
+
+.brand-logo {
+    max-height: 32px;
+    width: auto;
+    max-width: 70%;
+    display: block;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: var(--text-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.icon-button:hover {
+    background-color: #f3f4f6;
+    color: var(--primary-color);
+}
+
+.icon-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.close-button {
+    padding: 2px;
+}
+
+.close-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* === Status & Messages === */
 .status-message {
     text-align: center;
     font-size: 0.88em;
@@ -29,7 +98,7 @@ h3 {
     min-height: 20px;
 }
 
-/* ==================== TOGGLE CORREGIDO Y ÚNICO ==================== */
+/* === Toggle Switch === */
 .toggle-switch {
     display: flex;
     align-items: center;
@@ -93,15 +162,7 @@ input:checked+.slider:before {
     transform: translateX(22px);
 }
 
-/* ==================== FIN TOGGLE ==================== */
-
-hr {
-    border: 0;
-    height: 1px;
-    background: #e5e7eb;
-    margin: 18px 0;
-}
-
+/* === Controls (Sliders & Buttons) === */
 .section-title {
     margin: 20px 0 10px;
     font-size: 1.02em;
@@ -141,6 +202,11 @@ input[type="range"]::-webkit-slider-thumb {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
+input[type="range"]:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 .value-display {
     font-weight: 700;
     text-align: right;
@@ -170,106 +236,32 @@ input[type="range"]::-webkit-slider-thumb {
     transform: none;
 }
 
-.reset-button:disabled:hover {
-    background-color: #9ca3af;
-    /* Que no cambie de color al pasar el mouse */
-}
-
 .reset-button:hover {
     background: #dc2626;
 }
 
-input[type="range"]:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
-
-/* Agrega esto al final de tu popup.css */
-
-/* Header nuevo para alinear título y botón */
-.header-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.header-bar h3 {
-    margin: 0;
-    /* Quitamos margen para que se alinee bien */
-}
-
-/* Estilos para botones de icono (la tuerca y la X de cerrar) */
-.icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    color: var(--text-secondary);
-    /* Usa tu variable de color gris */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.icon-button:hover {
-    background-color: #f3f4f6;
-    /* Un gris muy clarito al pasar el mouse */
-    color: var(--primary-color);
-    /* Se pone verde al pasar el mouse */
-}
-
-/* Tamaño del SVG */
-.icon-button svg {
-    width: 24px;
-    height: 24px;
-}
-
-/* Estilo específico para el botón de cerrar 'X' */
-.close-button {
-    padding: 2px;
-}
-
-.close-button svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* --- Estilos del Panel de Configuración Superpuesto --- */
-
+/* === Settings Panel === */
 .settings-panel {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-
-    /* === CORRECCIÓN AQUÍ === */
     background-color: #f7f9fb;
-    /* Usamos el mismo color de fondo que el body */
-    /* ======================= */
-
     z-index: 200;
-    /* Aseguramos que esté bien arriba */
     padding: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-
-    /* Animación */
     opacity: 1;
     visibility: visible;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Clase utilitaria para ocultar el panel */
 .settings-panel.hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    /* Evita clicks cuando está invisible */
 }
 
 .settings-header {
@@ -289,47 +281,12 @@ input[type="range"]:disabled {
 
 .settings-content {
     flex-grow: 1;
-    /* Ocupa el resto del espacio */
 }
 
-/* Ajuste fino para el contenedor del encabezado */
-.header-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* CAMBIO: Reducimos el padding vertical de 15px a 5px */
-    padding: 5px 2px 10px 2px;
-    margin-bottom: 5px;
-    /* Reducimos el margen inferior también */
-}
-
-/* Estilos para el logo en el encabezado */
-.brand-logo {
-    max-height: 32px;
-    width: auto;
-    max-width: 70%;
-    display: block;
-}
-
-/* === SCROLLBAR INVISIBLE (Opción Nuclear) === */
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-    display: none;
-}
-
-html,
-body {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    overflow-y: auto;
-}
-
-/* === NUEVO: Botón de Donación === */
+/* === Support Button === */
 .donate-button {
     display: inline-block;
     background-color: #FFDD00;
-    /* Color clásico de Buy Me a Coffee */
     color: #000000;
     text-decoration: none;
     font-weight: 600;
@@ -348,4 +305,18 @@ body {
 
 .donate-button:active {
     transform: translateY(0);
+}
+
+/* === Utilities === */
+/* Hide Scrollbar Global */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    display: none;
+}
+
+html, body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-y: auto;
 }

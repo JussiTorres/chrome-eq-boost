@@ -1,1 +1,9 @@
+/**
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres (Zyntra Labs)
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
+ */
+
 async function ensureOffscreen(){await(chrome.offscreen.hasDocument?.())||await chrome.offscreen.createDocument({url:"offscreen.html",reasons:["AUDIO_PLAYBACK"],justification:"Audio Processing"})}chrome.runtime.onMessage.addListener((e,r,a)=>{if("START_CAPTURE"===e.type)return(async()=>{try{await ensureOffscreen(),chrome.tabCapture.getMediaStreamId({targetTabId:e.tabId},r=>{if(chrome.runtime.lastError||!r)return console.warn("Error stream:",chrome.runtime.lastError),void a({success:!1});chrome.storage.local.set({capturingTabId:e.tabId}),chrome.runtime.sendMessage({type:"INCOMING_STREAM",streamId:r}).catch(()=>{}),a({success:!0})})}catch(e){console.error(e),a({success:!1})}})(),!0;"STOP_CAPTURE"===e.type&&(chrome.storage.local.remove("capturingTabId"),chrome.runtime.sendMessage({type:"STOP_CAPTURE"}).catch(()=>{})),"STREAM_ENDED_EXTERNALLY"===e.type&&(console.log("Limpiando estado por corte de audio."),chrome.storage.local.remove("capturingTabId"),chrome.storage.local.set({isEnabled:!1}))}),chrome.tabs.onRemoved.addListener(e=>{chrome.storage.local.get(["capturingTabId"],r=>{r.capturingTabId===e&&(console.log(`Pestaña capturada (${e}) cerrada.`),chrome.storage.local.remove("capturingTabId"),chrome.storage.local.set({isEnabled:!1}),chrome.runtime.sendMessage({type:"STOP_CAPTURE"}).catch(()=>{}))})}),chrome.runtime.onStartup.addListener(()=>{chrome.storage.local.remove("capturingTabId"),chrome.storage.local.set({isEnabled:!1})}),chrome.runtime.onInstalled.addListener(()=>{chrome.storage.local.remove("capturingTabId"),chrome.storage.local.set({isEnabled:!1})});
