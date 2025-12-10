@@ -93,8 +93,8 @@
             <div class="settings-content">
                 <div class="setting-row" style="margin-bottom: 15px;">
                     <label for="languageSelect"
-                        style="display:block; margin-bottom: 8px; font-weight:600; color:#4b5563; font-size: 0.95em;">Language
-                        / Idioma:</label>
+                        style="display:block; margin-bottom: 8px; font-weight:600; color:#4b5563; font-size: 0.95em;"
+                        data-i18n="settings_language_label">Language</label>
                     <select id="languageSelect"
                         style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid #d1d5db; background-color: white; font-size: 0.95em;">
                         <option value="en">English</option>
@@ -111,8 +111,13 @@
             <div class="settings-footer" style="text-align: center; padding-top: 10px;">
                 <hr style="margin: 0 0 15px 0; border: 0; height: 1px; background: #e5e7eb;">
 
-                <p style="color: #6b7280; font-size: 0.85em; margin: 0 0 5px 0;">
-                    Made with ❤️ by
+                <a href="https://buymeacoffee.com/jussitorres" target="_blank" class="donate-button"
+                    data-i18n="footer_buy_coffee">
+                    ☕ Buy me a coffee
+                </a>
+
+                <p style="color: #6b7280; font-size: 0.85em; margin: 12px 0 5px 0;">
+                    <span data-i18n="footer_made_with">Made with ❤️ by</span>
                     <a href="https://www.jussitorres.com/" target="_blank"
                         style="color: #2563eb; text-decoration: none; font-weight: 600; transition: color 0.2s;">
                         Jussi Torres
@@ -120,7 +125,7 @@
                 </p>
 
                 <p style="color: #9ca3af; font-size: 0.75em; margin: 0;">
-                    v1.2.3
+                    v1.2.4
                 </p>
             </div>
         </div>

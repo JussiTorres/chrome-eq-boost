@@ -3,16 +3,16 @@
     "message": "Inicializando..."
   },
   "status_active": {
-    "message": "Ecualizador Activo"
+    "message": "Ecualizador activo"
   },
   "status_disabled": {
-    "message": "Extensión desactivada."
+    "message": "Extensión desactivada"
   },
   "status_waiting": {
     "message": "Captura iniciada. Esperando audio..."
   },
   "toggle_label": {
-    "message": "Extensión Habilitada"
+    "message": "Extensión habilitada"
   },
   "button_reset": {
     "message": "Restablecer EQ & Vol."
@@ -43,5 +43,14 @@
   },
   "status_conflict": {
     "message": "Controlando otra pestaña"
+  },
+  "settings_language_label": {
+    "message": "Idioma"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ Invítame un café"
+  },
+  "footer_made_with": {
+    "message": "Hecho con ❤️ por"
   }
 }

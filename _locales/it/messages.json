@@ -3,16 +3,16 @@
     "message": "Inizializzazione..."
   },
   "status_active": {
-    "message": "Equalizzatore Attivo"
+    "message": "Equalizzatore attivo"
   },
   "status_disabled": {
-    "message": "Estensione disattivata."
+    "message": "Estensione disattivata"
   },
   "status_waiting": {
     "message": "Cattura avviata. In attesa dell'audio..."
   },
   "toggle_label": {
-    "message": "Estensione Abilitata"
+    "message": "Estensione abilitata"
   },
   "button_reset": {
     "message": "Reimposta EQ & Vol."
@@ -43,5 +43,14 @@
   },
   "status_conflict": {
     "message": "Controllo di un'altra scheda"
+  },
+  "settings_language_label": {
+    "message": "Lingua"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ Offrimi un caffè"
+  },
+  "footer_made_with": {
+    "message": "Fatto con ❤️ da"
   }
 }

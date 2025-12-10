@@ -6,7 +6,7 @@
     "message": "Égaliseur actif"
   },
   "status_disabled": {
-    "message": "Extension désactivée."
+    "message": "Extension désactivée"
   },
   "status_waiting": {
     "message": "Capture lancée. En attente de l'audio..."
@@ -43,5 +43,14 @@
   },
   "status_conflict": {
     "message": "Contrôle un autre onglet"
+  },
+  "settings_language_label": {
+    "message": "Langue"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ Offrez-moi un café"
+  },
+  "footer_made_with": {
+    "message": "Fait avec ❤️ par"
   }
 }

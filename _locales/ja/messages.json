@@ -6,7 +6,7 @@
     "message": "イコライザー稼働中"
   },
   "status_disabled": {
-    "message": "拡張機能が無効です。"
+    "message": "拡張機能が無効です"
   },
   "status_waiting": {
     "message": "キャプチャ開始。音声を待機中..."
@@ -43,5 +43,14 @@
   },
   "status_conflict": {
     "message": "別のタブを制御中"
+  },
+  "settings_language_label": {
+    "message": "言語"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ コーヒーを奢って応援してください"
+  },
+  "footer_made_with": {
+    "message": "❤️ を込めて:"
   }
 }

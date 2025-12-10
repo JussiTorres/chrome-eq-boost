@@ -6,7 +6,7 @@
     "message": "均衡器已激活"
   },
   "status_disabled": {
-    "message": "扩展已禁用。"
+    "message": "扩展已禁用"
   },
   "status_waiting": {
     "message": "捕获已开始。等待音频..."
@@ -43,5 +43,14 @@
   },
   "status_conflict": {
     "message": "正在控制另一个标签页"
+  },
+  "settings_language_label": {
+    "message": "语言"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ 请我喝杯咖啡"
+  },
+  "footer_made_with": {
+    "message": "用 ❤️ 制作:"
   }
 }

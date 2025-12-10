@@ -3,16 +3,16 @@
     "message": "Initializing..."
   },
   "status_active": {
-    "message": "Equalizer Active"
+    "message": "Equalizer active"
   },
   "status_disabled": {
-    "message": "Extension disabled."
+    "message": "Extension disabled"
   },
   "status_waiting": {
     "message": "Capture started. Waiting for audio..."
   },
   "toggle_label": {
-    "message": "Extension Enabled"
+    "message": "Extension enabled"
   },
   "button_reset": {
     "message": "Reset EQ & Vol."
@@ -43,5 +43,14 @@
   },
   "status_conflict": {
     "message": "Controlling another tab"
+  },
+  "settings_language_label": {
+    "message": "Language"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ Buy me a coffee"
+  },
+  "footer_made_with": {
+    "message": "Made with ❤️ by"
   }
 }

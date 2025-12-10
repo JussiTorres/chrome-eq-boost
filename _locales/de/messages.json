@@ -6,7 +6,7 @@
     "message": "Equalizer aktiv"
   },
   "status_disabled": {
-    "message": "Erweiterung deaktiviert."
+    "message": "Erweiterung deaktiviert"
   },
   "status_waiting": {
     "message": "Aufnahme gestartet. Warte auf Audio..."
@@ -43,5 +43,14 @@
   },
   "status_conflict": {
     "message": "Steuert anderen Tab"
+  },
+  "settings_language_label": {
+    "message": "Sprache"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ Spendier mir einen Kaffee"
+  },
+  "footer_made_with": {
+    "message": "Mit ❤️ gemacht von"
   }
 }

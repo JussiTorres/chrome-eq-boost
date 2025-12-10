@@ -6,7 +6,7 @@
     "message": "इक्वेलाइज़र सक्रिय"
   },
   "status_disabled": {
-    "message": "एक्सटेंशन अक्षम है।"
+    "message": "एक्सटेंशन अक्षम है"
   },
   "status_waiting": {
     "message": "कैप्चर शुरू हुआ। ऑडियो की प्रतीक्षा है..."
@@ -43,5 +43,14 @@
   },
   "status_conflict": {
     "message": "दूसरे टैब को नियंत्रित कर रहा है"
+  },
+  "settings_language_label": {
+    "message": "भाषा"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ एक कॉफी पिलाएं"
+  },
+  "footer_made_with": {
+    "message": "❤️ से निर्मित:"
   }
 }
