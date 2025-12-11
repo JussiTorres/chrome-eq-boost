@@ -2,10 +2,14 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
-## [1.2.4] - 2025-12-10
+## [1.2.4] - 2025-12-11
+### Security (Crucial)
+- **Privacy Hardening:** Removed `content.js` and the `<all_urls>` permission entirely. The extension no longer has the ability to run scripts on web pages, strictly adhering to the **Principle of Least Privilege**.
+- **Manifest Cleanup:** Removed unused `scripting` and `tabs` permissions to ensure the extension only requests exactly what it needs (`activeTab`, `tabCapture`, `offscreen`).
+
 ### Added
 - **Support:** Added a "Buy me a coffee" donation button in the Settings panel.
-- **Localization:** finalized native translations for Japanese, Chinese, and Hindi to improve cultural relevance.
+- **Localization:** Finalized native translations for Japanese, Chinese, and Hindi to improve cultural relevance.
 
 ### Changed
 - **Codebase:** Refactored `popup.css` into logical sections for better maintainability.
