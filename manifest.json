@@ -18,10 +18,8 @@
   },
   "permissions": [
     "activeTab",
-    "scripting",
     "storage",
     "tabCapture",
-    "offscreen",
-    "tabs"
+    "offscreen"
   ]
 }
