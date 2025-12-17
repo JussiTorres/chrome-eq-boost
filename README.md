@@ -18,7 +18,12 @@ A powerful, privacy-focused Chrome Extension to boost volume (up to 400%) and eq
 
 ## 🚀 Installation
 
-### From Source (Developer Mode)
+### 🛒 Chrome Web Store (Recommended)
+The easiest way to install is directly from the official store:
+👉 [**Add to Chrome**](https://chromewebstore.google.com/detail/faklnjopaahkgaeklkplejmknidfcofh?utm_source=item-share-cb)
+
+### 👨‍💻 From Source (Developer Mode)
+If you want to inspect the code or build it yourself:
 1. Clone this repository.
 2. Open Chrome and navigate to `chrome://extensions/`.
 3. Enable **"Developer mode"** (top right switch).
