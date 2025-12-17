@@ -39,15 +39,17 @@ const sliderConfigs = [{
     multiplier: 1,
     suffix: " dB"
 }];
+
 let currentMessages = {},
     pollingInterval = null;
+
 async function loadLanguage(e) {
     try {
         const t = chrome.runtime.getURL(`_locales/${e}/messages.json`),
             s = await fetch(t);
         currentMessages = await s.json(), applyTranslations()
     } catch (e) {
-        console.error("Error cargando idioma:", e)
+        console.error("Error loading language:", e)
     }
 }
 
@@ -78,25 +80,60 @@ function syncAudioEngine() {
     })
 }
 
+// === UPDATED UI LOGIC ===
 function updateStatusUI(e, t, s = !1) {
-    const a = document.getElementById("statusMessage"),
-        l = document.querySelectorAll('input[type="range"]'),
-        n = document.getElementById("toggleEnabled"),
-        o = document.querySelector(".toggle-label"),
-        d = document.getElementById("resetButton");
-    if (a.style.display = "block", n && (n.checked = t), !t) {
-        const e = currentMessages.status_disabled ? currentMessages.status_disabled.message : "Extension disabled.";
-        return a.textContent = e, a.style.color = "#9ca3af", o && (o.textContent = e.replace(/\.$/, ""), o.style.color = "#6b7280"), l.forEach(e => e.disabled = !0), void(d && (d.disabled = !0))
-    }
-    if ("none" === document.getElementById("tabConflictPanel").style.display && (l.forEach(e => e.disabled = !1), d && (d.disabled = !1)), o && (o.textContent = currentMessages.toggle_label ? currentMessages.toggle_label.message : "Extension Enabled", o.style.color = "#1e3a8a"), e)
-        if (s) a.textContent = currentMessages.status_active ? currentMessages.status_active.message : "Equalizer Active", a.style.color = "#22c55e";
-        else {
-            const e = currentMessages.status_waiting ? currentMessages.status_waiting.message : "Waiting for audio...";
-            a.textContent = e, a.style.color = "#f59e0b"
+    const statusMsg = document.getElementById("statusMessage"),
+        container = document.getElementById("statusContainer"), // New Container
+        sliders = document.querySelectorAll('input[type="range"]'),
+        toggle = document.getElementById("toggleEnabled"),
+        toggleLabel = document.querySelector(".toggle-label"),
+        resetBtn = document.getElementById("resetButton");
+
+    // Default: Reset container style
+    // container.classList.remove("conflict"); // Don't remove here, logic handled below
+
+    if (toggle && (toggle.checked = t), !t) {
+        // DISABLED STATE
+        const msg = currentMessages.status_disabled ? currentMessages.status_disabled.message : "Extension disabled.";
+        statusMsg.textContent = msg;
+        statusMsg.style.color = "#9ca3af";
+        if (toggleLabel) {
+            toggleLabel.textContent = msg.replace(/\.$/, "");
+            toggleLabel.style.color = "#6b7280";
         }
-    else {
-        const e = currentMessages.status_loading ? currentMessages.status_loading.message : "Initializing...";
-        a.textContent = e, a.style.color = "#3b82f6"
+        sliders.forEach(e => e.disabled = !0);
+        if (resetBtn) resetBtn.disabled = !0;
+        return;
+    }
+
+    // ENABLED STATE
+    // Check if we are NOT in conflict mode
+    if (!container.classList.contains("conflict")) {
+        sliders.forEach(e => e.disabled = !1);
+        if (resetBtn) resetBtn.disabled = !1;
+    }
+
+    if (toggleLabel) {
+        toggleLabel.textContent = currentMessages.toggle_label ? currentMessages.toggle_label.message : "Extension Enabled";
+        toggleLabel.style.color = "#1e3a8a";
+    }
+
+    if (e) {
+        // AUDIO ACTIVE
+        if (s) {
+            statusMsg.textContent = currentMessages.status_active ? currentMessages.status_active.message : "Equalizer Active";
+            statusMsg.style.color = "#22c55e";
+        } else {
+            // WAITING
+            const msg = currentMessages.status_waiting ? currentMessages.status_waiting.message : "Waiting for audio...";
+            statusMsg.textContent = msg;
+            statusMsg.style.color = "#f59e0b";
+        }
+    } else {
+        // INITIALIZING
+        const msg = currentMessages.status_loading ? currentMessages.status_loading.message : "Initializing...";
+        statusMsg.textContent = msg;
+        statusMsg.style.color = "#3b82f6";
     }
 }
 
@@ -109,16 +146,17 @@ function startPolling() {
         }, t => {
             if (!chrome.runtime.lastError && t && t.success) updateStatusUI(!0, !0, t.audioDetected), e < 3 && syncAudioEngine();
             else if (e > 2) {
-                console.log("El audio dejó de responder en vivo (Muerte Súbita). Apagando..."), clearInterval(pollingInterval), chrome.storage.local.set({
+                console.log("Audio dead. Shutting down..."), clearInterval(pollingInterval), chrome.storage.local.set({
                     isEnabled: !1,
                     capturingTabId: null
                 });
-                const e = document.getElementById("toggleEnabled");
-                e && (e.checked = !1), updateStatusUI(!1, !1)
+                const el = document.getElementById("toggleEnabled");
+                el && (el.checked = !1), updateStatusUI(!1, !1)
             }
         })
     }, 1e3)
 }
+
 async function startCaptureProcess() {
     const [e] = await chrome.tabs.query({
         active: !0,
@@ -129,57 +167,66 @@ async function startCaptureProcess() {
         tabId: e.id
     }))
 }
+
 document.addEventListener("DOMContentLoaded", async () => {
-    const e = document.getElementById("toggleEnabled"),
-        t = document.getElementById("tabConflictPanel"),
-        s = document.getElementById("takeOverBtn"),
-        a = document.getElementById("settingsBtn"),
-        l = document.getElementById("settingsPanel"),
-        n = document.getElementById("closeSettingsBtn"),
+    const toggle = document.getElementById("toggleEnabled"),
+        container = document.getElementById("statusContainer"), // New
+        statusMsg = document.getElementById("statusMessage"),   // New
+        takeOverBtn = document.getElementById("takeOverBtn"),   // New
         
-        // NEW ELEMENTS
+        settingsBtn = document.getElementById("settingsBtn"),
+        settingsPanel = document.getElementById("settingsPanel"),
+        closeSettingsBtn = document.getElementById("closeSettingsBtn"),
         openAboutBtn = document.getElementById("openAboutBtn"),
         closeAboutBtn = document.getElementById("closeAboutBtn"),
         aboutPanel = document.getElementById("aboutPanel"),
+        langSelect = document.getElementById("languageSelect");
 
-        o = document.getElementById("languageSelect");
-        
-    // Standard Settings Navigation
-    a.addEventListener("click", () => {
-        l.classList.remove("hidden");
-        window.scrollTo(0, 0); // Reset scroll when opening settings
+    // Settings Nav
+    settingsBtn.addEventListener("click", () => {
+        settingsPanel.classList.remove("hidden");
+        window.scrollTo(0, 0);
     });
-    n.addEventListener("click", () => l.classList.add("hidden"));
+    closeSettingsBtn.addEventListener("click", () => settingsPanel.classList.add("hidden"));
 
-    // NEW: About Panel Navigation with Auto-Scroll
+    // About Nav
     openAboutBtn.addEventListener("click", () => {
-        l.classList.add("hidden"); // Hide Settings
-        aboutPanel.classList.remove("hidden"); // Show About
-        window.scrollTo(0, 0); // <--- FORCE SCROLL TO TOP
+        settingsPanel.classList.add("hidden");
+        aboutPanel.classList.remove("hidden");
+        window.scrollTo(0, 0);
     });
-
     closeAboutBtn.addEventListener("click", () => {
-        aboutPanel.classList.add("hidden"); // Hide About
-        l.classList.remove("hidden"); // Show Settings (Back behavior)
-        window.scrollTo(0, 0); // <--- FORCE SCROLL TO TOP
+        aboutPanel.classList.add("hidden");
+        settingsPanel.classList.remove("hidden");
+        window.scrollTo(0, 0);
     });
 
-    const [d] = await chrome.tabs.query({
+    const [activeTab] = await chrome.tabs.query({
         active: !0,
         currentWindow: !0
-    }), r = await chrome.storage.local.get(["volumeLevel", "bassLevel", "midLevel", "trebleLevel", "isEnabled", "capturingTabId", "preferredLocale"]), c = r.preferredLocale || "en";
-    o && (o.value = c, o.addEventListener("change", async t => {
-        const s = t.target.value;
-        chrome.storage.local.set({
-            preferredLocale: s
-        }), await loadLanguage(s), e.checked ? chrome.runtime.sendMessage({
-            type: "TARGET_OFFSCREEN_PING"
-        }, e => {
-            chrome.runtime.lastError, updateStatusUI(e ?.success, !0, e ?.audioDetected)
-        }) : updateStatusUI(!1, !1)
-    })), await loadLanguage(c);
-    const i = r.capturingTabId,
-        u = !1 !== r.isEnabled;
+    });
+    
+    const r = await chrome.storage.local.get(["volumeLevel", "bassLevel", "midLevel", "trebleLevel", "isEnabled", "capturingTabId", "preferredLocale"]),
+        c = r.preferredLocale || "en";
+
+    if (langSelect) {
+        langSelect.value = c;
+        langSelect.addEventListener("change", async t => {
+            const s = t.target.value;
+            chrome.storage.local.set({ preferredLocale: s });
+            await loadLanguage(s);
+            toggle.checked ? chrome.runtime.sendMessage({
+                type: "TARGET_OFFSCREEN_PING"
+            }, e => {
+                chrome.runtime.lastError, updateStatusUI(e?.success, !0, e?.audioDetected)
+            }) : updateStatusUI(!1, !1)
+        });
+    }
+    await loadLanguage(c);
+
+    const capturingTabId = r.capturingTabId,
+        isEnabled = !1 !== r.isEnabled;
+
     sliderConfigs.forEach(e => {
         const t = r[e.storageKey] ?? e.default,
             s = document.getElementById(e.id);
@@ -193,61 +240,111 @@ document.addEventListener("DOMContentLoaded", async () => {
             })
         })
     });
+
     let g = !1;
 
-    function m() {
-        t.style.display = "none", document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !1), document.getElementById("resetButton").disabled = !1, send({
-            type: "STOP_CAPTURE"
-        }), setTimeout(() => {
-            e.checked = !0, chrome.storage.local.set({
-                isEnabled: !0
-            }), startCaptureProcess()
-        }, 200)
+    // === GHOST BUSTER / CONFLICT LOGIC ===
+    function forceTakeover() {
+        // RESET UI TO NORMAL
+        container.classList.remove("conflict");
+        takeOverBtn.classList.add("hidden");
+        
+        document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !1);
+        document.getElementById("resetButton").disabled = !1;
+        
+        send({ type: "STOP_CAPTURE" });
+        setTimeout(() => {
+            toggle.checked = !0;
+            chrome.storage.local.set({ isEnabled: !0 });
+            startCaptureProcess();
+        }, 200);
     }
-    u && i && i !== d.id ? chrome.runtime.sendMessage({
-        type: "TARGET_OFFSCREEN_PING"
-    }, a => {
-        if (!chrome.runtime.lastError && a && a.success) {
-            g = !0, t.style.display = "block", e.checked = !1;
-            const a = document.querySelector(".toggle-label");
-            a && (a.textContent = currentMessages.status_disabled ? currentMessages.status_disabled.message.replace(/\.$/, "") : "Disabled", a.style.color = "#6b7280"), document.getElementById("statusMessage").textContent = currentMessages.status_conflict ? currentMessages.status_conflict.message : "Controlling another tab", document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !0), document.getElementById("resetButton").disabled = !0, s.onclick = m
-        } else console.log("Ghost state detectado. Limpiando..."), chrome.storage.local.set({
-            isEnabled: !1,
-            capturingTabId: null
-        }), t.style.display = "none", updateStatusUI(!1, !1)
-    }) : u ? (updateStatusUI(!1, !0), chrome.runtime.sendMessage({
-        type: "TARGET_OFFSCREEN_PING"
-    }, t => {
-        !chrome.runtime.lastError && t && t.success ? (updateStatusUI(!0, !0, t.audioDetected), startPolling()) : (console.log("Audio muerto detectado al abrir. Reseteando a OFF."), chrome.storage.local.set({
-            isEnabled: !1,
-            capturingTabId: null
-        }), e.checked = !1, updateStatusUI(!1, !1))
-    })) : updateStatusUI(!1, !1), e && e.addEventListener("change", () => {
-        e.checked ? "block" === t.style.display ? m() : (chrome.storage.local.set({
-            isEnabled: !0
-        }), send({
-            type: "STOP_CAPTURE"
-        }), setTimeout(() => startCaptureProcess(), 100)) : (pollingInterval && clearInterval(pollingInterval), t.style.display = "none", send({
-            type: "STOP_CAPTURE"
-        }), send({
-            type: "TOGGLE_ENABLED",
-            value: !1
-        }), updateStatusUI(!1, !1), chrome.storage.local.set({
-            isEnabled: !1
-        }))
-    }), document.getElementById("resetButton").addEventListener("click", () => {
-        sliderConfigs.forEach(e => {
-            document.getElementById(e.id).value = e.default, updateDisplay(e.id, e.display, e.default, e.multiplier, e.suffix), send({
-                type: e.type,
-                value: e.default
-            }), chrome.storage.local.set({
-                [e.storageKey]: e.default
-            })
+
+    if (isEnabled && capturingTabId && capturingTabId !== activeTab.id) {
+        chrome.runtime.sendMessage({
+            type: "TARGET_OFFSCREEN_PING"
+        }, res => {
+            if (!chrome.runtime.lastError && res && res.success) {
+                // === CONFLICT DETECTED ===
+                g = !0;
+                container.classList.add("conflict"); // Turn yellow
+                takeOverBtn.classList.remove("hidden"); // Show button
+                toggle.checked = !1;
+
+                const label = document.querySelector(".toggle-label");
+                if (label) {
+                    label.textContent = currentMessages.status_disabled ? currentMessages.status_disabled.message.replace(/\.$/, "") : "Disabled";
+                    label.style.color = "#6b7280";
+                }
+
+                // Fuse: Set status text to "Controlling another tab"
+                statusMsg.textContent = currentMessages.status_conflict ? currentMessages.status_conflict.message : "Controlling another tab";
+                // Color is handled by CSS .conflict class
+
+                document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !0);
+                document.getElementById("resetButton").disabled = !0;
+                
+                takeOverBtn.onclick = forceTakeover;
+
+            } else {
+                console.log("Ghost state detected. Cleaning...");
+                chrome.storage.local.set({ isEnabled: !1, capturingTabId: null });
+                container.classList.remove("conflict");
+                takeOverBtn.classList.add("hidden");
+                updateStatusUI(!1, !1);
+            }
         })
-    }), chrome.storage.onChanged.addListener((t, s) => {
-        if ("local" === s && t.isEnabled) {
-            const s = t.isEnabled.newValue;
-            e && (e.checked = s, updateStatusUI(s, s)), !s && pollingInterval && clearInterval(pollingInterval)
+    } else if (isEnabled) {
+        updateStatusUI(!1, !0);
+        chrome.runtime.sendMessage({
+            type: "TARGET_OFFSCREEN_PING"
+        }, t => {
+            !chrome.runtime.lastError && t && t.success ? (updateStatusUI(!0, !0, t.audioDetected), startPolling()) : (console.log("Dead audio on open. Resetting."), chrome.storage.local.set({
+                isEnabled: !1,
+                capturingTabId: null
+            }), toggle.checked = !1, updateStatusUI(!1, !1))
+        })
+    } else {
+        updateStatusUI(!1, !1);
+    }
+
+    toggle && toggle.addEventListener("change", () => {
+        if (toggle.checked) {
+            if (container.classList.contains("conflict")) {
+                forceTakeover();
+            } else {
+                chrome.storage.local.set({ isEnabled: !0 });
+                send({ type: "STOP_CAPTURE" });
+                setTimeout(() => startCaptureProcess(), 100);
+            }
+        } else {
+            pollingInterval && clearInterval(pollingInterval);
+            
+            // Clear conflict state if it existed
+            container.classList.remove("conflict");
+            takeOverBtn.classList.add("hidden");
+
+            send({ type: "STOP_CAPTURE" });
+            send({ type: "TOGGLE_ENABLED", value: !1 });
+            updateStatusUI(!1, !1);
+            chrome.storage.local.set({ isEnabled: !1 });
         }
-    })
+    });
+
+    document.getElementById("resetButton").addEventListener("click", () => {
+        sliderConfigs.forEach(e => {
+            document.getElementById(e.id).value = e.default;
+            updateDisplay(e.id, e.display, e.default, e.multiplier, e.suffix);
+            send({ type: e.type, value: e.default });
+            chrome.storage.local.set({ [e.storageKey]: e.default });
+        })
+    });
+
+    chrome.storage.onChanged.addListener((t, s) => {
+        if ("local" === s && t.isEnabled) {
+            const val = t.isEnabled.newValue;
+            toggle && (toggle.checked = val, updateStatusUI(val, val));
+            !val && pollingInterval && clearInterval(pollingInterval);
+        }
+    });
 });

@@ -9,7 +9,7 @@
 /* === Base & Layout === */
 body {
     width: 320px;
-    padding: 16px;
+    padding: 16px; /* Standard breathing room */
     font-family: 'Inter', Arial, sans-serif;
     background-color: #f7f9fb;
     color: #333;
@@ -19,13 +19,13 @@ body {
 }
 
 .container {
-    padding: 5px;
+    padding: 0 5px; /* Slight side padding for inner content */
 }
 
 h3 {
     text-align: center;
     color: #1e3a8a;
-    margin: 0 0 12px 0;
+    margin: 0 0 10px 0;
     font-size: 1.45em;
     font-weight: 700;
 }
@@ -34,7 +34,7 @@ hr {
     border: 0;
     height: 1px;
     background: #e5e7eb;
-    margin: 18px 0;
+    margin: 12px 0; /* TIGHTENED: Was 18px */
 }
 
 /* === Header & Branding === */
@@ -42,12 +42,8 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 2px 10px 2px;
+    padding: 0 2px 5px 2px;
     margin-bottom: 5px;
-}
-
-.header-bar h3 {
-    margin: 0;
 }
 
 .brand-logo {
@@ -62,7 +58,7 @@ hr {
     border: none;
     cursor: pointer;
     padding: 5px;
-    color: var(--text-secondary);
+    color: #6b7280; /* Explicit gray */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -72,7 +68,7 @@ hr {
 
 .icon-button:hover {
     background-color: #f3f4f6;
-    color: var(--primary-color);
+    color: #2563eb; /* Primary Blue */
 }
 
 .icon-button svg {
@@ -89,7 +85,7 @@ hr {
     height: 20px;
 }
 
-/* === Text Button (New for Info) === */
+/* === Text Button (About) === */
 .text-button {
     background: none;
     border: none;
@@ -109,16 +105,61 @@ hr {
     color: #1e3a8a;
 }
 
-/* === Status & Messages === */
+/* === Status & Conflict Container (OPTIMIZED) === */
+.status-container {
+    margin: 5px 0 10px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 0;
+}
+
+.status-container.conflict {
+    background: #fff3cd;
+    padding: 8px;
+    border: 1px solid #ffeeba;
+}
+
 .status-message {
     text-align: center;
     font-size: 0.88em;
     color: #9ca3af;
-    margin: 8px 0 12px;
+    margin: 0;
+    padding: 2px 0;
     min-height: 20px;
+    line-height: 1.4;
 }
 
-/* === Toggle Switch === */
+/* FIX: Removed bold, kept color */
+.status-container.conflict .status-message {
+    color: #856404 !important;
+    font-weight: 400; /* Normal weight */
+}
+
+.takeover-button {
+    width: 100%;
+    margin-top: 6px;
+    background: #f59e0b;
+    color: white;
+    border: none;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9em;
+    display: block;
+}
+
+.takeover-button.hidden {
+    display: none;
+}
+
+.takeover-button:hover {
+    background: #d97706;
+}
+
+/* === Main Control Group (Toggle + Reset) === */
 .toggle-switch {
     display: flex;
     align-items: center;
@@ -127,7 +168,7 @@ hr {
     padding: 12px;
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 16px;
+    margin-bottom: 10px; /* TIGHTENED: Was 16px */
 }
 
 .toggle-label {
@@ -182,21 +223,47 @@ input:checked+.slider:before {
     transform: translateX(22px);
 }
 
-/* === Controls (Sliders & Buttons) === */
+/* === Reset Button === */
+.reset-button {
+    width: 100%;
+    padding: 10px; /* Slightly thinner */
+    margin-top: 0; /* TIGHTENED: Was 12px. Now relies on toggle's bottom margin */
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background 0.2s;
+}
+
+.reset-button:disabled {
+    background-color: #d1d5db; /* Lighter gray for disabled state */
+    cursor: not-allowed;
+    opacity: 1; /* Remove opacity so it looks clean */
+    color: #9ca3af;
+}
+
+.reset-button:hover:not(:disabled) {
+    background: #dc2626;
+}
+
+/* === Sliders & Labels === */
 .section-title {
-    margin: 20px 0 10px;
-    font-size: 1.02em;
+    margin: 15px 0 8px; /* TIGHTENED: Was 20px 0 10px */
+    font-size: 1em;
     font-weight: 600;
     color: #4b5563;
 }
 
 .eq-control {
-    margin-bottom: 16px;
+    margin-bottom: 12px; /* TIGHTENED: Was 16px */
 }
 
 .eq-control label {
-    font-size: 0.9em;
-    margin-bottom: 6px;
+    font-size: 0.88em;
+    margin-bottom: 5px;
     color: #555;
     display: block;
 }
@@ -205,7 +272,7 @@ input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 8px;
+    height: 6px; /* Slightly slimmer track */
     background: #d1d5db;
     border-radius: 6px;
     outline: none;
@@ -213,54 +280,35 @@ input[type="range"] {
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 18px; /* Slightly smaller thumb */
+    height: 18px;
     background: #3b82f6;
-    border: 3px solid white;
+    border: 2px solid white;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
 }
 
 input[type="range"]:disabled {
-    opacity: 0.4;
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
 .value-display {
     font-weight: 700;
     text-align: right;
-    font-size: 0.95em;
+    font-size: 0.9em;
     color: #1f2937;
-    margin-top: 6px;
+    margin-top: 4px;
+    display: block; /* Ensure it behaves like a block for alignment */
 }
 
-.reset-button {
-    width: 100%;
-    padding: 11px;
-    margin-top: 12px;
-    background: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background 0.2s;
-}
-
-.reset-button:disabled {
-    background-color: #9ca3af;
-    cursor: not-allowed;
-    opacity: 0.7;
-    transform: none;
-}
-
-.reset-button:hover {
-    background: #dc2626;
-}
-
-/* === Settings Panel === */
+/* === Settings & About Panels === */
 .settings-panel {
     position: absolute;
     top: 0;
@@ -295,22 +343,22 @@ input[type="range"]:disabled {
 
 .settings-header h4 {
     margin: 0;
-    color: var(--text-primary);
-    font-size: 1.2em;
+    color: #111827;
+    font-size: 1.1em;
+    font-weight: 600;
 }
 
 .settings-content {
     flex-grow: 1;
 }
 
-/* === Support Button === */
 .donate-button {
     display: inline-block;
     background-color: #FFDD00;
     color: #000000;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9em;
+    font-size: 0.85em;
     padding: 8px 16px;
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -323,20 +371,7 @@ input[type="range"]:disabled {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.donate-button:active {
-    transform: translateY(0);
-}
-
 /* === Utilities === */
-/* Hide Scrollbar Global */
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
     display: none;
-}
-
-html, body {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    overflow-y: auto;
 }
