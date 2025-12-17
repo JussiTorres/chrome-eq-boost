@@ -89,6 +89,26 @@ hr {
     height: 20px;
 }
 
+/* === Text Button (New for Info) === */
+.text-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 0.85em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 5px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.text-button:hover {
+    background-color: #f3f4f6;
+    color: #1e3a8a;
+}
+
 /* === Status & Messages === */
 .status-message {
     text-align: center;
@@ -249,7 +269,7 @@ input[type="range"]:disabled {
     height: 100%;
     background-color: #f7f9fb;
     z-index: 200;
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
