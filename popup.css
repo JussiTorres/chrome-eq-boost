@@ -9,7 +9,7 @@
 /* === Base & Layout === */
 body {
     width: 320px;
-    padding: 16px; /* Standard breathing room */
+    padding: 16px;
     font-family: 'Inter', Arial, sans-serif;
     background-color: #f7f9fb;
     color: #333;
@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-    padding: 0 5px; /* Slight side padding for inner content */
+    padding: 0 5px;
 }
 
 h3 {
@@ -34,7 +34,7 @@ hr {
     border: 0;
     height: 1px;
     background: #e5e7eb;
-    margin: 12px 0; /* TIGHTENED: Was 18px */
+    margin: 12px 0;
 }
 
 /* === Header & Branding === */
@@ -58,7 +58,7 @@ hr {
     border: none;
     cursor: pointer;
     padding: 5px;
-    color: #6b7280; /* Explicit gray */
+    color: #6b7280;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -68,7 +68,7 @@ hr {
 
 .icon-button:hover {
     background-color: #f3f4f6;
-    color: #2563eb; /* Primary Blue */
+    color: #2563eb;
 }
 
 .icon-button svg {
@@ -105,7 +105,7 @@ hr {
     color: #1e3a8a;
 }
 
-/* === Status & Conflict Container (OPTIMIZED) === */
+/* === Status & Conflict Container === */
 .status-container {
     margin: 5px 0 10px 0;
     border-radius: 8px;
@@ -131,7 +131,6 @@ hr {
     line-height: 1.4;
 }
 
-/* FIX: Removed bold, kept color */
 .status-container.conflict .status-message {
     color: #856404 !important;
     font-weight: 400; /* Normal weight */
@@ -159,7 +158,7 @@ hr {
     background: #d97706;
 }
 
-/* === Main Control Group (Toggle + Reset) === */
+/* === Main Control Group === */
 .toggle-switch {
     display: flex;
     align-items: center;
@@ -168,7 +167,7 @@ hr {
     padding: 12px;
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px; /* TIGHTENED: Was 16px */
+    margin-bottom: 10px;
 }
 
 .toggle-label {
@@ -226,8 +225,8 @@ input:checked+.slider:before {
 /* === Reset Button === */
 .reset-button {
     width: 100%;
-    padding: 10px; /* Slightly thinner */
-    margin-top: 0; /* TIGHTENED: Was 12px. Now relies on toggle's bottom margin */
+    padding: 10px;
+    margin-top: 0;
     background: #ef4444;
     color: white;
     border: none;
@@ -239,9 +238,9 @@ input:checked+.slider:before {
 }
 
 .reset-button:disabled {
-    background-color: #d1d5db; /* Lighter gray for disabled state */
+    background-color: #d1d5db;
     cursor: not-allowed;
-    opacity: 1; /* Remove opacity so it looks clean */
+    opacity: 1;
     color: #9ca3af;
 }
 
@@ -251,14 +250,14 @@ input:checked+.slider:before {
 
 /* === Sliders & Labels === */
 .section-title {
-    margin: 15px 0 8px; /* TIGHTENED: Was 20px 0 10px */
+    margin: 15px 0 8px;
     font-size: 1em;
     font-weight: 600;
     color: #4b5563;
 }
 
 .eq-control {
-    margin-bottom: 12px; /* TIGHTENED: Was 16px */
+    margin-bottom: 12px;
 }
 
 .eq-control label {
@@ -272,7 +271,7 @@ input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 6px; /* Slightly slimmer track */
+    height: 6px;
     background: #d1d5db;
     border-radius: 6px;
     outline: none;
@@ -280,7 +279,7 @@ input[type="range"] {
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px; /* Slightly smaller thumb */
+    width: 18px;
     height: 18px;
     background: #3b82f6;
     border: 2px solid white;
@@ -305,7 +304,7 @@ input[type="range"]:disabled {
     font-size: 0.9em;
     color: #1f2937;
     margin-top: 4px;
-    display: block; /* Ensure it behaves like a block for alignment */
+    display: block;
 }
 
 /* === Settings & About Panels === */

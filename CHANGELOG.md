@@ -2,6 +2,13 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.2.5] - 2025-12-17
+### Changed
+- **UI Refinement:** Consolidated the Status message and Conflict Warning into a single, smart status container for a cleaner interface.
+- **Visuals:** Optimized spacing and typography in the popup (removed bold warning text, tightened margins).
+- **Navigation:** Fixed a bug where opening the "About" panel inside Settings would cause layout issues; panels are now properly sibling-structured.
+- **UX:** Moved "Buy me a coffee" and author credits to a dedicated "About" view to de-clutter the main Settings list.
+
 ## [1.2.4] - 2025-12-11
 ### Security (Crucial)
 - **Privacy Hardening:** Removed `content.js` and the `<all_urls>` permission entirely. The extension no longer has the ability to run scripts on web pages, strictly adhering to the **Principle of Least Privilege**.

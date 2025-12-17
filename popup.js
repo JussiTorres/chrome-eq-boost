@@ -83,31 +83,30 @@ function syncAudioEngine() {
 // === UPDATED UI LOGIC ===
 function updateStatusUI(e, t, s = !1) {
     const statusMsg = document.getElementById("statusMessage"),
-        container = document.getElementById("statusContainer"), // New Container
+        container = document.getElementById("statusContainer"),
         sliders = document.querySelectorAll('input[type="range"]'),
         toggle = document.getElementById("toggleEnabled"),
         toggleLabel = document.querySelector(".toggle-label"),
         resetBtn = document.getElementById("resetButton");
 
-    // Default: Reset container style
-    // container.classList.remove("conflict"); // Don't remove here, logic handled below
-
     if (toggle && (toggle.checked = t), !t) {
-        // DISABLED STATE
+        // === DISABLED STATE ===
         const msg = currentMessages.status_disabled ? currentMessages.status_disabled.message : "Extension disabled.";
         statusMsg.textContent = msg;
         statusMsg.style.color = "#9ca3af";
+        statusMsg.setAttribute("data-i18n", "status_disabled"); // FIX: Update tag
+
         if (toggleLabel) {
             toggleLabel.textContent = msg.replace(/\.$/, "");
             toggleLabel.style.color = "#6b7280";
+            toggleLabel.setAttribute("data-i18n", "status_disabled"); // FIX: Update tag
         }
         sliders.forEach(e => e.disabled = !0);
         if (resetBtn) resetBtn.disabled = !0;
         return;
     }
 
-    // ENABLED STATE
-    // Check if we are NOT in conflict mode
+    // === ENABLED STATE ===
     if (!container.classList.contains("conflict")) {
         sliders.forEach(e => e.disabled = !1);
         if (resetBtn) resetBtn.disabled = !1;
@@ -116,6 +115,7 @@ function updateStatusUI(e, t, s = !1) {
     if (toggleLabel) {
         toggleLabel.textContent = currentMessages.toggle_label ? currentMessages.toggle_label.message : "Extension Enabled";
         toggleLabel.style.color = "#1e3a8a";
+        toggleLabel.setAttribute("data-i18n", "toggle_label"); // FIX: Update tag
     }
 
     if (e) {
@@ -123,17 +123,20 @@ function updateStatusUI(e, t, s = !1) {
         if (s) {
             statusMsg.textContent = currentMessages.status_active ? currentMessages.status_active.message : "Equalizer Active";
             statusMsg.style.color = "#22c55e";
+            statusMsg.setAttribute("data-i18n", "status_active"); // FIX: Update tag
         } else {
             // WAITING
             const msg = currentMessages.status_waiting ? currentMessages.status_waiting.message : "Waiting for audio...";
             statusMsg.textContent = msg;
             statusMsg.style.color = "#f59e0b";
+            statusMsg.setAttribute("data-i18n", "status_waiting"); // FIX: Update tag
         }
     } else {
         // INITIALIZING
         const msg = currentMessages.status_loading ? currentMessages.status_loading.message : "Initializing...";
         statusMsg.textContent = msg;
         statusMsg.style.color = "#3b82f6";
+        statusMsg.setAttribute("data-i18n", "status_loading"); // FIX: Update tag
     }
 }
 
@@ -170,9 +173,9 @@ async function startCaptureProcess() {
 
 document.addEventListener("DOMContentLoaded", async () => {
     const toggle = document.getElementById("toggleEnabled"),
-        container = document.getElementById("statusContainer"), // New
-        statusMsg = document.getElementById("statusMessage"),   // New
-        takeOverBtn = document.getElementById("takeOverBtn"),   // New
+        container = document.getElementById("statusContainer"),
+        statusMsg = document.getElementById("statusMessage"),
+        takeOverBtn = document.getElementById("takeOverBtn"),
         
         settingsBtn = document.getElementById("settingsBtn"),
         settingsPanel = document.getElementById("settingsPanel"),
@@ -215,11 +218,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             const s = t.target.value;
             chrome.storage.local.set({ preferredLocale: s });
             await loadLanguage(s);
-            toggle.checked ? chrome.runtime.sendMessage({
-                type: "TARGET_OFFSCREEN_PING"
-            }, e => {
-                chrome.runtime.lastError, updateStatusUI(e?.success, !0, e?.audioDetected)
-            }) : updateStatusUI(!1, !1)
+
+            if (!container.classList.contains("conflict")) {
+                toggle.checked ? chrome.runtime.sendMessage({
+                    type: "TARGET_OFFSCREEN_PING"
+                }, e => {
+                    chrome.runtime.lastError, updateStatusUI(e?.success, !0, e?.audioDetected)
+                }) : updateStatusUI(!1, !1)
+            }
         });
     }
     await loadLanguage(c);
@@ -267,19 +273,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!chrome.runtime.lastError && res && res.success) {
                 // === CONFLICT DETECTED ===
                 g = !0;
-                container.classList.add("conflict"); // Turn yellow
-                takeOverBtn.classList.remove("hidden"); // Show button
+                container.classList.add("conflict"); 
+                takeOverBtn.classList.remove("hidden"); 
                 toggle.checked = !1;
 
                 const label = document.querySelector(".toggle-label");
                 if (label) {
                     label.textContent = currentMessages.status_disabled ? currentMessages.status_disabled.message.replace(/\.$/, "") : "Disabled";
                     label.style.color = "#6b7280";
+                    label.setAttribute("data-i18n", "status_disabled"); // FIX: Update tag
                 }
 
                 // Fuse: Set status text to "Controlling another tab"
                 statusMsg.textContent = currentMessages.status_conflict ? currentMessages.status_conflict.message : "Controlling another tab";
-                // Color is handled by CSS .conflict class
+                statusMsg.setAttribute("data-i18n", "status_conflict"); // FIX: Update tag
 
                 document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !0);
                 document.getElementById("resetButton").disabled = !0;
