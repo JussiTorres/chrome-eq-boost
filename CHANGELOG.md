@@ -2,11 +2,17 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
-## [1.2.5] - 2025-12-17
+## [1.2.6] - 2025-12-18
 ### Added
-- **Global Expansion:** Added native support for 7 new languages (Portuguese-BR, Polish, Russian, Ukrainian, Turkish, Indonesian, and Korean), bringing the total to 15 locales.
-- **Hybrid Localization:** Implemented an English-bridge naming convention in the settings menu for non-Latin scripts to improve cross-cultural navigation.
+- **Global Expansion:** Expanded localization support to 15 major languages by adding native support for Portuguese-BR, Polish, Russian, Ukrainian, Turkish, Indonesian, and Korean.
+- **Cultural Nuance:** Refined all "Buy me a coffee" donation labels with region-specific "treat me" phrasing for a warmer user experience.
 
+### Changed
+- **UI Refinement:** Standardized capitalization (Sentence case) across all supported locales for a unified professional look.
+- **Layout Optimization:** Fixed the "floating" footer bug in Settings and About panels using flex-grow; the footer now correctly pins to the bottom of the window.
+- **Code Hygiene:** Replaced heavy inline styles in the About section with dedicated CSS classes for better maintainability.
+
+## [1.2.5] - 2025-12-17
 ### Changed
 - **UI Refinement:** Consolidated the Status message and Conflict Warning into a single, smart status container for a cleaner interface.
 - **Visuals:** Optimized spacing and typography in the popup (removed bold warning text, tightened margins).
