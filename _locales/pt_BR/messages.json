@@ -1,0 +1,56 @@
+{
+  "status_loading": {
+    "message": "Inicializando..."
+  },
+  "status_active": {
+    "message": "Equalizador ativo"
+  },
+  "status_disabled": {
+    "message": "Extensão desativada"
+  },
+  "status_waiting": {
+    "message": "Captura iniciada. Aguardando áudio..."
+  },
+  "toggle_label": {
+    "message": "Extensão habilitada"
+  },
+  "button_reset": {
+    "message": "Redefinir EQ e Vol."
+  },
+  "section_volume": {
+    "message": "Volume (Pré-amp)"
+  },
+  "section_eq": {
+    "message": "Equalizador (-12dB a +12dB)"
+  },
+  "label_bass": {
+    "message": "Graves (100 Hz)"
+  },
+  "label_mids": {
+    "message": "Médios (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "Agudos (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 Outra guia está sendo amplificada."
+  },
+  "button_takeover": {
+    "message": "Usar nesta guia"
+  },
+  "settings_title": {
+    "message": "Configurações"
+  },
+  "status_conflict": {
+    "message": "Controlando outra guia"
+  },
+  "settings_language_label": {
+    "message": "Idioma"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ Me paga um café"
+  },
+  "footer_made_with": {
+    "message": "Feito com ❤️ por"
+  }
+}
