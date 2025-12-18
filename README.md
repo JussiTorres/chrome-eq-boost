@@ -13,8 +13,8 @@ A powerful, privacy-focused Chrome Extension to boost volume (up to 400%) and eq
   - **Silence Detection:** Automatically detects if audio is playing or waiting.
   - **Auto-Shutdown:** Saves resources by turning off when the tab is closed or silent.
   - **Ghost Buster:** Prevents "stuck" states if Chrome kills the background process.
-- **🌍 Multi-language:** Native support for English, Spanish, German, French, Italian, Japanese, Hindi, and Chinese.
-- **🛡️ Modern Tech:** Built with Manifest V3, `tabCapture`, and `Offscreen` API for maximum stability and security.
+- **🌍 Global Support:** Native support for 15 major languages across the Americas, Europe, and Asia.
+- **🛡️ Privacy First:** Built with Manifest V3 and the `tabCapture` API. No scripts injected into your pages, ensuring maximum security.
 
 ## 🚀 Installation
 

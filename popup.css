@@ -9,7 +9,8 @@
 /* === Base & Layout === */
 body {
     width: 320px;
-    padding: 16px;
+    padding: 16px 16px 8px 16px;
+    /* Back to tight padding */
     font-family: 'Inter', Arial, sans-serif;
     background-color: #f7f9fb;
     color: #333;
@@ -26,6 +27,7 @@ h3 {
     text-align: center;
     color: #1e3a8a;
     margin: 0 0 10px 0;
+    /* Tight margin */
     font-size: 1.45em;
     font-weight: 700;
 }
@@ -35,6 +37,7 @@ hr {
     height: 1px;
     background: #e5e7eb;
     margin: 12px 0;
+    /* Tight margin */
 }
 
 /* === Header & Branding === */
@@ -44,6 +47,7 @@ hr {
     align-items: center;
     padding: 0 2px 5px 2px;
     margin-bottom: 5px;
+    /* Tight margin */
 }
 
 .brand-logo {
@@ -108,6 +112,7 @@ hr {
 /* === Status & Conflict Container === */
 .status-container {
     margin: 5px 0 10px 0;
+    /* Tight margin */
     border-radius: 8px;
     transition: all 0.3s ease;
     background: transparent;
@@ -133,7 +138,7 @@ hr {
 
 .status-container.conflict .status-message {
     color: #856404 !important;
-    font-weight: 400; /* Normal weight */
+    font-weight: 400;
 }
 
 .takeover-button {
@@ -168,6 +173,7 @@ hr {
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+    /* Tight margin */
 }
 
 .toggle-label {
@@ -251,6 +257,7 @@ input:checked+.slider:before {
 /* === Sliders & Labels === */
 .section-title {
     margin: 15px 0 8px;
+    /* Tight margin */
     font-size: 1em;
     font-weight: 600;
     color: #4b5563;
@@ -258,6 +265,7 @@ input:checked+.slider:before {
 
 .eq-control {
     margin-bottom: 12px;
+    /* Tight margin */
 }
 
 .eq-control label {
@@ -317,6 +325,7 @@ input[type="range"]:disabled {
     background-color: #f7f9fb;
     z-index: 200;
     padding: 20px 20px 10px 20px;
+    /* Tight bottom padding */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -348,7 +357,31 @@ input[type="range"]:disabled {
 }
 
 .settings-content {
+    padding-top: 10px;
     flex-grow: 1;
+    /* Pushes the footer to the bottom */
+}
+
+.settings-footer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    flex-shrink: 0;
+}
+
+/* === About Panel Styles === */
+.footer-made-by {
+    color: #6b7280;
+    font-size: 0.85em;
+    margin: 0 0 4px 0;
+}
+
+.footer-name {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    margin: 0 0 12px 0;
+    display: block;
 }
 
 .donate-button {
@@ -362,7 +395,7 @@ input[type="range"]:disabled {
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
 }
 
 .donate-button:hover {
