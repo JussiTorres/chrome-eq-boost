@@ -1,0 +1,56 @@
+{
+  "status_loading": {
+    "message": "초기화 중..."
+  },
+  "status_active": {
+    "message": "이퀄라이저 활성"
+  },
+  "status_disabled": {
+    "message": "확장 프로그램 비활성"
+  },
+  "status_waiting": {
+    "message": "캡처 시작됨. 오디오 대기 중..."
+  },
+  "toggle_label": {
+    "message": "확장 프로그램 활성"
+  },
+  "button_reset": {
+    "message": "EQ 및 볼륨 초기화"
+  },
+  "section_volume": {
+    "message": "볼륨 (Preamp)"
+  },
+  "section_eq": {
+    "message": "이퀄라이저 (-12dB ~ +12dB)"
+  },
+  "label_bass": {
+    "message": "저음 (100 Hz)"
+  },
+  "label_mids": {
+    "message": "중음 (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "고음 (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 다른 탭이 증폭되고 있습니다."
+  },
+  "button_takeover": {
+    "message": "이 탭에서 사용"
+  },
+  "settings_title": {
+    "message": "설정"
+  },
+  "status_conflict": {
+    "message": "다른 탭 제어 중"
+  },
+  "settings_language_label": {
+    "message": "언어"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ 커피 한 잔 사주기"
+  },
+  "footer_made_with": {
+    "message": "❤️로 제작"
+  }
+}

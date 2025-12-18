@@ -1,0 +1,56 @@
+{
+  "status_loading": {
+    "message": "Memulai..."
+  },
+  "status_active": {
+    "message": "Equalizer aktif"
+  },
+  "status_disabled": {
+    "message": "Ekstensi nonaktif"
+  },
+  "status_waiting": {
+    "message": "Perekaman dimulai. Menunggu audio..."
+  },
+  "toggle_label": {
+    "message": "Ekstensi aktif"
+  },
+  "button_reset": {
+    "message": "Reset EQ & Volume"
+  },
+  "section_volume": {
+    "message": "Volume (Preamp)"
+  },
+  "section_eq": {
+    "message": "Equalizer (-12dB sampai +12dB)"
+  },
+  "label_bass": {
+    "message": "Bass (100 Hz)"
+  },
+  "label_mids": {
+    "message": "Mid (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "Treble (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 Tab lain sedang diamplifikasi."
+  },
+  "button_takeover": {
+    "message": "Gunakan di tab ini"
+  },
+  "settings_title": {
+    "message": "Pengaturan"
+  },
+  "status_conflict": {
+    "message": "Mengontrol tab lain"
+  },
+  "settings_language_label": {
+    "message": "Bahasa"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ Traktir saya kopi"
+  },
+  "footer_made_with": {
+    "message": "Dibuat dengan ❤️ oleh"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "status_loading": {
+    "message": "Inicjowanie..."
+  },
+  "status_active": {
+    "message": "Korektor aktywny"
+  },
+  "status_disabled": {
+    "message": "Rozszerzenie wyłączone"
+  },
+  "status_waiting": {
+    "message": "Przechwytywanie rozpoczęte. Oczekiwanie na dźwięk..."
+  },
+  "toggle_label": {
+    "message": "Rozszerzenie włączone"
+  },
+  "button_reset": {
+    "message": "Resetuj EQ i głośność"
+  },
+  "section_volume": {
+    "message": "Głośność (Preamp)"
+  },
+  "section_eq": {
+    "message": "Korektor (-12dB do +12dB)"
+  },
+  "label_bass": {
+    "message": "Niskie (100 Hz)"
+  },
+  "label_mids": {
+    "message": "Średnie (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "Wysokie (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 Inna karta jest wzmacniana."
+  },
+  "button_takeover": {
+    "message": "Użyj na tej karcie"
+  },
+  "settings_title": {
+    "message": "Ustawienia"
+  },
+  "status_conflict": {
+    "message": "Sterowanie inną kartą"
+  },
+  "settings_language_label": {
+    "message": "Język"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ Postaw mi kawę"
+  },
+  "footer_made_with": {
+    "message": "Stworzone z ❤️ przez"
+  }
+}

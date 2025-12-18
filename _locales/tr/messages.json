@@ -1,0 +1,56 @@
+{
+    "status_loading": {
+        "message": "Başlatılıyor..."
+    },
+    "status_active": {
+        "message": "Ekolayzer etkin"
+    },
+    "status_disabled": {
+        "message": "Uzantı devre dışı"
+    },
+    "status_waiting": {
+        "message": "Yakalama başladı. Ses bekleniyor..."
+    },
+    "toggle_label": {
+        "message": "Uzantı etkin"
+    },
+    "button_reset": {
+        "message": "EQ ve Sesi Sıfırla"
+    },
+    "section_volume": {
+        "message": "Ses (Preamp)"
+    },
+    "section_eq": {
+        "message": "Ekolayzer (-12dB ila +12dB)"
+    },
+    "label_bass": {
+        "message": "Bas (100 Hz)"
+    },
+    "label_mids": {
+        "message": "Orta (1000 Hz)"
+    },
+    "label_treble": {
+        "message": "Tiz (8000 Hz)"
+    },
+    "conflict_warning": {
+        "message": "🔊 Başka bir sekme yükseltiliyor."
+    },
+    "button_takeover": {
+        "message": "Bu sekmede kullan"
+    },
+    "settings_title": {
+        "message": "Ayarlar"
+    },
+    "status_conflict": {
+        "message": "Başka bir sekmeyi kontrol ediyor"
+    },
+    "settings_language_label": {
+        "message": "Dil"
+    },
+    "footer_buy_coffee": {
+        "message": "☕ Bana bir kahve ısmarla"
+    },
+    "footer_made_with": {
+        "message": "❤️ ile yapıldı"
+    }
+}
