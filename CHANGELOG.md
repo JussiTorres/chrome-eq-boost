@@ -2,6 +2,11 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.2.7] - 2025-12-31
+### Added
+- **Greater Chinese Expansion:** Added native support for Traditional Chinese (zh_TW) optimized for Taiwan and Hong Kong users.
+- **Terminology Polish:** Implemented region-specific technical terms.
+
 ## [1.2.6] - 2025-12-18
 ### Added
 - **Global Expansion:** Expanded localization support to 15 major languages by adding native support for Portuguese-BR, Polish, Russian, Ukrainian, Turkish, Indonesian, and Korean.

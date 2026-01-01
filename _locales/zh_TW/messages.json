@@ -1,0 +1,56 @@
+{
+  "status_loading": {
+    "message": "正在初始化..."
+  },
+  "status_active": {
+    "message": "等化器已啟用"
+  },
+  "status_disabled": {
+    "message": "擴充功能已停用"
+  },
+  "status_waiting": {
+    "message": "擷取已開始，正在等待音訊"
+  },
+  "toggle_label": {
+    "message": "擴充功能已啟用"
+  },
+  "button_reset": {
+    "message": "重設 EQ 與音量"
+  },
+  "section_volume": {
+    "message": "音量 (前級)"
+  },
+  "section_eq": {
+    "message": "等化器 (-12dB 至 +12dB)"
+  },
+  "label_bass": {
+    "message": "低音 (100 Hz)"
+  },
+  "label_mids": {
+    "message": "中音 (1000 Hz)"
+  },
+  "label_treble": {
+    "message": "高音 (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 另一個分頁正在增強中"
+  },
+  "button_takeover": {
+    "message": "在此分頁上使用"
+  },
+  "settings_title": {
+    "message": "設定"
+  },
+  "status_conflict": {
+    "message": "正在控制另一個分頁"
+  },
+  "settings_language_label": {
+    "message": "語言"
+  },
+  "footer_buy_coffee": {
+    "message": "☕ 請我喝杯咖啡"
+  },
+  "footer_made_with": {
+    "message": "用 ❤️ 製作："
+  }
+}
