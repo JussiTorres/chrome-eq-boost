@@ -1,10 +1,13 @@
 /**
  * Chrome EQ & Volume Boost
+ * Version: 1.3.0
  * Copyright (c) 2025 Jussi Torres
  * Licensed under the MIT License.
- *
- * Developed by Jussi Torres
  */
+
+// ==========================================
+// 1. CONFIGURATION & GLOBAL STATE
+// ==========================================
 
 const sliderConfigs = [{
     id: "volumeSlider",
@@ -40,149 +43,161 @@ const sliderConfigs = [{
     suffix: " dB"
 }];
 
-let currentMessages = {},
-    pollingInterval = null;
+let currentMessages = {};
+let pollingInterval = null;
 
-async function loadLanguage(e) {
+// ==========================================
+// 2. HELPER FUNCTIONS (i18n & Communication)
+// ==========================================
+
+async function loadLanguage(locale) {
     try {
-        const t = chrome.runtime.getURL(`_locales/${e}/messages.json`),
-            s = await fetch(t);
-        currentMessages = await s.json(), applyTranslations()
+        const url = chrome.runtime.getURL(`_locales/${locale}/messages.json`);
+        const response = await fetch(url);
+        currentMessages = await response.json();
+        applyTranslations();
     } catch (e) {
-        console.error("Error loading language:", e)
+        console.error("Error loading language:", e);
     }
 }
 
 function applyTranslations() {
-    document.querySelectorAll("[data-i18n]").forEach(e => {
-        const t = e.getAttribute("data-i18n");
-        if (currentMessages[t]) {
-            e.textContent = currentMessages[t].message;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (currentMessages[key]) {
+            el.textContent = currentMessages[key].message;
         }
     });
 }
 
-function send(e) {
-    chrome.runtime.sendMessage(e).catch(() => { })
+function send(message) {
+    chrome.runtime.sendMessage(message).catch(() => { });
 }
 
-function updateDisplay(e, t, s, a, l) {
-    const n = document.getElementById(t),
-        o = parseFloat(s) || 0;
-    n && (n.textContent = 100 === a ? `${Math.round(o * a)}%` : `${o.toFixed(1)}${l}`)
+function updateDisplay(id, displayId, value, multiplier, suffix) {
+    const display = document.getElementById(displayId);
+    const val = parseFloat(value) || 0;
+    if (display) {
+        display.textContent = multiplier === 100 ?
+            `${Math.round(val * multiplier)}%` :
+            `${val.toFixed(1)}${suffix}`;
+    }
 }
 
 function syncAudioEngine() {
-    sliderConfigs.forEach(e => {
-        const t = document.getElementById(e.id);
-        t && !t.disabled && send({
-            type: e.type,
-            value: parseFloat(t.value)
-        })
-    })
+    sliderConfigs.forEach(config => {
+        const el = document.getElementById(config.id);
+        if (el && !el.disabled) {
+            send({ type: config.type, value: parseFloat(el.value) });
+        }
+    });
 }
 
-// === UPDATED UI LOGIC WITH CSS CLASSES ===
-function updateStatusUI(e, t, s = !1) {
-    const statusMsg = document.getElementById("statusMessage"),
-        container = document.getElementById("statusContainer"),
-        sliders = document.querySelectorAll('input[type="range"]'),
-        toggle = document.getElementById("toggleEnabled"),
-        toggleLabel = document.querySelector(".toggle-label"),
-        resetBtn = document.getElementById("resetButton");
+// ==========================================
+// 3. UI STATUS MANAGEMENT
+// ==========================================
 
-    // Clear old status classes
+function updateStatusUI(isActive, isToggleOn, isAudioDetected = false) {
+    const statusMsg = document.getElementById("statusMessage");
+    const container = document.getElementById("statusContainer");
+    const sliders = document.querySelectorAll('input[type="range"]');
+    const toggle = document.getElementById("toggleEnabled");
+    const toggleLabel = document.querySelector(".toggle-label");
+    const resetBtn = document.getElementById("resetButton");
+
     statusMsg.className = 'status-message';
     if (toggleLabel) toggleLabel.className = 'toggle-label';
 
-    if (toggle && (toggle.checked = t), !t) {
-        // === DISABLED STATE ===
+    if (toggle) toggle.checked = isToggleOn;
+
+    if (!isToggleOn) {
         const msg = currentMessages.status_disabled ? currentMessages.status_disabled.message : "Extension disabled.";
         statusMsg.textContent = msg;
-        statusMsg.classList.add('text-disabled'); // Use CSS class
+        statusMsg.classList.add('text-disabled');
         statusMsg.setAttribute("data-i18n", "status_disabled");
 
         if (toggleLabel) {
             toggleLabel.textContent = msg.replace(/\.$/, "");
-            toggleLabel.classList.add('label-disabled'); // Use CSS class
+            toggleLabel.classList.add('label-disabled');
             toggleLabel.setAttribute("data-i18n", "status_disabled");
         }
-        sliders.forEach(e => e.disabled = !0);
-        if (resetBtn) resetBtn.disabled = !0;
+        sliders.forEach(s => s.disabled = true);
+        if (resetBtn) resetBtn.disabled = true;
         return;
     }
 
-    // === ENABLED STATE ===
     if (!container.classList.contains("conflict")) {
-        sliders.forEach(e => e.disabled = !1);
-        if (resetBtn) resetBtn.disabled = !1;
+        sliders.forEach(s => s.disabled = false);
+        if (resetBtn) resetBtn.disabled = false;
     }
 
     if (toggleLabel) {
         toggleLabel.textContent = currentMessages.toggle_label ? currentMessages.toggle_label.message : "Extension Enabled";
-        toggleLabel.classList.add('label-enabled'); // Use CSS class
+        toggleLabel.classList.add('label-enabled');
         toggleLabel.setAttribute("data-i18n", "toggle_label");
     }
 
-    if (e) {
-        // AUDIO ACTIVE
-        if (s) {
+    if (isActive) {
+        if (isAudioDetected) {
             statusMsg.textContent = currentMessages.status_active ? currentMessages.status_active.message : "Equalizer Active";
-            statusMsg.classList.add('text-active'); // Green via CSS
+            statusMsg.classList.add('text-active');
             statusMsg.setAttribute("data-i18n", "status_active");
         } else {
-            // WAITING
-            const msg = currentMessages.status_waiting ? currentMessages.status_waiting.message : "Waiting for audio...";
-            statusMsg.textContent = msg;
-            statusMsg.classList.add('text-waiting'); // Orange via CSS
+            statusMsg.textContent = currentMessages.status_waiting ? currentMessages.status_waiting.message : "Waiting for audio...";
+            statusMsg.classList.add('text-waiting');
             statusMsg.setAttribute("data-i18n", "status_waiting");
         }
     } else {
-        // INITIALIZING
-        const msg = currentMessages.status_loading ? currentMessages.status_loading.message : "Initializing...";
-        statusMsg.textContent = msg;
-        statusMsg.classList.add('text-loading'); // Blue via CSS
+        statusMsg.textContent = currentMessages.status_loading ? currentMessages.status_loading.message : "Initializing...";
+        statusMsg.classList.add('text-loading');
         statusMsg.setAttribute("data-i18n", "status_loading");
     }
 }
 
+// ==========================================
+// 4. AUDIO ENGINE CONTROL
+// ==========================================
+
 function startPolling() {
-    pollingInterval && clearInterval(pollingInterval);
-    let e = 0;
+    if (pollingInterval) clearInterval(pollingInterval);
+    let attempts = 0;
     pollingInterval = setInterval(() => {
-        e++, chrome.runtime.sendMessage({
-            type: "TARGET_OFFSCREEN_PING"
-        }, t => {
-            if (!chrome.runtime.lastError && t && t.success) updateStatusUI(!0, !0, t.audioDetected), e < 3 && syncAudioEngine();
-            else if (e > 2) {
-                console.log("Audio dead. Shutting down..."), clearInterval(pollingInterval), chrome.storage.local.set({
-                    isEnabled: !1,
-                    capturingTabId: null
-                });
+        attempts++;
+        chrome.runtime.sendMessage({ type: "TARGET_OFFSCREEN_PING" }, res => {
+            if (!chrome.runtime.lastError && res && res.success) {
+                updateStatusUI(true, true, res.audioDetected);
+                if (attempts < 3) syncAudioEngine();
+            } else if (attempts > 2) {
+                console.log("Audio dead. Shutting down...");
+                clearInterval(pollingInterval);
+                chrome.storage.local.set({ isEnabled: false, capturingTabId: null });
                 const el = document.getElementById("toggleEnabled");
-                el && (el.checked = !1), updateStatusUI(!1, !1)
+                if (el) el.checked = false;
+                updateStatusUI(false, false);
             }
-        })
-    }, 1e3)
+        });
+    }, 1000);
 }
 
 async function startCaptureProcess() {
-    const [e] = await chrome.tabs.query({
-        active: !0,
-        currentWindow: !0
-    });
-    e && (updateStatusUI(!1, !0), startPolling(), chrome.runtime.sendMessage({
-        type: "START_CAPTURE",
-        tabId: e.id
-    }))
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tab) {
+        updateStatusUI(false, true);
+        startPolling();
+        chrome.runtime.sendMessage({ type: "START_CAPTURE", tabId: tab.id });
+    }
 }
 
+// ==========================================
+// 5. MAIN ENTRY POINT (Initialize UI)
+// ==========================================
+
 document.addEventListener("DOMContentLoaded", async () => {
+    // UI Element References
     const toggle = document.getElementById("toggleEnabled"),
         container = document.getElementById("statusContainer"),
         statusMsg = document.getElementById("statusMessage"),
         takeOverBtn = document.getElementById("takeOverBtn"),
-
         settingsBtn = document.getElementById("settingsBtn"),
         settingsPanel = document.getElementById("settingsPanel"),
         closeSettingsBtn = document.getElementById("closeSettingsBtn"),
@@ -192,201 +207,165 @@ document.addEventListener("DOMContentLoaded", async () => {
         langSelect = document.getElementById("languageSelect"),
         darkModeToggle = document.getElementById("darkModeToggle");
 
-    // === DARK MODE LOGIC (Strict OG Default) ===
-    chrome.storage.local.get("darkMode", (res) => {
-        // DEFAULT TO FALSE (Light Mode) if undefined
-        // We only enable dark mode if explicitly saved as true
-        if (res.darkMode === true) {
-            document.body.classList.add("dark-mode");
-            if (darkModeToggle) darkModeToggle.checked = true;
-        } else {
-            // Ensure we start clean
-            document.body.classList.remove("dark-mode");
-            if (darkModeToggle) darkModeToggle.checked = false;
+    // Unified Storage Fetch
+    const storage = await chrome.storage.local.get([
+        "darkMode", "preferredLocale", "volumeLevel",
+        "bassLevel", "midLevel", "trebleLevel",
+        "isEnabled", "capturingTabId"
+    ]);
+
+    // First Run: Auto-Language Detection
+    let currentLocale = storage.preferredLocale;
+    if (currentLocale === undefined) {
+        const supported = ["en", "es", "pt_BR", "de", "fr", "it", "pl", "ru", "uk", "tr", "id", "ja", "ko", "hi", "zh_CN", "zh_TW"];
+        const uiLang = chrome.i18n.getUILanguage().replace('-', '_');
+        currentLocale = supported.includes(uiLang) ? uiLang : supported.find(l => l === uiLang.split('_')[0]) || "en";
+        chrome.storage.local.set({ preferredLocale: currentLocale });
+    }
+
+    // First Run: Default to Light Mode
+    let isDark = storage.darkMode;
+    if (isDark === undefined) {
+        isDark = false;
+        chrome.storage.local.set({ darkMode: isDark });
+    }
+
+    // Apply Initial Visual State
+    document.body.classList.toggle("dark-mode", isDark);
+    if (darkModeToggle) darkModeToggle.checked = isDark;
+    if (langSelect) langSelect.value = currentLocale;
+    await loadLanguage(currentLocale);
+
+    // Initialize Sliders
+    sliderConfigs.forEach(config => {
+        const savedVal = storage[config.storageKey] ?? config.default;
+        const slider = document.getElementById(config.id);
+        if (slider) {
+            slider.value = savedVal;
+            updateDisplay(config.id, config.display, savedVal, config.multiplier, config.suffix);
+            slider.addEventListener("input", (e) => {
+                const val = parseFloat(e.target.value);
+                updateDisplay(config.id, config.display, val, config.multiplier, config.suffix);
+                send({ type: config.type, value: val });
+                chrome.storage.local.set({ [config.storageKey]: val });
+            });
         }
     });
 
+    // Theme & Language Listeners
     if (darkModeToggle) {
         darkModeToggle.addEventListener("change", (e) => {
-            if (e.target.checked) {
-                document.body.classList.add("dark-mode");
-                chrome.storage.local.set({ darkMode: true });
-            } else {
-                document.body.classList.remove("dark-mode");
-                chrome.storage.local.set({ darkMode: false });
-            }
+            const enabled = e.target.checked;
+            document.body.classList.toggle("dark-mode", enabled);
+            chrome.storage.local.set({ darkMode: enabled });
         });
     }
-    // ========================
-
-    // Settings Nav
-    settingsBtn.addEventListener("click", () => {
-        settingsPanel.classList.remove("hidden");
-        window.scrollTo(0, 0);
-    });
-    closeSettingsBtn.addEventListener("click", () => settingsPanel.classList.add("hidden"));
-
-    // About Nav
-    openAboutBtn.addEventListener("click", () => {
-        settingsPanel.classList.add("hidden");
-        aboutPanel.classList.remove("hidden");
-        window.scrollTo(0, 0);
-    });
-    closeAboutBtn.addEventListener("click", () => {
-        aboutPanel.classList.add("hidden");
-        settingsPanel.classList.remove("hidden");
-        window.scrollTo(0, 0);
-    });
-
-    const [activeTab] = await chrome.tabs.query({
-        active: !0,
-        currentWindow: !0
-    });
-
-    const r = await chrome.storage.local.get(["volumeLevel", "bassLevel", "midLevel", "trebleLevel", "isEnabled", "capturingTabId", "preferredLocale"]),
-        c = r.preferredLocale || "en";
 
     if (langSelect) {
-        langSelect.value = c;
-        langSelect.addEventListener("change", async t => {
-            const s = t.target.value;
-            chrome.storage.local.set({ preferredLocale: s });
-            await loadLanguage(s);
-
+        langSelect.addEventListener("change", async (t) => {
+            const newLang = t.target.value;
+            chrome.storage.local.set({ preferredLocale: newLang });
+            await loadLanguage(newLang);
             if (!container.classList.contains("conflict")) {
-                toggle.checked ? chrome.runtime.sendMessage({
-                    type: "TARGET_OFFSCREEN_PING"
-                }, e => {
-                    chrome.runtime.lastError, updateStatusUI(e?.success, !0, e?.audioDetected)
-                }) : updateStatusUI(!1, !1)
+                toggle.checked ? chrome.runtime.sendMessage({ type: "TARGET_OFFSCREEN_PING" },
+                    res => updateStatusUI(res?.success, true, res?.audioDetected)) : updateStatusUI(false, false);
             }
         });
     }
-    await loadLanguage(c);
 
-    const capturingTabId = r.capturingTabId,
-        isEnabled = !1 !== r.isEnabled;
+    // Navigation Listeners
+    settingsBtn.addEventListener("click", () => { settingsPanel.classList.remove("hidden"); window.scrollTo(0, 0); });
+    closeSettingsBtn.addEventListener("click", () => settingsPanel.classList.add("hidden"));
+    openAboutBtn.addEventListener("click", () => { settingsPanel.classList.add("hidden"); aboutPanel.classList.remove("hidden"); window.scrollTo(0, 0); });
+    closeAboutBtn.addEventListener("click", () => { aboutPanel.classList.add("hidden"); settingsPanel.classList.remove("hidden"); window.scrollTo(0, 0); });
 
-    sliderConfigs.forEach(e => {
-        const t = r[e.storageKey] ?? e.default,
-            s = document.getElementById(e.id);
-        s.value = t, updateDisplay(e.id, e.display, t, e.multiplier, e.suffix), s.addEventListener("input", t => {
-            const s = parseFloat(t.target.value);
-            updateDisplay(e.id, e.display, s, e.multiplier, e.suffix), send({
-                type: e.type,
-                value: s
-            }), chrome.storage.local.set({
-                [e.storageKey]: s
-            })
-        })
-    });
+    // Conflict & Ghost Buster Checks
+    const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const isEnabled = storage.isEnabled === true;
+    const capturingTabId = storage.capturingTabId;
 
-    let g = !1;
-
-    // === GHOST BUSTER / CONFLICT LOGIC ===
     function forceTakeover() {
-        // RESET UI TO NORMAL
         container.classList.remove("conflict");
         takeOverBtn.classList.add("hidden");
-
-        document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !1);
-        document.getElementById("resetButton").disabled = !1;
-
+        document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = false);
+        document.getElementById("resetButton").disabled = false;
         send({ type: "STOP_CAPTURE" });
         setTimeout(() => {
-            toggle.checked = !0;
-            chrome.storage.local.set({ isEnabled: !0 });
+            toggle.checked = true;
+            chrome.storage.local.set({ isEnabled: true });
             startCaptureProcess();
         }, 200);
     }
 
     if (isEnabled && capturingTabId && capturingTabId !== activeTab.id) {
-        chrome.runtime.sendMessage({
-            type: "TARGET_OFFSCREEN_PING"
-        }, res => {
+        chrome.runtime.sendMessage({ type: "TARGET_OFFSCREEN_PING" }, res => {
             if (!chrome.runtime.lastError && res && res.success) {
-                // === CONFLICT DETECTED ===
-                g = !0;
                 container.classList.add("conflict");
                 takeOverBtn.classList.remove("hidden");
-                toggle.checked = !1;
-
-                const label = document.querySelector(".toggle-label");
-                if (label) {
-                    label.textContent = currentMessages.status_disabled ? currentMessages.status_disabled.message.replace(/\.$/, "") : "Disabled";
-                    label.className = 'toggle-label label-disabled'; // Use CSS class
-                    label.setAttribute("data-i18n", "status_disabled");
-                }
-
-                // Fuse: Set status text to "Controlling another tab"
-                statusMsg.textContent = currentMessages.status_conflict ? currentMessages.status_conflict.message : "Controlling another tab";
-                statusMsg.className = 'status-message text-conflict'; // Use CSS class
-                statusMsg.setAttribute("data-i18n", "status_conflict");
-
-                document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !0);
-                document.getElementById("resetButton").disabled = !0;
-
+                toggle.checked = false;
+                updateStatusUI(true, false);
                 takeOverBtn.onclick = forceTakeover;
-
             } else {
-                console.log("Ghost state detected. Cleaning...");
-                chrome.storage.local.set({ isEnabled: !1, capturingTabId: null });
-                container.classList.remove("conflict");
-                takeOverBtn.classList.add("hidden");
-                updateStatusUI(!1, !1);
+                chrome.storage.local.set({ isEnabled: false, capturingTabId: null });
+                updateStatusUI(false, false);
             }
-        })
+        });
     } else if (isEnabled) {
-        updateStatusUI(!1, !0);
-        chrome.runtime.sendMessage({
-            type: "TARGET_OFFSCREEN_PING"
-        }, t => {
-            !chrome.runtime.lastError && t && t.success ? (updateStatusUI(!0, !0, t.audioDetected), startPolling()) : (console.log("Dead audio on open. Resetting."), chrome.storage.local.set({
-                isEnabled: !1,
-                capturingTabId: null
-            }), toggle.checked = !1, updateStatusUI(!1, !1))
-        })
+        updateStatusUI(false, true);
+        chrome.runtime.sendMessage({ type: "TARGET_OFFSCREEN_PING" }, res => {
+            if (!chrome.runtime.lastError && res && res.success) {
+                updateStatusUI(true, true, res.audioDetected);
+                startPolling();
+            } else {
+                chrome.storage.local.set({ isEnabled: false, capturingTabId: null });
+                toggle.checked = false;
+                updateStatusUI(false, false);
+            }
+        });
     } else {
-        updateStatusUI(!1, !1);
+        updateStatusUI(false, false);
     }
 
-    toggle && toggle.addEventListener("change", () => {
+    // Main Toggle Listener
+    toggle.addEventListener("change", () => {
         if (toggle.checked) {
-            if (container.classList.contains("conflict")) {
-                forceTakeover();
-            } else {
-                chrome.storage.local.set({ isEnabled: !0 });
+            if (container.classList.contains("conflict")) forceTakeover();
+            else {
+                chrome.storage.local.set({ isEnabled: true });
                 send({ type: "STOP_CAPTURE" });
                 setTimeout(() => startCaptureProcess(), 100);
             }
         } else {
-            pollingInterval && clearInterval(pollingInterval);
-
-            // Clear conflict state if it existed
+            if (pollingInterval) clearInterval(pollingInterval);
             container.classList.remove("conflict");
             takeOverBtn.classList.add("hidden");
-
             send({ type: "STOP_CAPTURE" });
-            send({ type: "TOGGLE_ENABLED", value: !1 });
-            updateStatusUI(!1, !1);
-            chrome.storage.local.set({ isEnabled: !1 });
+            send({ type: "TOGGLE_ENABLED", value: false });
+            updateStatusUI(false, false);
+            chrome.storage.local.set({ isEnabled: false });
         }
     });
 
+    // Reset Listener
     document.getElementById("resetButton").addEventListener("click", () => {
-        sliderConfigs.forEach(e => {
-            document.getElementById(e.id).value = e.default;
-            updateDisplay(e.id, e.display, e.default, e.multiplier, e.suffix);
-            send({ type: e.type, value: e.default });
-            chrome.storage.local.set({ [e.storageKey]: e.default });
-        })
+        sliderConfigs.forEach(config => {
+            const el = document.getElementById(config.id);
+            if (el) {
+                el.value = config.default;
+                updateDisplay(config.id, config.display, config.default, config.multiplier, config.suffix);
+                send({ type: config.type, value: config.default });
+                chrome.storage.local.set({ [config.storageKey]: config.default });
+            }
+        });
     });
 
-    chrome.storage.onChanged.addListener((t, s) => {
-        if ("local" === s && t.isEnabled) {
-            const val = t.isEnabled.newValue;
-            toggle && (toggle.checked = val, updateStatusUI(val, val));
-            !val && pollingInterval && clearInterval(pollingInterval);
+    // Storage Sync Listener
+    chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === "local" && changes.isEnabled) {
+            const val = changes.isEnabled.newValue;
+            if (toggle) toggle.checked = val;
+            updateStatusUI(val, val);
+            if (!val && pollingInterval) clearInterval(pollingInterval);
         }
     });
 });
