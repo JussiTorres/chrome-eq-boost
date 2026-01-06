@@ -2,6 +2,14 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.3.0] - 2026-01-05
+### Added
+- Persistent Dark Mode theme engine.
+- High-integrity blue theme for section titles and toggles.
+
+### Changed
+- Refactored entire CSS architecture to use dynamic variables.
+
 ## [1.2.7] - 2025-12-31
 ### Added
 - **Greater Chinese Expansion:** Added native support for Traditional Chinese (zh_TW) optimized for Taiwan and Hong Kong users.

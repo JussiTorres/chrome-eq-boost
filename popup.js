@@ -80,7 +80,7 @@ function syncAudioEngine() {
     })
 }
 
-// === UPDATED UI LOGIC ===
+// === UPDATED UI LOGIC WITH CSS CLASSES ===
 function updateStatusUI(e, t, s = !1) {
     const statusMsg = document.getElementById("statusMessage"),
         container = document.getElementById("statusContainer"),
@@ -89,17 +89,21 @@ function updateStatusUI(e, t, s = !1) {
         toggleLabel = document.querySelector(".toggle-label"),
         resetBtn = document.getElementById("resetButton");
 
+    // Clear old status classes
+    statusMsg.className = 'status-message'; 
+    if (toggleLabel) toggleLabel.className = 'toggle-label';
+
     if (toggle && (toggle.checked = t), !t) {
         // === DISABLED STATE ===
         const msg = currentMessages.status_disabled ? currentMessages.status_disabled.message : "Extension disabled.";
         statusMsg.textContent = msg;
-        statusMsg.style.color = "#9ca3af";
-        statusMsg.setAttribute("data-i18n", "status_disabled"); // FIX: Update tag
+        statusMsg.classList.add('text-disabled'); // Use CSS class
+        statusMsg.setAttribute("data-i18n", "status_disabled");
 
         if (toggleLabel) {
             toggleLabel.textContent = msg.replace(/\.$/, "");
-            toggleLabel.style.color = "#6b7280";
-            toggleLabel.setAttribute("data-i18n", "status_disabled"); // FIX: Update tag
+            toggleLabel.classList.add('label-disabled'); // Use CSS class
+            toggleLabel.setAttribute("data-i18n", "status_disabled");
         }
         sliders.forEach(e => e.disabled = !0);
         if (resetBtn) resetBtn.disabled = !0;
@@ -114,29 +118,29 @@ function updateStatusUI(e, t, s = !1) {
 
     if (toggleLabel) {
         toggleLabel.textContent = currentMessages.toggle_label ? currentMessages.toggle_label.message : "Extension Enabled";
-        toggleLabel.style.color = "#1e3a8a";
-        toggleLabel.setAttribute("data-i18n", "toggle_label"); // FIX: Update tag
+        toggleLabel.classList.add('label-enabled'); // Use CSS class
+        toggleLabel.setAttribute("data-i18n", "toggle_label");
     }
 
     if (e) {
         // AUDIO ACTIVE
         if (s) {
             statusMsg.textContent = currentMessages.status_active ? currentMessages.status_active.message : "Equalizer Active";
-            statusMsg.style.color = "#22c55e";
-            statusMsg.setAttribute("data-i18n", "status_active"); // FIX: Update tag
+            statusMsg.classList.add('text-active'); // Green via CSS
+            statusMsg.setAttribute("data-i18n", "status_active");
         } else {
             // WAITING
             const msg = currentMessages.status_waiting ? currentMessages.status_waiting.message : "Waiting for audio...";
             statusMsg.textContent = msg;
-            statusMsg.style.color = "#f59e0b";
-            statusMsg.setAttribute("data-i18n", "status_waiting"); // FIX: Update tag
+            statusMsg.classList.add('text-waiting'); // Orange via CSS
+            statusMsg.setAttribute("data-i18n", "status_waiting");
         }
     } else {
         // INITIALIZING
         const msg = currentMessages.status_loading ? currentMessages.status_loading.message : "Initializing...";
         statusMsg.textContent = msg;
-        statusMsg.style.color = "#3b82f6";
-        statusMsg.setAttribute("data-i18n", "status_loading"); // FIX: Update tag
+        statusMsg.classList.add('text-loading'); // Blue via CSS
+        statusMsg.setAttribute("data-i18n", "status_loading");
     }
 }
 
@@ -183,7 +187,35 @@ document.addEventListener("DOMContentLoaded", async () => {
         openAboutBtn = document.getElementById("openAboutBtn"),
         closeAboutBtn = document.getElementById("closeAboutBtn"),
         aboutPanel = document.getElementById("aboutPanel"),
-        langSelect = document.getElementById("languageSelect");
+        langSelect = document.getElementById("languageSelect"),
+        darkModeToggle = document.getElementById("darkModeToggle");
+
+    // === DARK MODE LOGIC (Strict OG Default) ===
+    chrome.storage.local.get("darkMode", (res) => {
+        // DEFAULT TO FALSE (Light Mode) if undefined
+        // We only enable dark mode if explicitly saved as true
+        if (res.darkMode === true) {
+            document.body.classList.add("dark-mode");
+            if (darkModeToggle) darkModeToggle.checked = true;
+        } else {
+            // Ensure we start clean
+            document.body.classList.remove("dark-mode");
+            if (darkModeToggle) darkModeToggle.checked = false;
+        }
+    });
+
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener("change", (e) => {
+            if (e.target.checked) {
+                document.body.classList.add("dark-mode");
+                chrome.storage.local.set({ darkMode: true });
+            } else {
+                document.body.classList.remove("dark-mode");
+                chrome.storage.local.set({ darkMode: false });
+            }
+        });
+    }
+    // ========================
 
     // Settings Nav
     settingsBtn.addEventListener("click", () => {
@@ -280,13 +312,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const label = document.querySelector(".toggle-label");
                 if (label) {
                     label.textContent = currentMessages.status_disabled ? currentMessages.status_disabled.message.replace(/\.$/, "") : "Disabled";
-                    label.style.color = "#6b7280";
-                    label.setAttribute("data-i18n", "status_disabled"); // FIX: Update tag
+                    label.className = 'toggle-label label-disabled'; // Use CSS class
+                    label.setAttribute("data-i18n", "status_disabled");
                 }
 
                 // Fuse: Set status text to "Controlling another tab"
                 statusMsg.textContent = currentMessages.status_conflict ? currentMessages.status_conflict.message : "Controlling another tab";
-                statusMsg.setAttribute("data-i18n", "status_conflict"); // FIX: Update tag
+                statusMsg.className = 'status-message text-conflict'; // Use CSS class
+                statusMsg.setAttribute("data-i18n", "status_conflict");
 
                 document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !0);
                 document.getElementById("resetButton").disabled = !0;

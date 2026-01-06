@@ -86,12 +86,9 @@
             </div>
 
             <div class="settings-content">
-                <div class="setting-row" style="margin-bottom: 15px;">
-                    <label for="languageSelect"
-                        style="display:block; margin-bottom: 8px; font-weight:600; color:#4b5563; font-size: 0.95em;"
-                        data-i18n="settings_language_label">Language</label>
-                    <select id="languageSelect"
-                        style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid #d1d5db; background-color: white; font-size: 0.95em;">
+                <div class="setting-row" style="margin-bottom: 20px;">
+                    <label for="languageSelect" class="settings-label" data-i18n="settings_language_label">Language</label>
+                    <select id="languageSelect" class="settings-select">
                         <option value="en">English</option>
                         <option value="es">Español</option>
                         <option value="pt_BR">Português (Brasil)</option>
@@ -110,10 +107,18 @@
                         <option value="zh_TW">中文 (繁體)</option>
                     </select>
                 </div>
+
+                <div class="setting-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <label for="darkModeToggle" class="settings-label" style="margin: 0; cursor:pointer;" data-i18n="settings_dark_mode">Dark Mode</label>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
 
             <div class="settings-footer" style="text-align: center;">
-                <hr style="margin: 0 0 8px 0; border: 0; height: 1px; background: #e5e7eb;">
+                <hr style="margin: 0 0 8px 0; border: 0; height: 1px; background: var(--border-light);">
 
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 5px;">
                     <button id="openAboutBtn" class="text-button">
@@ -125,7 +130,7 @@
                         </svg>
                         About
                     </button>
-                    <p style="color: #9ca3af; font-size: 0.75em; margin: 0;">v1.2.7</p>
+                    <p style="color: var(--text-muted); font-size: 0.75em; margin: 0;">v1.3.0</p>
                 </div>
             </div>
         </div>
@@ -146,8 +151,8 @@
                 <img src="icons/icon128.png" alt="Logo"
                     style="width: 64px; height: 64px; margin: 0 auto 15px auto; display: block;">
 
-                <h3 style="font-size: 1.1em; color: #1e3a8a; margin-bottom: 5px;">Chrome EQ & Volume</h3>
-                <p style="color: #6b7280; font-size: 0.9em; margin-bottom: 20px;">Boost your audio to the max.</p>
+                <h3 style="font-size: 1.1em; color: var(--text-heading); margin-bottom: 5px;">Chrome EQ & Volume</h3>
+                <p style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 20px;">Boost your audio to the max.</p>
 
                 <p class="footer-made-by">
                     <span data-i18n="footer_made_with">Made with ❤️ by</span>
