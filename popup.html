@@ -87,7 +87,8 @@
 
             <div class="settings-content">
                 <div class="setting-row" style="margin-bottom: 20px;">
-                    <label for="languageSelect" class="settings-label" data-i18n="settings_language_label">Language</label>
+                    <label for="languageSelect" class="settings-label"
+                        data-i18n="settings_language_label">Language</label>
                     <select id="languageSelect" class="settings-select">
                         <option value="en">English</option>
                         <option value="es">Español</option>
@@ -108,8 +109,17 @@
                     </select>
                 </div>
 
-                <div class="setting-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <label for="darkModeToggle" class="settings-label" style="margin: 0; cursor:pointer;" data-i18n="settings_dark_mode">Dark Mode</label>
+                <div class="setting-row"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <label for="darkModeToggle" class="settings-label"
+                        style="margin: 0; cursor:pointer; display: flex; align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" style="width: 18px; height: 18px; margin-right: 6px;">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                        </svg>
+                        <span data-i18n="settings_dark_mode">Dark Mode</span>
+                    </label>
                     <label class="switch">
                         <input type="checkbox" id="darkModeToggle">
                         <span class="slider round"></span>
@@ -128,7 +138,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                         </svg>
-                        About
+                        <span data-i18n="about_title">About</span>
                     </button>
                     <p style="color: var(--text-muted); font-size: 0.75em; margin: 0;">v1.3.0</p>
                 </div>
@@ -137,7 +147,7 @@
 
         <div id="aboutPanel" class="settings-panel hidden">
             <div class="settings-header">
-                <h4>About</h4>
+                <h4 data-i18n="about_title">About</h4>
                 <button id="closeAboutBtn" class="icon-button close-button" aria-label="Back">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor">
@@ -151,8 +161,10 @@
                 <img src="icons/icon128.png" alt="Logo"
                     style="width: 64px; height: 64px; margin: 0 auto 15px auto; display: block;">
 
-                <h3 style="font-size: 1.1em; color: var(--text-heading); margin-bottom: 5px;">Chrome EQ & Volume</h3>
-                <p style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 20px;">Boost your audio to the max.</p>
+                <h3 style="font-size: 1.1em; color: var(--text-heading); margin-bottom: 5px;"
+                    data-i18n="about_app_name">Chrome EQ & Volume</h3>
+                <p style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 20px;" data-i18n="about_subtitle">
+                    Boost your audio to the max.</p>
 
                 <p class="footer-made-by">
                     <span data-i18n="footer_made_with">Made with ❤️ by</span>

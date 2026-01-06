@@ -52,5 +52,17 @@
   },
   "footer_made_with": {
     "message": "Stworzone z ❤️ przez"
+  },
+  "about_title": {
+    "message": "O programie"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Zwiększ głośność do maksimum."
+  },
+  "settings_dark_mode": {
+    "message": "Tryb ciemny"
   }
 }

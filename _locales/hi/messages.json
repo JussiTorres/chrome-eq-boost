@@ -52,5 +52,17 @@
   },
   "footer_made_with": {
     "message": "❤️ से निर्मित:"
+  },
+  "about_title": {
+    "message": "परिचय"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "अपने ऑडियो को अधिकतम तक बढ़ाएं."
+  },
+  "settings_dark_mode": {
+    "message": "डार्क मोड"
   }
 }

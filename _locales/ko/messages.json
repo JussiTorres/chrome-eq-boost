@@ -52,5 +52,17 @@
   },
   "footer_made_with": {
     "message": "❤️로 제작"
+  },
+  "about_title": {
+    "message": "정보"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "오디오를 최대한으로 높이세요."
+  },
+  "settings_dark_mode": {
+    "message": "다크 모드"
   }
 }

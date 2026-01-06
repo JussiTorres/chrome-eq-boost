@@ -52,5 +52,17 @@
   },
   "footer_made_with": {
     "message": "❤️ を込めて:"
+  },
+  "about_title": {
+    "message": "概要"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "オーディオを最大限にブーストします。"
+  },
+  "settings_dark_mode": {
+    "message": "ダークモード"
   }
 }

@@ -41,9 +41,6 @@
   "settings_title": {
     "message": "Settings"
   },
-  "settings_dark_mode": {
-    "message": "Dark Mode"
-  },
   "status_conflict": {
     "message": "Controlling another tab"
   },
@@ -55,5 +52,17 @@
   },
   "footer_made_with": {
     "message": "Made with ❤️ by"
+  },
+  "about_title": {
+    "message": "About"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Boost your audio to the max."
+  },
+  "settings_dark_mode": {
+    "message": "Dark Mode"
   }
 }

@@ -52,5 +52,17 @@
     },
     "footer_made_with": {
         "message": "Зроблено з ❤️"
+    },
+    "about_title": {
+        "message": "Про програму"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Підсильте звук до максимуму."
+    },
+    "settings_dark_mode": {
+        "message": "Темна тема"
     }
 }

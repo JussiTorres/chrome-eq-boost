@@ -56,18 +56,20 @@ async function loadLanguage(e) {
 function applyTranslations() {
     document.querySelectorAll("[data-i18n]").forEach(e => {
         const t = e.getAttribute("data-i18n");
-        currentMessages[t] && (e.textContent = currentMessages[t].message)
-    })
+        if (currentMessages[t]) {
+            e.textContent = currentMessages[t].message;
+        }
+    });
 }
 
 function send(e) {
-    chrome.runtime.sendMessage(e).catch(() => {})
+    chrome.runtime.sendMessage(e).catch(() => { })
 }
 
 function updateDisplay(e, t, s, a, l) {
     const n = document.getElementById(t),
         o = parseFloat(s) || 0;
-    n && (n.textContent = 100 === a ? `${Math.round(o*a)}%` : `${o.toFixed(1)}${l}`)
+    n && (n.textContent = 100 === a ? `${Math.round(o * a)}%` : `${o.toFixed(1)}${l}`)
 }
 
 function syncAudioEngine() {
@@ -90,7 +92,7 @@ function updateStatusUI(e, t, s = !1) {
         resetBtn = document.getElementById("resetButton");
 
     // Clear old status classes
-    statusMsg.className = 'status-message'; 
+    statusMsg.className = 'status-message';
     if (toggleLabel) toggleLabel.className = 'toggle-label';
 
     if (toggle && (toggle.checked = t), !t) {
@@ -180,7 +182,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         container = document.getElementById("statusContainer"),
         statusMsg = document.getElementById("statusMessage"),
         takeOverBtn = document.getElementById("takeOverBtn"),
-        
+
         settingsBtn = document.getElementById("settingsBtn"),
         settingsPanel = document.getElementById("settingsPanel"),
         closeSettingsBtn = document.getElementById("closeSettingsBtn"),
@@ -240,7 +242,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         active: !0,
         currentWindow: !0
     });
-    
+
     const r = await chrome.storage.local.get(["volumeLevel", "bassLevel", "midLevel", "trebleLevel", "isEnabled", "capturingTabId", "preferredLocale"]),
         c = r.preferredLocale || "en";
 
@@ -286,10 +288,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         // RESET UI TO NORMAL
         container.classList.remove("conflict");
         takeOverBtn.classList.add("hidden");
-        
+
         document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !1);
         document.getElementById("resetButton").disabled = !1;
-        
+
         send({ type: "STOP_CAPTURE" });
         setTimeout(() => {
             toggle.checked = !0;
@@ -305,8 +307,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!chrome.runtime.lastError && res && res.success) {
                 // === CONFLICT DETECTED ===
                 g = !0;
-                container.classList.add("conflict"); 
-                takeOverBtn.classList.remove("hidden"); 
+                container.classList.add("conflict");
+                takeOverBtn.classList.remove("hidden");
                 toggle.checked = !1;
 
                 const label = document.querySelector(".toggle-label");
@@ -323,7 +325,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = !0);
                 document.getElementById("resetButton").disabled = !0;
-                
+
                 takeOverBtn.onclick = forceTakeover;
 
             } else {
@@ -359,7 +361,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         } else {
             pollingInterval && clearInterval(pollingInterval);
-            
+
             // Clear conflict state if it existed
             container.classList.remove("conflict");
             takeOverBtn.classList.add("hidden");

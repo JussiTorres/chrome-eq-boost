@@ -52,5 +52,17 @@
   },
   "footer_made_with": {
     "message": "用 ❤️ 制作:"
+  },
+  "about_title": {
+    "message": "关于"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "将您的音频提升至极限。"
+  },
+  "settings_dark_mode": {
+    "message": "深色模式"
   }
 }

@@ -52,5 +52,17 @@
   },
   "footer_made_with": {
     "message": "Mit ❤️ gemacht von"
+  },
+  "about_title": {
+    "message": "Über"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Holen Sie das Maximum aus Ihrem Audio heraus."
+  },
+  "settings_dark_mode": {
+    "message": "Dunkelmodus"
   }
 }
