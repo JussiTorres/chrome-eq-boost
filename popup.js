@@ -1,8 +1,9 @@
 /**
  * Chrome EQ & Volume Boost
- * Version: 1.3.0
  * Copyright (c) 2025 Jussi Torres
  * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
  */
 
 // ==========================================

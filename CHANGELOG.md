@@ -2,6 +2,15 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.3.1] - 2026-01-06
+### Added
+- **Auto-Language Detection:** Implemented `chrome.i18n` logic to automatically match the extension language to the browser's UI on the first run.
+- **First-Run Intelligence:** Established a strict Light Mode default for new installs, ensuring the theme engine only activates persistence after the user's first manual choice.
+- **UI Update:** Added a localized moon icon to the Dark Mode settings toggle for better visual clarity.
+
+### Changed
+- **Logic Centralization:** Fully refactored `popup.js` to use a single-fetch storage block, improving performance and eliminating redundant database calls.
+
 ## [1.3.0] - 2026-01-05
 ### Added
 - Persistent Dark Mode theme engine.
