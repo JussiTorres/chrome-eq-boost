@@ -2,17 +2,18 @@
 
 A powerful, privacy-focused Chrome Extension to boost volume (up to 400%) and equalize audio frequencies using the modern **Web Audio API** and **Offscreen Documents**.
 
-![Version](https://img.shields.io/badge/version-1.3.1-blue)
+![Version](https://img.shields.io/badge/version-1.4.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## ✨ Features
 
 - **🔊 Volume Booster:** Clean pre-amp gain up to 400%.
 - **🎚️ 3-Band Equalizer:** Fine-tune Bass, Mid, and Treble (-12dB to +12dB).
+- **📻 Retro Marquee Mode:** Scrolling song title display with interactive **Click-to-Copy** and smart visual buffering.
 - **🌙 Persistent Dark Mode:** Features a dedicated theme engine with a localized moon icon and a high-integrity blue UI design.
 - **🧠 Smart Audio Engine:**
-  - **Silence Detection:** Automatically detects if audio is playing or waiting via AnalyserNode.
-  - **Auto-Shutdown:** Saves resources by turning off when the tab is closed or silent.
+  - **Zero-Latency Response:** Instant visual reaction to play/pause events with no lag.
+  - **Extended Battery Life:** Intelligent background silence detection (30s timeout) to automatically save resources.
   - **Ghost Buster:** Prevents "stuck" states by verifying audio engine health on startup.
 - **🌍 Global Support:** Native support for 16 major languages with **Auto-Language Detection** that matches your browser's UI on first run.
 - **🛡️ Privacy First:** Built with Manifest V3 and the `tabCapture` API. No scripts injected into your pages, ensuring maximum security through the Principle of Least Privilege.
