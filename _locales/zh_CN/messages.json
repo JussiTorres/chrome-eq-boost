@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "深色模式"
+  },
+  "settings_marquee": {
+    "message": "滚动标题"
   }
 }

@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "डार्क मोड"
+  },
+  "settings_marquee": {
+    "message": "स्क्रॉलिंग शीर्षक"
   }
 }

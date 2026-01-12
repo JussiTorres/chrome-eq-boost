@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "Mode sombre"
+  },
+  "settings_marquee": {
+    "message": "Titre défilant"
   }
 }

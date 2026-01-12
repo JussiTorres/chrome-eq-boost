@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "다크 모드"
+  },
+  "settings_marquee": {
+    "message": "곡명 스크롤"
   }
 }

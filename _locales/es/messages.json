@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "Modo oscuro"
+  },
+  "settings_marquee": {
+    "message": "Título desplazable"
   }
 }

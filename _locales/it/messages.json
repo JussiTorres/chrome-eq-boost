@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "Modalità scura"
+  },
+  "settings_marquee": {
+    "message": "Titolo scorrevole"
   }
 }

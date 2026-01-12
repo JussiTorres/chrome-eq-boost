@@ -48,7 +48,7 @@
     "message": "Idioma"
   },
   "footer_buy_coffee": {
-    "message": "☕ Me paga um café"
+    "message": "Me pague um café"
   },
   "footer_made_with": {
     "message": "Feito com ❤️ por"
@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "Modo escuro"
+  },
+  "settings_marquee": {
+    "message": "Título em rolagem"
   }
 }

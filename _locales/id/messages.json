@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "Mode gelap"
+  },
+  "settings_marquee": {
+    "message": "Judul Bergulir"
   }
 }

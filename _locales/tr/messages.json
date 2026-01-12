@@ -51,7 +51,7 @@
         "message": "☕ Bana bir kahve ısmarla"
     },
     "footer_made_with": {
-        "message": "❤️ ile yapıldı"
+        "message": "❤️ ile yapıldı:"
     },
     "about_title": {
         "message": "Hakkında"
@@ -64,5 +64,8 @@
     },
     "settings_dark_mode": {
         "message": "Karanlık mod"
+    },
+    "settings_marquee": {
+        "message": "Kayan Başlık"
     }
 }

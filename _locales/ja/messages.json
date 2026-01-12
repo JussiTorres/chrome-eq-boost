@@ -51,7 +51,7 @@
     "message": "☕ コーヒーを奢って応援してください"
   },
   "footer_made_with": {
-    "message": "❤️ を込めて:"
+    "message": "❤️を込めて"
   },
   "about_title": {
     "message": "概要"
@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "ダークモード"
+  },
+  "settings_marquee": {
+    "message": "曲名スクロール"
   }
 }

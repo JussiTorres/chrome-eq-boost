@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "Tryb ciemny"
+  },
+  "settings_marquee": {
+    "message": "Przewijany tytuł"
   }
 }

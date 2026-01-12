@@ -48,7 +48,7 @@
         "message": "Мова"
     },
     "footer_buy_coffee": {
-        "message": "☕ Пригостити кавою"
+        "message": "Пригости кавою"
     },
     "footer_made_with": {
         "message": "Зроблено з ❤️"
@@ -64,5 +64,8 @@
     },
     "settings_dark_mode": {
         "message": "Темна тема"
+    },
+    "settings_marquee": {
+        "message": "Рухомий рядок"
     }
 }

@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "Dunkelmodus"
+  },
+  "settings_marquee": {
+    "message": "Titel-Laufschrift"
   }
 }

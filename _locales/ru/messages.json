@@ -51,7 +51,7 @@
     "message": "☕ Угости меня кофе"
   },
   "footer_made_with": {
-    "message": "Сделано с ❤️"
+    "message": "Сделано с ❤️ от"
   },
   "about_title": {
     "message": "О программе"
@@ -64,5 +64,8 @@
   },
   "settings_dark_mode": {
     "message": "Темная тема"
+  },
+  "settings_marquee": {
+    "message": "Бегущая строка"
   }
 }
