@@ -2,6 +2,26 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.4.0] - 2026-01-12
+### ✨ New Features (Retro & Interactive)
+- **Retro Marquee Mode:** Added a scrolling "ticker" style song title display.
+  - Features an **Interactive Click-to-Copy** function (copies song title to clipboard).
+  - Includes a **Smart Visual Buffer** (Hysteresis) that prevents the text from flashing "Waiting..." during short gaps between songs.
+  - Added a toggle in Settings with a custom **Retro MP3 Player Icon** to enable/disable the effect.
+- **Smart Fade Mask:** The scrolling text now features a dynamic fade effect on the edges that only activates when animation is running.
+
+### ⚡ Core Engine Improvements
+- **Auto-Healing Logic:** The popup now includes a startup "Grace Period," ignoring initial connection failures for 2 seconds to allow the audio engine to warm up without stuttering the UI.
+- **Extended Battery Life:** Moved the silence detection logic to the background (`offscreen.js`). The extension now waits for **30 seconds of silence** (up from 5s) before auto-shutting down, preventing accidental closures while reading lyrics or browsing.
+- **Zero-Latency Response:**
+  - Removed audio analyzer smoothing (`smoothingTimeConstant = 0.0`) for instant visual reaction to play/pause.
+  - Increased UI polling rate to 500ms for a snappy 60fps feel.
+
+### 🛡️ Stability & Fixes
+- **Race Condition Proof:** Implemented a "Kill Switch" in the popup that ignores "Zombie" messages from a closing engine, ensuring the "Disabled" state is always respected.
+- **Message Hygiene:** Removed redundant `syncAudioEngine` calls from the polling loop to prevent message port flooding/spam.
+- **Error Handling:** Added safety catches to `START_CAPTURE` promises to eliminate "Unchecked runtime.lastError" console noise.
+
 ## [1.3.1] - 2026-01-06
 ### Added
 - **Auto-Language Detection:** Implemented `chrome.i18n` logic to automatically match the extension language to the browser's UI on the first run.

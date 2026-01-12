@@ -11,6 +11,10 @@ let bass, mid, treble, compressor, audioContext = null,
     gainNode = null,
     analyser = null;
 
+// NEW: Variables for background silence detection
+let silenceInterval = null;
+let silenceSeconds = 0;
+
 function createFilter(type, frequency) {
     const filter = audioContext.createBiquadFilter();
     filter.type = type;
@@ -25,6 +29,14 @@ async function startProcessing(streamId) {
         await audioContext.close().catch(() => {});
         audioContext = null;
     }
+    
+    // Clear any existing silence timer to prevent overlaps
+    if (silenceInterval) {
+        clearInterval(silenceInterval);
+        silenceInterval = null;
+    }
+    silenceSeconds = 0;
+
     try {
         const mediaStream = await navigator.mediaDevices.getUserMedia({
             audio: {
@@ -45,7 +57,10 @@ async function startProcessing(streamId) {
 
         sourceNode = audioContext.createMediaStreamSource(mediaStream);
         analyser = audioContext.createAnalyser();
-        analyser.fftSize = 256;
+        analyser.fftSize = 256; 
+        
+        // Instant response for snappy UI
+        analyser.smoothingTimeConstant = 0.0; 
 
         bass = createFilter("lowshelf", 100);
         mid = createFilter("peaking", 1000);
@@ -64,7 +79,7 @@ async function startProcessing(streamId) {
             .connect(compressor)
             .connect(audioContext.destination);
 
-        // Restore saved settings if available
+        // Restore saved settings
         let settings = {
             volumeLevel: 1,
             bassLevel: 0,
@@ -84,7 +99,7 @@ async function startProcessing(streamId) {
         mid.gain.value = settings.midLevel ?? 0;
         treble.gain.value = settings.trebleLevel ?? 0;
 
-        // Anti-sleep hack (silent oscillator) to keep audio context alive
+        // Anti-sleep hack
         const osc = audioContext.createOscillator();
         osc.frequency.value = 0;
         const silentGain = audioContext.createGain();
@@ -92,6 +107,42 @@ async function startProcessing(streamId) {
         osc.connect(silentGain).connect(audioContext.destination);
         osc.start();
         osc.stop(audioContext.currentTime + 0.001);
+
+        // --- NEW: INTERNAL WATCHDOG ---
+        // This runs inside the background document, so it keeps working
+        // even when the popup is closed.
+        silenceInterval = setInterval(() => {
+            if (!analyser || !audioContext || audioContext.state === 'closed') return;
+
+            const dataArray = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(dataArray);
+            
+            // Calculate total volume
+            const volumeSum = dataArray.reduce((acc, val) => acc + val, 0);
+
+            // Threshold > 100 filters out digital noise
+            if (volumeSum > 100) {
+                // Audio detected: Reset timer
+                silenceSeconds = 0;
+            } else {
+                // Silence detected: Start counting
+                silenceSeconds++;
+                
+                // If silent for 30 seconds, shut down
+                if (silenceSeconds >= 30) {
+                    console.log("Auto-shutdown: 30 seconds of silence detected.");
+                    
+                    // 1. Update UI state (so toggle turns off next time you open it)
+                    chrome.storage.local.set({ isEnabled: false });
+                    
+                    // 2. Tell Service Worker to stop capture
+                    chrome.runtime.sendMessage({ type: "STOP_CAPTURE" });
+                    
+                    // 3. Stop this timer
+                    clearInterval(silenceInterval);
+                }
+            }
+        }, 1000); // Check every 1 second
 
         chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: true }).catch(() => {});
 
@@ -113,7 +164,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (isContextActive && analyser) {
             const dataArray = new Uint8Array(analyser.frequencyBinCount);
             analyser.getByteFrequencyData(dataArray);
-            isAudioDetected = dataArray.reduce((acc, val) => acc + val, 0) > 0;
+            const volumeSum = dataArray.reduce((acc, val) => acc + val, 0);
+            isAudioDetected = volumeSum > 100; 
         }
         sendResponse({
             success: !!isContextActive,
@@ -128,6 +180,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if ("UPDATE_TREBLE" === message.type && treble) treble.gain.value = parseFloat(message.value);
 
     if (("TOGGLE_ENABLED" === message.type && false === message.value) || "STOP_CAPTURE" === message.type) {
+        // Clear the watchdog timer on manual stop
+        if (silenceInterval) {
+            clearInterval(silenceInterval);
+            silenceInterval = null;
+        }
+        
         if (sourceNode?.mediaStream) {
             sourceNode.mediaStream.getTracks().forEach(track => track.stop());
         }

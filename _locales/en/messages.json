@@ -47,6 +47,9 @@
   "settings_language_label": {
     "message": "Language"
   },
+  "settings_marquee": {
+    "message": "Scrolling Title"
+  },
   "footer_buy_coffee": {
     "message": "☕ Buy me a coffee"
   },

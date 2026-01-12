@@ -122,8 +122,9 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2px 5px 2px;
-    margin-bottom: 5px;
+    padding: 0;
+
+    margin-bottom: 0px;
 }
 
 .brand-logo {
@@ -185,30 +186,52 @@ hr {
     color: var(--text-heading);
 }
 
-/* === Status & Conflict Container === */
+/* === Simplistic & Seamless Continuous Scroll === */
 .status-container {
-    margin: 5px 0 10px 0;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    margin: 7.1px auto 7.1px auto;
+
+    max-width: 185px;
+    overflow: hidden;
+    white-space: nowrap;
     background: transparent;
-    border: 1px solid transparent;
+    border: none;
     padding: 0;
+    position: relative;
+    /* REMOVED: Default mask-image to fix "Waiting..." fade issue */
+
+    min-height: 22px;
+
+    /* OPTIMIZED: No selection, no pointer events on hover, looks static but clickable via JS */
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
+    cursor: default;
+}
+
+/* NEW: Only apply fade when this class is added via JS */
+.status-container.mask-active {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .status-container.conflict {
-    background: var(--warning-bg);
-    padding: 8px;
-    border: 1px solid var(--warning-border);
+    /* No special background/border needed in overlay mode */
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    /* DISABLE THE FADE IN CONFLICT MODE so the button is crisp */
+    mask-image: none;
+    -webkit-mask-image: none;
 }
 
 .status-message {
-    text-align: center;
-    font-size: 0.88em;
-    color: var(--text-muted);
-    /* Default color */
     margin: 0;
-    padding: 2px 0;
-    min-height: 20px;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: var(--primary);
+    /* High-integrity blue */
+    text-align: center;
     line-height: 1.4;
 }
 
@@ -233,33 +256,48 @@ hr {
     color: var(--warning-text) !important;
 }
 
-.status-container.conflict .status-message {
-    color: var(--warning-text) !important;
-    font-weight: 400;
+/* === Takeover Button (Overlay Style - REDESIGNED) === */
+.takeover-button {
+    position: absolute;
+    /* Floats over the text */
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Perfectly centered */
+
+    /* MODERN BLUE LOOK */
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #ffffff;
+    /* White text */
+    border: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    /* Pill shape */
+    font-weight: 600;
+    font-size: 0.85em;
+    cursor: pointer;
+    white-space: nowrap;
+
+    /* Blue glow shadow */
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.takeover-button {
-    width: 100%;
-    margin-top: 6px;
-    background: var(--warning);
-    color: white;
-    /* Keep white for contrast on button */
-    border: none;
-    padding: 6px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 0.9em;
-    display: block;
+.takeover-button:hover {
+    transform: translate(-50%, -52%) scale(1.05);
+    /* Slight lift */
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
+    /* Stronger glow */
+}
+
+.takeover-button:active {
+    transform: translate(-50%, -50%) scale(0.95);
+    /* Click press */
 }
 
 .takeover-button.hidden {
     display: none;
-}
-
-.takeover-button:hover {
-    background: #d97706;
-    /* Keep fixed for now or var(--warning-hover) */
 }
 
 /* === Main Control Group === */
@@ -493,6 +531,13 @@ input[type="range"]:disabled {
     flex-shrink: 0;
 }
 
+.settings-divider {
+    border: 0;
+    height: 1px;
+    background: var(--border-light);
+    margin: 0 0 8px 0;
+}
+
 /* === About Panel Styles === */
 .footer-made-by {
     color: var(--text-muted);
@@ -526,6 +571,45 @@ input[type="range"]:disabled {
 .donate-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* === Simplistic & Seamless Continuous Scroll === */
+.marquee-text {
+    display: inline-flex;
+    will-change: transform;
+    animation: seamless-scroll 12s linear infinite;
+}
+
+.marquee-content {
+    display: inline-block;
+    padding-right: 2.5em;
+}
+
+.separator-icon {
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+
+    margin: 0 8px 0 0;
+
+    opacity: 0.7;
+    position: relative;
+    top: -1px;
+    border-radius: 2px;
+
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+}
+
+@keyframes seamless-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 /* === Utilities === */
