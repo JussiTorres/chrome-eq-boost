@@ -23,7 +23,7 @@ All notable changes to the "Chrome EQ Boost" extension will be documented in thi
 
 ### 🛡️ Stability & Fixes
 - **Windows Stutter Fix:** Forced GPU acceleration (`backface-visibility`) to eliminate marquee frame drops on Windows 11.
-- **Animation Smoothness:** Removed random delay logic to prevent the scrolling text from jumping to the middle on refresh.
+- **Animation Loop Logic:** Fixed a critical bug where the status update loop was forcibly resetting the animation every 500ms.
 - **Race Condition Proof:** Implemented a "Kill Switch" to ignore "Zombie" messages from a closing engine.
 - **Message Hygiene:** Removed redundant `syncAudioEngine` calls to prevent port flooding.
 - **Error Handling:** Added safety catches to eliminate "Unchecked runtime.lastError" console noise.

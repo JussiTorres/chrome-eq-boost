@@ -113,7 +113,12 @@ async function updateStatusUI(isActive, isToggleOn, isAudioDetected = false) {
     const toggleLabel = document.querySelector(".toggle-label");
     const resetBtn = document.getElementById("resetButton");
 
-    statusMsg.className = 'status-message';
+    // FIX: Do NOT wipe className here. It kills the animation loop every 500ms.
+    // statusMsg.className = 'status-message';  <-- THIS WAS THE BUG
+
+    // Instead, strictly manage the color classes
+    statusMsg.classList.remove('text-disabled', 'text-waiting', 'text-loading', 'text-active', 'text-conflict');
+
     if (toggleLabel) toggleLabel.className = 'toggle-label';
 
     if (toggle) toggle.checked = isToggleOn;
@@ -123,6 +128,8 @@ async function updateStatusUI(isActive, isToggleOn, isAudioDetected = false) {
         const msg = currentMessages.status_disabled ? currentMessages.status_disabled.message : "Extension disabled.";
         statusMsg.textContent = msg;
         statusMsg.classList.add('text-disabled');
+
+        // STOP ANIMATION: Explicitly remove marquee class
         statusMsg.classList.remove('marquee-text');
 
         // Remove fade mask
@@ -170,10 +177,10 @@ async function updateStatusUI(isActive, isToggleOn, isAudioDetected = false) {
             try {
                 const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
                 if (tab && tab.title) {
-                    statusMsg.classList.remove('text-waiting');
 
                     // --- 1. ENFORCE UI STATE (Self-Healing) ---
                     if (isMarqueeEnabled) {
+                        // START ANIMATION: Adding it if it's already there does NOTHING (Safe!)
                         statusMsg.classList.add('marquee-text');
                         container.classList.add('mask-active');
                     } else {
@@ -235,8 +242,9 @@ async function updateStatusUI(isActive, isToggleOn, isAudioDetected = false) {
         } else {
             // --- CASE: PAUSED / SILENCE (After 2 seconds) ---
             statusMsg.textContent = currentMessages.status_waiting ? currentMessages.status_waiting.message : "Waiting for audio...";
+
             statusMsg.classList.add('text-waiting');
-            statusMsg.classList.remove('marquee-text');
+            statusMsg.classList.remove('marquee-text'); // STOP ANIMATION
 
             container.classList.remove('mask-active');
 
@@ -249,7 +257,7 @@ async function updateStatusUI(isActive, isToggleOn, isAudioDetected = false) {
     } else {
         statusMsg.textContent = currentMessages.status_loading ? currentMessages.status_loading.message : "Initializing...";
         statusMsg.classList.add('text-loading');
-        statusMsg.classList.remove('marquee-text');
+        statusMsg.classList.remove('marquee-text'); // STOP ANIMATION
 
         container.classList.remove('mask-active');
 
@@ -542,7 +550,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 statusMsg.style.color = "var(--success)";
                 copyTimeout = setTimeout(() => {
                     statusMsg.style.color = "";
-                }, 1500);
+                }, 1400);
             } catch (err) {
                 console.error("Failed to copy text:", err);
             }
