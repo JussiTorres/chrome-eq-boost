@@ -176,11 +176,6 @@ async function updateStatusUI(isActive, isToggleOn, isAudioDetected = false) {
                     if (isMarqueeEnabled) {
                         statusMsg.classList.add('marquee-text');
                         container.classList.add('mask-active');
-
-                        if (!statusMsg.style.animationDelay) {
-                            const randomOffset = Math.random() * 12;
-                            statusMsg.style.animationDelay = `-${randomOffset}s`;
-                        }
                     } else {
                         statusMsg.classList.remove('marquee-text');
                         container.classList.remove('mask-active');

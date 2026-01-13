@@ -2,7 +2,7 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
-## [1.4.0] - 2026-01-12
+## [1.4.0] - 2026-01-13
 ### ✨ New Features (Retro & Interactive)
 - **Retro Marquee Mode:** Added a scrolling "ticker" style song title display.
   - Features an **Interactive Click-to-Copy** function (copies song title to clipboard).
@@ -22,6 +22,8 @@ All notable changes to the "Chrome EQ Boost" extension will be documented in thi
 - **Refinements:** Improved grammar and native phrasing for Portuguese (BR), Ukrainian, Russian, and Turkish.
 
 ### 🛡️ Stability & Fixes
+- **Windows Stutter Fix:** Forced GPU acceleration (`backface-visibility`) to eliminate marquee frame drops on Windows 11.
+- **Animation Smoothness:** Removed random delay logic to prevent the scrolling text from jumping to the middle on refresh.
 - **Race Condition Proof:** Implemented a "Kill Switch" to ignore "Zombie" messages from a closing engine.
 - **Message Hygiene:** Removed redundant `syncAudioEngine` calls to prevent port flooding.
 - **Error Handling:** Added safety catches to eliminate "Unchecked runtime.lastError" console noise.

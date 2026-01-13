@@ -578,6 +578,11 @@ input[type="range"]:disabled {
     display: inline-flex;
     will-change: transform;
     animation: seamless-scroll 12s linear infinite;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .marquee-content {
