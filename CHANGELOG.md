@@ -5,7 +5,7 @@ All notable changes to the "Chrome EQ Boost" extension will be documented in thi
 ## [1.4.0] - 2026-01-13
 ### ✨ New Features (Retro & Interactive)
 - **Retro Marquee Mode:** Added a scrolling "ticker" style song title display.
-  - Features an **Interactive Click-to-Copy** function (copies song title to clipboard).
+  - Features an **Interactive Double-Click-to-Copy** function (requires double-click to prevent accidental clipboard overrides).
   - Includes a **Smart Visual Buffer** (Hysteresis) that prevents the text from flashing "Waiting..." during short gaps between songs.
   - Added a toggle in Settings with a custom **Retro MP3 Player Icon** to enable/disable the effect.
 - **Smart Fade Mask:** The scrolling text now features a dynamic fade effect on the edges that only activates when animation is running.

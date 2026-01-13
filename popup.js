@@ -539,15 +539,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
-    // SINGLE-CLICK to Copy Title
-    statusMsg.addEventListener("click", async () => {
+    // DOUBLE-CLICK to Copy Title (Prevents accidental copies)
+    statusMsg.addEventListener("dblclick", async () => {
         const titleToCopy = statusMsg.getAttribute("data-last-title");
         if (titleToCopy && !statusMsg.classList.contains('text-waiting')) {
             try {
                 await navigator.clipboard.writeText(titleToCopy);
                 if (copyTimeout) clearTimeout(copyTimeout);
+
+                // Visual Feedback
                 statusMsg.style.transition = "color 0.2s";
                 statusMsg.style.color = "var(--success)";
+
                 copyTimeout = setTimeout(() => {
                     statusMsg.style.color = "";
                 }, 1400);
