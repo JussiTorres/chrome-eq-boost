@@ -1,0 +1,71 @@
+{
+    "status_loading": {
+        "message": "Laden..."
+    },
+    "status_active": {
+        "message": "Equalizer actief"
+    },
+    "status_disabled": {
+        "message": "Extensie uitgeschakeld"
+    },
+    "status_waiting": {
+        "message": "Gestart. Wachten op audio..."
+    },
+    "toggle_label": {
+        "message": "Extensie ingeschakeld"
+    },
+    "button_reset": {
+        "message": "Reset EQ & Volume"
+    },
+    "section_volume": {
+        "message": "Volume (Preamp)"
+    },
+    "section_eq": {
+        "message": "Equalizer (-12dB tot +12dB)"
+    },
+    "label_bass": {
+        "message": "Bas (100 Hz)"
+    },
+    "label_mids": {
+        "message": "Midden (1000 Hz)"
+    },
+    "label_treble": {
+        "message": "Hoge tonen (8000 Hz)"
+    },
+    "conflict_warning": {
+        "message": "🔊 Een ander tabblad wordt versterkt"
+    },
+    "button_takeover": {
+        "message": "Gebruik op dit tabblad"
+    },
+    "settings_title": {
+        "message": "Instellingen"
+    },
+    "status_conflict": {
+        "message": "Bestuurt ander tabblad"
+    },
+    "settings_language_label": {
+        "message": "Taal"
+    },
+    "footer_buy_coffee": {
+        "message": "☕ Trakteer me op koffie"
+    },
+    "footer_made_with": {
+        "message": "Gemaakt met ❤️ door"
+    },
+    "about_title": {
+        "message": "Over"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Maximaliseer je audio"
+    },
+    "settings_dark_mode": {
+        "message": "Donkere modus"
+    },
+    "settings_marquee": {
+        "message": "Scrollende titel"
+    }
+}

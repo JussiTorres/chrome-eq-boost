@@ -1,0 +1,71 @@
+{
+    "status_loading": {
+        "message": "កំពុងផ្ទុក..."
+    },
+    "status_active": {
+        "message": "Equalizer កំពុងដំណើរការ"
+    },
+    "status_disabled": {
+        "message": "Extension ត្រូវបានបិទ"
+    },
+    "status_waiting": {
+        "message": "បានចាប់ផ្តើម។ កំពុងរង់ចាំសំឡេង..."
+    },
+    "toggle_label": {
+        "message": "បើក Extension"
+    },
+    "button_reset": {
+        "message": "កំណត់ EQ និងសំឡេងឡើងវិញ"
+    },
+    "section_volume": {
+        "message": "កម្រិតសំឡេង (Preamp)"
+    },
+    "section_eq": {
+        "message": "Equalizer (-12dB ដល់ +12dB)"
+    },
+    "label_bass": {
+        "message": "Bass (100 Hz)"
+    },
+    "label_mids": {
+        "message": "Mids (1000 Hz)"
+    },
+    "label_treble": {
+        "message": "Treble (8000 Hz)"
+    },
+    "conflict_warning": {
+        "message": "🔊 ផ្ទាំងមួយទៀតកំពុងត្រូវបានពង្រីកសំឡេង"
+    },
+    "button_takeover": {
+        "message": "ប្រើលើផ្ទាំងនេះ"
+    },
+    "settings_title": {
+        "message": "ការកំណត់"
+    },
+    "status_conflict": {
+        "message": "កំពុងគ្រប់គ្រងផ្ទាំងផ្សេង"
+    },
+    "settings_language_label": {
+        "message": "ភាសា"
+    },
+    "footer_buy_coffee": {
+        "message": "☕ ទិញកាហ្វេឱ្យខ្ញុំ"
+    },
+    "footer_made_with": {
+        "message": "បង្កើតឡើងដោយ ❤️ ដោយ"
+    },
+    "about_title": {
+        "message": "អំពី"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "បង្កើនសំឡេងរបស់អ្នកដល់កម្រិតអតិបរមា"
+    },
+    "settings_dark_mode": {
+        "message": "Dark Mode"
+    },
+    "settings_marquee": {
+        "message": "ចំណងជើងរំកិល"
+    }
+}

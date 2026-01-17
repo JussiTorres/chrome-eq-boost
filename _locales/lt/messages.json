@@ -1,0 +1,71 @@
+{
+    "status_loading": {
+        "message": "Kraunama..."
+    },
+    "status_active": {
+        "message": "Ekvalaizeris aktyvus"
+    },
+    "status_disabled": {
+        "message": "Plėtinys išjungtas"
+    },
+    "status_waiting": {
+        "message": "Pradėta. Laukiama garso..."
+    },
+    "toggle_label": {
+        "message": "Įjungti plėtinį"
+    },
+    "button_reset": {
+        "message": "Atstatyti EQ ir Garsą"
+    },
+    "section_volume": {
+        "message": "Garsumas (Preamp)"
+    },
+    "section_eq": {
+        "message": "Ekvalaizeris (-12dB iki +12dB)"
+    },
+    "label_bass": {
+        "message": "Žemi (100 Hz)"
+    },
+    "label_mids": {
+        "message": "Vidutiniai (1000 Hz)"
+    },
+    "label_treble": {
+        "message": "Aukšti (8000 Hz)"
+    },
+    "conflict_warning": {
+        "message": "🔊 Kitas skirtukas yra garsinamas"
+    },
+    "button_takeover": {
+        "message": "Naudoti šiame skirtuke"
+    },
+    "settings_title": {
+        "message": "Nustatymai"
+    },
+    "status_conflict": {
+        "message": "Valdomas kitas skirtukas"
+    },
+    "settings_language_label": {
+        "message": "Kalba"
+    },
+    "footer_buy_coffee": {
+        "message": "☕ Pavaišink mane kava"
+    },
+    "footer_made_with": {
+        "message": "Sukurta su ❤️"
+    },
+    "about_title": {
+        "message": "Apie"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Padidinkite garsą iki maksimumo"
+    },
+    "settings_dark_mode": {
+        "message": "Tamsus režimas"
+    },
+    "settings_marquee": {
+        "message": "Slenkantis pavadinimas"
+    }
+}

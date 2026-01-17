@@ -1,0 +1,71 @@
+{
+    "status_loading": {
+        "message": "Đang khởi tạo..."
+    },
+    "status_active": {
+        "message": "Bộ cân bằng đang hoạt động"
+    },
+    "status_disabled": {
+        "message": "Tiện ích đã tắt"
+    },
+    "status_waiting": {
+        "message": "Đã bắt đầu thu. Đang chờ âm thanh..."
+    },
+    "toggle_label": {
+        "message": "Tiện ích đã bật"
+    },
+    "button_reset": {
+        "message": "Đặt lại EQ & Âm lượng"
+    },
+    "section_volume": {
+        "message": "Âm lượng (Preamp)"
+    },
+    "section_eq": {
+        "message": "Bộ cân bằng (-12dB đến +12dB)"
+    },
+    "label_bass": {
+        "message": "Trầm (100 Hz)"
+    },
+    "label_mids": {
+        "message": "Trung (1000 Hz)"
+    },
+    "label_treble": {
+        "message": "Cao (8000 Hz)"
+    },
+    "conflict_warning": {
+        "message": "🔊 Một tab khác đang được khuếch đại"
+    },
+    "button_takeover": {
+        "message": "Sử dụng trên tab này"
+    },
+    "settings_title": {
+        "message": "Cài đặt"
+    },
+    "status_conflict": {
+        "message": "Đang điều khiển tab khác"
+    },
+    "settings_language_label": {
+        "message": "Ngôn ngữ"
+    },
+    "footer_buy_coffee": {
+        "message": "☕ Mời tôi một ly cà phê"
+    },
+    "footer_made_with": {
+        "message": "Được làm bằng ❤️ bởi"
+    },
+    "about_title": {
+        "message": "Về"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Tăng âm lượng của bạn lên mức tối đa."
+    },
+    "settings_dark_mode": {
+        "message": "Chế độ tối"
+    },
+    "settings_marquee": {
+        "message": "Tiêu đề cuộn"
+    }
+}

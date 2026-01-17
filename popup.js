@@ -379,7 +379,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     // First Run: Auto-Language Detection
     let currentLocale = storage.preferredLocale;
     if (currentLocale === undefined) {
-        const supported = ["en", "es", "pt_BR", "de", "fr", "it", "pl", "ru", "uk", "tr", "id", "ja", "ko", "hi", "zh_CN", "zh_TW"];
+        const supported = [
+            "en", "es", "pt_BR", "de", "fr", "it", "pl", "ru", "uk", "tr",
+            "id", "ja", "ko", "hi", "zh_CN", "zh_TW",
+            "th", "vi", "fil", "km", "lt", "nl"
+        ];
         const uiLang = chrome.i18n.getUILanguage().replace('-', '_');
         currentLocale = supported.includes(uiLang) ? uiLang : supported.find(l => l === uiLang.split('_')[0]) || "en";
         chrome.storage.local.set({ preferredLocale: currentLocale });

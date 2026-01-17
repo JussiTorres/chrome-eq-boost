@@ -1,0 +1,71 @@
+{
+    "status_loading": {
+        "message": "Nagsisimula..."
+    },
+    "status_active": {
+        "message": "Aktibo ang Equalizer"
+    },
+    "status_disabled": {
+        "message": "Naka-off ang extension"
+    },
+    "status_waiting": {
+        "message": "Nagsimula na. Naghihintay ng audio..."
+    },
+    "toggle_label": {
+        "message": "Naka-on ang extension"
+    },
+    "button_reset": {
+        "message": "I-reset ang EQ at Volume"
+    },
+    "section_volume": {
+        "message": "Volume (Preamp)"
+    },
+    "section_eq": {
+        "message": "Equalizer (-12dB hanggang +12dB)"
+    },
+    "label_bass": {
+        "message": "Bass (100 Hz)"
+    },
+    "label_mids": {
+        "message": "Mids (1000 Hz)"
+    },
+    "label_treble": {
+        "message": "Treble (8000 Hz)"
+    },
+    "conflict_warning": {
+        "message": "🔊 May ibang tab na pinalalakas"
+    },
+    "button_takeover": {
+        "message": "Gamitin sa tab na ito"
+    },
+    "settings_title": {
+        "message": "Settings"
+    },
+    "status_conflict": {
+        "message": "Kinokontrol ang ibang tab"
+    },
+    "settings_language_label": {
+        "message": "Wika"
+    },
+    "footer_buy_coffee": {
+        "message": "☕ Ilibre ako ng kape"
+    },
+    "footer_made_with": {
+        "message": "Gawa nang may ❤️ ni"
+    },
+    "about_title": {
+        "message": "Tungkol sa"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Palakasin ang iyong audio nang sagad."
+    },
+    "settings_dark_mode": {
+        "message": "Dark Mode"
+    },
+    "settings_marquee": {
+        "message": "Gumagalaw na Titulo"
+    }
+}
