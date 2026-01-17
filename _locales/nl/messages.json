@@ -9,7 +9,7 @@
         "message": "Extensie uitgeschakeld"
     },
     "status_waiting": {
-        "message": "Gestart. Wachten op audio..."
+        "message": "Wachten op audio..."
     },
     "toggle_label": {
         "message": "Extensie ingeschakeld"

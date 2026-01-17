@@ -9,7 +9,7 @@
     "message": "Ekstensi nonaktif"
   },
   "status_waiting": {
-    "message": "Perekaman dimulai. Menunggu audio..."
+    "message": "Menunggu audio..."
   },
   "toggle_label": {
     "message": "Ekstensi aktif"

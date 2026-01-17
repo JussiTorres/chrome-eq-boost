@@ -9,7 +9,7 @@
         "message": "Plėtinys išjungtas"
     },
     "status_waiting": {
-        "message": "Pradėta. Laukiama garso..."
+        "message": "Laukiama garso..."
     },
     "toggle_label": {
         "message": "Įjungti plėtinį"

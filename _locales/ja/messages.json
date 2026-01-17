@@ -9,7 +9,7 @@
     "message": "拡張機能が無効です"
   },
   "status_waiting": {
-    "message": "キャプチャ開始。音声を待機中..."
+    "message": "音声待機中..."
   },
   "toggle_label": {
     "message": "拡張機能を有効化"

@@ -9,7 +9,7 @@
     "message": "擴充功能已停用"
   },
   "status_waiting": {
-    "message": "擷取已開始，正在等待音訊"
+    "message": "等待音訊..."
   },
   "toggle_label": {
     "message": "擴充功能已啟用"

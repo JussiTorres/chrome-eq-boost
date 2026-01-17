@@ -9,7 +9,7 @@
     "message": "Rozszerzenie wyłączone"
   },
   "status_waiting": {
-    "message": "Przechwytywanie rozpoczęte. Oczekiwanie na dźwięk..."
+    "message": "Oczekiwanie na dźwięk..."
   },
   "toggle_label": {
     "message": "Rozszerzenie włączone"

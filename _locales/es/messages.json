@@ -9,7 +9,7 @@
     "message": "Extensión desactivada"
   },
   "status_waiting": {
-    "message": "Captura iniciada. Esperando audio..."
+    "message": "Esperando audio..."
   },
   "toggle_label": {
     "message": "Extensión habilitada"

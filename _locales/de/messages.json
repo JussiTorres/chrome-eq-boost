@@ -9,7 +9,7 @@
     "message": "Erweiterung deaktiviert"
   },
   "status_waiting": {
-    "message": "Aufnahme gestartet. Warte auf Audio..."
+    "message": "Warten auf Audio..."
   },
   "toggle_label": {
     "message": "Erweiterung aktiviert"

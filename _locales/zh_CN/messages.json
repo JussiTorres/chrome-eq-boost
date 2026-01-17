@@ -9,7 +9,7 @@
     "message": "扩展已禁用"
   },
   "status_waiting": {
-    "message": "捕获已开始。等待音频..."
+    "message": "等待音频..."
   },
   "toggle_label": {
     "message": "已启用"

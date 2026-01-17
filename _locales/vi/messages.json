@@ -9,7 +9,7 @@
         "message": "Tiện ích đã tắt"
     },
     "status_waiting": {
-        "message": "Đã bắt đầu thu. Đang chờ âm thanh..."
+        "message": "Đang chờ âm thanh..."
     },
     "toggle_label": {
         "message": "Tiện ích đã bật"

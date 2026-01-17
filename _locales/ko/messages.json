@@ -9,7 +9,7 @@
     "message": "확장 프로그램 비활성"
   },
   "status_waiting": {
-    "message": "캡처 시작됨. 오디오 대기 중..."
+    "message": "오디오 대기 중..."
   },
   "toggle_label": {
     "message": "확장 프로그램 활성"

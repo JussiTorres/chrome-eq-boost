@@ -9,7 +9,7 @@
         "message": "Uzantı devre dışı"
     },
     "status_waiting": {
-        "message": "Yakalama başladı. Ses bekleniyor..."
+        "message": "Ses bekleniyor..."
     },
     "toggle_label": {
         "message": "Uzantı etkin"
