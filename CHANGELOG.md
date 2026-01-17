@@ -2,6 +2,21 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.4.1] - 2026-01-17
+### 🌍 Southeast Asia & Baltic Expansion
+- **New Languages:** Added full native support for 6 new regions:
+  - **Thai (th)**
+  - **Vietnamese (vi)**
+  - **Filipino (fil)**
+  - **Khmer (km)**
+  - **Lithuanian (lt)**
+  - **Dutch (nl)**
+- **Auto-Detection:** The extension now automatically detects and applies these languages based on the user's browser settings.
+
+### 💅 UI & Polish
+- **Status Text Cleanup:** Simplified the "Waiting for audio..." message across all 22 supported languages (removed the redundant "Capture started" prefix) for a cleaner, more professional look.
+- **Menu Update:** Added the new languages to the Settings dropdown.
+
 ## [1.4.0] - 2026-01-13
 ### ✨ New Features (Retro & Interactive)
 - **Retro Marquee Mode:** Added a scrolling "ticker" style song title display.

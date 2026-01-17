@@ -2,7 +2,7 @@
 
 A powerful, privacy-focused Chrome Extension to boost volume (up to 400%) and equalize audio frequencies using the modern **Web Audio API** and **Offscreen Documents**.
 
-![Version](https://img.shields.io/badge/version-1.4.0-blue)
+![Version](https://img.shields.io/badge/version-1.4.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## ✨ Features
@@ -15,7 +15,7 @@ A powerful, privacy-focused Chrome Extension to boost volume (up to 400%) and eq
   - **Zero-Latency Response:** Instant visual reaction to play/pause events with no lag.
   - **Extended Battery Life:** Intelligent background silence detection (30s timeout) to automatically save resources.
   - **Ghost Buster:** Prevents "stuck" states by verifying audio engine health on startup.
-- **🌍 Global Support:** Native support for 16 major languages with **Auto-Language Detection** that matches your browser's UI on first run.
+- **🌍 Global Support:** Native support for 22 major languages with **Auto-Language Detection** that matches your browser's UI on first run.
 - **🛡️ Privacy First:** Built with Manifest V3 and the `tabCapture` API. No scripts injected into your pages, ensuring maximum security through the Principle of Least Privilege.
 
 ## 🚀 Installation
