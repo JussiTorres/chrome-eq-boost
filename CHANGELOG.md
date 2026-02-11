@@ -2,6 +2,16 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.5.1] - 2026-02-10
+### 🎨 Visual Engineering & Branding
+- **"Engineered Soft" Theme:** Completely refactored the color palette from harsh "Electric Blues" to a softer, professional "Inter Blue" (`#3b82f6`) system to reduce eye strain.
+- **Brand Alignment:** Synced the UI accent colors (Orange/Blue) to perfectly match the updated `logo-horizontal.png`.
+- **Donate Button Polish:** Changed the "Buy me a coffee" button from neon yellow to a matte "Latte Gold" (`#fbbf24`) with dark coffee text for a premium look.
+
+### 🐛 Critical Fixes
+- **Contrast Inversion Fix:** Fixed a critical CSS bug where text contrast variables were swapped, causing labels to be invisible in Light Mode and too dark in Dark Mode.
+- **Dark Mode Readability:** Tuned section headers and labels to "Silver" (`#cbd5e1`) for better legibility against the new "True Black" (`#121212`) OLED background.
+
 ## [1.4.1] - 2026-01-17
 ### 🌍 Southeast Asia & Baltic Expansion
 - **New Languages:** Added full native support for 6 new regions:

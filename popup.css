@@ -7,80 +7,96 @@
  */
 
 /* === Color System & Variables === */
+
+/* === Color System & Variables === */
+/* === Color System & Variables === */
 :root {
-    /* --- Light Mode (Original) --- */
+    /* --- Light Mode (Engineered Soft) --- */
     --bg-body: #f7f9fb;
     --bg-card: #ffffff;
     --bg-hover: #f3f4f6;
 
-    --text-primary: #333333;
-    --text-heading: #1e3a8a;
-    --text-muted: #6b7280;
-    --text-label: #555555;
-    --text-value: #1f2937;
-    --text-section: #4b5563;
+    /* Typography - HIGH CONTRAST FIXED */
+    --text-primary: #1e293b;
+    /* Slate-800 (Dark & Sharp) */
+    --text-heading: #2563eb;
+    /* Inter Blue */
 
-    --border-light: #e5e7eb;
-    --border-input: #d1d5db;
+    /* These were the broken ones - NOW FIXED to be DARK */
+    --text-muted: #64748b;
+    /* Slate-500 */
+    --text-label: #475569;
+    /* Slate-600 (Dark Gray - Visible) */
+    --text-value: #334155;
+    /* Slate-700 (Dark - Visible) */
+    --text-section: #475569;
+    /* Slate-600 (Dark - Visible) */
 
+    --border-light: #e2e8f0;
+    --border-input: #cbd5e1;
+    /* Darker border for visibility */
+
+    /* --- UI COLORS --- */
     --primary: #3b82f6;
     --primary-hover: #2563eb;
-    --success: #22c55e;
+
+    --slider-track: #e2e8f0;
+    --slider-thumb: #3b82f6;
+
+    /* Status: Warm Amber */
     --warning: #f59e0b;
-    --warning-bg: #fff3cd;
-    --warning-border: #ffeeba;
-    --warning-text: #856404;
+    --warning-bg: #fffbeb;
+    --warning-border: #fcd34d;
+    --warning-text: #b45309;
+
+    --success: #10b981;
     --danger: #ef4444;
     --danger-hover: #dc2626;
 
-    --slider-track: #d1d5db;
-    --slider-thumb: #3b82f6;
-
-    --shadow-soft: rgba(0, 0, 0, 0.1);
+    --shadow-soft: rgba(59, 130, 246, 0.15);
 }
 
 body.dark-mode {
-    /* --- Dark Mode (New) --- */
-    --bg-body: #111827;
-    /* Gray-900 */
-    --bg-card: #1f2937;
-    /* Gray-800 */
-    --bg-hover: #374151;
-    /* Gray-700 */
+    /* --- Dark Mode (OLED Cinema) --- */
+    --bg-body: #121212;
+    --bg-card: #1e1e1e;
+    --bg-hover: #27272a;
 
-    --text-primary: #f3f4f6;
-    /* Gray-100 */
+    /* Typography - Light Text for Dark BG */
+    --text-primary: #e2e8f0;
+    /* Slate-200 */
     --text-heading: #60a5fa;
-    /* Blue-400 (Lighter for contrast) */
-    --text-muted: #9ca3af;
-    /* Gray-400 */
-    --text-label: #d1d5db;
-    /* Gray-300 */
-    --text-value: #e5e7eb;
-    /* Gray-200 */
-    --text-section: #9ca3af;
+    /* Pastel Blue */
 
-    --border-light: #374151;
-    /* Gray-700 */
-    --border-input: #4b5563;
-    /* Gray-600 */
+    /* FIXED: Lighter grays for readability on black */
+    --text-muted: #94a3b8;
+    /* Slate-400 */
+    --text-label: #cbd5e1;
+    /* Slate-300 (Light Gray) */
+    --text-value: #f1f5f9;
+    /* Slate-100 (Near White) */
+    --text-section: #cbd5e1;
+    /* Slate-300 (Light Gray) */
 
+    --border-light: #27272a;
+    --border-input: #3f3f46;
+
+    /* Controls */
     --primary: #60a5fa;
     --primary-hover: #93c5fd;
-    --success: #4ade80;
-    /* Green-400 */
+
+    --slider-track: #3f3f46;
+    --slider-thumb: #60a5fa;
+
+    /* Status */
     --warning: #fbbf24;
-    /* Amber-400 */
     --warning-bg: #451a03;
-    /* Dark Amber */
     --warning-border: #78350f;
     --warning-text: #fbbf24;
-    --danger: #f87171;
-    /* Red-400 */
-    --danger-hover: #ef4444;
 
-    --slider-track: #4b5563;
-    --slider-thumb: #60a5fa;
+    --success: #34d399;
+    --danger: #f87171;
+    --danger-hover: #ef4444;
 
     --shadow-soft: rgba(0, 0, 0, 0.5);
 }
@@ -554,23 +570,29 @@ input[type="range"]:disabled {
     display: block;
 }
 
+/* === UPDATED: Eye-Friendly Donate Button === */
 .donate-button {
     display: inline-block;
-    background-color: #FFDD00;
-    color: #000000;
+    /* CHANGED: From Neon #FFDD00 to "Latte Gold" #fbbf24 */
+    background-color: #fbbf24;
+    color: #451a03;
+    /* Dark Brown text (Coffee style) looks softer */
     text-decoration: none;
     font-weight: 600;
     font-size: 0.85em;
     padding: 8px 16px;
     border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    /* Softer shadow */
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
     margin-bottom: 12px;
 }
 
 .donate-button:hover {
+    background-color: #f59e0b;
+    /* Slightly richer gold on hover */
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* === Simplistic & Seamless Continuous Scroll === */
