@@ -19,37 +19,33 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         (async () => {
             try {
                 await ensureOffscreen();
-                chrome.tabCapture.getMediaStreamId({
-                    targetTabId: message.tabId
-                }, (streamId) => {
+                chrome.tabCapture.getMediaStreamId({ targetTabId: message.tabId }, (streamId) => {
                     if (chrome.runtime.lastError || !streamId) {
-                        console.warn("Error stream:", chrome.runtime.lastError);
                         return sendResponse({ success: false });
                     }
                     chrome.storage.local.set({ capturingTabId: message.tabId });
-                    chrome.runtime.sendMessage({
-                        type: "INCOMING_STREAM",
-                        streamId: streamId
-                    }).catch(() => {});
-                    sendResponse({ success: true });
+                    chrome.runtime.sendMessage({ type: "INCOMING_STREAM", streamId: streamId }).catch(() => { });
+                    sendResponse({ success: true }); // Success response
                 });
             } catch (error) {
-                console.error(error);
                 sendResponse({ success: false });
             }
         })();
-        return true; // Keep channel open for async response
+        return true; // REQUIRED for async
     }
 
     if ("STOP_CAPTURE" === message.type) {
         chrome.storage.local.remove("capturingTabId");
-        chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => {});
+        chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
+        sendResponse({ status: "stopped" }); // Added response
+        return false;
     }
 
     if ("STREAM_ENDED_EXTERNALLY" === message.type) {
-        console.log("Cleaning up state due to audio cut.");
         chrome.storage.local.remove("capturingTabId");
         chrome.storage.local.set({ isEnabled: false });
+        sendResponse({ status: "cleaned" }); // Added response
+        return false;
     }
 });
 
@@ -59,7 +55,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
             console.log(`Captured tab (${tabId}) closed.`);
             chrome.storage.local.remove("capturingTabId");
             chrome.storage.local.set({ isEnabled: false });
-            chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => {});
+            chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
         }
     });
 });
