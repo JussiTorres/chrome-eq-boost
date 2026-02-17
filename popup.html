@@ -13,7 +13,6 @@
 
         <div class="header-bar">
             <img src="icons/logo-horizontal.png" alt="EQ & Volume Boost Logo" class="brand-logo">
-
             <button id="settingsBtn" class="icon-button" aria-label="Settings">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor">
@@ -25,16 +24,16 @@
         </div>
 
         <div id="statusContainer" class="status-container">
-            <p id="statusMessage" class="status-message" data-i18n="status_disabled">Extension disabled.</p>
-            <button id="takeOverBtn" class="takeover-button hidden" data-i18n="button_takeover">
+            <p id="statusMessage" class="status-message" data-i18n="status_disabled">Extension disabled.</p> <button
+                id="takeOverBtn" class="takeover-button hidden" data-i18n="button_takeover">
                 Use on this tab
             </button>
         </div>
 
         <div id="mainControls">
             <div class="control-group general-controls">
-                <div class="toggle-switch">
-                    <label class="toggle-label" data-i18n="toggle_label">Extension Enabled</label>
+                <div id="mainToggleContainer" class="toggle-switch"> <label class="toggle-label"
+                        data-i18n="toggle_label">Extension Enabled</label>
                     <label class="switch">
                         <input type="checkbox" id="toggleEnabled">
                         <span class="slider round"></span>
@@ -136,7 +135,6 @@
                     style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <label for="marqueeToggle" class="settings-label"
                         style="margin: 0; cursor:pointer; display: flex; align-items: center;">
-
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" style="width: 18px; height: 18px; margin-right: 6px;">
                             <rect x="5" y="2" width="14" height="20" rx="3" stroke-linecap="round"
@@ -145,7 +143,6 @@
                                 stroke-linejoin="round" />
                             <circle cx="12" cy="16" r="3" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-
                         <span data-i18n="settings_marquee">Scrolling Title</span>
                     </label>
                     <label class="switch">
@@ -153,8 +150,36 @@
                         <span class="slider round"></span>
                     </label>
                 </div>
-            </div>
+                <div class="setting-row"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <label for="customThemeToggle" class="settings-label"
+                        style="margin: 0; cursor:pointer; display: flex; align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" style="width: 18px; height: 18px; margin-right: 6px;">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                        </svg>
+                        <span data-i18n="settings_custom_theme">Custom Theme</span>
+                    </label>
 
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <button id="editThemeBtn" class="icon-button hidden"
+                            style="padding: 4px; color: var(--text-muted); transition: color 0.2s;"
+                            aria-label="Edit Theme" title="Edit Theme">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" style="width: 18px; height: 18px;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                            </svg>
+                        </button>
+
+                        <label class="switch">
+                            <input type="checkbox" id="customThemeToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="settings-footer" style="text-align: center;">
                 <hr class="settings-divider">
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 5px;">
@@ -167,8 +192,89 @@
                         </svg>
                         <span data-i18n="about_title">About</span>
                     </button>
-                    <p style="color: var(--text-muted); font-size: 0.75em; margin: 0;">v1.6.1</p>
+                    <p style="color: var(--text-muted); font-size: 0.75em; margin: 0;">v1.7.0</p>
                 </div>
+            </div>
+        </div>
+
+        <div id="customThemePanel" class="settings-panel hidden">
+            <div class="settings-header" style="margin-bottom: 10px; padding-bottom: 8px;">
+                <h4 data-i18n="custom_theme_title" style="margin:0;">Theme Editor</h4>
+                <button id="closeThemeBtn" class="icon-button close-button" aria-label="Back">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="settings-content" style="padding-top: 0;">
+                <div style="position: relative;">
+
+                    <div class="color-grid">
+                        <div class="color-stack">
+                            <label>App Background</label>
+                            <div class="color-wrapper">
+                                <input type="color" id="pickerBgBody" value="#f7f9fb">
+                                <input type="text" id="hexBgBody" class="color-hex-input" value="#f7f9fb" maxlength="7"
+                                    spellcheck="false">
+                            </div>
+                        </div>
+
+                        <div class="color-stack">
+                            <label>Card Background</label>
+                            <div class="color-wrapper">
+                                <input type="color" id="pickerBgCard" value="#ffffff">
+                                <input type="text" id="hexBgCard" class="color-hex-input" value="#ffffff" maxlength="7"
+                                    spellcheck="false">
+                            </div>
+                        </div>
+
+                        <div class="color-stack" style="grid-column: span 2;">
+                            <label>Text & Accent</label>
+                            <div class="color-wrapper">
+                                <input type="color" id="pickerUnified" value="#3b82f6">
+                                <input type="text" id="hexUnified" class="color-hex-input" value="#3b82f6" maxlength="7"
+                                    spellcheck="false">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr class="settings-divider">
+
+                <div class="setting-row" style="margin-bottom: 5px;">
+                    <label class="settings-label"
+                        style="font-size: 0.8em; text-transform: uppercase; margin-bottom: 4px;">Library</label>
+
+                    <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                        <select id="savedThemesSelect" class="settings-select"
+                            style="flex-grow: 1; padding: 4px 8px; height: 32px;">
+                            <option value="" disabled selected>Select a theme...</option>
+                        </select>
+                        <button id="deleteThemeBtn" class="icon-button"
+                            style="border: 1px solid var(--status-danger); color: var(--status-danger); border-radius: 6px; height: 32px; width: 32px;"
+                            title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div style="display: flex; gap: 6px;">
+                        <input type="text" id="themeNameInput" class="settings-select" placeholder="New Theme Name">
+                        <button id="saveThemeBtn" class="text-button">
+                            Save
+                        </button>
+                    </div>
+                </div>
+
+                <button id="resetThemeBtn" class="text-button"
+                    style="margin-top: 15px; width: 100%; justify-content: center; color: var(--danger); font-size: 0.8em; opacity: 0.8;">
+                    Reset to Defaults
+                </button>
             </div>
         </div>
 
@@ -183,34 +289,73 @@
                 </button>
             </div>
 
-            <div class="settings-content"
-                style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
-                <img src="icons/icon128.png" alt="Logo"
-                    style="width: 64px; height: 64px; margin: 0 auto 15px auto; display: block;">
+            <div class="settings-content about-layout">
+                <div class="about-header">
+                    <img src="icons/icon128.png" alt="Logo" class="about-app-icon">
+                    <h3 class="about-app-title" data-i18n="about_app_name">Chrome EQ & Volume</h3>
+                    <span class="about-version-badge">v1.5.1</span>
+                    <p class="about-app-desc" data-i18n="about_subtitle">Boost your audio to the max.</p>
+                </div>
 
-                <h3 style="font-size: 1.1em; color: var(--text-heading); margin-bottom: 5px;"
-                    data-i18n="about_app_name">Chrome EQ & Volume</h3>
-                <p style="color: var(--text-muted); font-size: 0.9em; margin-bottom: 20px;" data-i18n="about_subtitle">
-                    Boost your audio to the max.</p>
+                <div class="about-links-stack">
 
-                <p class="footer-made-by">
-                    <span data-i18n="footer_made_with">Made with ❤️ by</span>
-                </p>
+                    <div class="about-info-row">
+                        <div class="link-icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" style="width:20px;height:20px;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <div class="link-text-group">
+                            <span class="link-label" data-i18n="footer_made_with">Made by</span>
+                            <span class="link-value">Jussi Torres</span>
+                        </div>
+                    </div>
 
-                <a href="https://www.jussitorres.com/" target="_blank" class="footer-name">
-                    Jussi Torres
-                </a>
-
-                <div>
-                    <a href="https://buymeacoffee.com/jussitorres" target="_blank" class="donate-button"
-                        data-i18n="footer_buy_coffee">
-                        ☕ Buy me a coffee
+                    <a href="https://buymeacoffee.com/jussitorres" target="_blank" class="about-link-row coffee-row">
+                        <div class="link-content">
+                            <div class="link-icon-box">
+                                <span style="font-size: 1.2em;">☕</span>
+                            </div>
+                            <div class="link-text-group">
+                                <span class="link-label" style="color:var(--text-primary); opacity:0.7;">Support</span>
+                                <span class="link-value" data-i18n="footer_buy_coffee">Buy me a coffee</span>
+                            </div>
+                        </div>
+                        <svg class="link-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
                     </a>
+
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
+
+    </div>
+    <div id="customModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h4 id="modalTitle">Delete Theme?</h4>
+            <p id="modalMessage">
+                Are you sure?
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button id="modalCancelBtn" class="text-button"
+                    style="border: 1px solid var(--border-light); color: var(--text-primary); padding: 6px 16px;">
+                    Cancel
+                </button>
+                <button id="modalConfirmBtn" class="text-button"
+                    style="background: var(--status-danger); color: #fff; padding: 6px 16px; border: none;">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="popup/popup.js"></script>
 </body>
 

@@ -2,6 +2,16 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.7.0] - 2026-02-17
+### ✨ New Features
+- **Custom Theme Editor:** Users can now create, save, and delete their own custom themes using a new 3-color picker interface.
+- **Dynamic Contrast Engine:** The "Reset" button and other UI elements now automatically switch between Black/White text based on the brightness of the user's custom accent color.
+- **Smart Safety Checks:** Added a confirmation modal to prevent accidental deletion or overwriting of existing themes.
+
+### 💄 UI/UX Improvements
+- **Responsive Modal:** The delete/overwrite confirmation modal now adapts its width to the content, removing unnecessary whitespace.
+- **No-Jump Layout:** Fixed a pixel-perfect alignment issue where the "Edit Theme" pencil icon would shift the layout when toggled.
+
 ## [1.6.1] - 2026-02-16
 ### 🏗️ Code Architecture & Maintainability
 - **Modular Refactor:** Completely dismantled the monolithic `popup.js` into a robust, ES6 module-based architecture to improve scalability and debugging.

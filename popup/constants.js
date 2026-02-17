@@ -1,3 +1,7 @@
+/**
+ * chrome-eq-boost/popup/constants.js
+ */
+
 export const SLIDER_CONFIGS = [{
     id: "volumeSlider",
     display: "volumeValue",
@@ -35,4 +39,23 @@ export const SLIDER_CONFIGS = [{
 export const DEFAULTS = {
     pollingRate: 500,
     silenceTimeout: 2000
+};
+// --- popup/constants.js ---
+export const PRESET_THEMES = {
+    "Crimson Abyss": {
+        bgBody: "#0d0014",
+        bgCard: "#3d0000",
+        accentColor: "#ff9696"
+    },
+    "White Eclipse": {
+        bgBody: "#000000",
+        bgCard: "#000000",
+        accentColor: "#ffffff"
+    },
+    "Rosita": {
+        bgBody: "#ffdddd",
+        bgCard: "#ffbbbb",
+        accentColor: "#000000"
+    }
+
 };

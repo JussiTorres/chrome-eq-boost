@@ -2,114 +2,98 @@
  * Chrome EQ & Volume Boost
  * Copyright (c) 2025 Jussi Torres
  * Licensed under the MIT License.
- *
- * Developed by Jussi Torres
  */
 
-/* === Color System & Variables === */
+/* ==========================================================================
+   0. GLOBAL RESET (The Fix for the "Jump")
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    /* Locks padding/borders inside width/height */
+}
 
-/* === Color System & Variables === */
-/* === Color System & Variables === */
+/* ==========================================================================
+   1. MASTER SLOT SYSTEM
+   ========================================================================== */
+
 :root {
-    /* --- Light Mode (Engineered Soft) --- */
-    --bg-body: #f7f9fb;
+    /* === SLOT 1: Backgrounds (Light Default) === */
+    --bg-body: #f9fafb;
     --bg-card: #ffffff;
-    --bg-hover: #f3f4f6;
+    --bg-disabled: #e5e7eb;
 
-    /* Typography - HIGH CONTRAST FIXED */
-    --text-primary: #1e293b;
-    /* Slate-800 (Dark & Sharp) */
-    --text-heading: #2563eb;
-    /* Inter Blue */
+    /* === SLOT 2: Text (Light Default) === */
+    --text-primary: #0f172a;
+    --text-button: #ffffff;
+    /* Default white text for buttons */
 
-    /* These were the broken ones - NOW FIXED to be DARK */
-    --text-muted: #64748b;
-    /* Slate-500 */
-    --text-label: #475569;
-    /* Slate-600 (Dark Gray - Visible) */
-    --text-value: #334155;
-    /* Slate-700 (Dark - Visible) */
-    --text-section: #475569;
-    /* Slate-600 (Dark - Visible) */
-
-    --border-light: #e2e8f0;
-    --border-input: #cbd5e1;
-    /* Darker border for visibility */
-
-    /* --- UI COLORS --- */
+    /* === SLOT 3: Accent (Light Default) === */
     --primary: #3b82f6;
-    --primary-hover: #2563eb;
 
-    --slider-track: #e2e8f0;
+    /* === DERIVED SLOTS === */
+    --bg-hover: #f0f3f7;
+    --primary-hover: #1d4ed8;
+    --shadow-soft: rgba(15, 23, 42, 0.1);
+
+    /* === TEXT HIERARCHY === */
+    --text-heading: #2563eb;
+    --text-muted: #64748b;
+    --text-label: #475569;
+    --text-value: #334155;
+    --text-section: #475569;
+    --border-light: #e2e8f0;
+
+    /* === DYNAMIC STATUS COLORS === */
+    --status-success: #10b981;
+    --status-warning: #f59e0b;
+    --status-danger: #ef4444;
+    --status-disabled-text: #64748b;
+
+    --slider-track: #d1d5db;
     --slider-thumb: #3b82f6;
-
-    /* Status: Warm Amber */
-    --warning: #f59e0b;
-    --warning-bg: #fffbeb;
-    --warning-border: #fcd34d;
-    --warning-text: #b45309;
-
-    --success: #10b981;
-    --danger: #ef4444;
-    --danger-hover: #dc2626;
-
-    --shadow-soft: rgba(59, 130, 246, 0.15);
 }
 
 body.dark-mode {
-    /* --- Dark Mode (OLED Cinema) --- */
-    --bg-body: #121212;
-    --bg-card: #1e1e1e;
-    --bg-hover: #27272a;
+    --bg-body: #0f172a;
+    --bg-card: #1f2937;
+    --bg-disabled: #374151;
 
-    /* Typography - Light Text for Dark BG */
-    --text-primary: #e2e8f0;
-    /* Slate-200 */
+    --text-primary: #e5e7eb;
+    --text-button: #ffffff;
+    --primary: #3b82f6;
+
+    --bg-hover: #1e293b;
+    --primary-hover: #60a5fa;
+    --shadow-soft: rgba(0, 0, 0, 0.3);
+
     --text-heading: #60a5fa;
-    /* Pastel Blue */
-
-    /* FIXED: Lighter grays for readability on black */
-    --text-muted: #94a3b8;
-    /* Slate-400 */
-    --text-label: #cbd5e1;
-    /* Slate-300 (Light Gray) */
-    --text-value: #f1f5f9;
-    /* Slate-100 (Near White) */
-    --text-section: #cbd5e1;
-    /* Slate-300 (Light Gray) */
-
+    --text-muted: #e2e8f0;
+    --text-label: #e2e8f0;
+    --text-value: #e2e8f0;
+    --text-section: #e2e8f0;
     --border-light: #27272a;
-    --border-input: #3f3f46;
 
-    /* Controls */
-    --primary: #60a5fa;
-    --primary-hover: #93c5fd;
+    --status-success: #34d399;
+    --status-warning: #fbbf24;
+    --status-danger: #ef4444;
+    --status-disabled-text: #94a3b8;
 
-    --slider-track: #3f3f46;
-    --slider-thumb: #60a5fa;
-
-    /* Status */
-    --warning: #fbbf24;
-    --warning-bg: #451a03;
-    --warning-border: #78350f;
-    --warning-text: #fbbf24;
-
-    --success: #34d399;
-    --danger: #f87171;
-    --danger-hover: #ef4444;
-
-    --shadow-soft: rgba(0, 0, 0, 0.5);
+    --slider-track: #4b5563;
+    --slider-thumb: #3b82f6;
 }
 
-/* === Base & Layout === */
+/* ==========================================================================
+   2. BASE LAYOUT
+   ========================================================================== */
+
 body {
     width: 320px;
     padding: 16px 16px 8px 16px;
+    margin: 0;
+    /* box-sizing: border-box;  <-- REMOVED (Handled by global reset above) */
     font-family: 'Inter', Arial, sans-serif;
     background-color: var(--bg-body);
     color: var(--text-primary);
-    margin: 0;
-    box-sizing: border-box;
     overflow-y: auto;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -118,19 +102,86 @@ body {
     padding: 0 5px;
 }
 
-h3 {
-    text-align: center;
-    color: var(--text-heading);
-    margin: 0 0 10px 0;
-    font-size: 1.45em;
-    font-weight: 700;
-}
-
 hr {
     border: 0;
     height: 1px;
-    background: var(--border-light);
+    background: var(--primary);
+    opacity: 0.2;
     margin: 12px 0;
+}
+
+/* ==========================================================================
+   3. ELEMENT MAPPING
+   ========================================================================== */
+h3,
+h4 {
+    color: var(--text-heading);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+h3 {
+    text-align: center;
+    font-size: 1.45em;
+    margin-top: 0;
+}
+
+h4 {
+    font-size: 1.1em;
+    margin-top: 0;
+}
+
+/* Map specific classes to variables */
+.text-muted,
+.footer-made-by {
+    color: var(--text-muted);
+}
+
+label,
+.settings-label {
+    color: var(--text-label);
+}
+
+.value-display {
+    color: var(--text-value);
+}
+
+.section-title {
+    color: var(--text-section);
+}
+
+/* Card & Inputs */
+.toggle-switch,
+.settings-select {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+}
+
+/* Interactive States */
+.icon-button:hover,
+.text-button:hover {
+    background-color: var(--bg-hover);
+    color: var(--primary-hover);
+}
+
+/* Slider Overrides */
+input[type="range"] {
+    background: var(--slider-track);
+}
+
+/* ==========================================================================
+   SLIDER THUMB (Reverted to Cutout Style)
+   ========================================================================== */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--slider-thumb);
+    border: 2px solid var(--bg-card) !important;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px var(--shadow-soft);
 }
 
 /* === Header & Branding === */
@@ -139,7 +190,6 @@ hr {
     justify-content: space-between;
     align-items: center;
     padding: 0;
-
     margin-bottom: 0px;
 }
 
@@ -155,7 +205,7 @@ hr {
     border: none;
     cursor: pointer;
     padding: 5px;
-    color: var(--text-muted);
+    color: var(--text-heading);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -205,7 +255,6 @@ hr {
 /* === Simplistic & Seamless Continuous Scroll === */
 .status-container {
     margin: 7.1px auto 7.1px auto;
-
     max-width: 185px;
     overflow: hidden;
     white-space: nowrap;
@@ -213,30 +262,22 @@ hr {
     border: none;
     padding: 0;
     position: relative;
-    /* REMOVED: Default mask-image to fix "Waiting..." fade issue */
-
     min-height: 22px;
-
-    /* OPTIMIZED: No selection, no pointer events on hover, looks static but clickable via JS */
     user-select: none;
     -webkit-user-select: none;
     pointer-events: auto;
     cursor: default;
 }
 
-/* NEW: Only apply fade when this class is added via JS */
 .status-container.mask-active {
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .status-container.conflict {
-    /* No special background/border needed in overlay mode */
     background: transparent;
     border: none;
     padding: 0;
-
-    /* DISABLE THE FADE IN CONFLICT MODE so the button is crisp */
     mask-image: none;
     -webkit-mask-image: none;
 }
@@ -246,22 +287,21 @@ hr {
     font-size: 0.95em;
     font-weight: 600;
     color: var(--primary);
-    /* High-integrity blue */
     text-align: center;
     line-height: 1.4;
 }
 
-/* Status Helper Classes (Used by JS) */
+/* Status Helper Classes */
 .text-disabled {
-    color: var(--text-muted) !important;
+    color: var(--status-disabled-text) !important;
 }
 
 .text-active {
-    color: var(--success) !important;
+    color: var(--status-success) !important;
 }
 
 .text-waiting {
-    color: var(--warning) !important;
+    color: var(--status-warning) !important;
 }
 
 .text-loading {
@@ -269,47 +309,37 @@ hr {
 }
 
 .text-conflict {
-    color: var(--warning-text) !important;
+    color: var(--status-danger) !important;
+    font-weight: 700;
 }
 
-/* === Takeover Button (Overlay Style - REDESIGNED) === */
+/* === Takeover Button === */
 .takeover-button {
     position: absolute;
-    /* Floats over the text */
     z-index: 10;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* Perfectly centered */
-
-    /* MODERN BLUE LOOK */
     background: linear-gradient(135deg, #3b82f6, #2563eb);
     color: #ffffff;
-    /* White text */
     border: none;
     padding: 6px 16px;
     border-radius: 20px;
-    /* Pill shape */
     font-weight: 600;
     font-size: 0.85em;
     cursor: pointer;
     white-space: nowrap;
-
-    /* Blue glow shadow */
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .takeover-button:hover {
     transform: translate(-50%, -52%) scale(1.05);
-    /* Slight lift */
     box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
-    /* Stronger glow */
 }
 
 .takeover-button:active {
     transform: translate(-50%, -50%) scale(0.95);
-    /* Click press */
 }
 
 .takeover-button.hidden {
@@ -327,6 +357,8 @@ hr {
     box-shadow: 0 1px 3px var(--shadow-soft);
     margin-bottom: 10px;
     transition: background-color 0.3s;
+    border: 1px solid var(--border-light);
+    /* Constant 1px border */
 }
 
 .toggle-label {
@@ -335,7 +367,6 @@ hr {
     font-size: 1.02em;
 }
 
-/* Toggle Label Helpers */
 .label-disabled {
     color: var(--text-muted) !important;
 }
@@ -365,7 +396,6 @@ hr {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    /* Generic gray */
     transition: .4s;
     border-radius: 34px;
 }
@@ -384,7 +414,7 @@ hr {
 }
 
 input:checked+.slider {
-    background-color: var(--success);
+    background-color: var(--status-success);
 }
 
 input:checked+.slider:before {
@@ -396,8 +426,8 @@ input:checked+.slider:before {
     width: 100%;
     padding: 10px;
     margin-top: 0;
-    background: var(--danger);
-    color: white;
+    background: var(--status-danger);
+    color: var(--text-button);
     border: none;
     border-radius: 8px;
     font-weight: 600;
@@ -407,14 +437,15 @@ input:checked+.slider:before {
 }
 
 .reset-button:disabled {
-    background-color: var(--border-input);
+    background-color: var(--bg-disabled);
     cursor: not-allowed;
     opacity: 1;
     color: var(--text-muted);
 }
 
 .reset-button:hover:not(:disabled) {
-    background: var(--danger-hover);
+    background: var(--status-danger);
+    filter: brightness(0.9);
 }
 
 /* === Sliders & Labels === */
@@ -433,8 +464,9 @@ input:checked+.slider:before {
 .eq-control label {
     font-size: 0.88em;
     margin-bottom: 5px;
-    color: var(--text-label);
+    color: var(--text-heading);
     display: block;
+    font-weight: 600;
 }
 
 input[type="range"] {
@@ -445,17 +477,6 @@ input[type="range"] {
     background: var(--slider-track);
     border-radius: 6px;
     outline: none;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    background: var(--slider-thumb);
-    border: 2px solid var(--bg-card);
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 2px 4px var(--shadow-soft);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
@@ -471,7 +492,7 @@ input[type="range"]:disabled {
     font-weight: 700;
     text-align: right;
     font-size: 0.9em;
-    color: var(--text-value);
+    color: var(--text-heading);
     margin-top: 4px;
     display: block;
 }
@@ -486,7 +507,6 @@ input[type="range"]:disabled {
     background-color: var(--bg-body);
     z-index: 200;
     padding: 20px 20px 10px 20px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     opacity: 1;
@@ -505,7 +525,7 @@ input[type="range"]:disabled {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 2px solid var(--bg-hover);
+    border-bottom: 2px solid var(--primary);
     padding-bottom: 10px;
 }
 
@@ -570,27 +590,23 @@ input[type="range"]:disabled {
     display: block;
 }
 
-/* === UPDATED: Eye-Friendly Donate Button === */
+/* === UPDATED: Donate Button === */
 .donate-button {
     display: inline-block;
-    /* CHANGED: From Neon #FFDD00 to "Latte Gold" #fbbf24 */
     background-color: #fbbf24;
     color: #451a03;
-    /* Dark Brown text (Coffee style) looks softer */
     text-decoration: none;
     font-weight: 600;
     font-size: 0.85em;
     padding: 8px 16px;
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    /* Softer shadow */
     transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
     margin-bottom: 12px;
 }
 
 .donate-button:hover {
     background-color: #f59e0b;
-    /* Slightly richer gold on hover */
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -600,7 +616,6 @@ input[type="range"]:disabled {
     display: inline-flex;
     will-change: transform;
     animation: seamless-scroll 12s linear infinite;
-
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transform: translateZ(0);
@@ -616,14 +631,11 @@ input[type="range"]:disabled {
     width: 12px;
     height: 12px;
     vertical-align: middle;
-
     margin: 0 8px 0 0;
-
     opacity: 0.7;
     position: relative;
     top: -1px;
     border-radius: 2px;
-
     user-select: none;
     -webkit-user-select: none;
     pointer-events: none;
@@ -639,7 +651,615 @@ input[type="range"]:disabled {
     }
 }
 
-/* === Utilities === */
+/* Color Picker Styling */
+.color-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.color-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(125, 125, 125, 0.1);
+    padding: 4px 8px 4px 4px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    backdrop-filter: contrast(0.9);
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+}
+
+.color-value {
+    font-size: 0.85em;
+    font-family: monospace;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* === THEME EDITOR: "Reset to Defaults" Button === */
+#resetThemeBtn {
+    background-color: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+#resetThemeBtn:hover {
+    background-color: var(--danger) !important;
+    color: var(--bg-card) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-soft);
+}
+
+body #resetThemeBtn:hover {
+    background-color: var(--status-danger) !important;
+    color: var(--bg-card) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-soft);
+    opacity: 1 !important;
+}
+
+/* ==========================================================================
+   COMPACT THEME EDITOR (Grid Layout)
+   ========================================================================== */
+.color-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.color-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.color-stack label {
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.color-wrapper {
+    width: 100%;
+    justify-content: space-between;
+    height: 32px;
+}
+
+.settings-divider {
+    margin: 12px 0 12px 0 !important;
+}
+
+.compact-hint {
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: -5px;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   FIX: INPUT PLACEHOLDER COLORS
+   ========================================================================== */
+::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.6;
+}
+
+::-webkit-input-placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.6;
+}
+
+input[type="text"],
+select.settings-select {
+    color: var(--text-primary) !important;
+}
+
+/* ==========================================================================
+   DISABLED UI FADE (Only Active in CUSTOM MODE)
+   ========================================================================== */
+body.custom-theme #mainControls.controls-muted .eq-control label,
+body.custom-theme #mainControls.controls-muted .value-display {
+    opacity: 0.85 !important;
+    cursor: not-allowed !important;
+    transition: all 0.2s ease;
+}
+
+body.custom-theme #mainControls.controls-muted .eq-control input[type="range"] {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    transition: all 0.2s ease;
+}
+
+body.custom-theme #mainControls.controls-muted .section-title,
+body.custom-theme .status-message.text-disabled,
+body.custom-theme #mainToggleContainer .toggle-label.label-disabled {
+    opacity: 0.9 !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: var(--primary) !important;
+    cursor: not-allowed !important;
+    filter: none !important;
+    transition: all 0.2s ease;
+}
+
+body.custom-theme #mainToggleContainer.toggle-muted {
+    background-color: var(--bg-card) !important;
+    opacity: 1 !important;
+    filter: brightness(0.93) !important;
+    border: 1px solid var(--border-light) !important;
+    box-shadow: none !important;
+}
+
+/* ==========================================================================
+   SOLIDITY ENFORCER (Fixes Light & Dark Mode)
+   ========================================================================== */
+body:not(.custom-theme) #mainControls.controls-muted .eq-control label,
+body:not(.custom-theme) #mainControls.controls-muted .value-display,
+body:not(.custom-theme) #mainControls.controls-muted .eq-control input[type="range"],
+body:not(.custom-theme) #mainControls.controls-muted .section-title,
+body:not(.custom-theme) .status-message.text-disabled,
+body:not(.custom-theme) #mainToggleContainer.toggle-muted {
+    opacity: 1 !important;
+    filter: none !important;
+    cursor: not-allowed !important;
+}
+
+/* ==========================================================================
+   CUSTOM MODAL STYLING (Compact Fix)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 16px;
+    border-radius: 12px;
+    width: auto;
+    min-width: 200px;
+    max-width: 240px;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: var(--text-heading);
+}
+
+.modal-content p {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    color: var(--text-muted);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.modal-actions button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    min-width: 70px;
+}
+
+.modal-overlay.hidden .modal-content {
+    transform: scale(0.9);
+}
+
+#modalTitle {
+    margin: 0 0 8px 0;
+    color: var(--text-heading);
+    font-size: 1.1em;
+    font-weight: 700;
+    text-wrap: balance;
+}
+
+#modalMessage {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+    text-wrap: pretty;
+}
+
+/* ==========================================================================
+   SYNC ICONS TO PRIMARY TEXT
+   ========================================================================== */
+.icon-button:not(#deleteThemeBtn) {
+    color: var(--primary) !important;
+    transition: color 0.2s ease, transform 0.2s ease;
+    filter: none;
+}
+
+.settings-label svg {
+    color: var(--primary) !important;
+    transition: color 0.2s ease;
+    filter: none;
+}
+
+.text-button svg {
+    color: var(--primary) !important;
+}
+
+.icon-button:not(#deleteThemeBtn):hover,
+.settings-label:hover svg {
+    color: var(--primary) !important;
+    filter: none !important;
+}
+
+/* ==========================================================================
+   STRICT FIX FOR THE "EDIT THEME" PENCIL JUMP
+   ========================================================================== */
+#editThemeBtn {
+    /* 1. Force strict dimensions to match the adjacent switch (26px) */
+    width: 26px !important;
+    height: 26px !important;
+    
+    /* 2. Remove default padding that expands the box */
+    padding: 0 !important;
+    
+    /* 3. Ensure border doesn't add pixels */
+    border: none !important;
+    
+    /* 4. Center the icon perfectly */
+    /* REMOVED !important HERE so the .hidden class can actually work */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   RESET BUTTON (Solid - Simple Opacity)
+   ========================================================================== */
+.reset-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 0;
+
+    /* PREMIUM MODE: Solid Fill */
+    background-color: var(--status-danger);
+    color: var(--text-button);
+    
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95em;
+    
+    /* Default subtle shadow (kept for depth, but it won't glow on hover) */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    
+    /* CHANGE: Transition only Opacity now */
+    transition: opacity 0.2s ease;
+}
+
+.reset-button:disabled {
+    background-color: var(--bg-disabled);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    /* Ensure disabled button looks faded but solid */
+    opacity: 1; 
+    box-shadow: none;
+}
+
+.reset-button:hover:not(:disabled) {
+    /* ADDED: Simple Opacity Fade */
+    opacity: 0.89;
+}
+
+.reset-button:active:not(:disabled) {
+    /* Go slightly more transparent on click */
+    opacity: 0.75;
+}
+
+/* ==========================================================================
+   HEX INPUT STYLING
+   ========================================================================== */
+.color-hex-input {
+    border: none;
+    background: transparent;
+    width: 68px;
+    font-family: monospace;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    text-align: right;
+    outline: none;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.color-hex-input:focus {
+    background: var(--bg-body);
+    color: var(--text-heading);
+    box-shadow: 0 0 0 1px var(--primary);
+    font-weight: 700;
+}
+
+#hexUnified {
+    width: auto !important;
+    flex-grow: 1;
+    text-align: center;
+    margin-left: 8px;
+}
+
+/* Utilities */
 ::-webkit-scrollbar {
     display: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Theme Editor Name Input Fix */
+#themeNameInput {
+    flex-grow: 1;
+    height: 36px !important;
+    padding: 0 10px !important;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    font-size: 0.9em;
+    line-height: normal;
+}
+
+#saveThemeBtn {
+    height: 36px !important;
+    width: 100px;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-hover);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.84em;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+#saveThemeBtn:hover {
+    background: var(--primary);
+    color: var(--bg-card);
+}
+
+/* ==========================================================================
+   MODERN ABOUT PANEL
+   ========================================================================== */
+.about-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.about-app-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 6px var(--shadow-soft));
+}
+
+.about-app-title {
+    font-size: 1.25em;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+    color: var(--text-heading);
+    letter-spacing: -0.5px;
+}
+
+.about-version-badge {
+    display: inline-block;
+    background: var(--bg-hover);
+    color: var(--text-muted);
+    font-size: 0.75em;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-light);
+}
+
+.about-app-desc {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin: 0;
+    opacity: 0.8;
+}
+
+.about-links-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.about-info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    padding: 12px 16px;
+    border-radius: 10px;
+}
+
+.about-link-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.about-link-row:hover {
+    background: var(--bg-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-soft);
+    border-color: var(--primary);
+}
+
+.link-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.link-icon-box {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--bg-body);
+    color: var(--primary);
+}
+
+.link-text-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.link-label {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.link-value {
+    font-size: 0.95em;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.link-arrow {
+    color: var(--border-light);
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.about-link-row:hover .link-arrow {
+    color: var(--primary);
+    transform: translateX(2px);
+}
+
+.about-link-row.coffee-row {
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.about-link-row.coffee-row .link-icon-box {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.about-link-row.coffee-row:hover {
+    background: var(--shadow-soft);
+    border-color: var(--primary);
+}
+
+.about-link-row.coffee-row:hover .link-icon-box {
+    background: var(--primary);
+    color: var(--bg-card);
+}
+
+.about-link-row.coffee-row:hover .link-value {
+    color: var(--primary);
+}
+
+body.dark-mode .about-link-row.coffee-row .link-icon-box {
+    background: #451a03;
+    color: #fbbf24;
+}
+
+body.dark-mode .about-link-row.coffee-row:hover {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: #fbbf24;
+}
+
+.settings-panel label,
+.settings-panel .settings-label,
+.settings-panel .link-label,
+.custom-theme-panel label {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+.toggle-switch,
+.reset-button,
+.eq-control label {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }

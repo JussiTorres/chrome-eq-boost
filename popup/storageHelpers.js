@@ -1,18 +1,25 @@
+/**
+ * chrome-eq-boost/popup/storageHelpers.js
+ */
+// storageHelpers.js
 export const storage = {
     async getAll() {
         return await chrome.storage.local.get([
             "darkMode", "preferredLocale", "volumeLevel",
             "bassLevel", "midLevel", "trebleLevel",
-            "isEnabled", "capturingTabId", "marqueeEnabled"
+            "isEnabled", "capturingTabId", "marqueeEnabled",
+            "customThemeEnabled", "customTheme", "savedThemes",
+            "activeThemeName" 
         ]);
     },
-    
-    set(key, value) {
-        chrome.storage.local.set({ [key]: value });
+
+    async set(key, value) {
+        // MUST return the promise for 'await' in the editor to work
+        return await chrome.storage.local.set({ [key]: value });
     },
-    
-    // Helper for bulk updates if needed
-    setMultiple(obj) {
-        chrome.storage.local.set(obj);
+
+    async setMultiple(obj) {
+        // MUST return the promise for 'await' in the editor to work
+        return await chrome.storage.local.set(obj);
     }
 };
