@@ -10,7 +10,6 @@ All notable changes to the "Chrome EQ Boost" extension will be documented in thi
 
 ### 💄 UI/UX Improvements
 - **Responsive Modal:** The delete/overwrite confirmation modal now adapts its width to the content, removing unnecessary whitespace.
-- **No-Jump Layout:** Fixed a pixel-perfect alignment issue where the "Edit Theme" pencil icon would shift the layout when toggled.
 
 ## [1.6.1] - 2026-02-16
 ### 🏗️ Code Architecture & Maintainability
