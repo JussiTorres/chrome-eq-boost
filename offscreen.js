@@ -9,11 +9,9 @@
 let bass, mid, treble, compressor, audioContext = null,
     sourceNode = null,
     gainNode = null,
-    analyser = null;
-
-// NEW: Variables for background silence detection
-let silenceInterval = null;
-let silenceSeconds = 0;
+    analyser = null,
+    silenceInterval = null,
+    silenceSeconds = 0; // Global timer
 
 function createFilter(type, frequency) {
     const filter = audioContext.createBiquadFilter();
@@ -26,10 +24,10 @@ function createFilter(type, frequency) {
 
 async function startProcessing(streamId) {
     if (audioContext) {
-        await audioContext.close().catch(() => {});
+        await audioContext.close().catch(() => { });
         audioContext = null;
     }
-    
+
     // Clear any existing silence timer to prevent overlaps
     if (silenceInterval) {
         clearInterval(silenceInterval);
@@ -49,7 +47,7 @@ async function startProcessing(streamId) {
 
         mediaStream.getAudioTracks()[0].onended = () => {
             console.log("Stream cut externally");
-            chrome.runtime.sendMessage({ type: "STREAM_ENDED_EXTERNALLY" }).catch(() => {});
+            chrome.runtime.sendMessage({ type: "STREAM_ENDED_EXTERNALLY" }).catch(() => { });
         };
 
         audioContext = new AudioContext();
@@ -57,10 +55,10 @@ async function startProcessing(streamId) {
 
         sourceNode = audioContext.createMediaStreamSource(mediaStream);
         analyser = audioContext.createAnalyser();
-        analyser.fftSize = 256; 
-        
+        analyser.fftSize = 256;
+
         // Instant response for snappy UI
-        analyser.smoothingTimeConstant = 0.0; 
+        analyser.smoothingTimeConstant = 0.0;
 
         bass = createFilter("lowshelf", 100);
         mid = createFilter("peaking", 1000);
@@ -91,7 +89,7 @@ async function startProcessing(streamId) {
             try {
                 const stored = await chrome.storage.local.get(["volumeLevel", "bassLevel", "midLevel", "trebleLevel"]);
                 settings = { ...settings, ...stored };
-            } catch (e) {}
+            } catch (e) { }
         }
 
         gainNode.gain.value = settings.volumeLevel ?? 1;
@@ -108,67 +106,80 @@ async function startProcessing(streamId) {
         osc.start();
         osc.stop(audioContext.currentTime + 0.001);
 
-        // --- NEW: INTERNAL WATCHDOG ---
-        // This runs inside the background document, so it keeps working
-        // even when the popup is closed.
+        // Internal Watchdog
+        if (silenceInterval) clearInterval(silenceInterval);
+        silenceSeconds = 0; // Use the global variable
+
         silenceInterval = setInterval(() => {
-            if (!analyser || !audioContext || audioContext.state === 'closed') return;
-
-            const dataArray = new Uint8Array(analyser.frequencyBinCount);
-            analyser.getByteFrequencyData(dataArray);
-            
-            // Calculate total volume
-            const volumeSum = dataArray.reduce((acc, val) => acc + val, 0);
-
-            // Threshold > 100 filters out digital noise
-            if (volumeSum > 100) {
-                // Audio detected: Reset timer
-                silenceSeconds = 0;
-            } else {
-                // Silence detected: Start counting
-                silenceSeconds++;
-                
-                // If silent for 30 seconds, shut down
-                if (silenceSeconds >= 30) {
-                    console.log("Auto-shutdown: 30 seconds of silence detected.");
-                    
-                    // 1. Update UI state (so toggle turns off next time you open it)
-                    chrome.storage.local.set({ isEnabled: false });
-                    
-                    // 2. Tell Service Worker to stop capture
-                    chrome.runtime.sendMessage({ type: "STOP_CAPTURE" });
-                    
-                    // 3. Stop this timer
-                    clearInterval(silenceInterval);
-                }
+            // Safety Check: If the extension context is invalidated, stop the interval immediately
+            if (typeof chrome === "undefined" || !chrome.runtime || !chrome.runtime.id) {
+                clearInterval(silenceInterval);
+                return;
             }
-        }, 1000); // Check every 1 second
 
-        chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: true }).catch(() => {});
+            let isCurrentSilence = true;
+
+            if (audioContext && audioContext.state === "running" && analyser) {
+                const dataArray = new Uint8Array(analyser.frequencyBinCount);
+                analyser.getByteFrequencyData(dataArray);
+                const volumeSum = dataArray.reduce((acc, val) => acc + val, 0);
+
+                // If sound is detected, reset the timer to zero
+                isCurrentSilence = volumeSum <= 100;
+            }
+
+            if (isCurrentSilence) {
+                silenceSeconds++;
+            } else {
+                silenceSeconds = 0;
+            }
+
+            // ONLY here does the system auto-shutdown
+            if (silenceSeconds >= 30) {
+                // Secondary safety check for storage access
+                if (chrome.storage && chrome.storage.local) {
+                    chrome.storage.local.set({ isEnabled: false });
+                    chrome.storage.local.remove("capturingTabId");
+                }
+
+                if (audioContext) audioContext.close();
+                clearInterval(silenceInterval);
+                silenceInterval = null;
+                silenceSeconds = 0;
+
+                // Explicitly notify any open popups
+                chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: false }).catch(() => { });
+            }
+        }, 1000);
+
+        chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: true }).catch(() => { });
 
     } catch (error) {
         console.error("Capture error:", error);
-        chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: false }).catch(() => {});
+        chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: false }).catch(() => { });
     }
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if ("INCOMING_STREAM" === message.type) {
         startProcessing(message.streamId);
+        sendResponse({ success: true });
+        return false;
     }
 
     if ("TARGET_OFFSCREEN_PING" === message.type) {
-        const isContextActive = audioContext && "closed" !== audioContext.state;
+        const isContextActive = audioContext && audioContext.state !== "closed";
         let isAudioDetected = false;
-        
+
         if (isContextActive && analyser) {
             const dataArray = new Uint8Array(analyser.frequencyBinCount);
             analyser.getByteFrequencyData(dataArray);
             const volumeSum = dataArray.reduce((acc, val) => acc + val, 0);
-            isAudioDetected = volumeSum > 100; 
+            isAudioDetected = volumeSum > 100;
         }
+
         sendResponse({
-            success: !!isContextActive,
+            success: isContextActive,
             audioDetected: isAudioDetected
         });
         return false;
@@ -180,12 +191,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if ("UPDATE_TREBLE" === message.type && treble) treble.gain.value = parseFloat(message.value);
 
     if (("TOGGLE_ENABLED" === message.type && false === message.value) || "STOP_CAPTURE" === message.type) {
-        // Clear the watchdog timer on manual stop
         if (silenceInterval) {
             clearInterval(silenceInterval);
             silenceInterval = null;
         }
-        
+
         if (sourceNode?.mediaStream) {
             sourceNode.mediaStream.getTracks().forEach(track => track.stop());
         }
@@ -193,6 +203,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             audioContext.close();
             audioContext = null;
         }
-        chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: false }).catch(() => {});
+        chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: false }).catch(() => { });
     }
+    sendResponse({ received: true });
+    return false;
 });

@@ -2,7 +2,7 @@
 
 A powerful, privacy-focused Chrome Extension to boost volume (up to 400%) and equalize audio frequencies using the modern **Web Audio API** and **Offscreen Documents**.
 
-![Version](https://img.shields.io/badge/version-1.5.1-blue)
+![Version](https://img.shields.io/badge/version-1.7.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## ✨ Features

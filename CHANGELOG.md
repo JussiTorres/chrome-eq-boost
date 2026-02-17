@@ -2,6 +2,26 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.7.0] - 2026-02-17
+### ✨ New Features
+- **Custom Theme Editor:** Users can now create, save, and delete their own custom themes using a new 3-color picker interface.
+- **Dynamic Contrast Engine:** The "Reset" button and other UI elements now automatically switch between Black/White text based on the brightness of the user's custom accent color.
+- **Smart Safety Checks:** Added a confirmation modal to prevent accidental deletion or overwriting of existing themes.
+
+### 💄 UI/UX Improvements
+- **Responsive Modal:** The delete/overwrite confirmation modal now adapts its width to the content, removing unnecessary whitespace.
+
+## [1.6.1] - 2026-02-16
+### 🏗️ Code Architecture & Maintainability
+- **Modular Refactor:** Completely dismantled the monolithic `popup.js` into a robust, ES6 module-based architecture to improve scalability and debugging.
+- **Logic Decoupling:** Distributed core responsibilities into specialized modules:
+  - `themeEngine.js`: Dedicated handler for Dark Mode persistence and UI transitions.
+  - `i18n.js`: Centralized localization engine for seamless multi-language support.
+  - `storageHelpers.js`: Unified wrapper for all `chrome.storage.local` operations.
+  - `uiStatus.js`: Isolated UI state management for active, waiting, and disabled states.
+  - `constants.js`: Centralized configuration for audio sliders and engine polling rates.
+- **Performance Optimization:** Improved initialization speed by utilizing a directory-based module loading system, reducing redundant logic execution in the popup.
+
 ## [1.5.1] - 2026-02-10
 ### 🎨 Visual Engineering & Branding
 - **"Engineered Soft" Theme:** Completely refactored the color palette from harsh "Electric Blues" to a softer, professional "Inter Blue" (`#3b82f6`) system to reduce eye strain.
