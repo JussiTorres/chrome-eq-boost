@@ -1,7 +1,11 @@
 /**
- * chrome-eq-boost/popup/i18n.js
- * Centralized localization engine for seamless multi-language support.
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
  */
+
 let currentMessages = {};
 
 export const i18n = {

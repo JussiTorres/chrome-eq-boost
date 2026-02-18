@@ -21,13 +21,13 @@
     "message": "वॉल्यूम (प्रीएम्प)"
   },
   "section_eq": {
-    "message": "इक्वेलाइज़र (-12dB से +12dB)"
+    "message": "इक्वलाइज़र (-15dB से +15dB)"
   },
   "label_bass": {
-    "message": "बास (100 Hz)"
+    "message": "बास (80 Hz)"
   },
   "label_mids": {
-    "message": "मिड्स (1000 Hz)"
+    "message": "मिड्स (2500 Hz)"
   },
   "label_treble": {
     "message": "ट्रेबल (8000 Hz)"

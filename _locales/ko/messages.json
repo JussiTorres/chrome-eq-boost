@@ -21,13 +21,13 @@
     "message": "볼륨 (Preamp)"
   },
   "section_eq": {
-    "message": "이퀄라이저 (-12dB ~ +12dB)"
+    "message": "이퀄라이저 (-15dB ~ +15dB)"
   },
   "label_bass": {
-    "message": "저음 (100 Hz)"
+    "message": "저음 (80 Hz)"
   },
   "label_mids": {
-    "message": "중음 (1000 Hz)"
+    "message": "중음 (2500 Hz)"
   },
   "label_treble": {
     "message": "고음 (8000 Hz)"

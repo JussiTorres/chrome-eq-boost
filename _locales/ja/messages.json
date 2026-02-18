@@ -21,13 +21,13 @@
     "message": "音量 (プリアンプ)"
   },
   "section_eq": {
-    "message": "イコライザー (-12dB ~ +12dB)"
+    "message": "イコライザー (-15dB ～ +15dB)"
   },
   "label_bass": {
-    "message": "低音 (100 Hz)"
+    "message": "低音 (80 Hz)"
   },
   "label_mids": {
-    "message": "中音 (1000 Hz)"
+    "message": "中音 (2500 Hz)"
   },
   "label_treble": {
     "message": "高音 (8000 Hz)"

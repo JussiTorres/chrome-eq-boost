@@ -21,13 +21,13 @@
     "message": "Głośność (Preamp)"
   },
   "section_eq": {
-    "message": "Korektor (-12dB do +12dB)"
+    "message": "Ekvalaizer (-15dB do +15dB)"
   },
   "label_bass": {
-    "message": "Niskie (100 Hz)"
+    "message": "Niskie (80 Hz)"
   },
   "label_mids": {
-    "message": "Średnie (1000 Hz)"
+    "message": "Średnie (2500 Hz)"
   },
   "label_treble": {
     "message": "Wysokie (8000 Hz)"

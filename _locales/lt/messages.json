@@ -21,13 +21,13 @@
         "message": "Garsumas (Preamp)"
     },
     "section_eq": {
-        "message": "Ekvalaizeris (-12dB iki +12dB)"
+        "message": "Ekvalaizeris (-15dB iki +15dB)"
     },
     "label_bass": {
-        "message": "Žemi (100 Hz)"
+        "message": "Žemi (80 Hz)"
     },
     "label_mids": {
-        "message": "Vidutiniai (1000 Hz)"
+        "message": "Vidutiniai (2500 Hz)"
     },
     "label_treble": {
         "message": "Aukšti (8000 Hz)"

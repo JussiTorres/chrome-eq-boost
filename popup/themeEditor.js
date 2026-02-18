@@ -1,7 +1,11 @@
 /**
- * chrome-eq-boost/popup/themeEditor.js
- * Handles the Custom Theme Creator UI logic with Intelligent States
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
  */
+
 import { storage } from './storageHelpers.js';
 import { themeEngine } from './themeEngine.js';
 import { PRESET_THEMES } from './constants.js';

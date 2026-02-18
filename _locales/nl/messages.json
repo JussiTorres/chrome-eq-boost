@@ -21,13 +21,13 @@
         "message": "Volume (Preamp)"
     },
     "section_eq": {
-        "message": "Equalizer (-12dB tot +12dB)"
+        "message": "Equalizer (-15dB tot +15dB)"
     },
     "label_bass": {
-        "message": "Bas (100 Hz)"
+        "message": "Bas (80 Hz)"
     },
     "label_mids": {
-        "message": "Midden (1000 Hz)"
+        "message": "Midden (2500 Hz)"
     },
     "label_treble": {
         "message": "Hoge tonen (8000 Hz)"

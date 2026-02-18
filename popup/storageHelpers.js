@@ -1,7 +1,11 @@
 /**
- * chrome-eq-boost/popup/storageHelpers.js
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
  */
-// storageHelpers.js
+
 export const storage = {
     async getAll() {
         return await chrome.storage.local.get([

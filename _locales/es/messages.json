@@ -21,13 +21,13 @@
     "message": "Volumen (Preamp)"
   },
   "section_eq": {
-    "message": "Ecualizador (-12dB a +12dB)"
+    "message": "Ecualizador (-15dB a +15dB)"
   },
   "label_bass": {
-    "message": "Graves (100 Hz)"
+    "message": "Graves (80 Hz)"
   },
   "label_mids": {
-    "message": "Medios (1000 Hz)"
+    "message": "Medios (2500 Hz)"
   },
   "label_treble": {
     "message": "Agudos (8000 Hz)"

@@ -21,13 +21,13 @@
         "message": "ระดับเสียง (Preamp)"
     },
     "section_eq": {
-        "message": "อีควอไลเซอร์ (-12dB ถึง +12dB)"
+        "message": "อีควอไลเซอร์ (-15dB ถึง +15dB)"
     },
     "label_bass": {
-        "message": "เบส (100 Hz)"
+        "message": "เบส (80 Hz)"
     },
     "label_mids": {
-        "message": "กลาง (1000 Hz)"
+        "message": "กลาง (2500 Hz)"
     },
     "label_treble": {
         "message": "แหลม (8000 Hz)"

@@ -21,13 +21,13 @@
     "message": "Volume (Préampli)"
   },
   "section_eq": {
-    "message": "Égaliseur (-12dB à +12dB)"
+    "message": "Égaliseur (-15dB à +15dB)"
   },
   "label_bass": {
-    "message": "Basses (100 Hz)"
+    "message": "Basses (80 Hz)"
   },
   "label_mids": {
-    "message": "Médiums (1000 Hz)"
+    "message": "Médiums (2500 Hz)"
   },
   "label_treble": {
     "message": "Aigus (8000 Hz)"

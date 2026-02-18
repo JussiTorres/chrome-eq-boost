@@ -21,13 +21,13 @@
         "message": "Âm lượng (Preamp)"
     },
     "section_eq": {
-        "message": "Bộ cân bằng (-12dB đến +12dB)"
+        "message": "Bộ cân bằng (-15dB đến +15dB)"
     },
     "label_bass": {
-        "message": "Trầm (100 Hz)"
+        "message": "Trầm (80 Hz)"
     },
     "label_mids": {
-        "message": "Trung (1000 Hz)"
+        "message": "Trung (2500 Hz)"
     },
     "label_treble": {
         "message": "Cao (8000 Hz)"

@@ -21,13 +21,13 @@
     "message": "Громкость (Preamp)"
   },
   "section_eq": {
-    "message": "Эквалайзер (от -12дБ до +12дБ)"
+    "message": "Эквалайзер (-15дБ до +15дБ)"
   },
   "label_bass": {
-    "message": "Низкие (100 Гц)"
+    "message": "Низкие (80 Гц)"
   },
   "label_mids": {
-    "message": "Средние (1000 Гц)"
+    "message": "Средние (2500 Гц)"
   },
   "label_treble": {
     "message": "Высокие (8000 Гц)"

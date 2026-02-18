@@ -21,13 +21,13 @@
         "message": "Гучність (Preamp)"
     },
     "section_eq": {
-        "message": "Еквалайзер (від -12дБ до +12дБ)"
+        "message": "Еквалайзер (-15дБ до +15дБ)"
     },
     "label_bass": {
-        "message": "Низькі (100 Гц)"
+        "message": "Низькі (80 Гц)"
     },
     "label_mids": {
-        "message": "Середні (1000 Гц)"
+        "message": "Середні (2500 Гц)"
     },
     "label_treble": {
         "message": "Високі (8000 Гц)"

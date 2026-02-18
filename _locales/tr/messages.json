@@ -21,13 +21,13 @@
         "message": "Ses (Preamp)"
     },
     "section_eq": {
-        "message": "Ekolayzer (-12dB ila +12dB)"
+        "message": "Ekolayzer (-15dB ila +15dB)"
     },
     "label_bass": {
-        "message": "Bas (100 Hz)"
+        "message": "Bas (80 Hz)"
     },
     "label_mids": {
-        "message": "Orta (1000 Hz)"
+        "message": "Orta (2500 Hz)"
     },
     "label_treble": {
         "message": "Tiz (8000 Hz)"
