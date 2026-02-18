@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "滚动标题"
+  },
+  "settings_custom_theme": {
+    "message": "自定义主题"
+  },
+  "custom_theme_title": {
+    "message": "主题编辑器"
+  },
+  "label_bg_body": {
+    "message": "应用背景"
+  },
+  "label_bg_card": {
+    "message": "卡片背景"
+  },
+  "label_text_accent": {
+    "message": "文本与强调色"
+  },
+  "label_library": {
+    "message": "库"
+  },
+  "placeholder_select_theme": {
+    "message": "选择主题..."
+  },
+  "placeholder_new_theme": {
+    "message": "新主题名称"
+  },
+  "button_save": {
+    "message": "保存"
+  },
+  "button_reset_defaults": {
+    "message": "恢复默认"
+  },
+  "button_replace": {
+    "message": "替换"
+  },
+  "button_confirm": {
+    "message": "确认"
+  },
+  "button_cancel": {
+    "message": "取消"
+  },
+  "modal_delete_title": {
+    "message": "删除主题？"
+  },
+  "modal_delete_msg": {
+    "message": "确定要永久删除 {{NAME}} 吗？"
+  },
+  "modal_overwrite_title": {
+    "message": "覆盖主题？"
+  },
+  "modal_overwrite_msg": {
+    "message": "“{{NAME}}”已存在。是否替换？"
+  },
+  "feedback_saved": {
+    "message": "已保存！"
+  },
+  "feedback_reset_success": {
+    "message": "重置成功！"
+  },
+  "feedback_no_changes": {
+    "message": "无更改"
+  },
+  "feedback_already_default": {
+    "message": "已是默认"
+  },
+  "alert_invalid_name": {
+    "message": "名称无效。"
+  },
+  "label_support": {
+    "message": "支持"
   }
 }

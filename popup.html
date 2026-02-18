@@ -213,7 +213,7 @@
 
                     <div class="color-grid">
                         <div class="color-stack">
-                            <label>App Background</label>
+                            <label data-i18n="label_bg_body">App Background</label>
                             <div class="color-wrapper">
                                 <input type="color" id="pickerBgBody" value="#f7f9fb">
                                 <input type="text" id="hexBgBody" class="color-hex-input" value="#f7f9fb" maxlength="7"
@@ -222,7 +222,7 @@
                         </div>
 
                         <div class="color-stack">
-                            <label>Card Background</label>
+                            <label data-i18n="label_bg_card">Card Background</label>
                             <div class="color-wrapper">
                                 <input type="color" id="pickerBgCard" value="#ffffff">
                                 <input type="text" id="hexBgCard" class="color-hex-input" value="#ffffff" maxlength="7"
@@ -231,7 +231,7 @@
                         </div>
 
                         <div class="color-stack" style="grid-column: span 2;">
-                            <label>Text & Accent</label>
+                            <label data-i18n="label_text_accent">Text & Accent</label>
                             <div class="color-wrapper">
                                 <input type="color" id="pickerUnified" value="#3b82f6">
                                 <input type="text" id="hexUnified" class="color-hex-input" value="#3b82f6" maxlength="7"
@@ -244,13 +244,14 @@
                 <hr class="settings-divider">
 
                 <div class="setting-row" style="margin-bottom: 5px;">
-                    <label class="settings-label"
+                    <label class="settings-label" data-i18n="label_library"
                         style="font-size: 0.8em; text-transform: uppercase; margin-bottom: 4px;">Library</label>
 
                     <div style="display: flex; gap: 6px; margin-bottom: 8px;">
                         <select id="savedThemesSelect" class="settings-select"
                             style="flex-grow: 1; padding: 4px 8px; height: 32px;">
-                            <option value="" disabled selected>Select a theme...</option>
+                            <option value="" disabled selected data-i18n="placeholder_select_theme">Select a theme...
+                            </option>
                         </select>
                         <button id="deleteThemeBtn" class="icon-button"
                             style="border: 1px solid var(--status-danger); color: var(--status-danger); border-radius: 6px; height: 32px; width: 32px;"
@@ -264,14 +265,15 @@
                     </div>
 
                     <div style="display: flex; gap: 6px;">
-                        <input type="text" id="themeNameInput" class="settings-select" placeholder="New Theme Name">
-                        <button id="saveThemeBtn" class="text-button">
+                        <input type="text" id="themeNameInput" class="settings-select"
+                            data-i18n-placeholder="placeholder_new_theme" placeholder="New Theme Name">
+                        <button id="saveThemeBtn" class="text-button" data-i18n="button_save">
                             Save
                         </button>
                     </div>
                 </div>
 
-                <button id="resetThemeBtn" class="text-button"
+                <button id="resetThemeBtn" class="text-button" data-i18n="button_reset_defaults"
                     style="margin-top: 15px; width: 100%; justify-content: center; color: var(--danger); font-size: 0.8em; opacity: 0.8;">
                     Reset to Defaults
                 </button>
@@ -293,7 +295,7 @@
                 <div class="about-header">
                     <img src="icons/icon128.png" alt="Logo" class="about-app-icon">
                     <h3 class="about-app-title" data-i18n="about_app_name">Chrome EQ & Volume</h3>
-                    <span class="about-version-badge">v1.5.1</span>
+                    <span class="about-version-badge">v1.7.0</span>
                     <p class="about-app-desc" data-i18n="about_subtitle">Boost your audio to the max.</p>
                 </div>
 
@@ -319,7 +321,8 @@
                                 <span style="font-size: 1.2em;">☕</span>
                             </div>
                             <div class="link-text-group">
-                                <span class="link-label" style="color:var(--text-primary); opacity:0.7;">Support</span>
+                                <span class="link-label" style="color:var(--text-primary); opacity:0.7;"
+                                    data-i18n="label_support">Support</span>
                                 <span class="link-value" data-i18n="footer_buy_coffee">Buy me a coffee</span>
                             </div>
                         </div>
@@ -337,14 +340,15 @@
     </div>
 
     </div>
+
     <div id="customModal" class="modal-overlay hidden">
         <div class="modal-content">
-            <h4 id="modalTitle">Delete Theme?</h4>
-            <p id="modalMessage">
+            <h4 id="modalTitle" data-i18n="modal_delete_title">Delete Theme?</h4>
+            <p id="modalMessage" data-i18n="modal_delete_msg">
                 Are you sure?
             </p>
             <div style="display: flex; gap: 10px; justify-content: center;">
-                <button id="modalCancelBtn" class="text-button"
+                <button id="modalCancelBtn" class="text-button" data-i18n="button_cancel"
                     style="border: 1px solid var(--border-light); color: var(--text-primary); padding: 6px 16px;">
                     Cancel
                 </button>

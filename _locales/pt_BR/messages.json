@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Título em rolagem"
+  },
+  "settings_custom_theme": {
+    "message": "Tema Personalizado"
+  },
+  "custom_theme_title": {
+    "message": "Editor de Temas"
+  },
+  "label_bg_body": {
+    "message": "Fundo do App"
+  },
+  "label_bg_card": {
+    "message": "Fundo do Cartão"
+  },
+  "label_text_accent": {
+    "message": "Texto e Destaque"
+  },
+  "label_library": {
+    "message": "Biblioteca"
+  },
+  "placeholder_select_theme": {
+    "message": "Selecione um tema..."
+  },
+  "placeholder_new_theme": {
+    "message": "Nome do novo tema"
+  },
+  "button_save": {
+    "message": "Salvar"
+  },
+  "button_reset_defaults": {
+    "message": "Restaurar Padrões"
+  },
+  "button_replace": {
+    "message": "Substituir"
+  },
+  "button_confirm": {
+    "message": "Confirmar"
+  },
+  "button_cancel": {
+    "message": "Cancelar"
+  },
+  "modal_delete_title": {
+    "message": "Excluir tema?"
+  },
+  "modal_delete_msg": {
+    "message": "Tem certeza que deseja excluir {{NAME}}?"
+  },
+  "modal_overwrite_title": {
+    "message": "Sobrescrever tema?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" já existe. Substituir?"
+  },
+  "feedback_saved": {
+    "message": "Salvo!"
+  },
+  "feedback_reset_success": {
+    "message": "Restaurado com sucesso!"
+  },
+  "feedback_no_changes": {
+    "message": "Sem alterações"
+  },
+  "feedback_already_default": {
+    "message": "Já é o padrão"
+  },
+  "alert_invalid_name": {
+    "message": "Nome inválido."
+  },
+  "label_support": {
+    "message": "Suporte"
   }
 }

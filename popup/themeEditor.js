@@ -5,6 +5,7 @@
 import { storage } from './storageHelpers.js';
 import { themeEngine } from './themeEngine.js';
 import { PRESET_THEMES } from './constants.js';
+import { i18n } from './i18n.js'; //
 
 let currentCustomTheme = {};
 let originalThemeState = ""; // The "Brain" baseline for comparison
@@ -46,8 +47,6 @@ export const themeEditor = {
 
         // 5. DROPDOWN SYNC (Prioritize the stored name, but verify integrity)
         if (data.activeThemeName && libraryThemes[data.activeThemeName]) {
-            // Verify: Does the stored name actually match the stored colors?
-            // If yes, select it. If no (dirty exit), leave as default.
             const storedThemeJson = JSON.stringify(this.normalizeTheme(libraryThemes[data.activeThemeName]));
             const currentJson = JSON.stringify(this.normalizeTheme(currentCustomTheme));
 
@@ -55,7 +54,6 @@ export const themeEditor = {
                 els.select.value = data.activeThemeName;
             }
         } else {
-            // If no active name, check if colors happen to match a preset
             const currentJson = JSON.stringify(this.normalizeTheme(currentCustomTheme));
             const activeThemeName = Object.keys(libraryThemes).find(name =>
                 JSON.stringify(this.normalizeTheme(libraryThemes[name])) === currentJson
@@ -91,8 +89,6 @@ export const themeEditor = {
             modalCancel: document.getElementById("modalCancelBtn")
         };
     },
-
-    // --- INTELLIGENT HELPERS ---
 
     normalizeTheme(theme) {
         return {
@@ -132,34 +128,24 @@ export const themeEditor = {
             els.resetBtn.style.cursor = hasChanged ? "pointer" : "default";
         }
 
-        // --- INTELLIGENT DROPDOWN SYNC ---
-
-        // 1. CHECK VALIDITY: Does the current dropdown name match the current colors?
         const currentSelection = els.select.value;
         const selectionIsValid = currentSelection &&
             libraryThemes[currentSelection] &&
             JSON.stringify(this.normalizeTheme(libraryThemes[currentSelection])) === currentJson;
 
         if (selectionIsValid) {
-            // We are perfectly synced. Ensure storage knows this name is the "active" one.
             await storage.set("activeThemeName", currentSelection);
             return;
         }
 
-        // 2. CHECK MATCH: If not valid, do we strictly match another theme in the library?
-        // (e.g., user dialed the colors back to match "Rosita")
         const match = Object.keys(libraryThemes).find(name =>
             JSON.stringify(this.normalizeTheme(libraryThemes[name])) === currentJson
         );
 
         if (match) {
-            // YES: Snap the dropdown to the matching theme
             els.select.value = match;
             await storage.set("activeThemeName", match);
         } else {
-            // NO: We are in a "Dirty/Modified" state.
-            // behavior: KEEP the dropdown visual (e.g. "Rosita") so user knows what they are editing.
-            // But CLEAR the storage name, so if they reload, it defaults to "Select a theme..."
             await storage.set("activeThemeName", "");
         }
     },
@@ -174,10 +160,7 @@ export const themeEditor = {
         };
     },
 
-    // --- CORE LOGIC ---
-
     setupListeners(els) {
-        // 1. Picker to Hex Sync + LIVE PERSISTENCE
         ["pickerBgBody", "pickerBgCard", "pickerUnified"].forEach(id => {
             const el = document.getElementById(id);
             if (!el) return;
@@ -195,7 +178,6 @@ export const themeEditor = {
             });
         });
 
-        // 2. Hex to Picker Sync + LIVE PERSISTENCE
         ["hexBgBody", "hexBgCard", "hexUnified"].forEach(id => {
             const el = document.getElementById(id);
             if (!el) return;
@@ -215,7 +197,6 @@ export const themeEditor = {
             });
         });
 
-        // Main Custom Theme Toggle Logic
         els.customToggle.addEventListener("change", async (e) => {
             const enabled = e.target.checked;
             await storage.set("customThemeEnabled", enabled);
@@ -238,14 +219,12 @@ export const themeEditor = {
             }
         });
 
-        // Smart Save logic
         els.saveBtn.addEventListener("click", async () => {
             const name = els.nameInput.value.trim();
             if (!name) { els.nameInput.focus(); return; }
 
-            // Simple safety check for reserved words
             if (["__proto__", "constructor", "prototype"].includes(name)) {
-                alert("Invalid theme name.");
+                alert(i18n.t("alert_invalid_name")); // Fixed
                 return;
             }
 
@@ -254,12 +233,17 @@ export const themeEditor = {
 
             if (libraryThemes[name]) {
                 if (currentJson === originalThemeState) {
-                    this.flashButtonText("saveThemeBtn", "No changes", "Save");
+                    // Fixed: Use feedback_no_changes key
+                    this.flashButtonText("saveThemeBtn", i18n.t("feedback_no_changes"), i18n.t("button_save"));
                     return;
                 }
-                els.modalConfirm.textContent = "Replace";
+                // Fixed: Use button_replace key
+                els.modalConfirm.textContent = i18n.t("button_replace");
                 els.modalCancel.classList.remove("hidden");
-                this.showModal(els, "Overwrite Theme?", `"${name}" already exists. Replace it?`, async () => {
+
+                const msg = i18n.t("modal_overwrite_msg").replace("{{NAME}}", name);
+
+                this.showModal(els, i18n.t("modal_overwrite_title"), msg, async () => {
                     await this.performSave(els, name, libraryThemes, currentValues);
                 });
             } else {
@@ -267,73 +251,68 @@ export const themeEditor = {
             }
         });
 
-        // Smart Reset logic
         els.resetBtn.addEventListener("click", () => {
             const currentJson = JSON.stringify(this.normalizeTheme(this.getCurrentPickerValues()));
 
-            // 1. Check if there's actually anything to reset
             if (currentJson === originalThemeState) {
-                this.flashButtonText("resetThemeBtn", "Already Default", "Reset to Defaults");
+                // Fixed: Use feedback_already_default key
+                this.flashButtonText("resetThemeBtn", i18n.t("feedback_already_default"), i18n.t("button_reset_defaults"));
                 return;
             }
 
-            // 2. Perform the reset
             const baseline = JSON.parse(originalThemeState);
             this.updatePickerUI(baseline);
             currentCustomTheme = { ...baseline };
             themeEngine.apply('custom', currentCustomTheme);
 
-            // 3. THE FIX: Show success feedback
-            // This changes the text to "Reset Successful!" for 1.5s, then restores "Reset to Defaults"
-            this.flashButtonText("resetThemeBtn", "Reset Successful!", "Reset to Defaults");
+            this.flashButtonText("resetThemeBtn", i18n.t("feedback_reset_success"), i18n.t("button_reset_defaults")); //
 
-            // 4. Update other buttons (Save button needs to know we just reset)
             this.updateButtonStates();
         });
 
         els.deleteBtn.addEventListener("click", () => {
             const name = els.select.value;
-            if (!name || name === "Select a theme...") return;
+            const placeholder = i18n.t("placeholder_select_theme");
+            if (!name || name === placeholder) return;
 
-            this.showModal(els, "Delete Theme?", `Permanently delete "${name}"?`, async () => {
-                // 1. Delete from memory & storage
-                delete libraryThemes[name];
-                await storage.set("savedThemes", libraryThemes);
+            // Line 254: Updated to use $NAME$ for localization replacement
+            this.showModal(
+                els,
+                i18n.t("modal_delete_title"),
+                i18n.t("modal_delete_msg").replace("{{NAME}}", `"${name}"`),
+                async () => {                // 1. Delete from memory & storage
+                    delete libraryThemes[name];
+                    await storage.set("savedThemes", libraryThemes);
 
-                // 2. Refresh the dropdown list
-                await this.refreshThemeList(els.select);
+                    // 2. Refresh the dropdown list
+                    await this.refreshThemeList(els.select);
 
-                // 3. INTELLIGENT SWITCH: Jump to the first available theme
-                const remainingNames = Object.keys(libraryThemes);
+                    // 3. Intelligent switch to the first available theme
+                    const remainingNames = Object.keys(libraryThemes);
 
-                if (remainingNames.length > 0) {
-                    const nextName = remainingNames[0]; // Grab the first one (e.g., "Crimson Abyss")
-                    const nextTheme = libraryThemes[nextName];
+                    if (remainingNames.length > 0) {
+                        const nextName = remainingNames[0];
+                        const nextTheme = libraryThemes[nextName];
 
-                    // Update Memory
-                    currentCustomTheme = { ...nextTheme };
+                        currentCustomTheme = { ...nextTheme };
 
-                    // Update Storage (So it remembers this new selection)
-                    await storage.setMultiple({
-                        "customTheme": currentCustomTheme,
-                        "activeThemeName": nextName
-                    });
+                        await storage.setMultiple({
+                            "customTheme": currentCustomTheme,
+                            "activeThemeName": nextName
+                        });
 
-                    // Update UI (Dropdown, Color Pickers, Visuals)
-                    els.select.value = nextName;
-                    this.updatePickerUI(nextTheme);
-                    themeEngine.apply('custom', currentCustomTheme);
+                        els.select.value = nextName;
+                        this.updatePickerUI(nextTheme);
+                        themeEngine.apply('custom', currentCustomTheme);
 
-                    // Reset the "Save" button state (Clean slate)
-                    originalThemeState = JSON.stringify(this.normalizeTheme(nextTheme));
-                } else {
-                    // Fallback if user somehow deleted EVERYTHING (rare)
-                    els.select.value = "";
-                    await storage.set("activeThemeName", "");
-                }
+                        originalThemeState = JSON.stringify(this.normalizeTheme(nextTheme));
+                    } else {
+                        els.select.value = "";
+                        await storage.set("activeThemeName", "");
+                    }
 
-                this.updateButtonStates();
-            });
+                    this.updateButtonStates();
+                });
         });
 
         els.closeBtn.addEventListener("click", () => {
@@ -379,13 +358,13 @@ export const themeEditor = {
         await this.refreshThemeList(els.select);
         els.select.value = name;
         els.nameInput.value = "";
-        this.flashButtonText("saveThemeBtn", "Saved!", "Save");
+        this.flashButtonText("saveThemeBtn", i18n.t("feedback_saved"), i18n.t("button_save")); //
         themeEngine.apply('custom', themeToSave);
         this.updateButtonStates();
     },
 
     showModal(els, title, msg, onConfirm) {
-        els.modalConfirm.textContent = "Confirm";
+        els.modalConfirm.textContent = i18n.t("button_confirm"); // Fixed
         els.modalCancel.classList.remove("hidden");
         els.modalTitle.textContent = title;
         els.modalMsg.textContent = msg;
@@ -416,7 +395,8 @@ export const themeEditor = {
     async refreshThemeList(select) {
         const data = await storage.getAll();
         libraryThemes = data.savedThemes || {};
-        select.innerHTML = '<option value="" disabled selected>Select a theme...</option>';
+        const placeholder = i18n.t("placeholder_select_theme"); //
+        select.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
         Object.keys(libraryThemes).forEach(name => {
             const opt = document.createElement("option");
             opt.value = name; opt.textContent = name;

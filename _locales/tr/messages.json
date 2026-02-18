@@ -67,5 +67,74 @@
     },
     "settings_marquee": {
         "message": "Kayan Başlık"
+    },
+    "settings_custom_theme": {
+        "message": "Özel Tema"
+    },
+    "custom_theme_title": {
+        "message": "Tema Düzenleyici"
+    },
+    "label_bg_body": {
+        "message": "Uygulama Arka Planı"
+    },
+    "label_bg_card": {
+        "message": "Kart Arka Planı"
+    },
+    "label_text_accent": {
+        "message": "Metin ve Vurgu"
+    },
+    "label_library": {
+        "message": "Kütüphane"
+    },
+    "placeholder_select_theme": {
+        "message": "Bir tema seç..."
+    },
+    "placeholder_new_theme": {
+        "message": "Yeni Tema Adı"
+    },
+    "button_save": {
+        "message": "Kaydet"
+    },
+    "button_reset_defaults": {
+        "message": "Varsayılana Dön"
+    },
+    "button_replace": {
+        "message": "Değiştir"
+    },
+    "button_confirm": {
+        "message": "Onayla"
+    },
+    "button_cancel": {
+        "message": "İptal"
+    },
+    "modal_delete_title": {
+        "message": "Tema silinsin mi?"
+    },
+    "modal_delete_msg": {
+        "message": "{{NAME}} temasını silmek istediğinize emin misiniz?"
+    },
+    "modal_overwrite_title": {
+        "message": "Tema üzerine yazılsın mı?"
+    },
+    "modal_overwrite_msg": {
+        "message": "\"{{NAME}}\" zaten var. Değiştirilsin mi?"
+    },
+    "feedback_saved": {
+        "message": "Kaydedildi!"
+    },
+    "feedback_reset_success": {
+        "message": "Sıfırlandı!"
+    },
+    "feedback_no_changes": {
+        "message": "Değişiklik yok"
+    },
+    "feedback_already_default": {
+        "message": "Zaten Varsayılan"
+    },
+    "alert_invalid_name": {
+        "message": "Geçersiz isim."
+    },
+    "label_support": {
+        "message": "Destek"
     }
 }

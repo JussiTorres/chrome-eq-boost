@@ -67,5 +67,74 @@
     },
     "settings_marquee": {
         "message": "เลื่อนชื่อเพลง"
+    },
+    "settings_custom_theme": {
+        "message": "ธีมกำหนดเอง"
+    },
+    "custom_theme_title": {
+        "message": "ตัวแก้ไขธีม"
+    },
+    "label_bg_body": {
+        "message": "พื้นหลังแอป"
+    },
+    "label_bg_card": {
+        "message": "พื้นหลังการ์ด"
+    },
+    "label_text_accent": {
+        "message": "ข้อความและสีเน้น"
+    },
+    "label_library": {
+        "message": "คลังธีม"
+    },
+    "placeholder_select_theme": {
+        "message": "เลือกธีม..."
+    },
+    "placeholder_new_theme": {
+        "message": "ชื่อธีมใหม่"
+    },
+    "button_save": {
+        "message": "บันทึก"
+    },
+    "button_reset_defaults": {
+        "message": "คืนค่าเริ่มต้น"
+    },
+    "button_replace": {
+        "message": "แทนที่"
+    },
+    "button_confirm": {
+        "message": "ยืนยัน"
+    },
+    "button_cancel": {
+        "message": "ยกเลิก"
+    },
+    "modal_delete_title": {
+        "message": "ลบธีม?"
+    },
+    "modal_delete_msg": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{NAME}}?"
+    },
+    "modal_overwrite_title": {
+        "message": "เขียนทับธีม?"
+    },
+    "modal_overwrite_msg": {
+        "message": "\"{{NAME}}\" มีอยู่แล้ว ต้องการแทนที่หรือไม่?"
+    },
+    "feedback_saved": {
+        "message": "บันทึกแล้ว!"
+    },
+    "feedback_reset_success": {
+        "message": "คืนค่าเรียบร้อย!"
+    },
+    "feedback_no_changes": {
+        "message": "ไม่มีการเปลี่ยนแปลง"
+    },
+    "feedback_already_default": {
+        "message": "เป็นค่าเริ่มต้นอยู่แล้ว"
+    },
+    "alert_invalid_name": {
+        "message": "ชื่อไม่ถูกต้อง."
+    },
+    "label_support": {
+        "message": "สนับสนุน"
     }
 }

@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "曲名スクロール"
+  },
+  "settings_custom_theme": {
+    "message": "カスタムテーマ"
+  },
+  "custom_theme_title": {
+    "message": "テーマエディタ"
+  },
+  "label_bg_body": {
+    "message": "アプリの背景"
+  },
+  "label_bg_card": {
+    "message": "カードの背景"
+  },
+  "label_text_accent": {
+    "message": "テキストとアクセント"
+  },
+  "label_library": {
+    "message": "ライブラリ"
+  },
+  "placeholder_select_theme": {
+    "message": "テーマを選択..."
+  },
+  "placeholder_new_theme": {
+    "message": "新しいテーマ名"
+  },
+  "button_save": {
+    "message": "保存"
+  },
+  "button_reset_defaults": {
+    "message": "初期設定に戻す"
+  },
+  "button_replace": {
+    "message": "置き換え"
+  },
+  "button_confirm": {
+    "message": "確認"
+  },
+  "button_cancel": {
+    "message": "キャンセル"
+  },
+  "modal_delete_title": {
+    "message": "テーマを削除？"
+  },
+  "modal_delete_msg": {
+    "message": "本当に {{NAME}} を削除しますか？"
+  },
+  "modal_overwrite_title": {
+    "message": "テーマを上書き？"
+  },
+  "modal_overwrite_msg": {
+    "message": "「{{NAME}}」は既に存在します。置き換えますか？"
+  },
+  "feedback_saved": {
+    "message": "保存しました！"
+  },
+  "feedback_reset_success": {
+    "message": "リセット完了！"
+  },
+  "feedback_no_changes": {
+    "message": "変更なし"
+  },
+  "feedback_already_default": {
+    "message": "既にデフォルトです"
+  },
+  "alert_invalid_name": {
+    "message": "無効な名前です。"
+  },
+  "label_support": {
+    "message": "サポート"
   }
 }

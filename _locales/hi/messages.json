@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "स्क्रॉलिंग शीर्षक"
+  },
+  "settings_custom_theme": {
+    "message": "कस्टम थीम"
+  },
+  "custom_theme_title": {
+    "message": "थीम एडिटर"
+  },
+  "label_bg_body": {
+    "message": "ऐप बैकग्राउंड"
+  },
+  "label_bg_card": {
+    "message": "कार्ड बैकग्राउंड"
+  },
+  "label_text_accent": {
+    "message": "टेक्स्ट और एक्सेंट"
+  },
+  "label_library": {
+    "message": "लाइब्रेरी"
+  },
+  "placeholder_select_theme": {
+    "message": "थीम चुनें..."
+  },
+  "placeholder_new_theme": {
+    "message": "नई थीम का नाम"
+  },
+  "button_save": {
+    "message": "सेव करें"
+  },
+  "button_reset_defaults": {
+    "message": "डिफ़ॉल्ट पर रीसेट करें"
+  },
+  "button_replace": {
+    "message": "बदलें"
+  },
+  "button_confirm": {
+    "message": "पुष्टि करें"
+  },
+  "button_cancel": {
+    "message": "रद्द करें"
+  },
+  "modal_delete_title": {
+    "message": "थीम हटाएं?"
+  },
+  "modal_delete_msg": {
+    "message": "क्या आप वाकई {{NAME}} को हटाना चाहते हैं?"
+  },
+  "modal_overwrite_title": {
+    "message": "थीम ओवरराइट करें?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" पहले से मौजूद है। क्या इसे बदलना है?"
+  },
+  "feedback_saved": {
+    "message": "सेव हो गया!"
+  },
+  "feedback_reset_success": {
+    "message": "रीसेट सफल!"
+  },
+  "feedback_no_changes": {
+    "message": "कोई बदलाव नहीं"
+  },
+  "feedback_already_default": {
+    "message": "पहले से डिफ़ॉल्ट है"
+  },
+  "alert_invalid_name": {
+    "message": "अमान्य नाम।"
+  },
+  "label_support": {
+    "message": "सहायता"
   }
 }

@@ -67,5 +67,74 @@
     },
     "settings_marquee": {
         "message": "Tiêu đề cuộn"
+    },
+    "settings_custom_theme": {
+        "message": "Chủ đề tùy chỉnh"
+    },
+    "custom_theme_title": {
+        "message": "Trình chỉnh sửa chủ đề"
+    },
+    "label_bg_body": {
+        "message": "Nền ứng dụng"
+    },
+    "label_bg_card": {
+        "message": "Nền thẻ"
+    },
+    "label_text_accent": {
+        "message": "Văn bản & Màu nhấn"
+    },
+    "label_library": {
+        "message": "Thư viện"
+    },
+    "placeholder_select_theme": {
+        "message": "Chọn chủ đề..."
+    },
+    "placeholder_new_theme": {
+        "message": "Tên chủ đề mới"
+    },
+    "button_save": {
+        "message": "Lưu"
+    },
+    "button_reset_defaults": {
+        "message": "Khôi phục mặc định"
+    },
+    "button_replace": {
+        "message": "Thay thế"
+    },
+    "button_confirm": {
+        "message": "Xác nhận"
+    },
+    "button_cancel": {
+        "message": "Hủy"
+    },
+    "modal_delete_title": {
+        "message": "Xóa chủ đề?"
+    },
+    "modal_delete_msg": {
+        "message": "Bạn có chắc muốn xóa {{NAME}} không?"
+    },
+    "modal_overwrite_title": {
+        "message": "Ghi đè chủ đề?"
+    },
+    "modal_overwrite_msg": {
+        "message": "\"{{NAME}}\" đã tồn tại. Thay thế nó?"
+    },
+    "feedback_saved": {
+        "message": "Đã lưu!"
+    },
+    "feedback_reset_success": {
+        "message": "Đã khôi phục!"
+    },
+    "feedback_no_changes": {
+        "message": "Không có thay đổi"
+    },
+    "feedback_already_default": {
+        "message": "Đã là mặc định"
+    },
+    "alert_invalid_name": {
+        "message": "Tên không hợp lệ."
+    },
+    "label_support": {
+        "message": "Hỗ trợ"
     }
 }
