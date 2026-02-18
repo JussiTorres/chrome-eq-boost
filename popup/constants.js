@@ -1,5 +1,9 @@
 /**
- * chrome-eq-boost/popup/constants.js
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
  */
 
 export const SLIDER_CONFIGS = [{
@@ -40,7 +44,7 @@ export const DEFAULTS = {
     pollingRate: 500,
     silenceTimeout: 2000
 };
-// --- popup/constants.js ---
+
 export const PRESET_THEMES = {
     "Crimson Abyss": {
         bgBody: "#0d0014",

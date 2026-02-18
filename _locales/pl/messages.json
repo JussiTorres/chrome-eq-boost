@@ -21,13 +21,13 @@
     "message": "Głośność (Preamp)"
   },
   "section_eq": {
-    "message": "Korektor (-12dB do +12dB)"
+    "message": "Ekvalaizer (-15dB do +15dB)"
   },
   "label_bass": {
-    "message": "Niskie (100 Hz)"
+    "message": "Niskie (80 Hz)"
   },
   "label_mids": {
-    "message": "Średnie (1000 Hz)"
+    "message": "Średnie (2500 Hz)"
   },
   "label_treble": {
     "message": "Wysokie (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Przewijany tytuł"
+  },
+  "settings_custom_theme": {
+    "message": "Motyw niestandardowy"
+  },
+  "custom_theme_title": {
+    "message": "Edytor motywów"
+  },
+  "label_bg_body": {
+    "message": "Tło aplikacji"
+  },
+  "label_bg_card": {
+    "message": "Tło karty"
+  },
+  "label_text_accent": {
+    "message": "Tekst i akcent"
+  },
+  "label_library": {
+    "message": "Biblioteka"
+  },
+  "placeholder_select_theme": {
+    "message": "Wybierz motyw..."
+  },
+  "placeholder_new_theme": {
+    "message": "Nazwa nowego motywu"
+  },
+  "button_save": {
+    "message": "Zapisz"
+  },
+  "button_reset_defaults": {
+    "message": "Przywróć domyślne"
+  },
+  "button_replace": {
+    "message": "Zastąp"
+  },
+  "button_confirm": {
+    "message": "Potwierdź"
+  },
+  "button_cancel": {
+    "message": "Anuluj"
+  },
+  "modal_delete_title": {
+    "message": "Usunąć motyw?"
+  },
+  "modal_delete_msg": {
+    "message": "Czy na pewno chcesz usunąć {{NAME}}?"
+  },
+  "modal_overwrite_title": {
+    "message": "Nadpisać motyw?"
+  },
+  "modal_overwrite_msg": {
+    "message": "„{{NAME}}” już istnieje. Zastąpić?"
+  },
+  "feedback_saved": {
+    "message": "Zapisano!"
+  },
+  "feedback_reset_success": {
+    "message": "Zresetowano pomyślnie!"
+  },
+  "feedback_no_changes": {
+    "message": "Brak zmian"
+  },
+  "feedback_already_default": {
+    "message": "Już domyślny"
+  },
+  "alert_invalid_name": {
+    "message": "Nieprawidłowa nazwa."
+  },
+  "label_support": {
+    "message": "Wsparcie"
   }
 }

@@ -21,13 +21,13 @@
         "message": "Volume (Preamp)"
     },
     "section_eq": {
-        "message": "Equalizer (-12dB tot +12dB)"
+        "message": "Equalizer (-15dB tot +15dB)"
     },
     "label_bass": {
-        "message": "Bas (100 Hz)"
+        "message": "Bas (80 Hz)"
     },
     "label_mids": {
-        "message": "Midden (1000 Hz)"
+        "message": "Midden (2500 Hz)"
     },
     "label_treble": {
         "message": "Hoge tonen (8000 Hz)"
@@ -67,5 +67,74 @@
     },
     "settings_marquee": {
         "message": "Scrollende titel"
+    },
+    "settings_custom_theme": {
+        "message": "Aangepast thema"
+    },
+    "custom_theme_title": {
+        "message": "Thema-editor"
+    },
+    "label_bg_body": {
+        "message": "App-achtergrond"
+    },
+    "label_bg_card": {
+        "message": "Kaart-achtergrond"
+    },
+    "label_text_accent": {
+        "message": "Tekst & Accent"
+    },
+    "label_library": {
+        "message": "Bibliotheek"
+    },
+    "placeholder_select_theme": {
+        "message": "Kies een thema..."
+    },
+    "placeholder_new_theme": {
+        "message": "Nieuwe theamanaam"
+    },
+    "button_save": {
+        "message": "Opslaan"
+    },
+    "button_reset_defaults": {
+        "message": "Herstel standaard"
+    },
+    "button_replace": {
+        "message": "Vervangen"
+    },
+    "button_confirm": {
+        "message": "Bevestigen"
+    },
+    "button_cancel": {
+        "message": "Annuleren"
+    },
+    "modal_delete_title": {
+        "message": "Thema verwijderen?"
+    },
+    "modal_delete_msg": {
+        "message": "Weet je zeker dat je {{NAME}} wilt verwijderen?"
+    },
+    "modal_overwrite_title": {
+        "message": "Thema overschrijven?"
+    },
+    "modal_overwrite_msg": {
+        "message": "\"{{NAME}}\" bestaat al. Vervangen?"
+    },
+    "feedback_saved": {
+        "message": "Opgeslagen!"
+    },
+    "feedback_reset_success": {
+        "message": "Standaard hersteld!"
+    },
+    "feedback_no_changes": {
+        "message": "Geen wijzigingen"
+    },
+    "feedback_already_default": {
+        "message": "Al standaard"
+    },
+    "alert_invalid_name": {
+        "message": "Ongeldige naam."
+    },
+    "label_support": {
+        "message": "Ondersteuning"
     }
 }

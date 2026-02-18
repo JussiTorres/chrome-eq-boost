@@ -17,7 +17,8 @@ function createFilter(type, frequency) {
     const filter = audioContext.createBiquadFilter();
     filter.type = type;
     filter.frequency.value = frequency;
-    filter.Q.value = "peaking" === type ? 1 : 0.0001;
+    // HD TWEAK: Q value of 0.7 provides a smooth "musical" curve
+    filter.Q.value = "peaking" === type ? 0.7 : 0.0001;
     filter.gain.value = 0;
     return filter;
 }
@@ -50,6 +51,7 @@ async function startProcessing(streamId) {
             chrome.runtime.sendMessage({ type: "STREAM_ENDED_EXTERNALLY" }).catch(() => { });
         };
 
+        // Standard AudioContext uses system sample rate (e.g., 44.1kHz or 48kHz) for high fidelity
         audioContext = new AudioContext();
         await audioContext.resume();
 
@@ -60,13 +62,21 @@ async function startProcessing(streamId) {
         // Instant response for snappy UI
         analyser.smoothingTimeConstant = 0.0;
 
-        bass = createFilter("lowshelf", 100);
-        mid = createFilter("peaking", 1000);
-        treble = createFilter("highshelf", 8000);
+        // HD FREQUENCIES
+        bass = createFilter("lowshelf", 80);      // Deep Bass (previously 100)
+        mid = createFilter("peaking", 2500);      // Clarity/Presence (previously 1000)
+        treble = createFilter("highshelf", 8000); // Air/Brilliance (Stayed same)
+
         gainNode = audioContext.createGain();
+
+        // HD COMPRESSOR SETTINGS
+        // Prevents clipping while maintaining dynamic range
         compressor = audioContext.createDynamicsCompressor();
-        compressor.threshold.value = -10;
-        compressor.ratio.value = 12;
+        compressor.threshold.value = -24; // Start compressing early
+        compressor.knee.value = 30;       // Soft knee for transparent transition
+        compressor.ratio.value = 3;       // 3:1 ratio (Audiophile standard)
+        compressor.attack.value = 0.003;  // Fast attack (3ms)
+        compressor.release.value = 0.25;  // Natural release (250ms)
 
         // Connect the nodes chain
         sourceNode.connect(analyser);

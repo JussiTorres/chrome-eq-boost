@@ -21,13 +21,13 @@
     "message": "音量 (前級)"
   },
   "section_eq": {
-    "message": "等化器 (-12dB 至 +12dB)"
+    "message": "等化器 (-15dB 至 +15dB)"
   },
   "label_bass": {
-    "message": "低音 (100 Hz)"
+    "message": "低音 (80 Hz)"
   },
   "label_mids": {
-    "message": "中音 (1000 Hz)"
+    "message": "中音 (2500 Hz)"
   },
   "label_treble": {
     "message": "高音 (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "標題捲動效果"
+  },
+  "settings_custom_theme": {
+    "message": "自訂主題"
+  },
+  "custom_theme_title": {
+    "message": "主題編輯器"
+  },
+  "label_bg_body": {
+    "message": "應用程式背景"
+  },
+  "label_bg_card": {
+    "message": "卡片背景"
+  },
+  "label_text_accent": {
+    "message": "文字與強調色"
+  },
+  "label_library": {
+    "message": "收藏庫"
+  },
+  "placeholder_select_theme": {
+    "message": "選擇主題..."
+  },
+  "placeholder_new_theme": {
+    "message": "新主題名稱"
+  },
+  "button_save": {
+    "message": "儲存"
+  },
+  "button_reset_defaults": {
+    "message": "恢復預設值"
+  },
+  "button_replace": {
+    "message": "取代"
+  },
+  "button_confirm": {
+    "message": "確認"
+  },
+  "button_cancel": {
+    "message": "取消"
+  },
+  "modal_delete_title": {
+    "message": "刪除主題？"
+  },
+  "modal_delete_msg": {
+    "message": "確定要永久刪除 {{NAME}} 嗎？"
+  },
+  "modal_overwrite_title": {
+    "message": "覆寫主題？"
+  },
+  "modal_overwrite_msg": {
+    "message": "「{{NAME}}」已存在。是否取代？"
+  },
+  "feedback_saved": {
+    "message": "已儲存！"
+  },
+  "feedback_reset_success": {
+    "message": "已恢復預設！"
+  },
+  "feedback_no_changes": {
+    "message": "無變更"
+  },
+  "feedback_already_default": {
+    "message": "已是預設值"
+  },
+  "alert_invalid_name": {
+    "message": "名稱無效。"
+  },
+  "label_support": {
+    "message": "支援"
   }
 }

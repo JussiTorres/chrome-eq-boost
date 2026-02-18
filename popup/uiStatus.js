@@ -1,3 +1,11 @@
+/**
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
+ */
+
 import { i18n } from './i18n.js';
 import { storage } from './storageHelpers.js';
 

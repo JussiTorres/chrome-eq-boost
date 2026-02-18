@@ -21,13 +21,13 @@
         "message": "Volume (Preamp)"
     },
     "section_eq": {
-        "message": "Equalizer (-12dB hanggang +12dB)"
+        "message": "Equalizer (-15dB hanggang +15dB)"
     },
     "label_bass": {
-        "message": "Bass (100 Hz)"
+        "message": "Bass (80 Hz)"
     },
     "label_mids": {
-        "message": "Mids (1000 Hz)"
+        "message": "Mids (2500 Hz)"
     },
     "label_treble": {
         "message": "Treble (8000 Hz)"
@@ -67,5 +67,74 @@
     },
     "settings_marquee": {
         "message": "Gumagalaw na Titulo"
+    },
+    "settings_custom_theme": {
+        "message": "Sariling Tema"
+    },
+    "custom_theme_title": {
+        "message": "Editor ng Tema"
+    },
+    "label_bg_body": {
+        "message": "Background ng App"
+    },
+    "label_bg_card": {
+        "message": "Background ng Card"
+    },
+    "label_text_accent": {
+        "message": "Text at Accent"
+    },
+    "label_library": {
+        "message": "Library"
+    },
+    "placeholder_select_theme": {
+        "message": "Pumili ng tema..."
+    },
+    "placeholder_new_theme": {
+        "message": "Pangalan ng Bagong Tema"
+    },
+    "button_save": {
+        "message": "I-save"
+    },
+    "button_reset_defaults": {
+        "message": "Ibalik sa Default"
+    },
+    "button_replace": {
+        "message": "Palitan"
+    },
+    "button_confirm": {
+        "message": "Kumpirmahin"
+    },
+    "button_cancel": {
+        "message": "Kanselahin"
+    },
+    "modal_delete_title": {
+        "message": "Burahin ang Tema?"
+    },
+    "modal_delete_msg": {
+        "message": "Sigurado ka bang gusto mong burahin ang {{NAME}}?"
+    },
+    "modal_overwrite_title": {
+        "message": "Palitan ang Tema?"
+    },
+    "modal_overwrite_msg": {
+        "message": "Mayroon nang \"{{NAME}}\". Palitan ito?"
+    },
+    "feedback_saved": {
+        "message": "Na-save na!"
+    },
+    "feedback_reset_success": {
+        "message": "Na-reset na!"
+    },
+    "feedback_no_changes": {
+        "message": "Walang pagbabago"
+    },
+    "feedback_already_default": {
+        "message": "Naka-default na"
+    },
+    "alert_invalid_name": {
+        "message": "Hindi valid ang pangalan."
+    },
+    "label_support": {
+        "message": "Suporta"
     }
 }

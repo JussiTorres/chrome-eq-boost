@@ -21,13 +21,13 @@
         "message": "Гучність (Preamp)"
     },
     "section_eq": {
-        "message": "Еквалайзер (від -12дБ до +12дБ)"
+        "message": "Еквалайзер (-15дБ до +15дБ)"
     },
     "label_bass": {
-        "message": "Низькі (100 Гц)"
+        "message": "Низькі (80 Гц)"
     },
     "label_mids": {
-        "message": "Середні (1000 Гц)"
+        "message": "Середні (2500 Гц)"
     },
     "label_treble": {
         "message": "Високі (8000 Гц)"
@@ -67,5 +67,74 @@
     },
     "settings_marquee": {
         "message": "Рухомий рядок"
+    },
+    "settings_custom_theme": {
+        "message": "Власна тема"
+    },
+    "custom_theme_title": {
+        "message": "Редактор тем"
+    },
+    "label_bg_body": {
+        "message": "Фон додатка"
+    },
+    "label_bg_card": {
+        "message": "Фон картки"
+    },
+    "label_text_accent": {
+        "message": "Текст і акцент"
+    },
+    "label_library": {
+        "message": "Бібліотека"
+    },
+    "placeholder_select_theme": {
+        "message": "Оберіть тему..."
+    },
+    "placeholder_new_theme": {
+        "message": "Назва нової теми"
+    },
+    "button_save": {
+        "message": "Зберегти"
+    },
+    "button_reset_defaults": {
+        "message": "Скинути до стандартних"
+    },
+    "button_replace": {
+        "message": "Замінити"
+    },
+    "button_confirm": {
+        "message": "Підтвердити"
+    },
+    "button_cancel": {
+        "message": "Скасувати"
+    },
+    "modal_delete_title": {
+        "message": "Видалити тему?"
+    },
+    "modal_delete_msg": {
+        "message": "Ви впевнені, що хочете видалити {{NAME}}?"
+    },
+    "modal_overwrite_title": {
+        "message": "Перезаписати тему?"
+    },
+    "modal_overwrite_msg": {
+        "message": "\"{{NAME}}\" вже існує. Замінити?"
+    },
+    "feedback_saved": {
+        "message": "Збережено!"
+    },
+    "feedback_reset_success": {
+        "message": "Скинуто успішно!"
+    },
+    "feedback_no_changes": {
+        "message": "Без змін"
+    },
+    "feedback_already_default": {
+        "message": "Вже стандартна"
+    },
+    "alert_invalid_name": {
+        "message": "Некоректна назва."
+    },
+    "label_support": {
+        "message": "Підтримка"
     }
 }

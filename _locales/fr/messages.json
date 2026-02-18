@@ -21,13 +21,13 @@
     "message": "Volume (Préampli)"
   },
   "section_eq": {
-    "message": "Égaliseur (-12dB à +12dB)"
+    "message": "Égaliseur (-15dB à +15dB)"
   },
   "label_bass": {
-    "message": "Basses (100 Hz)"
+    "message": "Basses (80 Hz)"
   },
   "label_mids": {
-    "message": "Médiums (1000 Hz)"
+    "message": "Médiums (2500 Hz)"
   },
   "label_treble": {
     "message": "Aigus (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Titre défilant"
+  },
+  "settings_custom_theme": {
+    "message": "Thème personnalisé"
+  },
+  "custom_theme_title": {
+    "message": "Éditeur de thème"
+  },
+  "label_bg_body": {
+    "message": "Arrière-plan de l'app"
+  },
+  "label_bg_card": {
+    "message": "Arrière-plan des cartes"
+  },
+  "label_text_accent": {
+    "message": "Texte et Accent"
+  },
+  "label_library": {
+    "message": "Bibliothèque"
+  },
+  "placeholder_select_theme": {
+    "message": "Sélectionner un thème..."
+  },
+  "placeholder_new_theme": {
+    "message": "Nom du nouveau thème"
+  },
+  "button_save": {
+    "message": "Enregistrer"
+  },
+  "button_reset_defaults": {
+    "message": "Rétablir les défauts"
+  },
+  "button_replace": {
+    "message": "Remplacer"
+  },
+  "button_confirm": {
+    "message": "Confirmer"
+  },
+  "button_cancel": {
+    "message": "Annuler"
+  },
+  "modal_delete_title": {
+    "message": "Supprimer le thème ?"
+  },
+  "modal_delete_msg": {
+    "message": "Voulez-vous vraiment supprimer {{NAME}} ?"
+  },
+  "modal_overwrite_title": {
+    "message": "Écraser le thème ?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" existe déjà. Le remplacer ?"
+  },
+  "feedback_saved": {
+    "message": "Enregistré !"
+  },
+  "feedback_reset_success": {
+    "message": "Réinitialisation réussie !"
+  },
+  "feedback_no_changes": {
+    "message": "Aucun changement"
+  },
+  "feedback_already_default": {
+    "message": "Déjà par défaut"
+  },
+  "alert_invalid_name": {
+    "message": "Nom de thème invalide."
+  },
+  "label_support": {
+    "message": "Support"
   }
 }

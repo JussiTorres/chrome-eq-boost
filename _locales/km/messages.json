@@ -21,13 +21,13 @@
         "message": "កម្រិតសំឡេង (Preamp)"
     },
     "section_eq": {
-        "message": "Equalizer (-12dB ដល់ +12dB)"
+        "message": "Equalizer (-15dB ដល់ +15dB)"
     },
     "label_bass": {
-        "message": "Bass (100 Hz)"
+        "message": "Bass (80 Hz)"
     },
     "label_mids": {
-        "message": "Mids (1000 Hz)"
+        "message": "Mids (2500 Hz)"
     },
     "label_treble": {
         "message": "Treble (8000 Hz)"
@@ -67,5 +67,74 @@
     },
     "settings_marquee": {
         "message": "ចំណងជើងរំកិល"
+    },
+    "settings_custom_theme": {
+        "message": "Theme ផ្ទាល់ខ្លួន"
+    },
+    "custom_theme_title": {
+        "message": "កម្មវិធីកែ Theme"
+    },
+    "label_bg_body": {
+        "message": "Background កម្មវិធី"
+    },
+    "label_bg_card": {
+        "message": "Background កាត"
+    },
+    "label_text_accent": {
+        "message": "អក្សរ និងពណ៌លេចធ្លោ"
+    },
+    "label_library": {
+        "message": "បណ្ណាល័យ"
+    },
+    "placeholder_select_theme": {
+        "message": "ជ្រើសរើស theme..."
+    },
+    "placeholder_new_theme": {
+        "message": "ឈ្មោះ theme ថ្មី"
+    },
+    "button_save": {
+        "message": "រក្សាទុក"
+    },
+    "button_reset_defaults": {
+        "message": "កំណត់ដើមវិញ"
+    },
+    "button_replace": {
+        "message": "ជំនួស"
+    },
+    "button_confirm": {
+        "message": "အတည်ပြု"
+    },
+    "button_cancel": {
+        "message": "បោះបង់"
+    },
+    "modal_delete_title": {
+        "message": "លុប Theme?"
+    },
+    "modal_delete_msg": {
+        "message": "តើអ្នកប្រាកដថាចង់លុប {{NAME}} ទេ?"
+    },
+    "modal_overwrite_title": {
+        "message": "សរសេរជាន់លើ Theme?"
+    },
+    "modal_overwrite_msg": {
+        "message": "\"{{NAME}}\" មានរួចហើយ។ ជំនួសវាឬ?"
+    },
+    "feedback_saved": {
+        "message": "បានរក្សាទុក!"
+    },
+    "feedback_reset_success": {
+        "message": "បានកំណត់ឡើងវិញ!"
+    },
+    "feedback_no_changes": {
+        "message": "គ្មានការផ្លាស់ប្តូរ"
+    },
+    "feedback_already_default": {
+        "message": "លំនាំដើមរួចហើយ"
+    },
+    "alert_invalid_name": {
+        "message": "ឈ្មោះមិនត្រឹមត្រូវ."
+    },
+    "label_support": {
+        "message": "ជំនួយ"
     }
 }

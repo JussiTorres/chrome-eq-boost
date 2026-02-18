@@ -21,13 +21,13 @@
     "message": "Громкость (Preamp)"
   },
   "section_eq": {
-    "message": "Эквалайзер (от -12дБ до +12дБ)"
+    "message": "Эквалайзер (-15дБ до +15дБ)"
   },
   "label_bass": {
-    "message": "Низкие (100 Гц)"
+    "message": "Низкие (80 Гц)"
   },
   "label_mids": {
-    "message": "Средние (1000 Гц)"
+    "message": "Средние (2500 Гц)"
   },
   "label_treble": {
     "message": "Высокие (8000 Гц)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Бегущая строка"
+  },
+  "settings_custom_theme": {
+    "message": "Своя тема"
+  },
+  "custom_theme_title": {
+    "message": "Редактор тем"
+  },
+  "label_bg_body": {
+    "message": "Фон приложения"
+  },
+  "label_bg_card": {
+    "message": "Фон карточки"
+  },
+  "label_text_accent": {
+    "message": "Текст и акцент"
+  },
+  "label_library": {
+    "message": "Библиотека"
+  },
+  "placeholder_select_theme": {
+    "message": "Выберите тему..."
+  },
+  "placeholder_new_theme": {
+    "message": "Имя новой темы"
+  },
+  "button_save": {
+    "message": "Сохранить"
+  },
+  "button_reset_defaults": {
+    "message": "Сброс по умолчанию"
+  },
+  "button_replace": {
+    "message": "Заменить"
+  },
+  "button_confirm": {
+    "message": "Подтвердить"
+  },
+  "button_cancel": {
+    "message": "Отмена"
+  },
+  "modal_delete_title": {
+    "message": "Удалить тему?"
+  },
+  "modal_delete_msg": {
+    "message": "Вы уверены, что хотите удалить {{NAME}}?"
+  },
+  "modal_overwrite_title": {
+    "message": "Перезаписать тему?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" уже существует. Заменить?"
+  },
+  "feedback_saved": {
+    "message": "Сохранено!"
+  },
+  "feedback_reset_success": {
+    "message": "Сброс выполнен!"
+  },
+  "feedback_no_changes": {
+    "message": "Без изменений"
+  },
+  "feedback_already_default": {
+    "message": "Уже по умолчанию"
+  },
+  "alert_invalid_name": {
+    "message": "Неверное имя."
+  },
+  "label_support": {
+    "message": "Поддержка"
   }
 }

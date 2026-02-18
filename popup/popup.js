@@ -1,6 +1,11 @@
 /**
- * popup/popup.js
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
  */
+
 import { SLIDER_CONFIGS } from './constants.js';
 import { storage } from './storageHelpers.js';
 import { i18n } from './i18n.js';

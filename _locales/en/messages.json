@@ -21,13 +21,13 @@
     "message": "Volume (Preamp)"
   },
   "section_eq": {
-    "message": "Equalizer (-12dB to +12dB)"
+    "message": "Equalizer (-15dB to +15dB)"
   },
   "label_bass": {
-    "message": "Bass (100 Hz)"
+    "message": "Bass (80 Hz)"
   },
   "label_mids": {
-    "message": "Mids (1000 Hz)"
+    "message": "Mids (2500 Hz)"
   },
   "label_treble": {
     "message": "Treble (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Scrolling Title"
+  },
+  "settings_custom_theme": {
+    "message": "Custom Theme"
+  },
+  "custom_theme_title": {
+    "message": "Theme Editor"
+  },
+  "label_bg_body": {
+    "message": "App Background"
+  },
+  "label_bg_card": {
+    "message": "Card Background"
+  },
+  "label_text_accent": {
+    "message": "Text & Accent"
+  },
+  "label_library": {
+    "message": "Library"
+  },
+  "placeholder_select_theme": {
+    "message": "Select a theme..."
+  },
+  "placeholder_new_theme": {
+    "message": "New Theme Name"
+  },
+  "button_save": {
+    "message": "Save"
+  },
+  "button_reset_defaults": {
+    "message": "Reset to Defaults"
+  },
+  "button_replace": {
+    "message": "Replace"
+  },
+  "button_confirm": {
+    "message": "Confirm"
+  },
+  "button_cancel": {
+    "message": "Cancel"
+  },
+  "modal_delete_title": {
+    "message": "Delete Theme?"
+  },
+  "modal_delete_msg": {
+    "message": "Are you sure you want to permanently delete {{NAME}}?"
+  },
+  "modal_overwrite_title": {
+    "message": "Overwrite Theme?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" already exists. Replace it?"
+  },
+  "feedback_saved": {
+    "message": "Saved!"
+  },
+  "feedback_reset_success": {
+    "message": "Defaults Restored!"
+  },
+  "feedback_no_changes": {
+    "message": "No changes"
+  },
+  "feedback_already_default": {
+    "message": "Already Default"
+  },
+  "alert_invalid_name": {
+    "message": "Invalid theme name."
+  },
+  "label_support": {
+    "message": "Support"
   }
 }

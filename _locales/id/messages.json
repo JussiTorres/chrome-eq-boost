@@ -21,13 +21,13 @@
     "message": "Volume (Preamp)"
   },
   "section_eq": {
-    "message": "Equalizer (-12dB sampai +12dB)"
+    "message": "Equalizer (-15dB sampai +15dB)"
   },
   "label_bass": {
-    "message": "Bass (100 Hz)"
+    "message": "Bass (80 Hz)"
   },
   "label_mids": {
-    "message": "Mid (1000 Hz)"
+    "message": "Mid (2500 Hz)"
   },
   "label_treble": {
     "message": "Treble (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Judul Bergulir"
+  },
+  "settings_custom_theme": {
+    "message": "Tema Kustom"
+  },
+  "custom_theme_title": {
+    "message": "Editor Tema"
+  },
+  "label_bg_body": {
+    "message": "Latar Aplikasi"
+  },
+  "label_bg_card": {
+    "message": "Latar Kartu"
+  },
+  "label_text_accent": {
+    "message": "Teks & Aksen"
+  },
+  "label_library": {
+    "message": "Pustaka"
+  },
+  "placeholder_select_theme": {
+    "message": "Pilih tema..."
+  },
+  "placeholder_new_theme": {
+    "message": "Nama Tema Baru"
+  },
+  "button_save": {
+    "message": "Simpan"
+  },
+  "button_reset_defaults": {
+    "message": "Reset ke Awal"
+  },
+  "button_replace": {
+    "message": "Ganti"
+  },
+  "button_confirm": {
+    "message": "Konfirmasi"
+  },
+  "button_cancel": {
+    "message": "Batal"
+  },
+  "modal_delete_title": {
+    "message": "Hapus Tema?"
+  },
+  "modal_delete_msg": {
+    "message": "Yakin ingin menghapus {{NAME}}?"
+  },
+  "modal_overwrite_title": {
+    "message": "Timpa Tema?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" sudah ada. Ganti?"
+  },
+  "feedback_saved": {
+    "message": "Disimpan!"
+  },
+  "feedback_reset_success": {
+    "message": "Berhasil Direset!"
+  },
+  "feedback_no_changes": {
+    "message": "Tidak ada perubahan"
+  },
+  "feedback_already_default": {
+    "message": "Sudah Default"
+  },
+  "alert_invalid_name": {
+    "message": "Nama tidak valid."
+  },
+  "label_support": {
+    "message": "Dukungan"
   }
 }

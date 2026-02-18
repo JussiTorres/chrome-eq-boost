@@ -1,6 +1,11 @@
 /**
- * chrome-eq-boost/popup/themeEngine.js
+ * Chrome EQ & Volume Boost
+ * Copyright (c) 2025 Jussi Torres
+ * Licensed under the MIT License.
+ *
+ * Developed by Jussi Torres
  */
+
 import { storage } from './storageHelpers.js';
 
 // Fallback colors to prevent the "Flash-back" bug when storage is in flux

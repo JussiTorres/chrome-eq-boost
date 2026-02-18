@@ -2,8 +2,26 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.8.0] - 2026-02-17
+
+### ✨ Audio Engineering (HD Upgrade)
+
+* **High-Fidelity Tuning:** Refactored the audio engine to prioritize musical transparency over aggressive limiting.
+* **New Dynamics Chain:** Implemented a gentle 3:1 compressor ratio with a -24dB threshold and soft-knee transition to prevent clipping while preserving dynamic range.
+* **Audiophile EQ Frequencies:** - Re-tuned Bass to **80Hz** for deeper sub-frequency response.
+* Re-tuned Mids to **2500Hz** to enhance vocal clarity and presence.
+* Applied a musical **0.7 Q-factor** to the peaking filter for smoother, more natural frequency curves.
+* **Zen Balance UI:** Increased the EQ range to **+/- 15dB**, providing a middle ground between standard fidelity and extreme boosting.
+
+### 🌍 Localization & Infrastructure
+
+* **Massive Locale Refactor:** Expanded the localization system with numerous new key variables to support deeper UI translation across all 22 languages.
+* **UI Alignment:** Updated labels in the popup to accurately reflect the new 80Hz/2500Hz HD frequency targets and the +/- 15dB range globally.
+
 ## [1.7.0] - 2026-02-17
+
 ### ✨ New Features
+
 - **Custom Theme Editor:** Users can now create, save, and delete their own custom themes using a new 3-color picker interface.
 - **Dynamic Contrast Engine:** The "Reset" button and other UI elements now automatically switch between Black/White text based on the brightness of the user's custom accent color.
 - **Smart Safety Checks:** Added a confirmation modal to prevent accidental deletion or overwriting of existing themes.
@@ -12,7 +30,9 @@ All notable changes to the "Chrome EQ Boost" extension will be documented in thi
 - **Responsive Modal:** The delete/overwrite confirmation modal now adapts its width to the content, removing unnecessary whitespace.
 
 ## [1.6.1] - 2026-02-16
+
 ### 🏗️ Code Architecture & Maintainability
+
 - **Modular Refactor:** Completely dismantled the monolithic `popup.js` into a robust, ES6 module-based architecture to improve scalability and debugging.
 - **Logic Decoupling:** Distributed core responsibilities into specialized modules:
   - `themeEngine.js`: Dedicated handler for Dark Mode persistence and UI transitions.
@@ -23,6 +43,7 @@ All notable changes to the "Chrome EQ Boost" extension will be documented in thi
 - **Performance Optimization:** Improved initialization speed by utilizing a directory-based module loading system, reducing redundant logic execution in the popup.
 
 ## [1.5.1] - 2026-02-10
+
 ### 🎨 Visual Engineering & Branding
 - **"Engineered Soft" Theme:** Completely refactored the color palette from harsh "Electric Blues" to a softer, professional "Inter Blue" (`#3b82f6`) system to reduce eye strain.
 - **Brand Alignment:** Synced the UI accent colors (Orange/Blue) to perfectly match the updated `logo-horizontal.png`.

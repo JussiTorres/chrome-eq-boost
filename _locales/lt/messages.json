@@ -21,13 +21,13 @@
         "message": "Garsumas (Preamp)"
     },
     "section_eq": {
-        "message": "Ekvalaizeris (-12dB iki +12dB)"
+        "message": "Ekvalaizeris (-15dB iki +15dB)"
     },
     "label_bass": {
-        "message": "Žemi (100 Hz)"
+        "message": "Žemi (80 Hz)"
     },
     "label_mids": {
-        "message": "Vidutiniai (1000 Hz)"
+        "message": "Vidutiniai (2500 Hz)"
     },
     "label_treble": {
         "message": "Aukšti (8000 Hz)"
@@ -67,5 +67,74 @@
     },
     "settings_marquee": {
         "message": "Slenkantis pavadinimas"
+    },
+    "settings_custom_theme": {
+        "message": "Pasirinktinė tema"
+    },
+    "custom_theme_title": {
+        "message": "Temų redaktorius"
+    },
+    "label_bg_body": {
+        "message": "Programos fonas"
+    },
+    "label_bg_card": {
+        "message": "Kortelės fonas"
+    },
+    "label_text_accent": {
+        "message": "Tekstas ir akcentas"
+    },
+    "label_library": {
+        "message": "Biblioteka"
+    },
+    "placeholder_select_theme": {
+        "message": "Pasirinkite temą..."
+    },
+    "placeholder_new_theme": {
+        "message": "Naujos temos pavadinimas"
+    },
+    "button_save": {
+        "message": "Išsaugoti"
+    },
+    "button_reset_defaults": {
+        "message": "Atkurti numatytuosius"
+    },
+    "button_replace": {
+        "message": "Pakeisti"
+    },
+    "button_confirm": {
+        "message": "Patvirtinti"
+    },
+    "button_cancel": {
+        "message": "Atšaukti"
+    },
+    "modal_delete_title": {
+        "message": "Ištrinti temą?"
+    },
+    "modal_delete_msg": {
+        "message": "Ar tikrai norite ištrinti {{NAME}}?"
+    },
+    "modal_overwrite_title": {
+        "message": "Perrašyti temą?"
+    },
+    "modal_overwrite_msg": {
+        "message": "„{{NAME}}“ jau yra. Pakeisti?"
+    },
+    "feedback_saved": {
+        "message": "Išsaugota!"
+    },
+    "feedback_reset_success": {
+        "message": "Atkurta sėkmingai!"
+    },
+    "feedback_no_changes": {
+        "message": "Jokių pakeitimų"
+    },
+    "feedback_already_default": {
+        "message": "Jau yra numatytoji"
+    },
+    "alert_invalid_name": {
+        "message": "Netinkamas pavadinimas."
+    },
+    "label_support": {
+        "message": "Pagalba"
     }
 }

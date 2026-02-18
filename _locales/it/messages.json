@@ -21,13 +21,13 @@
     "message": "Volume (Preamp)"
   },
   "section_eq": {
-    "message": "Equalizzatore (da -12dB a +12dB)"
+    "message": "Equalizzatore (-15dB a +15dB)"
   },
   "label_bass": {
-    "message": "Bassi (100 Hz)"
+    "message": "Bassi (80 Hz)"
   },
   "label_mids": {
-    "message": "Medi (1000 Hz)"
+    "message": "Medi (2500 Hz)"
   },
   "label_treble": {
     "message": "Alti (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Titolo scorrevole"
+  },
+  "settings_custom_theme": {
+    "message": "Tema personalizzato"
+  },
+  "custom_theme_title": {
+    "message": "Editor temi"
+  },
+  "label_bg_body": {
+    "message": "Sfondo app"
+  },
+  "label_bg_card": {
+    "message": "Sfondo scheda"
+  },
+  "label_text_accent": {
+    "message": "Testo e accento"
+  },
+  "label_library": {
+    "message": "Libreria"
+  },
+  "placeholder_select_theme": {
+    "message": "Seleziona un tema..."
+  },
+  "placeholder_new_theme": {
+    "message": "Nome nuovo tema"
+  },
+  "button_save": {
+    "message": "Salva"
+  },
+  "button_reset_defaults": {
+    "message": "Ripristina predefiniti"
+  },
+  "button_replace": {
+    "message": "Sostituisci"
+  },
+  "button_confirm": {
+    "message": "Conferma"
+  },
+  "button_cancel": {
+    "message": "Annulla"
+  },
+  "modal_delete_title": {
+    "message": "Eliminare il tema?"
+  },
+  "modal_delete_msg": {
+    "message": "Vuoi davvero eliminare {{NAME}}?"
+  },
+  "modal_overwrite_title": {
+    "message": "Sovrascrivere tema?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" esiste già. Sostituirlo?"
+  },
+  "feedback_saved": {
+    "message": "Salvato!"
+  },
+  "feedback_reset_success": {
+    "message": "Ripristino riuscito!"
+  },
+  "feedback_no_changes": {
+    "message": "Nessuna modifica"
+  },
+  "feedback_already_default": {
+    "message": "Già predefinito"
+  },
+  "alert_invalid_name": {
+    "message": "Nome non valido."
+  },
+  "label_support": {
+    "message": "Supporto"
   }
 }

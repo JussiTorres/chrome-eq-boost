@@ -21,13 +21,13 @@
     "message": "볼륨 (Preamp)"
   },
   "section_eq": {
-    "message": "이퀄라이저 (-12dB ~ +12dB)"
+    "message": "이퀄라이저 (-15dB ~ +15dB)"
   },
   "label_bass": {
-    "message": "저음 (100 Hz)"
+    "message": "저음 (80 Hz)"
   },
   "label_mids": {
-    "message": "중음 (1000 Hz)"
+    "message": "중음 (2500 Hz)"
   },
   "label_treble": {
     "message": "고음 (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "곡명 스크롤"
+  },
+  "settings_custom_theme": {
+    "message": "사용자 지정 테마"
+  },
+  "custom_theme_title": {
+    "message": "테마 편집기"
+  },
+  "label_bg_body": {
+    "message": "앱 배경"
+  },
+  "label_bg_card": {
+    "message": "카드 배경"
+  },
+  "label_text_accent": {
+    "message": "텍스트 및 강조"
+  },
+  "label_library": {
+    "message": "라이브러리"
+  },
+  "placeholder_select_theme": {
+    "message": "테마 선택..."
+  },
+  "placeholder_new_theme": {
+    "message": "새 테마 이름"
+  },
+  "button_save": {
+    "message": "저장"
+  },
+  "button_reset_defaults": {
+    "message": "기본값으로 초기화"
+  },
+  "button_replace": {
+    "message": "교체"
+  },
+  "button_confirm": {
+    "message": "확인"
+  },
+  "button_cancel": {
+    "message": "취소"
+  },
+  "modal_delete_title": {
+    "message": "테마 삭제?"
+  },
+  "modal_delete_msg": {
+    "message": "정말로 {{NAME}} 테마를 삭제하시겠습니까?"
+  },
+  "modal_overwrite_title": {
+    "message": "테마 덮어쓰기?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" 테마가 이미 존재합니다. 교체하시겠습니까?"
+  },
+  "feedback_saved": {
+    "message": "저장됨!"
+  },
+  "feedback_reset_success": {
+    "message": "초기화 성공!"
+  },
+  "feedback_no_changes": {
+    "message": "변경 사항 없음"
+  },
+  "feedback_already_default": {
+    "message": "이미 기본값입니다"
+  },
+  "alert_invalid_name": {
+    "message": "잘못된 이름입니다."
+  },
+  "label_support": {
+    "message": "지원"
   }
 }

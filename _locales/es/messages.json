@@ -21,13 +21,13 @@
     "message": "Volumen (Preamp)"
   },
   "section_eq": {
-    "message": "Ecualizador (-12dB a +12dB)"
+    "message": "Ecualizador (-15dB a +15dB)"
   },
   "label_bass": {
-    "message": "Graves (100 Hz)"
+    "message": "Graves (80 Hz)"
   },
   "label_mids": {
-    "message": "Medios (1000 Hz)"
+    "message": "Medios (2500 Hz)"
   },
   "label_treble": {
     "message": "Agudos (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Título desplazable"
+  },
+  "settings_custom_theme": {
+    "message": "Tema personalizado"
+  },
+  "custom_theme_title": {
+    "message": "Editor de temas"
+  },
+  "label_bg_body": {
+    "message": "Fondo de aplicación"
+  },
+  "label_bg_card": {
+    "message": "Fondo de tarjeta"
+  },
+  "label_text_accent": {
+    "message": "Texto y énfasis"
+  },
+  "label_library": {
+    "message": "Biblioteca"
+  },
+  "placeholder_select_theme": {
+    "message": "Selecciona un tema..."
+  },
+  "placeholder_new_theme": {
+    "message": "Nombre del tema nuevo"
+  },
+  "button_save": {
+    "message": "Guardar"
+  },
+  "button_reset_defaults": {
+    "message": "Restaurar valores"
+  },
+  "button_replace": {
+    "message": "Reemplazar"
+  },
+  "button_confirm": {
+    "message": "Confirmar"
+  },
+  "button_cancel": {
+    "message": "Cancelar"
+  },
+  "modal_delete_title": {
+    "message": "¿Eliminar tema?"
+  },
+  "modal_delete_msg": {
+    "message": "¿Seguro que quieres eliminar {{NAME}} permanentemente?"
+  },
+  "modal_overwrite_title": {
+    "message": "¿Sobrescribir tema?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" ya existe. ¿Quieres reemplazarlo?"
+  },
+  "feedback_saved": {
+    "message": "¡Guardado!"
+  },
+  "feedback_reset_success": {
+    "message": "¡Restaurado!"
+  },
+  "feedback_no_changes": {
+    "message": "Sin cambios"
+  },
+  "feedback_already_default": {
+    "message": "Ya es el predeterminado"
+  },
+  "alert_invalid_name": {
+    "message": "Nombre no válido."
+  },
+  "label_support": {
+    "message": "Soporte"
   }
 }

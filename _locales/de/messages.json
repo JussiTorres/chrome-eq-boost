@@ -21,13 +21,13 @@
     "message": "Lautstärke (Preamp)"
   },
   "section_eq": {
-    "message": "Equalizer (-12dB bis +12dB)"
+    "message": "Equalizer (-15dB bis +15dB)"
   },
   "label_bass": {
-    "message": "Bass (100 Hz)"
+    "message": "Bass (80 Hz)"
   },
   "label_mids": {
-    "message": "Mitten (1000 Hz)"
+    "message": "Mitten (2500 Hz)"
   },
   "label_treble": {
     "message": "Höhen (8000 Hz)"
@@ -67,5 +67,74 @@
   },
   "settings_marquee": {
     "message": "Titel-Laufschrift"
+  },
+  "settings_custom_theme": {
+    "message": "Benutzerdefiniertes Design"
+  },
+  "custom_theme_title": {
+    "message": "Design-Editor"
+  },
+  "label_bg_body": {
+    "message": "App-Hintergrund"
+  },
+  "label_bg_card": {
+    "message": "Karten-Hintergrund"
+  },
+  "label_text_accent": {
+    "message": "Text & Akzent"
+  },
+  "label_library": {
+    "message": "Bibliothek"
+  },
+  "placeholder_select_theme": {
+    "message": "Design auswählen..."
+  },
+  "placeholder_new_theme": {
+    "message": "Neuer Design-Name"
+  },
+  "button_save": {
+    "message": "Speichern"
+  },
+  "button_reset_defaults": {
+    "message": "Auf Standard zurücksetzen"
+  },
+  "button_replace": {
+    "message": "Ersetzen"
+  },
+  "button_confirm": {
+    "message": "Bestätigen"
+  },
+  "button_cancel": {
+    "message": "Abbrechen"
+  },
+  "modal_delete_title": {
+    "message": "Design löschen?"
+  },
+  "modal_delete_msg": {
+    "message": "Möchten Sie {{NAME}} wirklich löschen?"
+  },
+  "modal_overwrite_title": {
+    "message": "Design überschreiben?"
+  },
+  "modal_overwrite_msg": {
+    "message": "„{{NAME}}“ existiert bereits. Ersetzen?"
+  },
+  "feedback_saved": {
+    "message": "Gespeichert!"
+  },
+  "feedback_reset_success": {
+    "message": "Zurücksetzen erfolgreich!"
+  },
+  "feedback_no_changes": {
+    "message": "Keine Änderungen"
+  },
+  "feedback_already_default": {
+    "message": "Standard"
+  },
+  "alert_invalid_name": {
+    "message": "Ungültiger Name."
+  },
+  "label_support": {
+    "message": "Support"
   }
 }
