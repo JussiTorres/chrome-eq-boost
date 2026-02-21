@@ -17,7 +17,7 @@ A professional-grade, privacy-focused audio suite for Chrome. Boost your volume 
 
 ### 🎨 Next-Gen UI & Personalization
 
-* **Venganza "Void" Design (New):** A premium, high-contrast midnight aesthetic using a deep blue-black base (`#020617`) and midnight slate cards (`#0F172A`) for reduced eye strain.
+* **"Void" Design (New):** A premium, high-contrast midnight aesthetic using a deep blue-black base (`#020617`) and midnight slate cards (`#0F172A`) for reduced eye strain.
 * **Custom Theme Editor:** Create and save your own UI designs with a professional **3-color picker system**.
 * **Dynamic Contrast Engine:** Intelligent UI logic that automatically adjusts text color (Black/White) and makes the Reset button a chameleon that adapts to your chosen accent colors.
 * **Unified "Light-Up" Logic:** Smart state management via CSS `:has()` that applies a subtle opacity fade when disabled and a high-luminance **Electric Orange** (`#FF7A00`) glow when active.
