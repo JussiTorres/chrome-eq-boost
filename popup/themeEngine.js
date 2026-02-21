@@ -78,7 +78,7 @@ export const themeEngine = {
             root.style.setProperty('--bg-hover', adjustBrightness(t.bgCard, -5));
             root.style.setProperty('--primary-hover', adjustBrightness(t.accentColor, -20));
             root.style.setProperty('--shadow-soft', hexToRgba(t.accentColor, 0.15));
-            root.style.setProperty('--bg-disabled', hexToRgba(t.textPrimary, 0.12));
+            root.style.setProperty('--bg-disabled', hexToRgba(t.textPrimary, 0.14));
             root.style.setProperty('--border-light', hexToRgba(t.textPrimary, 0.15));
             root.style.setProperty('--slider-track', hexToRgba(t.textPrimary, 0.2));
             root.style.setProperty('--slider-thumb', t.accentColor);
@@ -93,6 +93,11 @@ export const themeEngine = {
             root.style.setProperty('--status-warning', t.accentColor);
             root.style.setProperty('--status-danger', t.accentColor);
             root.style.setProperty('--danger', t.accentColor);
+
+            root.style.setProperty('--text-loading', t.accentColor);
+            root.style.setProperty('--text-waiting', t.accentColor);
+            root.style.setProperty('--text-active', t.accentColor);
+            root.style.setProperty('--text-conflict', t.accentColor);
 
             // --- THE FIX: Intelligent Button Text Color ---
             // If the accent is bright (like White), this returns Black.

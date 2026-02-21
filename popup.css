@@ -15,73 +15,86 @@
 }
 
 /* ==========================================================================
-   1. MASTER SLOT SYSTEM
+   1. REFINED COLOR SYSTEM (Venganza Edition)
    ========================================================================== */
 
 :root {
-    /* === SLOT 1: Backgrounds (Light Default) === */
-    --bg-body: #f9fafb;
-    --bg-card: #ffffff;
-    --bg-disabled: #e5e7eb;
-
-    /* === SLOT 2: Text (Light Default) === */
-    --text-primary: #0f172a;
-    --text-button: #ffffff;
-    /* Default white text for buttons */
-
-    /* === SLOT 3: Accent (Light Default) === */
-    --primary: #3b82f6;
-
-    /* === DERIVED SLOTS === */
-    --bg-hover: #f0f3f7;
-    --primary-hover: #1d4ed8;
-    --shadow-soft: rgba(15, 23, 42, 0.1);
+    /* === NEUTRAL BASE (Light Mode) === */
+    --bg-body: #F1F5F9;
+    /* Crisp, clean slate */
+    --bg-card: #FFFFFF;
+    --bg-disabled: #F8FAFC;
+    --border-light: #CBD5E1;
+    /* Stronger contrast for the "Hobbit" screen */
 
     /* === TEXT HIERARCHY === */
-    --text-heading: #2563eb;
-    --text-muted: #64748b;
-    --text-label: #475569;
-    --text-value: #334155;
-    --text-section: #475569;
-    --border-light: #e2e8f0;
+    --text-primary: #1E293B;
+    /* Deep Slate */
+    --text-heading: #0F172A;
+    /* Near Black */
+    --text-muted: #64748B;
+    --text-button: #FFFFFF;
 
-    /* === DYNAMIC STATUS COLORS === */
-    --status-success: #10b981;
-    --status-warning: #f59e0b;
-    --status-danger: #ef4444;
-    --status-disabled-text: #64748b;
+    /* === UNIFIED ACCENT (Modern Cobalt) === */
+    --primary: #2563EB;
+    /* The "Anchor" Blue */
+    --primary-hover: #1D4ED8;
+    --bg-hover: #F8FAFC;
 
-    --slider-track: #d1d5db;
-    --slider-thumb: #3b82f6;
+    /* === SLOTS === */
+    --slider-track: #E2E8F0;
+    --slider-thumb: #2563EB;
+    --status-success: #059669;
+    /* Emerald instead of generic green */
+    --status-danger: #DC2626;
+    /* Crimson for the revenge vibe */
+    --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+
+    /* === DYNAMIC STATUS SLOTS (Light Mode) === */
+    --text-loading: #2563EB;
+    /* Modern Cobalt */
+    --text-waiting: #D97706;
+    /* Deep Amber */
+    --text-active: #059669;
+    /* Emerald */
+    --text-conflict: #DC2626;
+    /* Crimson Revenge */
 }
 
 body.dark-mode {
-    --bg-body: #0f172a;
-    --bg-card: #1f2937;
-    --bg-disabled: #374151;
+    /* === THE VOID (Dark Mode) === */
+    --bg-body: #020617;
+    /* Deepest possible blue/black */
+    --bg-card: #0F172A;
+    /* Midnight Slate */
+    --bg-disabled: #1E293B;
+    --border-light: #1E293B;
 
-    --text-primary: #e5e7eb;
-    --text-button: #ffffff;
-    --primary: #3b82f6;
+    /* === TEXT HIERARCHY === */
+    --text-primary: #F1F5F9;
+    --text-heading: #38BDF8;
+    /* Bright Sky/Cyan */
+    --text-muted: #94A3B8;
+    --text-button: #FFFFFF;
 
-    --bg-hover: #1e293b;
-    --primary-hover: #60a5fa;
-    --shadow-soft: rgba(0, 0, 0, 0.3);
+    /* === UNIFIED ACCENT (Neon Cobalt) === */
+    --primary: #0EA5E9;
+    /* Deeper Cyan for the main accent */
+    --primary-hover: #38BDF8;
+    --bg-hover: #1E293B;
 
-    --text-heading: #60a5fa;
-    --text-muted: #e2e8f0;
-    --text-label: #e2e8f0;
-    --text-value: #e2e8f0;
-    --text-section: #e2e8f0;
-    --border-light: #27272a;
+    /* === SLOTS === */
+    --slider-track: #334155;
+    --slider-thumb: #3B82F6;
+--status-success: #FF9500; /* Cyber Tangerine */
 
-    --status-success: #34d399;
-    --status-warning: #fbbf24;
-    --status-danger: #ef4444;
-    --status-disabled-text: #94a3b8;
+    --status-danger: #F87171;
 
-    --slider-track: #4b5563;
-    --slider-thumb: #3b82f6;
+    /* === STATUS === */
+ /* === STATUS === */
+    --text-loading: #2DD4BF; /* Your Jade */
+    --text-waiting: #FF9500; 
+    --text-active: var(--status-success);
 }
 
 /* ==========================================================================
@@ -288,30 +301,26 @@ input[type="range"]::-webkit-slider-thumb {
     margin: 0;
     font-size: 0.95em;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--text-heading);
+    /* Changed from var(--primary) */
     text-align: center;
     line-height: 1.4;
 }
 
-/* Status Helper Classes */
-.text-disabled {
-    color: var(--status-disabled-text) !important;
-}
-
 .text-active {
-    color: var(--status-success) !important;
+    color: var(--text-active) !important;
 }
 
 .text-waiting {
-    color: var(--status-warning) !important;
+    color: var(--text-waiting) !important;
 }
 
 .text-loading {
-    color: var(--primary) !important;
+    color: var(--text-loading) !important;
 }
 
 .text-conflict {
-    color: var(--status-danger) !important;
+    color: var(--text-conflict) !important;
     font-weight: 700;
 }
 
@@ -369,10 +378,6 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 1.02em;
 }
 
-.label-disabled {
-    color: var(--text-muted) !important;
-}
-
 .label-enabled {
     color: var(--text-heading) !important;
 }
@@ -423,31 +428,71 @@ input:checked+.slider:before {
     transform: translateX(22px);
 }
 
-/* === Reset Button === */
+.text-disabled,
+.label-disabled {
+    color: var(--text-primary) !important;
+    opacity: 0.9 !important;
+}
+
+/* ==========================================================================
+   RESET BUTTON: Venganza Red (Solid & Mode-Aware)
+   ========================================================================== */
 .reset-button {
     width: 100%;
     padding: 10px;
     margin-top: 0;
-    background: var(--status-danger);
-    color: var(--text-button);
-    border: none;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 800;
     cursor: pointer;
     font-size: 0.95em;
-    transition: background 0.2s;
-}
+    border: none !important;
 
-.reset-button:disabled {
-    background-color: var(--bg-disabled);
-    cursor: not-allowed;
-    opacity: 1;
-    color: var(--text-muted);
+    /* DYNAMIC COLORS: Pulls from your theme engine */
+    background-color: var(--status-danger) !important;
+    color: var(--text-button) !important;
+    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: filter 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
 }
 
 .reset-button:hover:not(:disabled) {
-    background: var(--status-danger);
-    filter: brightness(0.9);
+    filter: brightness(1.1);
+    /* Dynamic shadow using your primary accent */
+    box-shadow: 0 4px 12px var(--shadow-soft); 
+}
+
+.reset-button:active:not(:disabled) {
+    background-color: #991b1b !important;
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   RESET BUTTON: Venganza Disabled States (Lockdown Edition)
+   ========================================================================== */
+
+/* 1. LIGHT MODE: Sharp Silver */
+body.default-theme .reset-button:disabled {
+    background-color: #cbd5e1 !important;
+    color: #1E293B !important;
+    font-weight: 800 !important;
+    opacity: 0.9 !important;
+}
+
+/* 2. DARK MODE: The Recessed Void Block */
+body.dark-mode .reset-button:disabled {
+    background-color: #1e293b !important;
+    color: #94a3b8 !important;
+    opacity: 0.9 !important;
+}
+
+/* 3. CUSTOM MODE: Dynamic Fallback */
+body.custom-theme .reset-button:disabled {
+    background-color: var(--bg-disabled) !important;
+    color: var(--text-muted) !important;
+    opacity: 0.9 !important;
+    box-shadow: none !important;
+    border: none !important;
+    cursor: not-allowed !important;
 }
 
 /* === Sliders & Labels === */
@@ -787,36 +832,66 @@ select.settings-select {
 }
 
 /* ==========================================================================
-   DISABLED UI FADE (Only Active in CUSTOM MODE)
+   DISABLED UI FADE (Cleaned & Locked)
    ========================================================================== */
+
+/* 1. EQ Labels & Values: Subtle Fade */
 body.custom-theme #mainControls.controls-muted .eq-control label,
 body.custom-theme #mainControls.controls-muted .value-display {
     opacity: 0.85 !important;
     cursor: not-allowed !important;
-    transition: all 0.2s ease;
 }
 
+/* 2. Sliders: Heavier Fade for Visual Depth */
 body.custom-theme #mainControls.controls-muted .eq-control input[type="range"] {
     opacity: 0.6 !important;
     cursor: not-allowed !important;
-    transition: all 0.2s ease;
 }
 
+/* 3. Status Labels: Dynamic Theme Color */
 body.custom-theme #mainControls.controls-muted .section-title,
 body.custom-theme .status-message.text-disabled,
 body.custom-theme #mainToggleContainer .toggle-label.label-disabled {
     opacity: 0.9 !important;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
-    color: var(--primary) !important;
+    color: var(--text-primary) !important;
+    /* Fixed from #1E293B */
     cursor: not-allowed !important;
     filter: none !important;
-    transition: all 0.2s ease;
 }
 
+/* ==========================================================================
+   UNIFIED DISABLED UI FADE (Applies to all modes)
+   ========================================================================== */
+
+/* 1. Unify all headings, labels, and values when the extension is toggled OFF */
+body:has(#toggleEnabled:not(:checked)) .eq-control label,
+body:has(#toggleEnabled:not(:checked)) .value-display,
+body:has(#toggleEnabled:not(:checked)) .section-title {
+    color: var(--text-primary) !important;
+    opacity: 0.9 !important;
+    cursor: not-allowed !important;
+    filter: none !important;
+}
+
+body:has(#toggleEnabled:not(:checked)) .section-title {
+    color: var(--primary) !important;
+    opacity: 0.9 !important;
+    cursor: not-allowed !important;
+    filter: none !important;
+}
+
+/* 2. Slightly recess the main Toggle Card (Custom Themes Only) */
+body.custom-theme:has(#toggleEnabled:not(:checked)) .toggle-switch {
+    background-color: var(--bg-card) !important;
+    filter: brightness(0.93) !important;
+    box-shadow: none !important;
+}
+
+/* 4. Toggle Card: Recessed Look */
 body.custom-theme #mainToggleContainer.toggle-muted {
     background-color: var(--bg-card) !important;
-    opacity: 1 !important;
     filter: brightness(0.93) !important;
+    /* Slightly "sunken" appearance */
     border: 1px solid var(--border-light) !important;
     box-shadow: none !important;
 }
@@ -828,7 +903,6 @@ body:not(.custom-theme) #mainControls.controls-muted .eq-control label,
 body:not(.custom-theme) #mainControls.controls-muted .value-display,
 body:not(.custom-theme) #mainControls.controls-muted .eq-control input[type="range"],
 body:not(.custom-theme) #mainControls.controls-muted .section-title,
-body:not(.custom-theme) .status-message.text-disabled,
 body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     opacity: 1 !important;
     filter: none !important;
@@ -950,62 +1024,18 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     /* 1. Force strict dimensions to match the adjacent switch (26px) */
     width: 26px !important;
     height: 26px !important;
-    
+
     /* 2. Remove default padding that expands the box */
     padding: 0 !important;
-    
+
     /* 3. Ensure border doesn't add pixels */
     border: none !important;
-    
+
     /* 4. Center the icon perfectly */
     /* REMOVED !important HERE so the .hidden class can actually work */
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* ==========================================================================
-   RESET BUTTON (Solid - Simple Opacity)
-   ========================================================================== */
-.reset-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 0;
-
-    /* PREMIUM MODE: Solid Fill */
-    background-color: var(--status-danger);
-    color: var(--text-button);
-    
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 0.95em;
-    
-    /* Default subtle shadow (kept for depth, but it won't glow on hover) */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    
-    /* CHANGE: Transition only Opacity now */
-    transition: opacity 0.2s ease;
-}
-
-.reset-button:disabled {
-    background-color: var(--bg-disabled);
-    color: var(--text-muted);
-    cursor: not-allowed;
-    /* Ensure disabled button looks faded but solid */
-    opacity: 1; 
-    box-shadow: none;
-}
-
-.reset-button:hover:not(:disabled) {
-    /* ADDED: Simple Opacity Fade */
-    opacity: 0.89;
-}
-
-.reset-button:active:not(:disabled) {
-    /* Go slightly more transparent on click */
-    opacity: 0.75;
 }
 
 /* ==========================================================================
@@ -1224,8 +1254,13 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 }
 
 .about-link-row.coffee-row .link-icon-box {
-    background: #fffbeb;
-    color: #d97706;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.about-link-row.coffee-row .link-icon-box span {
+    font-size: 1.5em; /* Slightly larger emoji to stand out */
 }
 
 .about-link-row.coffee-row:hover {
@@ -1234,22 +1269,99 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 }
 
 .about-link-row.coffee-row:hover .link-icon-box {
-    background: var(--primary);
-    color: var(--bg-card);
+    background: transparent !important;
 }
 
 .about-link-row.coffee-row:hover .link-value {
     color: var(--primary);
 }
 
+/*DARK MODE BODY*/
+
 body.dark-mode .about-link-row.coffee-row .link-icon-box {
-    background: #451a03;
-    color: #fbbf24;
+    background: #451a03; /* Deep coffee brown */
+    color: #FF7A00;      /* Electric Orange Cup */
+    opacity: 1 !important;
 }
 
+/* DARK MODE: Coffee Row Hover Fix */
 body.dark-mode .about-link-row.coffee-row:hover {
-    background: rgba(251, 191, 36, 0.1);
-    border-color: #fbbf24;
+    background: rgba(255, 122, 0, 0.15); /* Match your Electric Orange #FF7A00 */
+    border-color: #FF7A00;
+    opacity: 1 !important; /* Forces it to stay bright */
+}
+
+body.dark-mode .text-loading {
+    color: var(--text-loading) !important;
+}
+
+body.dark-mode .text-waiting {
+    color: var(--text-waiting) !important;
+}
+
+body.dark-mode .text-active {
+    color: var(--text-active) !important;
+}
+
+/* ==========================================================================
+   DARK MODE: ACTIVE (ENABLED) STATE
+   Stops the text from turning blue when you turn the extension on
+   ========================================================================== */
+body.dark-mode .eq-control label {
+    color: var(--text-primary) !important;
+    /* Pulls your #F1F5F9 White */
+}
+
+/* ==========================================================================
+   DARK MODE: ACTIVE SONG TITLE
+   ========================================================================== */
+body.dark-mode .status-message:not(.text-disabled):not(.text-waiting):not(.text-loading) {
+    color: var(--status-success) !important;
+    /* Pulls the Emerald Green */
+    text-shadow: 0 0 10px rgba(52, 211, 153, 0.2);
+    /* Adds a very subtle "active" glow */
+}
+
+/* ==========================================================================
+   DARK MODE: DISABLED SONG TITLE (Amber)
+   ========================================================================== */
+body.dark-mode .status-message.text-disabled {
+    color: var(--text-waiting) !important;
+    /* Pulls your #FBBF24 Amber */
+}
+
+/* ==========================================================================
+   DARK MODE: ACTIVE TOGGLE LABEL FIX 
+   (Syncs the toggle text to the exact same blue as your section titles)
+   ========================================================================== */
+body.dark-mode .label-enabled {
+    color: var(--primary) !important;
+}
+
+body.dark-mode .value-display {
+    color: var(--text-waiting) !important;
+}
+
+/* ==========================================================================
+   DARK MODE: DISABLED VALUES (Amber)
+   ========================================================================== */
+body.dark-mode:has(#toggleEnabled:not(:checked)) .value-display {
+    color: var(--text-waiting) !important;
+    /* Pulls the Amber color */
+    opacity: 0.9 !important;
+    cursor: not-allowed !important;
+    filter: none !important;
+}
+
+/* ==========================================================================
+   DARK MODE: DISABLED STATE
+   Keeps it white but applies the unified 0.9 opacity fade
+   ========================================================================== */
+body.dark-mode:has(#toggleEnabled:not(:checked)) .eq-control label {
+    color: var(--text-primary) !important;
+    opacity: 0.9 !important;
+    cursor: not-allowed !important;
+    filter: none !important;
 }
 
 .settings-panel label,

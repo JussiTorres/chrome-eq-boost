@@ -17,6 +17,13 @@ let isMarqueeEnabled = true;
 let copyTimeout = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
+    // 0. Immediate Theme Check (Prevents white flash)
+    chrome.storage.local.get(['darkMode'], (result) => {
+        if (result.darkMode) {
+            document.body.classList.add('dark-mode');
+        }
+    });
+
     // 1. Initialize Data
     const data = await storage.getAll();
     const currentLocale = i18n.detectLocale(data.preferredLocale);
