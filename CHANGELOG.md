@@ -2,6 +2,25 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.9.0] - 2026-02-21
+
+### 💄 UI Overhaul ("Void" Edition)
+
+- **The Void Dark Mode:** Established a premium, high-contrast midnight aesthetic using a deep blue-black base (#020617) and midnight slate cards (#0F172A).
+- **Unified "Light-Up" Logic:** Engineered a global state-management system via CSS :has() that applies a subtle opacity "fade" when disabled and a high-luminance "glow" when active.
+- **Dynamic Accent Integration:** Refactored the "Reset EQ & Vol" button to be a true chameleon; it now automatically adopts the active accent color in Custom Themes while maintaining high-contrast text.
+- **High-Luminance Status Indicators:** - Swapped standard colors for **Neon Jade** (#2DD4BF) during initialization for a digital terminal feel.
+  - Implemented **Electric Orange** (#FF7A00) for waiting/active states to provide maximum contrast against dark backgrounds.
+
+### 🎨 Design & Branding Polish
+
+- **Minimalist Footer:** Stripped the "Buy Me A Coffee" section of its container box and borders, leaving a clean, floating icon and text for a more integrated look.
+- **Hierarchy Refinement:** Synchronized all header and label blues to a unified Neon Cobalt system, eliminating clashing shades in Dark Mode.
+- **Value Display Clarity:** Forced slider numerical values to a high-contrast white and **Electric Orange** system to ensure readability regardless of the slider's position.
+
+### 🌐 Global Infrastructure
+- **Locale Synchronization:** Updated all 22 localized messages.json files to align with the revised UI hierarchy.
+
 ## [1.8.0] - 2026-02-17
 
 ### ✨ Audio Engineering (HD Upgrade)

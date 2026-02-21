@@ -10,23 +10,23 @@ A professional-grade, privacy-focused audio suite for Chrome. Boost your volume 
 
 * **Pro-Level Preamp:** Clean digital gain boost up to **400%** without distorting your source.
 * **HD 3-Band Equalizer:** Re-tuned for audiophile transparency with a range of **+/- 15dB**.
-* **Sub-Bass (80Hz):** Deep, resonant lows.
-* **Vocal Clarity (2500Hz):** Enhanced presence for speech and vocals.
-* **Air/Brilliance (8000Hz):** Crisp high-end definition.
-
-
-* **Dynamics Processing:** Built-in **3:1 Compressor** with a soft-knee transition to prevent clipping while maintaining dynamic range.
+* **Sub-Bass (80Hz):** Deep, resonant lows with a musical 0.7 Q-factor.
+* **Vocal Clarity (2500Hz):** Enhanced presence and intelligibility for speech and vocals.
+* **Air/Brilliance (8000Hz):** Crisp high-end definition for an airy, open soundstage.
+* **Dynamics Processing:** Built-in **3:1 Compressor** with a -24dB threshold and soft-knee transition to prevent clipping while preserving dynamic range.
 
 ### 🎨 Next-Gen UI & Personalization
 
+* **Venganza "Void" Design (New):** A premium, high-contrast midnight aesthetic using a deep blue-black base (`#020617`) and midnight slate cards (`#0F172A`) for reduced eye strain.
 * **Custom Theme Editor:** Create and save your own UI designs with a professional **3-color picker system**.
-* **Dynamic Contrast Engine:** Intelligent UI logic that automatically adjusts text color (Black/White) based on your chosen accent colors for maximum readability.
+* **Dynamic Contrast Engine:** Intelligent UI logic that automatically adjusts text color (Black/White) and makes the Reset button a chameleon that adapts to your chosen accent colors.
+* **Unified "Light-Up" Logic:** Smart state management via CSS `:has()` that applies a subtle opacity fade when disabled and a high-luminance **Electric Orange** (`#FF7A00`) glow when active.
 * **Retro Marquee Mode:** A scrolling "ticker" display for song titles with **Double-Click-to-Copy** functionality.
 * **Smart Dark Mode:** Persistent, high-integrity dark theme for late-night sessions.
 
 ### 🧠 Intelligent Audio Engine
 
-* **Zero-Latency:** Instant visual and auditory reaction to play/pause events.
+* **Zero-Latency:** Instant visual and auditory reaction to play/pause events with a 500ms UI polling rate.
 * **Power Efficient:** Background silence detection (30s timeout) automatically shuts down the engine to save system resources.
 * **Auto-Healing:** Verifies engine health on startup to prevent "ghost" states or frozen sliders.
 
@@ -42,7 +42,7 @@ The extension features **Auto-Language Detection** and is fully localized in **2
 
 Built with **Manifest V3** and the principle of **Least Privilege**:
 
-* **No Script Injection:** Unlike competitors, we never inject code into your webpages.
+* **No Script Injection:** Unlike competitors, we never inject code into your webpages, keeping your data safe.
 * **Sandboxed Processing:** Audio is processed in a secure, isolated **Offscreen Document** using the `tabCapture` API.
 * **Minimal Permissions:** We only ask for the permissions required to process your audio—nothing more.
 
@@ -66,15 +66,15 @@ The most secure and easiest method:
 
 ## 🛠️ Technical Stack
 
-* **Engine:** Web Audio API (`BiquadFilterNode`, `DynamicsCompressorNode`).
-* **Architecture:** Modular ES6 Javascript for high performance and maintainability.
-* **Communication:** Asynchronous Service Worker orchestration.
+* **Engine:** Web Audio API (`BiquadFilterNode`, `DynamicsCompressorNode`, `AnalyserNode`).
+* **Architecture:** Modular ES6 Javascript (`themeEngine.js`, `uiStatus.js`, `storageHelpers.js`) for high performance and maintainability.
+* **Communication:** Asynchronous Service Worker orchestration and offscreen messaging.
 
 ---
 
 ## ☕ Support the Developer
 
-This project is free and open-source. If it improves your daily browsing, consider supporting its maintenance!
+**Chrome EQ Boost** is a **Zyntra Labs** project. It is free and open-source. If it improves your daily browsing, consider supporting its maintenance!.
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180">](https://buymeacoffee.com/jussitorres)
 
@@ -84,4 +84,6 @@ This project is free and open-source. If it improves your daily browsing, consid
 
 Distributed under the **MIT License**. See `LICENSE` for details.
 
-**Copyright (c) 2025 Jussi Torres**
+**Copyright (c) 2026 Jussi Torres**
+
+---
