@@ -21,7 +21,7 @@ A professional-grade, privacy-focused audio suite for Chrome. Boost your volume 
 * **Custom Theme Editor:** Create and save your own UI designs with a professional **3-color picker system**.
 * **Dynamic Contrast Engine:** Intelligent UI logic that automatically adjusts text color (Black/White) and makes the Reset button a chameleon that adapts to your chosen accent colors.
 * **Unified "Light-Up" Logic:** Smart state management via CSS `:has()` that applies a subtle opacity fade when disabled and a high-luminance **Electric Orange** (`#FF7A00`) glow when active.
-* **Retro Marquee Mode:** A scrolling "ticker" display for song titles with **Double-Click-to-Copy** functionality.
+* **Retro Marquee Mode:** A scrolling "ticker" display for song titles.
 * **Smart Dark Mode:** Persistent, high-integrity dark theme for late-night sessions.
 
 ### 🧠 Intelligent Audio Engine
