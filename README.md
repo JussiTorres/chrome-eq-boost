@@ -74,7 +74,7 @@ The most secure and easiest method:
 
 ## ☕ Support the Developer
 
-**Chrome EQ Boost** is a **Zyntra Labs** project. It is free and open-source. If it improves your daily browsing, consider supporting its maintenance!.
+**Chrome EQ Boost** is free and open-source. If it improves your daily browsing, consider supporting its maintenance!.
 
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180">](https://buymeacoffee.com/jussitorres)
 
