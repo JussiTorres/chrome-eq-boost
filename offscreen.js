@@ -23,7 +23,7 @@ function createFilter(type, frequency) {
     return filter;
 }
 
-async function startProcessing(streamId) {
+async function startProcessing(streamId, savedSettings = {}) {
     if (audioContext) {
         await audioContext.close().catch(() => { });
         audioContext = null;
@@ -87,25 +87,11 @@ async function startProcessing(streamId) {
             .connect(compressor)
             .connect(audioContext.destination);
 
-        // Restore saved settings
-        let settings = {
-            volumeLevel: 1,
-            bassLevel: 0,
-            midLevel: 0,
-            trebleLevel: 0
-        };
-
-        if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.local) {
-            try {
-                const stored = await chrome.storage.local.get(["volumeLevel", "bassLevel", "midLevel", "trebleLevel"]);
-                settings = { ...settings, ...stored };
-            } catch (e) { }
-        }
-
-        gainNode.gain.value = settings.volumeLevel ?? 1;
-        bass.gain.value = settings.bassLevel ?? 0;
-        mid.gain.value = settings.midLevel ?? 0;
-        treble.gain.value = settings.trebleLevel ?? 0;
+        // Apply them immediately using the settings passed from the service worker
+        gainNode.gain.value = savedSettings.volumeLevel ?? 1.0;
+        bass.gain.value = savedSettings.bassLevel ?? 0.0;
+        mid.gain.value = savedSettings.midLevel ?? 0.0;
+        treble.gain.value = savedSettings.trebleLevel ?? 0.0;
 
         // Anti-sleep hack
         const osc = audioContext.createOscillator();
@@ -146,19 +132,9 @@ async function startProcessing(streamId) {
 
             // ONLY here does the system auto-shutdown
             if (silenceSeconds >= 30) {
-                // Secondary safety check for storage access
-                if (chrome.storage && chrome.storage.local) {
-                    chrome.storage.local.set({ isEnabled: false });
-                    chrome.storage.local.remove("capturingTabId");
-                }
-
-                if (audioContext) audioContext.close();
-                clearInterval(silenceInterval);
-                silenceInterval = null;
+                // Delegate to the reliable service worker instead of touching storage here
+                chrome.runtime.sendMessage({ type: "SILENCE_TIMEOUT" }).catch(() => { });
                 silenceSeconds = 0;
-
-                // Explicitly notify any open popups
-                chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: false }).catch(() => { });
             }
         }, 1000);
 
@@ -172,7 +148,8 @@ async function startProcessing(streamId) {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if ("INCOMING_STREAM" === message.type) {
-        startProcessing(message.streamId);
+        // Pass the settings into the processing function
+        startProcessing(message.streamId, message.settings);
         sendResponse({ success: true });
         return false;
     }

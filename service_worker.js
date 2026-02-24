@@ -19,13 +19,23 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         (async () => {
             try {
                 await ensureOffscreen();
-                chrome.tabCapture.getMediaStreamId({ targetTabId: message.tabId }, (streamId) => {
+                chrome.tabCapture.getMediaStreamId({ targetTabId: message.tabId }, async (streamId) => {
                     if (chrome.runtime.lastError || !streamId) {
                         return sendResponse({ success: false });
                     }
                     chrome.storage.local.set({ capturingTabId: message.tabId });
-                    chrome.runtime.sendMessage({ type: "INCOMING_STREAM", streamId: streamId }).catch(() => { });
-                    sendResponse({ success: true }); // Success response
+
+                    // 1. Fetch settings here where the API is 100% stable
+                    const settings = await chrome.storage.local.get(["volumeLevel", "bassLevel", "midLevel", "trebleLevel"]);
+
+                    // 2. Pass them directly to the offscreen document
+                    chrome.runtime.sendMessage({
+                        type: "INCOMING_STREAM",
+                        streamId: streamId,
+                        settings: settings
+                    }).catch(() => { });
+
+                    sendResponse({ success: true });
                 });
             } catch (error) {
                 sendResponse({ success: false });
@@ -44,7 +54,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if ("STREAM_ENDED_EXTERNALLY" === message.type) {
         chrome.storage.local.remove("capturingTabId");
         chrome.storage.local.set({ isEnabled: false });
-        sendResponse({ status: "cleaned" }); // Added response
+        // Add this line to kill the zombie offscreen document
+        chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
+        sendResponse({ status: "cleaned" });
+        return false;
+    }
+
+    // Add this new block to handle the 30-second silence timeout securely
+    if ("SILENCE_TIMEOUT" === message.type) {
+        chrome.storage.local.remove("capturingTabId");
+        chrome.storage.local.set({ isEnabled: false });
+        chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
+        sendResponse({ status: "cleaned" });
         return false;
     }
 });
