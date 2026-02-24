@@ -2,6 +2,12 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.9.1] - 2026-02-24
+
+### 🛡️ Stability & Core Architecture
+- **Zombie Context Fix:** Centralized audio lifecycle management to the Service Worker, preventing the `AudioContext` from running infinitely in the background when streams are cut externally.
+- **Storage Crash Resolution:** Prevented random extension resets by removing direct `chrome.storage` modifications from the offscreen document. The 30-second silence watchdog now delegates shutdown commands securely to the background worker.
+
 ## [1.9.0] - 2026-02-21
 
 ### 💄 UI Overhaul ("Void" Edition)
