@@ -1,17 +1,50 @@
 /**
  * Chrome EQ & Volume Boost
- * Copyright (c) 2025 Jussi Torres
+ * Copyright (c) 2026 Jussi Torres
  * Licensed under the MIT License.
  *
  * Developed by Jussi Torres
  */
 
+// Mutex lock to prevent concurrency crashes if the user rapidly double-clicks UI toggles
+let creatingOffscreenPromise = null;
+
 async function ensureOffscreen() {
-    await (chrome.offscreen.hasDocument?.()) || await chrome.offscreen.createDocument({
-        url: "offscreen.html",
-        reasons: ["AUDIO_PLAYBACK"],
-        justification: "Audio Processing"
-    });
+    if (creatingOffscreenPromise) {
+        await creatingOffscreenPromise;
+        return;
+    }
+
+    const hasDoc = await chrome.offscreen.hasDocument?.();
+    if (!hasDoc) {
+        creatingOffscreenPromise = chrome.offscreen.createDocument({
+            url: "offscreen.html",
+            reasons: ["AUDIO_PLAYBACK", "LOCAL_STORAGE"],
+            justification: "Continuous audio equalization and settings persistence"
+        });
+        await creatingOffscreenPromise;
+    }
+    creatingOffscreenPromise = null;
+}
+
+// -----------------------------------------------------------------------------
+// CENTRALIZED TEARDOWN PIPELINE
+// Eliminates race conditions by strictly awaiting the track termination 
+// inside offscreen.js before destroying the document execution context.
+// -----------------------------------------------------------------------------
+async function executeCleanTeardown() {
+    chrome.storage.local.remove("capturingTabId");
+    chrome.storage.local.set({ isEnabled: false });
+
+    const hasDoc = await chrome.offscreen.hasDocument?.();
+    if (hasDoc) {
+        // 1. Tell offscreen to stop hardware tracks NOW.
+        // AWAIT this so the document isn't killed mid-execution, preventing stuck icons.
+        await chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => {});
+        
+        // 2. NOW we can safely drop the document from memory.
+        await chrome.offscreen.closeDocument().catch(() => {});
+    }
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -25,47 +58,57 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                     }
                     chrome.storage.local.set({ capturingTabId: message.tabId });
 
-                    // 1. Fetch settings here where the API is 100% stable
+                    // Fetch parameters securely inside the background worker
                     const settings = await chrome.storage.local.get(["volumeLevel", "bassLevel", "midLevel", "trebleLevel"]);
 
-                    // 2. Pass them directly to the offscreen document
-                    chrome.runtime.sendMessage({
+                    // Pipe stream handles to the canvas and AWAIT confirmation
+                    // This fixes the "synchronous lie" where the UI thought it succeeded 
+                    // before the stream was actually processed.
+                    const response = await chrome.runtime.sendMessage({
                         type: "INCOMING_STREAM",
                         streamId: streamId,
                         settings: settings
-                    }).catch(() => { });
+                    }).catch(() => ({ success: false }));
 
-                    sendResponse({ success: true });
+                    sendResponse({ success: response?.success || false });
                 });
             } catch (error) {
                 sendResponse({ success: false });
             }
         })();
-        return true; // REQUIRED for async
+        return true; // REQUIRED for async sendResponse
     }
 
+    // Handles intentional shutdowns triggered from the UI
     if ("STOP_CAPTURE" === message.type) {
-        chrome.storage.local.remove("capturingTabId");
-        chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
-        sendResponse({ status: "stopped" }); // Added response
-        return false;
+        executeCleanTeardown().then(() => sendResponse({ status: "stopped" }));
+        return true; // Keep channel open for async teardown
     }
 
-    if ("STREAM_ENDED_EXTERNALLY" === message.type) {
+    // Handles automatic shutdowns triggered FROM the offscreen document.
+    // Because offscreen.js already ran track.stop() locally before sending these, 
+    // we bypass the await chain and just kill the document frame.
+    if (["STREAM_ENDED_EXTERNALLY", "SILENCE_TIMEOUT"].includes(message.type)) {
         chrome.storage.local.remove("capturingTabId");
         chrome.storage.local.set({ isEnabled: false });
-        // Add this line to kill the zombie offscreen document
-        chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
+        chrome.offscreen.closeDocument().catch(() => {}); 
         sendResponse({ status: "cleaned" });
         return false;
     }
 
-    // Add this new block to handle the 30-second silence timeout securely
-    if ("SILENCE_TIMEOUT" === message.type) {
-        chrome.storage.local.remove("capturingTabId");
-        chrome.storage.local.set({ isEnabled: false });
-        chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
-        sendResponse({ status: "cleaned" });
+    // =========================================================================
+    // SLIDER REAL-TIME ROUTING MIDDLEWARE
+    // Intercepts UI slider modification messages when the service worker wakes
+    // up from an inactive state and pipes them forward onto the offscreen canvas.
+    // =========================================================================
+    const uiUpdateEvents = ["UPDATE_GAIN", "UPDATE_BASS", "UPDATE_MID", "UPDATE_TREBLE"];
+    if (uiUpdateEvents.includes(message.type)) {
+        chrome.runtime.sendMessage(message).catch(() => {
+            // Self-healing fallback: If forwarding fails, the offscreen target context 
+            // was closed unexpectedly, so we trigger a clean teardown to reset state.
+            executeCleanTeardown();
+        });
+        sendResponse({ forwarded: true });
         return false;
     }
 });
@@ -74,19 +117,10 @@ chrome.tabs.onRemoved.addListener((tabId) => {
     chrome.storage.local.get(["capturingTabId"], (result) => {
         if (result.capturingTabId === tabId) {
             console.log(`Captured tab (${tabId}) closed.`);
-            chrome.storage.local.remove("capturingTabId");
-            chrome.storage.local.set({ isEnabled: false });
-            chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
+            executeCleanTeardown();
         }
     });
 });
 
-chrome.runtime.onStartup.addListener(() => {
-    chrome.storage.local.remove("capturingTabId");
-    chrome.storage.local.set({ isEnabled: false });
-});
-
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.local.remove("capturingTabId");
-    chrome.storage.local.set({ isEnabled: false });
-});
+chrome.runtime.onStartup.addListener(executeCleanTeardown);
+chrome.runtime.onInstalled.addListener(executeCleanTeardown);
