@@ -1,6 +1,6 @@
 /**
  * Chrome EQ & Volume Boost
- * Copyright (c) 2026 Jussi Torres
+ * Copyright (c) 2025-2026 Jussi Torres
  * Licensed under the MIT License.
  *
  * Developed by Jussi Torres
