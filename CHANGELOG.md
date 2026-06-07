@@ -2,6 +2,25 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [1.10.0] - 2026-06-06
+
+### 🏗️ Architectural Overhaul (Core Engine)
+- **Linear Audio Pipeline:** Rerouted the `AnalyserNode` and `destination` to follow the `DynamicsCompressor` node. This ensures that the visualizer and silence watchdog analyze the final, high-fidelity processed signal instead of the raw input.
+- **Centralized Teardown Pipeline:** Implemented `executeCleanTeardown()` and `stopHardwareTracks()` as a strict source of truth for resource disposal, eliminating "zombie" offscreen documents and hanging casting icons.
+- **Robust Auto-Healing:** Added `onstatechange` listeners to proactively resume `AudioContext` if suspended by Chromium (e.g., system sleep or tab discarding).
+- **Concurrency Control:** Introduced a mutex lock (`creatingOffscreenPromise`) to prevent race conditions caused by rapid UI toggling.
+- **Middleware Routing:** Implemented real-time routing for slider events, ensuring UI states persist correctly even if the service worker wakes from an inactive state.
+
+### ✨ Features & Branding
+- **New Theme - "Amber Wave":** Introduced a premium theme using a deep coffee base (`#120b08`) and vibrant amber accents (`#f59e0b`).
+- **Brand Update:** Refreshed the extension's identity with the new motto: *"One world in perfect harmony."*, updated globally across all 22 locales and UI surfaces.
+- **Compliance Refresh:** Updated all copyright notices to `2025-2026` across the entire codebase and `LICENSE` file.
+
+### 🛡️ Stability & Maintenance
+- **Resilience:** Implemented a new "grace period" for the silence watchdog, now featuring a 30-minute buffer for extended sessions.
+- **Async Hygiene:** Standardized `onMessage` listeners to return `true` for asynchronous operations, preventing hanging message channels and potential `lastError` warnings.
+- **Version Bump:** Official release v1.10.0.
+
 ## [1.9.1] - 2026-02-24
 
 ### 🛡️ Stability & Core Architecture

@@ -1,6 +1,6 @@
 /**
  * Chrome EQ & Volume Boost
- * Copyright (c) 2025 Jussi Torres
+ * Copyright (c) 2025-2026 Jussi Torres
  * Licensed under the MIT License.
  *
  * Developed by Jussi Torres
@@ -59,7 +59,12 @@ export const PRESET_THEMES = {
     "Rosita": {
         bgBody: "#ffdddd",
         bgCard: "#ffbbbb",
-        accentColor: "#000000"
+        accentColor: "#2A0815"
+    },
+    "Amber Wave": {
+        bgBody: "#120b08",
+        bgCard: "#1f1612",
+        accentColor: "#f59e0b"
     }
 
 };

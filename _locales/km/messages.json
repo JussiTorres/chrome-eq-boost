@@ -6,7 +6,7 @@
         "message": "Equalizer កំពុងដំណើរការ"
     },
     "status_disabled": {
-        "message": "Extension ត្រូវបានបិទ"
+        "message": "បានបិទ Extension"
     },
     "status_waiting": {
         "message": "កំពុងរង់ចាំសំឡេង..."
@@ -21,7 +21,7 @@
         "message": "កម្រិតសំឡេង (Preamp)"
     },
     "section_eq": {
-        "message": "Equalizer (-15dB ដល់ +15dB)"
+        "message": "Equalizer (-15dB ទៅ +15dB)"
     },
     "label_bass": {
         "message": "Bass (80 Hz)"
@@ -33,10 +33,10 @@
         "message": "Treble (8000 Hz)"
     },
     "conflict_warning": {
-        "message": "🔊 ផ្ទាំងមួយទៀតកំពុងត្រូវបានពង្រីកសំឡេង"
+        "message": "🔊 ផ្ទាំងផ្សេងកំពុងបង្កើនសំឡេង"
     },
     "button_takeover": {
-        "message": "ប្រើលើផ្ទាំងនេះ"
+        "message": "ប្រើនៅផ្ទាំងនេះ"
     },
     "settings_title": {
         "message": "ការកំណត់"
@@ -60,10 +60,10 @@
         "message": "Chrome EQ & Volume"
     },
     "about_subtitle": {
-        "message": "បង្កើនសំឡេងរបស់អ្នកដល់កម្រិតអតិបរមា"
+        "message": "ពិភពលោកតែមួយក្នុងភាពចុះសម្រុងគ្នាយ៉ាងល្អឥតខ្ចោះ。"
     },
     "settings_dark_mode": {
-        "message": "Dark Mode"
+        "message": "របៀបងងឹត"
     },
     "settings_marquee": {
         "message": "ចំណងជើងរំកិល"
@@ -75,10 +75,10 @@
         "message": "កម្មវិធីកែ Theme"
     },
     "label_bg_body": {
-        "message": "Background កម្មវិធី"
+        "message": "ផ្ទៃខាងក្រោយកម្មវិធី"
     },
     "label_bg_card": {
-        "message": "Background កាត"
+        "message": "ផ្ទៃខាងក្រោយកាត"
     },
     "label_text_accent": {
         "message": "អក្សរ និងពណ៌លេចធ្លោ"
@@ -87,22 +87,22 @@
         "message": "បណ្ណាល័យ"
     },
     "placeholder_select_theme": {
-        "message": "ជ្រើសរើស theme..."
+        "message": "ជ្រើសរើស Theme..."
     },
     "placeholder_new_theme": {
-        "message": "ឈ្មោះ theme ថ្មី"
+        "message": "ឈ្មោះ Theme ថ្មី"
     },
     "button_save": {
         "message": "រក្សាទុក"
     },
     "button_reset_defaults": {
-        "message": "កំណត់ដើមវិញ"
+        "message": "កំណត់ឡើងវិញទៅលំនាំដើម"
     },
     "button_replace": {
         "message": "ជំនួស"
     },
     "button_confirm": {
-        "message": "အတည်ပြု"
+        "message": "យល់ព្រម"
     },
     "button_cancel": {
         "message": "បោះបង់"
@@ -111,13 +111,13 @@
         "message": "លុប Theme?"
     },
     "modal_delete_msg": {
-        "message": "តើអ្នកប្រាកដថាចង់លុប {{NAME}} ទេ?"
+        "message": "តើអ្នកពិតជាចង់លុប {{NAME}} មែនទេ?"
     },
     "modal_overwrite_title": {
         "message": "សរសេរជាន់លើ Theme?"
     },
     "modal_overwrite_msg": {
-        "message": "\"{{NAME}}\" មានរួចហើយ។ ជំនួសវាឬ?"
+        "message": "\"{{NAME}}\" មានរួចហើយ។ ចង់ជំនួសវាឬ?"
     },
     "feedback_saved": {
         "message": "បានរក្សាទុក!"
@@ -129,10 +129,10 @@
         "message": "គ្មានការផ្លាស់ប្តូរ"
     },
     "feedback_already_default": {
-        "message": "លំនាំដើមរួចហើយ"
+        "message": "ជាលំនាំដើមរួចហើយ"
     },
     "alert_invalid_name": {
-        "message": "ឈ្មោះមិនត្រឹមត្រូវ."
+        "message": "ឈ្មោះមិនត្រឹមត្រូវ។"
     },
     "label_support": {
         "message": "ជំនួយ"
