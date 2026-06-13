@@ -33,7 +33,7 @@ export const uiStatus = {
             statusMsg.classList.remove('text-disabled', 'text-waiting', 'text-loading', 'text-active', 'text-conflict', 'marquee-text');
             container.classList.remove('mask-active');
             statusMsg.style.animationDelay = "";
-            statusMsg.textContent = ""; 
+            statusMsg.textContent = "";
             statusMsg.setAttribute("data-ui-type", nextType);
         }
 
@@ -120,11 +120,29 @@ export const uiStatus = {
 
                 const iconUrl = tab.favIconUrl || '';
                 const content = isMarqueeEnabled
-                    ? `<span class="marquee-content"><img src="${iconUrl}" class="separator-icon"><span>${tab.title}</span></span>`.repeat(4)
-                    : `<span class="static-wrapper" style="display:inline-flex;align-items:center;justify-content:center;max-width:100%;"><img src="${iconUrl}" class="separator-icon" style="margin-right:6px;"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${tab.title}</span></span>`;
+                    ? `<span class="marquee-content"><img src="${iconUrl}" class="separator-icon" style="flex-shrink:0;"><span dir="auto">${tab.title}</span></span>`.repeat(4)
+                    : `<span class="static-wrapper" style="display:inline-flex;align-items:center;justify-content:center;max-width:100%;gap:5px;"><img src="${iconUrl}" class="separator-icon" style="flex-shrink:0;"><span dir="auto" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:100%;">${tab.title}</span></span>`;
 
                 statusMsg.innerHTML = content;
                 statusMsg.setAttribute("data-last-title", tab.title);
+
+                // --- LA OPCIÓN NUCLEAR: Cálculo Javascript de Píxeles ---
+                if (isMarqueeEnabled) {
+                    // 1. Forzar reflow para que el navegador dimensione el contenido
+                    statusMsg.style.animation = 'none';
+                    statusMsg.offsetWidth;
+
+                    // 2. Extraer el ancho real absoluto en píxeles
+                    const totalWidth = statusMsg.scrollWidth;
+                    const halfWidth = totalWidth / 2;
+
+                    // 3. Inyectar la variable CSS personalizada
+                    statusMsg.style.setProperty('--marquee-travel', `-${halfWidth}px`);
+
+                    // 4. Reactivar la animación
+                    statusMsg.style.animation = '';
+                }
+                // --------------------------------------------------------
             }
         } catch (e) {
             statusMsg.textContent = i18n.t("status_active") || "Active";

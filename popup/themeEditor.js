@@ -399,9 +399,8 @@ export const themeEditor = {
     async refreshThemeList(select) {
         const data = await storage.getAll();
         libraryThemes = data.savedThemes || {};
-        const placeholder = i18n.t("placeholder_select_theme"); //
-        select.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
-        Object.keys(libraryThemes).forEach(name => {
+        const placeholder = i18n.t("placeholder_select_theme");
+        select.innerHTML = `<option value="" disabled selected data-i18n="placeholder_select_theme">${placeholder}</option>`; Object.keys(libraryThemes).forEach(name => {
             const opt = document.createElement("option");
             opt.value = name; opt.textContent = name;
             select.appendChild(opt);

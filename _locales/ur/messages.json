@@ -1,0 +1,140 @@
+{
+  "status_loading": {
+    "message": "شروع ہو رہا ہے..."
+  },
+  "status_active": {
+    "message": "ایکولائزر فعال ہے"
+  },
+  "status_disabled": {
+    "message": "ایکسٹینشن غیر فعال ہے"
+  },
+  "status_waiting": {
+    "message": "آڈیو کا انتظار ہے..."
+  },
+  "toggle_label": {
+    "message": "ایکسٹینشن فعال ہے"
+  },
+  "button_reset": {
+    "message": "EQ اور والیوم ری سیٹ کریں"
+  },
+  "section_volume": {
+    "message": "والیوم (Preamp)"
+  },
+  "section_eq": {
+    "message": "ایکولائزر (-15dB سے +15dB)"
+  },
+  "label_bass": {
+    "message": "بیس (80 Hz)"
+  },
+  "label_mids": {
+    "message": "مڈز (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "ٹریبل (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 ایک اور ٹیب کو ایمپلیفائی کیا جا رہا ہے۔"
+  },
+  "button_takeover": {
+    "message": "اس ٹیب پر استعمال کریں"
+  },
+  "settings_title": {
+    "message": "ترتیبات"
+  },
+  "status_conflict": {
+    "message": "دوسرے ٹیب کو کنٹرول کر رہا ہے"
+  },
+  "settings_language_label": {
+    "message": "زبان"
+  },
+  "footer_buy_coffee": {
+    "message": "میرے لیے ایک کافی خریدیں"
+  },
+  "footer_made_with": {
+    "message": "❤️ کے ساتھ بنایا گیا"
+  },
+  "about_title": {
+    "message": "تعارف"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "ایک دنیا کامل ہم آہنگی میں۔"
+  },
+  "settings_dark_mode": {
+    "message": "ڈارک موڈ"
+  },
+  "settings_marquee": {
+    "message": "سکرولنگ ٹائٹل"
+  },
+  "settings_custom_theme": {
+    "message": "کسٹم تھیم"
+  },
+  "custom_theme_title": {
+    "message": "تھیم ایڈیٹر"
+  },
+  "label_bg_body": {
+    "message": "ایپ کا پس منظر"
+  },
+  "label_bg_card": {
+    "message": "کارڈ کا پس منظر"
+  },
+  "label_text_accent": {
+    "message": "متن اور لہجہ"
+  },
+  "label_library": {
+    "message": "لائبریری"
+  },
+  "placeholder_select_theme": {
+    "message": "ایک تھیم منتخب کریں..."
+  },
+  "placeholder_new_theme": {
+    "message": "نیا تھیم کا نام"
+  },
+  "button_save": {
+    "message": "محفوظ کریں"
+  },
+  "button_reset_defaults": {
+    "message": "ڈیفالٹ پر ری سیٹ کریں"
+  },
+  "button_replace": {
+    "message": "تبدیل کریں"
+  },
+  "button_confirm": {
+    "message": "تصدیق کریں"
+  },
+  "button_cancel": {
+    "message": "منسوخ کریں"
+  },
+  "modal_delete_title": {
+    "message": "تھیم ڈیلیٹ کریں؟"
+  },
+  "modal_delete_msg": {
+    "message": "کیا آپ واقعی {{NAME}} کو مستقل طور پر حذف کرنا چاہتے ہیں؟"
+  },
+  "modal_overwrite_title": {
+    "message": "تھیم اوور رائٹ کریں؟"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" پہلے سے موجود ہے۔ کیا اسے تبدیل کریں؟"
+  },
+  "feedback_saved": {
+    "message": "محفوظ ہو گیا!"
+  },
+  "feedback_reset_success": {
+    "message": "ڈیفالٹس بحال ہو گئے!"
+  },
+  "feedback_no_changes": {
+    "message": "کوئی تبدیلی نہیں"
+  },
+  "feedback_already_default": {
+    "message": "پہلے ہی ڈیفالٹ ہے"
+  },
+  "alert_invalid_name": {
+    "message": "تھیم کا نام غلط ہے۔"
+  },
+  "label_support": {
+    "message": "سپورٹ"
+  }
+}

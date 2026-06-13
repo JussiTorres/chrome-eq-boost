@@ -1,0 +1,140 @@
+{
+  "status_loading": {
+    "message": "جاري التهيئة..."
+  },
+  "status_active": {
+    "message": "مُعادل الصوت نشط"
+  },
+  "status_disabled": {
+    "message": "تم تعطيل الإضافة"
+  },
+  "status_waiting": {
+    "message": "في انتظار الصوت..."
+  },
+  "toggle_label": {
+    "message": "الإضافة مفعلة"
+  },
+  "button_reset": {
+    "message": "إعادة ضبط EQ والصوت"
+  },
+  "section_volume": {
+    "message": "مستوى الصوت (Preamp)"
+  },
+  "section_eq": {
+    "message": "مُعادل الصوت (-15dB إلى +15dB)"
+  },
+  "label_bass": {
+    "message": "البيس (80 Hz)"
+  },
+  "label_mids": {
+    "message": "المتوسطات (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "التريبل (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 يتم تضخيم تبويب آخر."
+  },
+  "button_takeover": {
+    "message": "استخدم على هذا التبويب"
+  },
+  "settings_title": {
+    "message": "الإعدادات"
+  },
+  "status_conflict": {
+    "message": "يتحكم في تبويب آخر"
+  },
+  "settings_language_label": {
+    "message": "اللغة"
+  },
+  "footer_buy_coffee": {
+    "message": "اشترِ لي قهوة"
+  },
+  "footer_made_with": {
+    "message": "صُنع بـ ❤️ بواسطة"
+  },
+  "about_title": {
+    "message": "حول"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "عالم واحد في تناغم تام."
+  },
+  "settings_dark_mode": {
+    "message": "الوضع الداكن"
+  },
+  "settings_marquee": {
+    "message": "عنوان متحرك"
+  },
+  "settings_custom_theme": {
+    "message": "مظهر مخصص"
+  },
+  "custom_theme_title": {
+    "message": "محرر المظهر"
+  },
+  "label_bg_body": {
+    "message": "خلفية التطبيق"
+  },
+  "label_bg_card": {
+    "message": "خلفية البطاقة"
+  },
+  "label_text_accent": {
+    "message": "النص والتمييز"
+  },
+  "label_library": {
+    "message": "المكتبة"
+  },
+  "placeholder_select_theme": {
+    "message": "اختر مظهرًا..."
+  },
+  "placeholder_new_theme": {
+    "message": "اسم المظهر الجديد"
+  },
+  "button_save": {
+    "message": "حفظ"
+  },
+  "button_reset_defaults": {
+    "message": "استعادة الافتراضيات"
+  },
+  "button_replace": {
+    "message": "استبدال"
+  },
+  "button_confirm": {
+    "message": "تأكيد"
+  },
+  "button_cancel": {
+    "message": "إلغاء"
+  },
+  "modal_delete_title": {
+    "message": "حذف المظهر؟"
+  },
+  "modal_delete_msg": {
+    "message": "هل أنت متأكد أنك تريد حذف {{NAME}} نهائيًا؟"
+  },
+  "modal_overwrite_title": {
+    "message": "استبدال المظهر؟"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" موجود مسبقًا. هل تريد استبداله؟"
+  },
+  "feedback_saved": {
+    "message": "تم الحفظ!"
+  },
+  "feedback_reset_success": {
+    "message": "تمت استعادة الافتراضيات!"
+  },
+  "feedback_no_changes": {
+    "message": "لا توجد تغييرات"
+  },
+  "feedback_already_default": {
+    "message": "افتراضي مسبقًا"
+  },
+  "alert_invalid_name": {
+    "message": "اسم المظهر غير صالح."
+  },
+  "label_support": {
+    "message": "الدعم"
+  }
+}

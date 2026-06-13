@@ -1,0 +1,140 @@
+{
+  "status_loading": {
+    "message": "מאתחל..."
+  },
+  "status_active": {
+    "message": "האקולייזר פעיל"
+  },
+  "status_disabled": {
+    "message": "התוסף מושבת"
+  },
+  "status_waiting": {
+    "message": "ממתין לשמע..."
+  },
+  "toggle_label": {
+    "message": "התוסף פעיל"
+  },
+  "button_reset": {
+    "message": "איפוס EQ ועוצמה"
+  },
+  "section_volume": {
+    "message": "עוצמת שמע (Preamp)"
+  },
+  "section_eq": {
+    "message": "אקולייזר (-15dB עד +15dB)"
+  },
+  "label_bass": {
+    "message": "באס (80 Hz)"
+  },
+  "label_mids": {
+    "message": "מידס (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "טרבל (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 כרטיסייה אחרת מוגברת כעת."
+  },
+  "button_takeover": {
+    "message": "השתמש בכרטיסייה זו"
+  },
+  "settings_title": {
+    "message": "הגדרות"
+  },
+  "status_conflict": {
+    "message": "שולט בכרטיסייה אחרת"
+  },
+  "settings_language_label": {
+    "message": "שפה"
+  },
+  "footer_buy_coffee": {
+    "message": "קנה לי קפה"
+  },
+  "footer_made_with": {
+    "message": "נוצר עם ❤️ על ידי"
+  },
+  "about_title": {
+    "message": "אודות"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "עולם אחד בהרמוניה מושלמת."
+  },
+  "settings_dark_mode": {
+    "message": "מצב כהה"
+  },
+  "settings_marquee": {
+    "message": "כותרת נגללת"
+  },
+  "settings_custom_theme": {
+    "message": "ערכת עיצוב מותאמת אישית"
+  },
+  "custom_theme_title": {
+    "message": "עורך ערכות עיצוב"
+  },
+  "label_bg_body": {
+    "message": "רקע האפליקציה"
+  },
+  "label_bg_card": {
+    "message": "רקע הכרטיס"
+  },
+  "label_text_accent": {
+    "message": "טקסט והדגשה"
+  },
+  "label_library": {
+    "message": "ספרייה"
+  },
+  "placeholder_select_theme": {
+    "message": "בחר ערכת עיצוב..."
+  },
+  "placeholder_new_theme": {
+    "message": "שם ערכת עיצוב חדשה"
+  },
+  "button_save": {
+    "message": "שמירה"
+  },
+  "button_reset_defaults": {
+    "message": "איפוס לברירת מחדל"
+  },
+  "button_replace": {
+    "message": "החלפה"
+  },
+  "button_confirm": {
+    "message": "אישור"
+  },
+  "button_cancel": {
+    "message": "ביטול"
+  },
+  "modal_delete_title": {
+    "message": "למחוק את ערכת העיצוב?"
+  },
+  "modal_delete_msg": {
+    "message": "האם אתה בטוח שברצונך למחוק לצמיתות את {{NAME}}?"
+  },
+  "modal_overwrite_title": {
+    "message": "לדרוס את ערכת העיצוב?"
+  },
+  "modal_overwrite_msg": {
+    "message": "ערכת העיצוב \"{{NAME}}\" כבר קיימת. האם להחליף אותה?"
+  },
+  "feedback_saved": {
+    "message": "נשמר!"
+  },
+  "feedback_reset_success": {
+    "message": "ערכי ברירת המחדל שוחזרו!"
+  },
+  "feedback_no_changes": {
+    "message": "אין שינויים"
+  },
+  "feedback_already_default": {
+    "message": "כבר ברירת מחדל"
+  },
+  "alert_invalid_name": {
+    "message": "שם ערכת עיצוב לא חוקי."
+  },
+  "label_support": {
+    "message": "תמיכה"
+  }
+}

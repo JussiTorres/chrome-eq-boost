@@ -14,6 +14,13 @@ export const i18n = {
             const url = chrome.runtime.getURL(`_locales/${locale}/messages.json`);
             const response = await fetch(url);
             currentMessages = await response.json();
+            
+            // --- FUSED RTL ENGINE CONFIGURATION ---
+            // Handles native text layout direction changes dynamically without structural regressions
+            const rtlLocales = ["ar", "he", "fa", "ur"];
+            document.documentElement.lang = locale;
+            document.documentElement.dir = rtlLocales.includes(locale) ? "rtl" : "ltr";
+
             this.apply();
         } catch (e) {
             console.error("Error loading language:", e);
@@ -63,10 +70,12 @@ export const i18n = {
     detectLocale(savedLocale) {
         if (savedLocale) return savedLocale;
 
+        // FUSED: Includes your full stable production locale targets
         const supported = [
             "en", "es", "pt_BR", "de", "fr", "it", "pl", "ru", "uk", "tr",
             "id", "ja", "ko", "hi", "zh_CN", "zh_TW",
-            "th", "vi", "fil", "km", "lt", "nl"
+            "th", "vi", "fil", "km", "lt", "nl",
+            "fi", "sv", "ar"
         ];
         // Match browser language to supported extension locales
         const uiLang = chrome.i18n.getUILanguage().replace('-', '_');

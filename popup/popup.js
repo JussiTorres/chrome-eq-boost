@@ -17,6 +17,20 @@ let isMarqueeEnabled = true;
 let copyTimeout = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
+    // --- 0ms SYNCHRONOUS UI LOCK (PREVENTS 500ms FLASH) ---
+    // Accessing localStorage synchronously mutates the DOM before Chrome can draw the initial frame.
+    const dropdown = document.getElementById("languageDropdown");
+    const summary = document.getElementById("dropdownSelected");
+    
+    const cachedLang = localStorage.getItem("syncLocaleCache") || "en";
+    if (dropdown && summary) {
+        const activeOption = dropdown.querySelector(`.option[data-value="${cachedLang}"]`);
+        if (activeOption) {
+            summary.textContent = activeOption.textContent;
+            activeOption.classList.add("selected"); // Immediate pre-paint typography weight change
+        }
+    }
+
     // 0. Immediate Theme Check (Prevents white flash)
     chrome.storage.local.get(['darkMode'], (result) => {
         if (result.darkMode) {
@@ -25,16 +39,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // 1. Initialize Data
+    // Execution safely yields here while awaiting extension database asynchronous disk reads.
     const data = await storage.getAll();
-    const currentLocale = i18n.detectLocale(data.preferredLocale);
-    const editThemeBtn = document.getElementById("editThemeBtn"); // Reference established for startup check
+    let currentLocale = i18n.detectLocale(data.preferredLocale); 
+    
+    localStorage.setItem("syncLocaleCache", currentLocale);
+    const editThemeBtn = document.getElementById("editThemeBtn");
+
+    // Bulletproof baseline sync: verify highlights line up with asynchronous storage accuracy
+    if (dropdown) {
+        dropdown.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+        const actualActive = dropdown.querySelector(`.option[data-value="${currentLocale}"]`);
+        if (actualActive) {
+            actualActive.classList.add('selected');
+        }
+    }
+
     await i18n.load(currentLocale);
 
     // 2. Initialize Visuals (Theme Engine + Editor)
     themeEngine.init(data);
     await themeEditor.init();
 
-    // Logic for the edit pencil visibility on initial boot
     if (data.customThemeEnabled && editThemeBtn) {
         editThemeBtn.classList.remove("hidden");
     }
@@ -73,7 +99,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const statusMsg = document.getElementById("statusMessage");
     const takeOverBtn = document.getElementById("takeOverBtn");
     const marqueeToggle = document.getElementById("marqueeToggle");
-    const langSelect = document.getElementById("languageSelect");
     const resetBtn = document.getElementById("resetButton");
     const darkModeToggle = document.getElementById("darkModeToggle");
 
@@ -90,19 +115,56 @@ document.addEventListener("DOMContentLoaded", async () => {
     openAboutBtn.addEventListener("click", () => { settingsPanel.classList.add("hidden"); aboutPanel.classList.remove("hidden"); });
     closeAboutBtn.addEventListener("click", () => { aboutPanel.classList.add("hidden"); settingsPanel.classList.remove("hidden"); });
 
-    // --- Language Selector ---
-    if (langSelect) {
-        langSelect.value = currentLocale;
-        langSelect.addEventListener("change", async (t) => {
-            const newLang = t.target.value;
-            storage.set("preferredLocale", newLang);
+    // --- Language Selector with Synchronous Pre-Paint Centering ---
+    if (dropdown && summary) {
+        
+        // --- Instantly center active language BEFORE paint frames execute ---
+        dropdown.addEventListener('toggle', () => {
+            if (dropdown.hasAttribute('open')) {
+                const optionsContainer = dropdown.querySelector('.dropdown-options');
+                const currentSelection = dropdown.querySelector(`.option[data-value="${currentLocale}"]`);
 
-            if (statusMsg) {
-                statusMsg.removeAttribute("data-ui-type");
-                statusMsg.removeAttribute("data-last-title");
+                if (optionsContainer && currentSelection) {
+                    // Reading clientHeight & offsetTop forces a synchronous layout reflow flush.
+                    // This recalculates container geometry immediately, overwriting old cached scroll states.
+                    const containerHeight = optionsContainer.clientHeight || 280;
+                    const targetHeight = currentSelection.clientHeight || 38;
+
+                    optionsContainer.scrollTop = currentSelection.offsetTop - (containerHeight / 2) + (targetHeight / 2);
+                }
             }
-            await i18n.load(newLang);
-            refreshUI();
+        });
+
+        // 2. Intercept element options clicks
+        dropdown.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', async () => {
+                const newLang = option.getAttribute('data-value');
+                summary.textContent = option.textContent;
+                dropdown.removeAttribute('open'); 
+
+                // Clear previous bold class states and apply it to the new active element row
+                dropdown.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+
+                await storage.set("preferredLocale", newLang);
+                localStorage.setItem("syncLocaleCache", newLang); 
+
+                if (statusMsg) {
+                    statusMsg.removeAttribute("data-ui-type");
+                    statusMsg.removeAttribute("data-last-title");
+                }
+                await i18n.load(newLang);
+
+                currentLocale = newLang;
+                refreshUI(); 
+            });
+        });
+
+        // 3. Close the custom select list if clicking completely outside the element wrapper
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.removeAttribute('open');
+            }
         });
     }
 

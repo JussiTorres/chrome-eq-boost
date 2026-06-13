@@ -1,0 +1,140 @@
+{
+  "status_loading": {
+    "message": "Initierar..."
+  },
+  "status_active": {
+    "message": "Equalizern är aktiv"
+  },
+  "status_disabled": {
+    "message": "Tillägg inaktiverat"
+  },
+  "status_waiting": {
+    "message": "Väntar på ljud..."
+  },
+  "toggle_label": {
+    "message": "Tillägg aktiverat"
+  },
+  "button_reset": {
+    "message": "Återställ EQ & Vol."
+  },
+  "section_volume": {
+    "message": "Volym (Preamp)"
+  },
+  "section_eq": {
+    "message": "Equalizer (-15dB till +15dB)"
+  },
+  "label_bass": {
+    "message": "Bas (80 Hz)"
+  },
+  "label_mids": {
+    "message": "Mellanregister (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "Diskant (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 En annan flik förstärks."
+  },
+  "button_takeover": {
+    "message": "Använd på den här fliken"
+  },
+  "settings_title": {
+    "message": "Inställningar"
+  },
+  "status_conflict": {
+    "message": "Kontrollerar en annan flik"
+  },
+  "settings_language_label": {
+    "message": "Språk"
+  },
+  "footer_buy_coffee": {
+    "message": "Bjud mig på en kaffe"
+  },
+  "footer_made_with": {
+    "message": "Skapad med ❤️ av"
+  },
+  "about_title": {
+    "message": "Om"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "En värld i perfekt harmoni."
+  },
+  "settings_dark_mode": {
+    "message": "Mörkt läge"
+  },
+  "settings_marquee": {
+    "message": "Rullande titel"
+  },
+  "settings_custom_theme": {
+    "message": "Anpassat tema"
+  },
+  "custom_theme_title": {
+    "message": "Temaredigerare"
+  },
+  "label_bg_body": {
+    "message": "App-bakgrund"
+  },
+  "label_bg_card": {
+    "message": "Kortbakgrund"
+  },
+  "label_text_accent": {
+    "message": "Text & accent"
+  },
+  "label_library": {
+    "message": "Bibliotek"
+  },
+  "placeholder_select_theme": {
+    "message": "Välj ett tema..."
+  },
+  "placeholder_new_theme": {
+    "message": "Nytt temanamn"
+  },
+  "button_save": {
+    "message": "Spara"
+  },
+  "button_reset_defaults": {
+    "message": "Återställ till standardinställningar"
+  },
+  "button_replace": {
+    "message": "Ersätt"
+  },
+  "button_confirm": {
+    "message": "Bekräfta"
+  },
+  "button_cancel": {
+    "message": "Avbryt"
+  },
+  "modal_delete_title": {
+    "message": "Radera tema?"
+  },
+  "modal_delete_msg": {
+    "message": "Är du säker på att du vill radera {{NAME}} permanent?"
+  },
+  "modal_overwrite_title": {
+    "message": "Skriva över tema?"
+  },
+  "modal_overwrite_msg": {
+    "message": "\"{{NAME}}\" finns redan. Vill du ersätta det?"
+  },
+  "feedback_saved": {
+    "message": "Sparat!"
+  },
+  "feedback_reset_success": {
+    "message": "Standardvärden återställda!"
+  },
+  "feedback_no_changes": {
+    "message": "Inga ändringar"
+  },
+  "feedback_already_default": {
+    "message": "Redan standard"
+  },
+  "alert_invalid_name": {
+    "message": "Ogiltigt temanamn."
+  },
+  "label_support": {
+    "message": "Support"
+  }
+}

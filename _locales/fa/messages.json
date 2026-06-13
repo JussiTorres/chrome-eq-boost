@@ -1,0 +1,140 @@
+{
+  "status_loading": {
+    "message": "در حال راه‌اندازی..."
+  },
+  "status_active": {
+    "message": "اکولایزر فعال است"
+  },
+  "status_disabled": {
+    "message": "افزونه غیرفعال است"
+  },
+  "status_waiting": {
+    "message": "در انتظار صدا..."
+  },
+  "toggle_label": {
+    "message": "افزونه فعال است"
+  },
+  "button_reset": {
+    "message": "بازنشانی EQ و صدا"
+  },
+  "section_volume": {
+    "message": "حجم صدا (Preamp)"
+  },
+  "section_eq": {
+    "message": "اکولایزر (-15dB تا +15dB)"
+  },
+  "label_bass": {
+    "message": "باس (80 Hz)"
+  },
+  "label_mids": {
+    "message": "میدز (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "تریبل (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 تب دیگری در حال تقویت است."
+  },
+  "button_takeover": {
+    "message": "استفاده در این تب"
+  },
+  "settings_title": {
+    "message": "تنظیمات"
+  },
+  "status_conflict": {
+    "message": "در حال کنترل تب دیگر"
+  },
+  "settings_language_label": {
+    "message": "زبان"
+  },
+  "footer_buy_coffee": {
+    "message": "برایم قهوه بخر"
+  },
+  "footer_made_with": {
+    "message": "ساخته شده با ❤️ توسط"
+  },
+  "about_title": {
+    "message": "درباره"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "یک جهان در هارمونی کامل."
+  },
+  "settings_dark_mode": {
+    "message": "حالت تاریک"
+  },
+  "settings_marquee": {
+    "message": "عنوان متحرک"
+  },
+  "settings_custom_theme": {
+    "message": "تم سفارشی"
+  },
+  "custom_theme_title": {
+    "message": "ویرایشگر تم"
+  },
+  "label_bg_body": {
+    "message": "پس‌زمینه برنامه"
+  },
+  "label_bg_card": {
+    "message": "پس‌زمینه کارت"
+  },
+  "label_text_accent": {
+    "message": "متن و رنگ شاخص"
+  },
+  "label_library": {
+    "message": "کتابخانه"
+  },
+  "placeholder_select_theme": {
+    "message": "انتخاب تم..."
+  },
+  "placeholder_new_theme": {
+    "message": "نام تم جدید"
+  },
+  "button_save": {
+    "message": "ذخیره"
+  },
+  "button_reset_defaults": {
+    "message": "بازنشانی به پیش‌فرض"
+  },
+  "button_replace": {
+    "message": "جایگزینی"
+  },
+  "button_confirm": {
+    "message": "تایید"
+  },
+  "button_cancel": {
+    "message": "لغو"
+  },
+  "modal_delete_title": {
+    "message": "حذف تم؟"
+  },
+  "modal_delete_msg": {
+    "message": "آیا مطمئن هستید که می‌خواهید تم {{NAME}} را برای همیشه حذف کنید؟"
+  },
+  "modal_overwrite_title": {
+    "message": "جایگزینی تم؟"
+  },
+  "modal_overwrite_msg": {
+    "message": "تم \"{{NAME}}\" از قبل وجود دارد. جایگزین شود؟"
+  },
+  "feedback_saved": {
+    "message": "ذخیره شد!"
+  },
+  "feedback_reset_success": {
+    "message": "پیش‌فرض‌ها بازیابی شدند!"
+  },
+  "feedback_no_changes": {
+    "message": "بدون تغییر"
+  },
+  "feedback_already_default": {
+    "message": "از قبل پیش‌فرض است"
+  },
+  "alert_invalid_name": {
+    "message": "نام تم نامعتبر است."
+  },
+  "label_support": {
+    "message": "پشتیبانی"
+  }
+}

@@ -68,7 +68,7 @@ body.dark-mode {
     --bg-card: #0F172A;
     /* Midnight Slate */
     --bg-disabled: #1E293B;
-    --border-light: #1E293B;
+    --border-light: #334155;
 
     /* === TEXT HIERARCHY === */
     --text-primary: #F1F5F9;
@@ -86,14 +86,15 @@ body.dark-mode {
     /* === SLOTS === */
     --slider-track: #334155;
     --slider-thumb: #3B82F6;
---status-success: #FF9500; /* Cyber Tangerine */
+    --status-success: #FF9500;
+    /* Cyber Tangerine */
 
     --status-danger: #F87171;
 
     /* === STATUS === */
- /* === STATUS === */
-    --text-loading: #2DD4BF; /* Your Jade */
-    --text-waiting: #FF9500; 
+    --text-loading: #2DD4BF;
+    /* Your Jade */
+    --text-waiting: #FF9500;
     --text-active: var(--status-success);
 }
 
@@ -105,12 +106,11 @@ body {
     width: 320px;
     padding: 16px 16px 8px 16px;
     margin: 0;
-    /* box-sizing: border-box;  <-- REMOVED (Handled by global reset above) */
     font-family: 'Inter', Arial, sans-serif;
     background-color: var(--bg-body);
     color: var(--text-primary);
     overflow-y: auto;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, min-height 0.2s ease;
 }
 
 .container {
@@ -269,7 +269,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* === Simplistic & Seamless Continuous Scroll === */
 .status-container {
-    margin: 7.1px auto 7.1px auto;
+    margin: 2.15px auto 11px auto;
     max-width: 185px;
     overflow: hidden;
     white-space: nowrap;
@@ -282,6 +282,8 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-user-select: none;
     pointer-events: auto;
     cursor: default;
+    display: block;
+    /* <-- THE FIX: Reverted back to block */
 }
 
 .status-container.mask-active {
@@ -302,9 +304,14 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 0.95em;
     font-weight: 600;
     color: var(--text-heading);
-    /* Changed from var(--primary) */
     text-align: center;
-    line-height: 1.4;
+    /* 1. Unificamos a 1 rígido para que coincida con el marquee y no haya salto */
+    line-height: 1;
+
+    min-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .text-active {
@@ -369,7 +376,6 @@ input[type="range"]::-webkit-slider-thumb {
     margin-bottom: 10px;
     transition: background-color 0.3s;
     border: 1px solid var(--border-light);
-    /* Constant 1px border */
 }
 
 .toggle-label {
@@ -447,18 +453,16 @@ input:checked+.slider:before {
     font-size: 0.95em;
     border: none !important;
 
-    /* DYNAMIC COLORS: Pulls from your theme engine */
     background-color: var(--status-danger) !important;
     color: var(--text-button) !important;
-    
+
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: filter 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
 }
 
 .reset-button:hover:not(:disabled) {
     filter: brightness(1.1);
-    /* Dynamic shadow using your primary accent */
-    box-shadow: 0 4px 12px var(--shadow-soft); 
+    box-shadow: 0 4px 12px var(--shadow-soft);
 }
 
 .reset-button:active:not(:disabled) {
@@ -586,6 +590,17 @@ input[type="range"]:disabled {
 .settings-content {
     padding-top: 10px;
     flex-grow: 1;
+    /* REMOVED: max-height and overflow-y that caused the double scroll trap */
+}
+
+.settings-content::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+    background-color: var(--border-light);
+    border-radius: 3px;
 }
 
 /* Settings Inputs */
@@ -660,7 +675,12 @@ input[type="range"]:disabled {
 
 /* === Simplistic & Seamless Continuous Scroll === */
 .marquee-text {
-    display: inline-flex;
+    /* 2. Cambiamos inline-flex a flex + max-content para aniquilar el espacio base fantasma */
+    display: flex;
+    width: max-content;
+
+    align-items: center;
+    justify-content: flex-start;
     will-change: transform;
     animation: seamless-scroll 12s linear infinite;
     backface-visibility: hidden;
@@ -670,31 +690,37 @@ input[type="range"]:disabled {
 }
 
 .marquee-content {
-    display: inline-block;
-    padding-right: 2.5em;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    /* Aquí unificamos la regla de 5px */
+    padding-right: 1.7em;
 }
 
 .separator-icon {
     width: 12px;
     height: 12px;
-    vertical-align: middle;
-    margin: 0 8px 0 0;
     opacity: 0.7;
-    position: relative;
-    top: -1px;
     border-radius: 2px;
     user-select: none;
     -webkit-user-select: none;
     pointer-events: none;
+    flex-shrink: 0;
+    display: block;
+    /* ELIMINADO: transform: translateY(1.5px); */
+}
+
+.static-wrapper .separator-icon {
+    margin: 0 !important;
 }
 
 @keyframes seamless-scroll {
     from {
-        transform: translateX(0);
+        transform: translateX(0px);
     }
 
     to {
-        transform: translateX(-50%);
+        transform: translateX(var(--marquee-travel, -50%));
     }
 }
 
@@ -854,7 +880,6 @@ body.custom-theme .status-message.text-disabled,
 body.custom-theme #mainToggleContainer .toggle-label.label-disabled {
     opacity: 0.9 !important;
     color: var(--text-primary) !important;
-    /* Fixed from #1E293B */
     cursor: not-allowed !important;
     filter: none !important;
 }
@@ -891,7 +916,6 @@ body.custom-theme:has(#toggleEnabled:not(:checked)) .toggle-switch {
 body.custom-theme #mainToggleContainer.toggle-muted {
     background-color: var(--bg-card) !important;
     filter: brightness(0.93) !important;
-    /* Slightly "sunken" appearance */
     border: 1px solid var(--border-light) !important;
     box-shadow: none !important;
 }
@@ -1021,18 +1045,10 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
    STRICT FIX FOR THE "EDIT THEME" PENCIL JUMP
    ========================================================================== */
 #editThemeBtn {
-    /* 1. Force strict dimensions to match the adjacent switch (26px) */
     width: 26px !important;
     height: 26px !important;
-
-    /* 2. Remove default padding that expands the box */
     padding: 0 !important;
-
-    /* 3. Ensure border doesn't add pixels */
     border: none !important;
-
-    /* 4. Center the icon perfectly */
-    /* REMOVED !important HERE so the .hidden class can actually work */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1071,7 +1087,6 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     margin-left: 8px;
 }
 
-/* Utilities */
 ::-webkit-scrollbar {
     display: none;
 }
@@ -1260,7 +1275,7 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 }
 
 .about-link-row.coffee-row .link-icon-box span {
-    font-size: 1.5em; /* Slightly larger emoji to stand out */
+    font-size: 1.5em;
 }
 
 .about-link-row.coffee-row:hover {
@@ -1279,16 +1294,15 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 /*DARK MODE BODY*/
 
 body.dark-mode .about-link-row.coffee-row .link-icon-box {
-    background: #451a03; /* Deep coffee brown */
-    color: #FF7A00;      /* Electric Orange Cup */
+    background: #451a03;
+    color: #FF7A00;
     opacity: 1 !important;
 }
 
-/* DARK MODE: Coffee Row Hover Fix */
 body.dark-mode .about-link-row.coffee-row:hover {
-    background: rgba(255, 122, 0, 0.15); /* Match your Electric Orange #FF7A00 */
+    background: rgba(255, 122, 0, 0.15);
     border-color: #FF7A00;
-    opacity: 1 !important; /* Forces it to stay bright */
+    opacity: 1 !important;
 }
 
 body.dark-mode .text-loading {
@@ -1305,11 +1319,9 @@ body.dark-mode .text-active {
 
 /* ==========================================================================
    DARK MODE: ACTIVE (ENABLED) STATE
-   Stops the text from turning blue when you turn the extension on
    ========================================================================== */
 body.dark-mode .eq-control label {
     color: var(--text-primary) !important;
-    /* Pulls your #F1F5F9 White */
 }
 
 /* ==========================================================================
@@ -1317,9 +1329,7 @@ body.dark-mode .eq-control label {
    ========================================================================== */
 body.dark-mode .status-message:not(.text-disabled):not(.text-waiting):not(.text-loading) {
     color: var(--status-success) !important;
-    /* Pulls the Emerald Green */
     text-shadow: 0 0 10px rgba(52, 211, 153, 0.2);
-    /* Adds a very subtle "active" glow */
 }
 
 /* ==========================================================================
@@ -1327,12 +1337,10 @@ body.dark-mode .status-message:not(.text-disabled):not(.text-waiting):not(.text-
    ========================================================================== */
 body.dark-mode .status-message.text-disabled {
     color: var(--text-waiting) !important;
-    /* Pulls your #FBBF24 Amber */
 }
 
 /* ==========================================================================
    DARK MODE: ACTIVE TOGGLE LABEL FIX 
-   (Syncs the toggle text to the exact same blue as your section titles)
    ========================================================================== */
 body.dark-mode .label-enabled {
     color: var(--primary) !important;
@@ -1347,7 +1355,6 @@ body.dark-mode .value-display {
    ========================================================================== */
 body.dark-mode:has(#toggleEnabled:not(:checked)) .value-display {
     color: var(--text-waiting) !important;
-    /* Pulls the Amber color */
     opacity: 0.9 !important;
     cursor: not-allowed !important;
     filter: none !important;
@@ -1355,7 +1362,6 @@ body.dark-mode:has(#toggleEnabled:not(:checked)) .value-display {
 
 /* ==========================================================================
    DARK MODE: DISABLED STATE
-   Keeps it white but applies the unified 0.9 opacity fade
    ========================================================================== */
 body.dark-mode:has(#toggleEnabled:not(:checked)) .eq-control label {
     color: var(--text-primary) !important;
@@ -1376,4 +1382,197 @@ body.dark-mode:has(#toggleEnabled:not(:checked)) .eq-control label {
 .reset-button,
 .eq-control label {
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ==========================================================================
+   --- Custom Scrollable Dropdown Engine ---
+   ========================================================================== */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+.custom-dropdown summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.custom-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.custom-dropdown summary::after {
+    content: '▼';
+    font-size: 0.7em;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.custom-dropdown[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    /* THE FIX: 312px is too tall for the physical popup. Drop it to 200px. */
+    max-height: 243px;
+    overflow-y: auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    z-index: 999;
+    box-shadow: var(--shadow-soft);
+    margin-top: 4px;
+    /* Tiny gap so it doesn't sit perfectly flush against the button */
+}
+
+.dropdown-options .option {
+    padding: 10px;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 0.95em;
+    text-align: left;
+}
+
+.dropdown-options .option:hover {
+    background-color: var(--bg-hover);
+    color: var(--primary);
+}
+
+.dropdown-options::-webkit-scrollbar {
+    width: 6px !important;
+    display: block !important;
+}
+
+.dropdown-options::-webkit-scrollbar-thumb {
+    background-color: var(--border-light) !important;
+    border-radius: 3px !important;
+}
+
+.dropdown-options .option.selected {
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    background-color: var(--bg-hover);
+}
+
+/* ==========================================================================
+   HOTFIX: DYNAMIC POPUP EXPANSION (Double Scrollbar Fix)
+   ========================================================================== */
+/* Forces the physical Chrome Extension window to grow just enough to house 
+   the floating absolute dropdown without triggering the parent's scrollbar */
+body:has(.custom-dropdown[open]) {
+    min-height: 480px;
+}
+
+/* ==========================================================================
+   RTL (RIGHT-TO-LEFT) LAYOUT & HOTFIX CONFIGURATION
+   ========================================================================== */
+
+/* 1. Typography & Global Containment */
+html[dir="rtl"] body {
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+}
+
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] label,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .toggle-label,
+html[dir="rtl"] .value-display,
+html[dir="rtl"] .status-message,
+html[dir="rtl"] .footer-made-by {
+    line-height: 1.15 !important;
+}
+
+/* 2. Text Alignment & Layout Direction Shifts */
+html[dir="rtl"] .value-display {
+    text-align: left;
+}
+
+html[dir="rtl"] .link-text-group {
+    text-align: right;
+}
+
+html[dir="rtl"] #themeNameInput {
+    text-align: right;
+}
+
+html[dir="rtl"] .color-stack label {
+    text-align: right;
+}
+
+html[dir="rtl"] .color-hex-input {
+    text-align: left;
+}
+
+/* HOTFIX: Custom Dropdown RTL text alignment */
+html[dir="rtl"] .dropdown-options .option {
+    text-align: right;
+}
+
+/* 3. Custom Toggle Switch Mechanics */
+html[dir="rtl"] .slider:before {
+    right: 2px;
+    left: auto;
+}
+
+html[dir="rtl"] input:checked+.slider:before {
+    transform: translateX(-22px);
+}
+
+/* 4. Status Container & Marquee — THE JAVASCRIPT/PIXEL FIX */
+
+/* 4a. Default state */
+html[dir="rtl"] .status-container {
+    text-align: center !important;
+    margin-top: 6.8px !important;
+    display: block !important;
+}
+
+html[dir="rtl"] .status-message {
+    text-align: center !important;
+    width: 100%;
+}
+
+/* 4b. Active: just prevent RTL from reversing the scroll direction */
+html[dir="rtl"] .status-container:has(.marquee-text:not(.hidden)) {
+    direction: ltr !important;
+}
+
+/* 4c. RTL marquee — pixel travel set by JS, no transform percentage conflict */
+html[dir="rtl"] .marquee-text {
+    display: flex !important;
+    width: max-content !important;
+    direction: ltr !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    animation: seamless-scroll 12s linear infinite !important;
+}
+
+html[dir="rtl"] .marquee-content {
+    display: inline-flex !important;
+    padding-left: 0 !important;
+    padding-right: 1.6em !important;
+}
+
+/* 5. El Micro-Nudge: Empuja visualmente las letras 1px hacia abajo para alinear 
+      el centro matemático del texto con el centro geométrico del ícono */
+.marquee-content span[dir="auto"],
+.static-wrapper span[dir="auto"] {
+    line-height: 1;
+}
+
+/* 6. ICON SPACING FIX (Flip physical margins for logical RTL flow) */
+html[dir="rtl"] .settings-label svg,
+html[dir="rtl"] .text-button svg {
+    margin-right: 0 !important;
+    margin-left: 6px !important;
 }

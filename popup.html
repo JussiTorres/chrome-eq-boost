@@ -1,11 +1,3 @@
-<!--
- * Chrome EQ & Volume Boost
- * Copyright (c) 2025-2026 Jussi Torres
- * Licensed under the MIT License.
- *
- * Developed by Jussi Torres
--->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,32 +86,41 @@
 
             <div class="settings-content">
                 <div class="setting-row" style="margin-bottom: 20px;">
-                    <label for="languageSelect" class="settings-label"
-                        data-i18n="settings_language_label">Language</label>
-                    <select id="languageSelect" class="settings-select">
-                        <option value="en">English</option>
-                        <option value="es">Español</option>
-                        <option value="pt_BR">Português (Brasil)</option>
-                        <option value="de">Deutsch</option>
-                        <option value="fr">Français</option>
-                        <option value="it">Italiano</option>
-                        <option value="pl">Polski</option>
-                        <option value="ru">Русский (Russian)</option>
-                        <option value="uk">Українська (Ukrainian)</option>
-                        <option value="tr">Türkçe</option>
-                        <option value="id">Bahasa Indonesia</option>
-                        <option value="ja">日本語 (Japanese)</option>
-                        <option value="ko">한국어 (Korean)</option>
-                        <option value="hi">हिन्दी (Hindi)</option>
-                        <option value="zh_CN">中文 (简体)</option>
-                        <option value="zh_TW">中文 (繁體)</option>
-                        <option value="th">ไทย (Thai)</option>
-                        <option value="vi">Tiếng Việt (Vietnamese)</option>
-                        <option value="fil">Filipino</option>
-                        <option value="km">ភាសាខ្មែរ (Khmer)</option>
-                        <option value="lt">Lietuvių (Lithuanian)</option>
-                        <option value="nl">Nederlands (Dutch)</option>
-                    </select>
+                    <label class="settings-label" data-i18n="settings_language_label">Language</label>
+
+                    <details class="custom-dropdown" id="languageDropdown">
+                        <summary class="settings-select" id="dropdownSelected"></summary>
+                        <div class="dropdown-options">
+                            <div class="option" data-value="en">English</div>
+                            <div class="option" data-value="ar">العربية (Arabic)</div>
+                            <div class="option" data-value="id">Bahasa Indonesia</div>
+                            <div class="option" data-value="de">Deutsch</div>
+                            <div class="option" data-value="es">Español</div>
+                            <div class="option" data-value="fa">فارسی (Persian)</div>
+                            <div class="option" data-value="fil">Filipino</div>
+                            <div class="option" data-value="fr">Français</div>
+                            <div class="option" data-value="he">עברית (Hebrew)</div>
+                            <div class="option" data-value="hi">हिन्दी (Hindi)</div>
+                            <div class="option" data-value="it">Italiano</div>
+                            <div class="option" data-value="ja">日本語 (Japanese)</div>
+                            <div class="option" data-value="km">ភាសាខ្មែរ (Khmer)</div>
+                            <div class="option" data-value="ko">한국어 (Korean)</div>
+                            <div class="option" data-value="lt">Lietuvių (Lithuanian)</div>
+                            <div class="option" data-value="nl">Nederlands (Dutch)</div>
+                            <div class="option" data-value="pl">Polski</div>
+                            <div class="option" data-value="pt_BR">Português (Brasil)</div>
+                            <div class="option" data-value="ru">Русский (Russian)</div>
+                            <div class="option" data-value="fi">Suomi (Finnish)</div>
+                            <div class="option" data-value="sv">Svenska (Swedish)</div>
+                            <div class="option" data-value="th">ไทย (Thai)</div>
+                            <div class="option" data-value="tr">Türkçe</div>
+                            <div class="option" data-value="uk">Українська (Ukrainian)</div>
+                            <div class="option" data-value="ur">اردو (Urdu)</div>
+                            <div class="option" data-value="vi">Tiếng Việt (Vietnamese)</div>
+                            <div class="option" data-value="zh_CN">中文 (简体)</div>
+                            <div class="option" data-value="zh_TW">中文 (繁體)</div>
+                        </div>
+                    </details>
                 </div>
 
                 <div class="setting-row"
@@ -343,10 +344,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    </div>
-
     </div>
 
     <div id="customModal" class="modal-overlay hidden">
