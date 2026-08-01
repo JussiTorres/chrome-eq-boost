@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "Ожидание аудио..."
   },
+  "status_conflict": {
+    "message": "Управление другой вкладкой"
+  },
   "toggle_label": {
     "message": "Расширение включено"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "Настройки"
   },
-  "status_conflict": {
-    "message": "Управление другой вкладкой"
-  },
   "settings_language_label": {
     "message": "Язык"
-  },
-  "footer_buy_coffee": {
-    "message": "Угости меня кофе"
-  },
-  "footer_made_with": {
-    "message": "Сделано с ❤️ от"
-  },
-  "about_title": {
-    "message": "О программе"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "Один мир в совершенной гармонии."
   },
   "settings_dark_mode": {
     "message": "Темная тема"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "Имя новой темы"
   },
+  "placeholder_select_preset": {
+    "message": "Выберите пресет..."
+  },
+  "placeholder_new_preset": {
+    "message": "Имя нового пресета"
+  },
   "button_save": {
     "message": "Сохранить"
   },
   "button_reset_defaults": {
     "message": "Сброс по умолчанию"
-  },
-  "button_replace": {
-    "message": "Заменить"
   },
   "button_confirm": {
     "message": "Подтвердить"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "Отмена"
   },
-  "modal_delete_title": {
-    "message": "Удалить тему?"
+  "button_delete": {
+    "message": "Удалить"
   },
-  "modal_delete_msg": {
-    "message": "Вы уверены, что хотите удалить {{NAME}}?"
+  "button_close": {
+    "message": "Закрыть"
   },
-  "modal_overwrite_title": {
-    "message": "Перезаписать тему?"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" уже существует. Заменить?"
+  "button_back": {
+    "message": "Назад"
   },
   "feedback_saved": {
     "message": "Сохранено!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "Поддержка"
+  },
+  "aria_presets": {
+    "message": "Пресеты"
+  },
+  "about_title": {
+    "message": "О программе"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Один мир в совершенной гармонии."
+  },
+  "footer_buy_coffee": {
+    "message": "Угости меня кофе"
+  },
+  "footer_made_with": {
+    "message": "Сделано с ❤️ от"
+  },
+  "title_update_preset": {
+    "message": "Обновить пресет"
+  },
+  "title_delete_preset": {
+    "message": "Удалить пресет"
+  },
+  "title_revert_preset": {
+    "message": "Отменить изменения"
+  },
+  "title_new_preset": {
+    "message": "Создать пресет"
+  },
+  "title_edit_theme": {
+    "message": "Изменить тему"
+  },
+  "title_delete_theme": {
+    "message": "Удалить тему"
+  },
+  "modal_theme_delete_title": {
+    "message": "Удалить тему?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Вы уверены, что хотите навсегда удалить тему «{{NAME}}»?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Перезаписать тему?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Тема «{{NAME}}» уже существует. Заменить?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Удалить пресет?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Вы уверены, что хотите навсегда удалить пресет «{{NAME}}»?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Перезаписать пресет?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Вы уверены, что хотите перезаписать «{{NAME}}» текущими настройками?"
+  },
+  "button_replace": {
+    "message": "Заменить"
+  },
+  "modal_delete_msg": {
+    "message": "Вы уверены?"
+  },
+  "preset_flat": {
+    "message": "Плоский"
+  },
+  "preset_pop": {
+    "message": "Поп"
+  },
+  "preset_rock": {
+    "message": "Рок"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Хип-хоп"
+  },
+  "preset_electronic": {
+    "message": "Электроника"
+  },
+  "preset_deep_bass": {
+    "message": "Глубокий бас"
+  },
+  "preset_indie_alt": {
+    "message": "Инди / Альтернатива"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Вокалоид / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Джаз / Блюз"
+  },
+  "preset_acoustic": {
+    "message": "Акустика"
+  },
+  "preset_classical": {
+    "message": "Классика"
+  },
+  "preset_hi_fi_master": {
+    "message": "Хай-Фай Мастер"
+  },
+  "preset_cinema": {
+    "message": "Кино"
+  },
+  "preset_vocal_booster": {
+    "message": "Усилитель вокала"
+  },
+  "preset_late_night": {
+    "message": "Поздняя ночь"
   }
 }

@@ -9,7 +9,7 @@
 import { storage } from './storageHelpers.js';
 import { themeEngine } from './themeEngine.js';
 import { PRESET_THEMES } from './constants.js';
-import { i18n } from './i18n.js'; //
+import { i18n } from './i18n.js';
 
 let currentCustomTheme = {};
 let originalThemeState = ""; // The "Brain" baseline for comparison
@@ -34,7 +34,7 @@ export const themeEditor = {
         libraryThemes = savedThemes;
 
         // 2. STRENGTHENED LOAD STATE
-        currentCustomTheme = data.customTheme || libraryThemes["Crimson Abyss"] || {
+        currentCustomTheme = data.customTheme || libraryThemes["Solar Flare"] || {
             bgBody: '#f7f9fb', bgCard: '#ffffff', accentColor: '#3b82f6', textPrimary: '#3b82f6'
         };
         const isCustom = data.customThemeEnabled || false;
@@ -47,23 +47,25 @@ export const themeEditor = {
         if (isCustom && els.editBtn) els.editBtn.classList.remove("hidden");
 
         this.updatePickerUI(currentCustomTheme);
-        await this.refreshThemeList(els.select);
+        await this.refreshThemeList(els);
 
         // 5. DROPDOWN SYNC (Prioritize the stored name, but verify integrity)
+        let activeNameToSet = "";
         if (data.activeThemeName && libraryThemes[data.activeThemeName]) {
             const storedThemeJson = JSON.stringify(this.normalizeTheme(libraryThemes[data.activeThemeName]));
             const currentJson = JSON.stringify(this.normalizeTheme(currentCustomTheme));
 
             if (storedThemeJson === currentJson) {
-                els.select.value = data.activeThemeName;
+                activeNameToSet = data.activeThemeName;
             }
         } else {
             const currentJson = JSON.stringify(this.normalizeTheme(currentCustomTheme));
-            const activeThemeName = Object.keys(libraryThemes).find(name =>
+            activeNameToSet = Object.keys(libraryThemes).find(name =>
                 JSON.stringify(this.normalizeTheme(libraryThemes[name])) === currentJson
-            );
-            if (activeThemeName) els.select.value = activeThemeName;
+            ) || "";
         }
+
+        this.setSelectedThemeUI(els, activeNameToSet);
 
         if (isCustom) {
             themeEngine.apply('custom', currentCustomTheme);
@@ -85,13 +87,47 @@ export const themeEditor = {
             deleteBtn: document.getElementById("deleteThemeBtn"),
             resetBtn: document.getElementById("resetThemeBtn"),
             nameInput: document.getElementById("themeNameInput"),
-            select: document.getElementById("savedThemesSelect"),
+
+            // Replaced native select with custom dropdown DOM elements
+            themeDropdown: document.getElementById("savedThemesDropdown"),
+            themeDropdownText: document.getElementById("savedThemesDropdownText"),
+            themeOptionsContainer: document.getElementById("savedThemesOptionsContainer"),
+
             modal: document.getElementById("customModal"),
             modalTitle: document.getElementById("modalTitle"),
             modalMsg: document.getElementById("modalMessage"),
             modalConfirm: document.getElementById("modalConfirmBtn"),
             modalCancel: document.getElementById("modalCancelBtn")
         };
+    },
+
+    setSelectedThemeUI(els, themeName) {
+        if (!els.themeDropdownText || !els.themeOptionsContainer) return;
+
+        const placeholder = i18n.t("placeholder_select_theme") || "Select a theme...";
+        els.themeDropdownText.textContent = themeName || placeholder;
+
+        // Prevent i18n from overwriting an active theme name with the placeholder
+        if (themeName) {
+            els.themeDropdownText.removeAttribute("data-i18n");
+        } else {
+            els.themeDropdownText.setAttribute("data-i18n", "placeholder_select_theme");
+        }
+
+        els.themeOptionsContainer.querySelectorAll('.option').forEach(opt => {
+            if (opt.dataset.value === themeName) {
+                opt.classList.add('selected');
+            } else {
+                opt.classList.remove('selected');
+            }
+        });
+    },
+
+    async render() {
+        const els = this.getElements();
+        const data = await storage.getAll();
+        const activeName = data.activeThemeName || "";
+        this.setSelectedThemeUI(els, activeName);
     },
 
     normalizeTheme(theme) {
@@ -106,12 +142,17 @@ export const themeEditor = {
     flashButtonText(btnId, tempText, originalText) {
         const btn = document.getElementById(btnId);
         if (!btn) return;
+
         btn.textContent = tempText;
         btn.disabled = true;
-        btn.style.opacity = "0.5";
+        btn.classList.add("is-flashing"); // Flags the animation state for CSS so prohibited cursor is ignored
+        btn.style.opacity = "0.7";
+
         setTimeout(() => {
             btn.textContent = originalText;
             btn.disabled = false;
+            btn.classList.remove("is-flashing");
+            btn.style.opacity = "1";
             this.updateButtonStates();
         }, 1500);
     },
@@ -121,18 +162,12 @@ export const themeEditor = {
         const current = this.normalizeTheme(this.getCurrentPickerValues());
         const currentJson = JSON.stringify(current);
 
-        const hasChanged = currentJson !== originalThemeState;
+        // REMOVED: Disabling logic for saveBtn and resetBtn.
+        // Both buttons remain clickable at all times so user actions (like focusing the input box or early returns) work seamlessly without showing a prohibited cursor!
 
-        if (els.saveBtn) {
-            els.saveBtn.style.opacity = hasChanged ? "1" : "0.6";
-            els.saveBtn.style.cursor = hasChanged ? "pointer" : "default";
-        }
-        if (els.resetBtn) {
-            els.resetBtn.style.opacity = hasChanged ? "1" : "0.6";
-            els.resetBtn.style.cursor = hasChanged ? "pointer" : "default";
-        }
+        const placeholder = i18n.t("placeholder_select_theme") || "Select a theme...";
+        const currentSelection = els.themeDropdownText?.textContent === placeholder ? "" : els.themeDropdownText?.textContent;
 
-        const currentSelection = els.select.value;
         const selectionIsValid = currentSelection &&
             libraryThemes[currentSelection] &&
             JSON.stringify(this.normalizeTheme(libraryThemes[currentSelection])) === currentJson;
@@ -147,9 +182,10 @@ export const themeEditor = {
         );
 
         if (match) {
-            els.select.value = match;
+            this.setSelectedThemeUI(els, match);
             await storage.set("activeThemeName", match);
         } else {
+            this.setSelectedThemeUI(els, "");
             await storage.set("activeThemeName", "");
         }
     },
@@ -208,7 +244,9 @@ export const themeEditor = {
             let savedThemes = data.savedThemes || {};
 
             if (enabled) {
-                const selectedName = els.select.value;
+                const placeholder = i18n.t("placeholder_select_theme") || "Select a theme...";
+                const selectedName = els.themeDropdownText?.textContent === placeholder ? "" : els.themeDropdownText?.textContent;
+
                 if (selectedName && savedThemes[selectedName]) {
                     currentCustomTheme = savedThemes[selectedName];
                     await storage.set("customTheme", currentCustomTheme);
@@ -223,12 +261,16 @@ export const themeEditor = {
             }
         });
 
-        els.saveBtn.addEventListener("click", async () => {
+        // --- Shared Save Handler (Used by Button Click & Enter Key) ---
+        const handleSave = async () => {
+            // PATCH: Ignore Enter key spam if a save is already in progress
+            if (els.saveBtn.disabled) return;
+
             const name = els.nameInput.value.trim();
             if (!name) { els.nameInput.focus(); return; }
 
             if (["__proto__", "constructor", "prototype"].includes(name)) {
-                alert(i18n.t("alert_invalid_name")); // Fixed
+                alert(i18n.t("alert_invalid_name"));
                 return;
             }
 
@@ -237,31 +279,44 @@ export const themeEditor = {
 
             if (libraryThemes[name]) {
                 if (currentJson === originalThemeState) {
-                    // Fixed: Use feedback_no_changes key
-                    this.flashButtonText("saveThemeBtn", i18n.t("feedback_no_changes"), i18n.t("button_save"));
+                    this.flashButtonText("saveThemeBtn", i18n.t("feedback_no_changes") || "No changes!", i18n.t("button_save") || "Save");
                     return;
                 }
-                // Fixed: Use button_replace key
-                els.modalConfirm.textContent = i18n.t("button_replace");
-                els.modalCancel.classList.remove("hidden");
 
-                const msg = i18n.t("modal_overwrite_msg").replace("{{NAME}}", name);
+                const titleText = i18n.t("modal_theme_overwrite_title") || "Overwrite Theme?";
+                const msgText = (i18n.t("modal_theme_overwrite_msg") || `The theme '${name}' already exists. Replace it?`).replace("{{NAME}}", name);
+                const btnText = i18n.t("button_replace") || "Replace";
 
-                this.showModal(els, i18n.t("modal_overwrite_title"), msg, async () => {
+                this.showModal(els, titleText, msgText, btnText, async () => {
                     await this.performSave(els, name, libraryThemes, currentValues);
                 });
             } else {
                 await this.performSave(els, name, libraryThemes, currentValues);
             }
+        };
+
+        // 1. Trigger save via Button Click
+        els.saveBtn.addEventListener("click", handleSave);
+
+        // 2. Trigger save via Enter Key in the theme name input box
+        els.nameInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault(); // Stops form submission / page jumps
+                els.nameInput.blur(); // Drops the focus ring just like clicking with a mouse
+                handleSave();
+            }
+        });
+
+        // 3. STEP 2: Update button state immediately as the user types
+        els.nameInput.addEventListener("input", () => {
+            this.updateButtonStates();
         });
 
         els.resetBtn.addEventListener("click", () => {
             const currentJson = JSON.stringify(this.normalizeTheme(this.getCurrentPickerValues()));
 
             if (currentJson === originalThemeState) {
-                // Fixed: Use feedback_already_default key
-                this.flashButtonText("resetThemeBtn", i18n.t("feedback_already_default"), i18n.t("button_reset_defaults"));
-                return;
+                return; // Do nothing when no changes have been made
             }
 
             const baseline = JSON.parse(originalThemeState);
@@ -269,27 +324,32 @@ export const themeEditor = {
             currentCustomTheme = { ...baseline };
             themeEngine.apply('custom', currentCustomTheme);
 
-            this.flashButtonText("resetThemeBtn", i18n.t("feedback_reset_success"), i18n.t("button_reset_defaults")); //
+            this.flashButtonText("resetThemeBtn", i18n.t("feedback_reset_success") || "Reset!", i18n.t("button_reset_defaults") || "Reset to Defaults");
 
             this.updateButtonStates();
         });
 
         els.deleteBtn.addEventListener("click", () => {
-            const name = els.select.value;
-            const placeholder = i18n.t("placeholder_select_theme");
-            if (!name || name === placeholder) return;
+            const placeholder = i18n.t("placeholder_select_theme") || "Select a theme...";
+            const name = els.themeDropdownText?.textContent === placeholder ? "" : els.themeDropdownText?.textContent;
+            if (!name) return;
 
-            // Line 254: Updated to use $NAME$ for localization replacement
+            const titleText = i18n.t("modal_theme_delete_title") || "Delete Theme?";
+            const msgText = (i18n.t("modal_theme_delete_msg") || `Are you sure you want to permanently delete '${name}'?`).replace("{{NAME}}", name);
+            const btnText = i18n.t("button_delete") || "Delete";
+
             this.showModal(
                 els,
-                i18n.t("modal_delete_title"),
-                i18n.t("modal_delete_msg").replace("{{NAME}}", `"${name}"`),
-                async () => {                // 1. Delete from memory & storage
+                titleText,
+                msgText,
+                btnText,
+                async () => {
+                    // 1. Delete from memory & storage
                     delete libraryThemes[name];
                     await storage.set("savedThemes", libraryThemes);
 
                     // 2. Refresh the dropdown list
-                    await this.refreshThemeList(els.select);
+                    await this.refreshThemeList(els);
 
                     // 3. Intelligent switch to the first available theme
                     const remainingNames = Object.keys(libraryThemes);
@@ -305,18 +365,19 @@ export const themeEditor = {
                             "activeThemeName": nextName
                         });
 
-                        els.select.value = nextName;
+                        this.setSelectedThemeUI(els, nextName);
                         this.updatePickerUI(nextTheme);
                         themeEngine.apply('custom', currentCustomTheme);
 
                         originalThemeState = JSON.stringify(this.normalizeTheme(nextTheme));
                     } else {
-                        els.select.value = "";
+                        this.setSelectedThemeUI(els, "");
                         await storage.set("activeThemeName", "");
                     }
 
                     this.updateButtonStates();
-                });
+                }
+            );
         });
 
         els.closeBtn.addEventListener("click", () => {
@@ -328,27 +389,12 @@ export const themeEditor = {
             els.settingsPanel.classList.add("hidden");
             els.panel.classList.remove("hidden");
         });
-
-        els.select.addEventListener("change", async () => {
-            const name = els.select.value;
-            if (libraryThemes[name]) {
-                const selected = libraryThemes[name];
-                currentCustomTheme = { ...selected };
-
-                await storage.setMultiple({
-                    "customTheme": currentCustomTheme,
-                    "activeThemeName": name
-                });
-
-                this.updatePickerUI(selected);
-                originalThemeState = JSON.stringify(this.normalizeTheme(selected));
-                themeEngine.apply('custom', currentCustomTheme);
-                this.updateButtonStates();
-            }
-        });
     },
 
     async performSave(els, name, themes, themeToSave) {
+        // PATCH: Lock the UI immediately to prevent rapid-fire race conditions
+        if (els.saveBtn) els.saveBtn.disabled = true;
+
         themes[name] = themeToSave;
         libraryThemes = themes;
 
@@ -359,20 +405,23 @@ export const themeEditor = {
         });
 
         originalThemeState = JSON.stringify(this.normalizeTheme(themeToSave));
-        await this.refreshThemeList(els.select);
-        els.select.value = name;
+        await this.refreshThemeList(els);
+        this.setSelectedThemeUI(els, name);
         els.nameInput.value = "";
-        this.flashButtonText("saveThemeBtn", i18n.t("feedback_saved"), i18n.t("button_save")); //
+
+        // The flasher handles the unlock after the animation
+        this.flashButtonText("saveThemeBtn", i18n.t("feedback_saved") || "Saved!", i18n.t("button_save") || "Save");
         themeEngine.apply('custom', themeToSave);
         this.updateButtonStates();
     },
 
-    showModal(els, title, msg, onConfirm) {
-        els.modalConfirm.textContent = i18n.t("button_confirm"); // Fixed
+    showModal(els, title, msg, confirmText, onConfirm) {
+        els.modalConfirm.textContent = confirmText || i18n.t("button_confirm");
         els.modalCancel.classList.remove("hidden");
         els.modalTitle.textContent = title;
         els.modalMsg.textContent = msg;
         els.modal.classList.remove("hidden");
+
         els.modalConfirm.onclick = () => {
             onConfirm();
             els.modal.classList.add("hidden");
@@ -396,14 +445,38 @@ export const themeEditor = {
         });
     },
 
-    async refreshThemeList(select) {
+    async refreshThemeList(els) {
         const data = await storage.getAll();
         libraryThemes = data.savedThemes || {};
-        const placeholder = i18n.t("placeholder_select_theme");
-        select.innerHTML = `<option value="" disabled selected data-i18n="placeholder_select_theme">${placeholder}</option>`; Object.keys(libraryThemes).forEach(name => {
-            const opt = document.createElement("option");
-            opt.value = name; opt.textContent = name;
-            select.appendChild(opt);
+
+        if (!els.themeOptionsContainer) return;
+        els.themeOptionsContainer.innerHTML = '';
+
+        Object.keys(libraryThemes).forEach(name => {
+            const optDiv = document.createElement("div");
+            optDiv.className = "option";
+            optDiv.dataset.value = name;
+            optDiv.textContent = name;
+
+            optDiv.addEventListener("click", async () => {
+                const selected = libraryThemes[name];
+                currentCustomTheme = { ...selected };
+
+                await storage.setMultiple({
+                    "customTheme": currentCustomTheme,
+                    "activeThemeName": name
+                });
+
+                this.setSelectedThemeUI(els, name);
+                if (els.themeDropdown) els.themeDropdown.removeAttribute("open");
+
+                this.updatePickerUI(selected);
+                originalThemeState = JSON.stringify(this.normalizeTheme(selected));
+                themeEngine.apply('custom', currentCustomTheme);
+                this.updateButtonStates();
+            });
+
+            els.themeOptionsContainer.appendChild(optDiv);
         });
     }
 };

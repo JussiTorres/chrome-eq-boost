@@ -11,6 +11,9 @@
     "status_waiting": {
         "message": "Laukiama garso..."
     },
+    "status_conflict": {
+        "message": "Valdomas kitas skirtukas"
+    },
     "toggle_label": {
         "message": "Įjungti plėtinį"
     },
@@ -41,26 +44,8 @@
     "settings_title": {
         "message": "Nustatymai"
     },
-    "status_conflict": {
-        "message": "Valdomas kitas skirtukas"
-    },
     "settings_language_label": {
         "message": "Kalba"
-    },
-    "footer_buy_coffee": {
-        "message": "Pavaišink mane kava"
-    },
-    "footer_made_with": {
-        "message": "Sukurta su ❤️"
-    },
-    "about_title": {
-        "message": "Apie"
-    },
-    "about_app_name": {
-        "message": "Chrome EQ & Volume"
-    },
-    "about_subtitle": {
-        "message": "Vienas pasaulis tobuloje harmonijoje."
     },
     "settings_dark_mode": {
         "message": "Tamsus režimas"
@@ -92,14 +77,17 @@
     "placeholder_new_theme": {
         "message": "Naujos temos pavadinimas"
     },
+    "placeholder_select_preset": {
+        "message": "Pasirinkite išankstinį nustatymą..."
+    },
+    "placeholder_new_preset": {
+        "message": "Naujo išankstinio nustatymo pavadinimas"
+    },
     "button_save": {
         "message": "Išsaugoti"
     },
     "button_reset_defaults": {
         "message": "Atkurti numatytuosius"
-    },
-    "button_replace": {
-        "message": "Pakeisti"
     },
     "button_confirm": {
         "message": "Patvirtinti"
@@ -107,17 +95,14 @@
     "button_cancel": {
         "message": "Atšaukti"
     },
-    "modal_delete_title": {
-        "message": "Ištrinti temą?"
+    "button_delete": {
+        "message": "Ištrinti"
     },
-    "modal_delete_msg": {
-        "message": "Ar tikrai norite ištrinti {{NAME}}?"
+    "button_close": {
+        "message": "Uždaryti"
     },
-    "modal_overwrite_title": {
-        "message": "Perrašyti temą?"
-    },
-    "modal_overwrite_msg": {
-        "message": "„{{NAME}}“ jau yra. Pakeisti?"
+    "button_back": {
+        "message": "Atgal"
     },
     "feedback_saved": {
         "message": "Išsaugota!"
@@ -136,5 +121,116 @@
     },
     "label_support": {
         "message": "Pagalba"
+    },
+    "aria_presets": {
+        "message": "Išankstiniai nustatymai"
+    },
+    "about_title": {
+        "message": "Apie"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Vienas pasaulis tobuloje harmonijoje."
+    },
+    "footer_buy_coffee": {
+        "message": "Pavaišink mane kava"
+    },
+    "footer_made_with": {
+        "message": "Sukurta su ❤️, autorius: "
+    },
+    "title_update_preset": {
+        "message": "Atnaujinti nustatymą"
+    },
+    "title_delete_preset": {
+        "message": "Ištrinti nustatymą"
+    },
+    "title_revert_preset": {
+        "message": "Atmesti pakeitimus"
+    },
+    "title_new_preset": {
+        "message": "Sukurti naują nustatymą"
+    },
+    "title_edit_theme": {
+        "message": "Redaguoti temą"
+    },
+    "title_delete_theme": {
+        "message": "Ištrinti temą"
+    },
+    "modal_theme_delete_title": {
+        "message": "Ištrinti temą?"
+    },
+    "modal_theme_delete_msg": {
+        "message": "Ar tikrai norite visam laikui ištrinti temą „{{NAME}}“?"
+    },
+    "modal_theme_overwrite_title": {
+        "message": "Perrašyti temą?"
+    },
+    "modal_theme_overwrite_msg": {
+        "message": "Tema „{{NAME}}“ jau egzistuoja. Pakeisti?"
+    },
+    "modal_preset_delete_title": {
+        "message": "Ištrinti nustatymą?"
+    },
+    "modal_preset_delete_msg": {
+        "message": "Ar tikrai norite visam laikui ištrinti išankstinį nustatymą „{{NAME}}“?"
+    },
+    "modal_preset_overwrite_title": {
+        "message": "Perrašyti nustatymą?"
+    },
+    "modal_preset_overwrite_msg": {
+        "message": "Ar tikrai norite perrašyti „{{NAME}}“ dabartiniais nustatymais?"
+    },
+    "button_replace": {
+        "message": "Pakeisti"
+    },
+    "modal_delete_msg": {
+        "message": "Ar esate tikri?"
+    },
+    "preset_flat": {
+        "message": "Plokščias"
+    },
+    "preset_pop": {
+        "message": "Pop"
+    },
+    "preset_rock": {
+        "message": "Rokas"
+    },
+    "preset_rb_hip_hop": {
+        "message": "R&B / Hip-Hop"
+    },
+    "preset_electronic": {
+        "message": "Elektroninė"
+    },
+    "preset_deep_bass": {
+        "message": "Gilūs žemi"
+    },
+    "preset_indie_alt": {
+        "message": "Indie / Alt"
+    },
+    "preset_vocaloid_j_pop": {
+        "message": "Vocaloid / J-Pop"
+    },
+    "preset_jazz_blues": {
+        "message": "Džiazas / Bliuzas"
+    },
+    "preset_acoustic": {
+        "message": "Akustinė"
+    },
+    "preset_classical": {
+        "message": "Klasikinė"
+    },
+    "preset_hi_fi_master": {
+        "message": "Hi-Fi Master"
+    },
+    "preset_cinema": {
+        "message": "Kinas"
+    },
+    "preset_vocal_booster": {
+        "message": "Vokalo stiprinimas"
+    },
+    "preset_late_night": {
+        "message": "Vėlyva naktis"
     }
 }

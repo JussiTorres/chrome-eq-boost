@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "Väntar på ljud..."
   },
+  "status_conflict": {
+    "message": "Kontrollerar en annan flik"
+  },
   "toggle_label": {
     "message": "Tillägg aktiverat"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "Inställningar"
   },
-  "status_conflict": {
-    "message": "Kontrollerar en annan flik"
-  },
   "settings_language_label": {
     "message": "Språk"
-  },
-  "footer_buy_coffee": {
-    "message": "Bjud mig på en kaffe"
-  },
-  "footer_made_with": {
-    "message": "Skapad med ❤️ av"
-  },
-  "about_title": {
-    "message": "Om"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "En värld i perfekt harmoni."
   },
   "settings_dark_mode": {
     "message": "Mörkt läge"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "Nytt temanamn"
   },
+  "placeholder_select_preset": {
+    "message": "Välj förinställning..."
+  },
+  "placeholder_new_preset": {
+    "message": "Nytt namn på förinställning"
+  },
   "button_save": {
     "message": "Spara"
   },
   "button_reset_defaults": {
     "message": "Återställ till standardinställningar"
-  },
-  "button_replace": {
-    "message": "Ersätt"
   },
   "button_confirm": {
     "message": "Bekräfta"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "Avbryt"
   },
-  "modal_delete_title": {
-    "message": "Radera tema?"
+  "button_delete": {
+    "message": "Radera"
   },
-  "modal_delete_msg": {
-    "message": "Är du säker på att du vill radera {{NAME}} permanent?"
+  "button_close": {
+    "message": "Stäng"
   },
-  "modal_overwrite_title": {
-    "message": "Skriva över tema?"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" finns redan. Vill du ersätta det?"
+  "button_back": {
+    "message": "Bakåt"
   },
   "feedback_saved": {
     "message": "Sparat!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "Support"
+  },
+  "aria_presets": {
+    "message": "Förinställningar"
+  },
+  "about_title": {
+    "message": "Om"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "En värld i perfekt harmoni."
+  },
+  "footer_buy_coffee": {
+    "message": "Bjud mig på en kaffe"
+  },
+  "footer_made_with": {
+    "message": "Skapad med ❤️ av"
+  },
+  "title_update_preset": {
+    "message": "Uppdatera förinställning"
+  },
+  "title_delete_preset": {
+    "message": "Ta bort förinställning"
+  },
+  "title_revert_preset": {
+    "message": "Ångra ändringar"
+  },
+  "title_new_preset": {
+    "message": "Skapa ny förinställning"
+  },
+  "title_edit_theme": {
+    "message": "Redigera tema"
+  },
+  "title_delete_theme": {
+    "message": "Ta bort tema"
+  },
+  "modal_theme_delete_title": {
+    "message": "Radera tema?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Är du säker på att du vill radera temat '{{NAME}}' permanent?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Skriva över tema?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Temat '{{NAME}}' finns redan. Vill du ersätta det?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Radera förinställning?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Är du säker på att du vill radera förinställningen '{{NAME}}' permanent?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Skriva över förinställning?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Är du säker på att du vill skriva över '{{NAME}}' med dina nuvarande inställningar?"
+  },
+  "button_replace": {
+    "message": "Ersätt"
+  },
+  "modal_delete_msg": {
+    "message": "Är du säker?"
+  },
+  "preset_flat": {
+    "message": "Platt"
+  },
+  "preset_pop": {
+    "message": "Pop"
+  },
+  "preset_rock": {
+    "message": "Rock"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
+  },
+  "preset_electronic": {
+    "message": "Elektroniskt"
+  },
+  "preset_deep_bass": {
+    "message": "Djup bas"
+  },
+  "preset_indie_alt": {
+    "message": "Indie / Alt"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Akustiskt"
+  },
+  "preset_classical": {
+    "message": "Klassiskt"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi Master"
+  },
+  "preset_cinema": {
+    "message": "Biograf"
+  },
+  "preset_vocal_booster": {
+    "message": "Röstförstärkare"
+  },
+  "preset_late_night": {
+    "message": "Sen kväll"
   }
 }

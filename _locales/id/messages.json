@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "Menunggu audio..."
   },
+  "status_conflict": {
+    "message": "Mengontrol tab lain"
+  },
   "toggle_label": {
     "message": "Ekstensi aktif"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "Pengaturan"
   },
-  "status_conflict": {
-    "message": "Mengontrol tab lain"
-  },
   "settings_language_label": {
     "message": "Bahasa"
-  },
-  "footer_buy_coffee": {
-    "message": "Traktir saya kopi"
-  },
-  "footer_made_with": {
-    "message": "Dibuat dengan ❤️ oleh"
-  },
-  "about_title": {
-    "message": "Tentang"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "Satu dunia dalam harmoni yang sempurna."
   },
   "settings_dark_mode": {
     "message": "Mode gelap"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "Nama Tema Baru"
   },
+  "placeholder_select_preset": {
+    "message": "Pilih preset..."
+  },
+  "placeholder_new_preset": {
+    "message": "Nama Preset Baru"
+  },
   "button_save": {
     "message": "Simpan"
   },
   "button_reset_defaults": {
     "message": "Reset ke Awal"
-  },
-  "button_replace": {
-    "message": "Ganti"
   },
   "button_confirm": {
     "message": "Konfirmasi"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "Batal"
   },
-  "modal_delete_title": {
-    "message": "Hapus Tema?"
+  "button_delete": {
+    "message": "Hapus"
   },
-  "modal_delete_msg": {
-    "message": "Yakin ingin menghapus {{NAME}}?"
+  "button_close": {
+    "message": "Tutup"
   },
-  "modal_overwrite_title": {
-    "message": "Timpa Tema?"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" sudah ada. Ganti?"
+  "button_back": {
+    "message": "Kembali"
   },
   "feedback_saved": {
     "message": "Disimpan!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "Dukungan"
+  },
+  "aria_presets": {
+    "message": "Preset"
+  },
+  "about_title": {
+    "message": "Tentang"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Satu dunia dalam harmoni yang sempurna."
+  },
+  "footer_buy_coffee": {
+    "message": "Traktir saya kopi"
+  },
+  "footer_made_with": {
+    "message": "Dibuat dengan ❤️ oleh"
+  },
+  "title_update_preset": {
+    "message": "Perbarui Preset"
+  },
+  "title_delete_preset": {
+    "message": "Hapus Preset"
+  },
+  "title_revert_preset": {
+    "message": "Batalkan Perubahan"
+  },
+  "title_new_preset": {
+    "message": "Buat Preset Baru"
+  },
+  "title_edit_theme": {
+    "message": "Edit Tema"
+  },
+  "title_delete_theme": {
+    "message": "Hapus Tema"
+  },
+  "modal_theme_delete_title": {
+    "message": "Hapus Tema?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Apakah Anda yakin ingin menghapus tema '{{NAME}}' secara permanen?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Timpa Tema?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Tema '{{NAME}}' sudah ada. Ganti?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Hapus Preset?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Apakah Anda yakin ingin menghapus preset '{{NAME}}' secara permanen?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Timpa Preset?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Apakah Anda yakin ingin menimpa '{{NAME}}' dengan pengaturan Anda saat ini?"
+  },
+  "button_replace": {
+    "message": "Ganti"
+  },
+  "modal_delete_msg": {
+    "message": "Apakah Anda yakin?"
+  },
+  "preset_flat": {
+    "message": "Datar"
+  },
+  "preset_pop": {
+    "message": "Pop"
+  },
+  "preset_rock": {
+    "message": "Rock"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
+  },
+  "preset_electronic": {
+    "message": "Elektronik"
+  },
+  "preset_deep_bass": {
+    "message": "Bass Mendalam"
+  },
+  "preset_indie_alt": {
+    "message": "Indie / Alt"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Akustik"
+  },
+  "preset_classical": {
+    "message": "Klasik"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi Master"
+  },
+  "preset_cinema": {
+    "message": "Bioskop"
+  },
+  "preset_vocal_booster": {
+    "message": "Peningkat Vokal"
+  },
+  "preset_late_night": {
+    "message": "Larut Malam"
   }
 }

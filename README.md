@@ -20,14 +20,18 @@ A professional-grade, privacy-focused audio suite for Chrome. Boost your volume 
 
 ### 🎨 Next-Gen UI & Personalization
 
+* **EQ Preset Management System:** Save, load, and manage custom equalizer profiles seamlessly alongside built-in default presets.
 * **Custom Theme Editor:** Create and save your own UI designs with a professional **3-color picker system**.
 * **Dynamic Contrast Engine:** Intelligent UI logic that automatically adjusts text color (Black/White) and makes the Reset button a chameleon that adapts to your chosen accent colors.
 * **Unified "Light-Up" Logic:** Smart state management via CSS `:has()` that applies a subtle opacity fade when disabled and a high-luminance glow when active.
 * **Retro Marquee Mode:** A scrolling "ticker" display for song titles.
 * **Dark Mode:** Persistent, high-integrity dark theme for late-night sessions.
 
-### 🧠 Intelligent Audio Engine (v1.10.0 Update)
+### 🧠 Intelligent Audio Engine
 
+* **Fused RTL Engine:** Full layout parity for Right-To-Left languages featuring dynamic document-level mirroring.
+* **Stale UI Teardown:** Aggressive `unload` event listeners automatically clear transient states (like open preset decks) from memory when the popup closes.
+* **Decoupled Modal Engine:** A centralized, reusable UI module for handling all confirmation dialogues (theme deletion, preset overwriting).
 * **Auto-Healing Watchdog:** Proactively catches unexpected Chromium context suspensions (system sleep, tab discarding) via `onstatechange` events and executes programmatic recovery.
 * **Concurrency-Safe Operations:** Implemented an atomic mutex lock (`creatingOffscreenPromise`) to prevent race condition crashes during rapid UI toggle interactions.
 * **Centralized Teardown Pipeline:** Orchestrates clean resource disposal via `executeCleanTeardown()` and `stopHardwareTracks()`, strictly ensuring instantaneous track termination and forcing the blue casting icon to drop immediately.
@@ -39,7 +43,7 @@ A professional-grade, privacy-focused audio suite for Chrome. Boost your volume 
 
 ## 🌍 Global Support
 
-The extension features **Auto-Language Detection** and is fully localized in **22 major languages**, including English, Español, Français, 日本語, 中文, and more.
+The extension features **Auto-Language Detection** and is fully localized in **28 major languages**, including English, Español, Français, 日本語, 中文, Arabic, Hebrew, Farsi, and Urdu.
 
 ---
 
@@ -72,7 +76,7 @@ The most secure and easiest method:
 ## 🛠️ Technical Stack
 
 * **Engine:** Web Audio API (`BiquadFilterNode`, `DynamicsCompressorNode`, `AnalyserNode`) wired into a linear node chain.
-* **Architecture:** Modular ES6 Javascript (`themeEngine.js`, `uiStatus.js`, `storageHelpers.js`, `themeEditor.js`) for high performance and maintainability.
+* **Architecture:** Modular ES6 Javascript (`themeEngine.js`, `uiStatus.js`, `storageHelpers.js`, `themeEditor.js`, `presetManager.js`, `modalEngine.js`) for high performance and maintainability.
 * **Communication:** Asynchronous Service Worker orchestration, atomic promise gates, and cross-context message routing.
 
 ---

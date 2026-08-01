@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "في انتظار الصوت..."
   },
+  "status_conflict": {
+    "message": "يتحكم في تبويب آخر"
+  },
   "toggle_label": {
     "message": "الإضافة مفعلة"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "الإعدادات"
   },
-  "status_conflict": {
-    "message": "يتحكم في تبويب آخر"
-  },
   "settings_language_label": {
     "message": "اللغة"
-  },
-  "footer_buy_coffee": {
-    "message": "اشترِ لي قهوة"
-  },
-  "footer_made_with": {
-    "message": "صُنع بـ ❤️ بواسطة"
-  },
-  "about_title": {
-    "message": "حول"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "عالم واحد في تناغم تام."
   },
   "settings_dark_mode": {
     "message": "الوضع الداكن"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "اسم المظهر الجديد"
   },
+  "placeholder_select_preset": {
+    "message": "اختر إعدادًا مسبقًا..."
+  },
+  "placeholder_new_preset": {
+    "message": "اسم الإعداد المسبق الجديد"
+  },
   "button_save": {
     "message": "حفظ"
   },
   "button_reset_defaults": {
     "message": "استعادة الافتراضيات"
-  },
-  "button_replace": {
-    "message": "استبدال"
   },
   "button_confirm": {
     "message": "تأكيد"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "إلغاء"
   },
-  "modal_delete_title": {
-    "message": "حذف المظهر؟"
+  "button_delete": {
+    "message": "حذف"
   },
-  "modal_delete_msg": {
-    "message": "هل أنت متأكد أنك تريد حذف {{NAME}} نهائيًا؟"
+  "button_close": {
+    "message": "إغلاق"
   },
-  "modal_overwrite_title": {
-    "message": "استبدال المظهر؟"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" موجود مسبقًا. هل تريد استبداله؟"
+  "button_back": {
+    "message": "رجوع"
   },
   "feedback_saved": {
     "message": "تم الحفظ!"
@@ -132,9 +117,120 @@
     "message": "افتراضي مسبقًا"
   },
   "alert_invalid_name": {
-    "message": "اسم المظهر غير صالح."
+    "message": "اسم غير صالح."
   },
   "label_support": {
     "message": "الدعم"
+  },
+  "aria_presets": {
+    "message": "الإعدادات المسبقة"
+  },
+  "about_title": {
+    "message": "حول"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "عالم واحد في تناغم تام."
+  },
+  "footer_buy_coffee": {
+    "message": "اشترِ لي قهوة"
+  },
+  "footer_made_with": {
+    "message": "صُنع بـ ❤️ بواسطة"
+  },
+  "title_update_preset": {
+    "message": "تحديث الإعداد المسبق"
+  },
+  "title_delete_preset": {
+    "message": "حذف الإعداد المسبق"
+  },
+  "title_revert_preset": {
+    "message": "تراجع عن التغييرات"
+  },
+  "title_new_preset": {
+    "message": "إنشاء إعداد مسبق جديد"
+  },
+  "title_edit_theme": {
+    "message": "تعديل المظهر"
+  },
+  "title_delete_theme": {
+    "message": "حذف المظهر"
+  },
+  "modal_theme_delete_title": {
+    "message": "حذف المظهر؟"
+  },
+  "modal_theme_delete_msg": {
+    "message": "هل أنت متأكد أنك تريد حذف المظهر '{{NAME}}' نهائيًا؟"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "استبدال المظهر؟"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "المظهر '{{NAME}}' موجود مسبقًا. هل تريد استبداله؟"
+  },
+  "modal_preset_delete_title": {
+    "message": "حذف الإعداد المسبق؟"
+  },
+  "modal_preset_delete_msg": {
+    "message": "هل أنت متأكد أنك تريد حذف الإعداد المسبق '{{NAME}}' نهائيًا؟"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "استبدال الإعداد المسبق؟"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "هل أنت متأكد أنك تريد استبدال '{{NAME}}' بإعداداتك الحالية؟"
+  },
+  "button_replace": {
+    "message": "استبدال"
+  },
+  "modal_delete_msg": {
+    "message": "هل أنت متأكد؟"
+  },
+  "preset_flat": {
+    "message": "مسطح"
+  },
+  "preset_pop": {
+    "message": "بوب"
+  },
+  "preset_rock": {
+    "message": "روك"
+  },
+  "preset_rb_hip_hop": {
+    "message": "آر أند بي / هيب هوب"
+  },
+  "preset_electronic": {
+    "message": "إلكتروني"
+  },
+  "preset_deep_bass": {
+    "message": "بيس عميق"
+  },
+  "preset_indie_alt": {
+    "message": "إندي / بديل"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "فوكالوييد / جي-بوب"
+  },
+  "preset_jazz_blues": {
+    "message": "جاز / بلوز"
+  },
+  "preset_acoustic": {
+    "message": "أكوستيك"
+  },
+  "preset_classical": {
+    "message": "كلاسيكي"
+  },
+  "preset_hi_fi_master": {
+    "message": "هاي-فاي ماستر"
+  },
+  "preset_cinema": {
+    "message": "سينما"
+  },
+  "preset_vocal_booster": {
+    "message": "معزز الصوت"
+  },
+  "preset_late_night": {
+    "message": "وقت متأخر من الليل"
   }
 }

@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "等待音频..."
   },
+  "status_conflict": {
+    "message": "正在控制另一个标签页"
+  },
   "toggle_label": {
     "message": "已启用"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "设置"
   },
-  "status_conflict": {
-    "message": "正在控制另一个标签页"
-  },
   "settings_language_label": {
     "message": "语言"
-  },
-  "footer_buy_coffee": {
-    "message": "请我喝杯咖啡"
-  },
-  "footer_made_with": {
-    "message": "用 ❤️ 制作:"
-  },
-  "about_title": {
-    "message": "关于"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "一个完美和谐的世界。"
   },
   "settings_dark_mode": {
     "message": "深色模式"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "新主题名称"
   },
+  "placeholder_select_preset": {
+    "message": "选择预设..."
+  },
+  "placeholder_new_preset": {
+    "message": "新预设名称"
+  },
   "button_save": {
     "message": "保存"
   },
   "button_reset_defaults": {
     "message": "恢复默认"
-  },
-  "button_replace": {
-    "message": "替换"
   },
   "button_confirm": {
     "message": "确认"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "取消"
   },
-  "modal_delete_title": {
-    "message": "删除主题？"
+  "button_delete": {
+    "message": "删除"
   },
-  "modal_delete_msg": {
-    "message": "确定要永久删除 {{NAME}} 吗？"
+  "button_close": {
+    "message": "关闭"
   },
-  "modal_overwrite_title": {
-    "message": "覆盖主题？"
-  },
-  "modal_overwrite_msg": {
-    "message": "“{{NAME}}”已存在。是否替换？"
+  "button_back": {
+    "message": "返回"
   },
   "feedback_saved": {
     "message": "已保存！"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "支持"
+  },
+  "aria_presets": {
+    "message": "预设"
+  },
+  "about_title": {
+    "message": "关于"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "一个完美和谐的世界。"
+  },
+  "footer_buy_coffee": {
+    "message": "请我喝杯咖啡"
+  },
+  "footer_made_with": {
+    "message": "用 ❤️ 制作:"
+  },
+  "title_update_preset": {
+    "message": "更新预设"
+  },
+  "title_delete_preset": {
+    "message": "删除预设"
+  },
+  "title_revert_preset": {
+    "message": "撤销更改"
+  },
+  "title_new_preset": {
+    "message": "创建新预设"
+  },
+  "title_edit_theme": {
+    "message": "编辑主题"
+  },
+  "title_delete_theme": {
+    "message": "删除主题"
+  },
+  "modal_theme_delete_title": {
+    "message": "删除主题？"
+  },
+  "modal_theme_delete_msg": {
+    "message": "确定要永久删除主题“{{NAME}}”吗？"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "覆盖主题？"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "“{{NAME}}”已存在。是否替换？"
+  },
+  "modal_preset_delete_title": {
+    "message": "删除预设？"
+  },
+  "modal_preset_delete_msg": {
+    "message": "确定要永久删除预设“{{NAME}}”吗？"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "覆盖预设？"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "确定要使用当前设置覆盖预设“{{NAME}}”吗？"
+  },
+  "button_replace": {
+    "message": "替换"
+  },
+  "modal_delete_msg": {
+    "message": "确定吗？"
+  },
+  "preset_flat": {
+    "message": "平直"
+  },
+  "preset_pop": {
+    "message": "流行"
+  },
+  "preset_rock": {
+    "message": "摇滚"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / 嘻哈"
+  },
+  "preset_electronic": {
+    "message": "电子"
+  },
+  "preset_deep_bass": {
+    "message": "重低音"
+  },
+  "preset_indie_alt": {
+    "message": "独立 / 另类"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "爵士 / 蓝调"
+  },
+  "preset_acoustic": {
+    "message": "原声"
+  },
+  "preset_classical": {
+    "message": "古典"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi 母带"
+  },
+  "preset_cinema": {
+    "message": "影院"
+  },
+  "preset_vocal_booster": {
+    "message": "人声增强"
+  },
+  "preset_late_night": {
+    "message": "深夜模式"
   }
 }

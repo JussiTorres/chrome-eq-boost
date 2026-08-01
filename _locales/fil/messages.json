@@ -11,6 +11,9 @@
     "status_waiting": {
         "message": "Naghihintay ng audio..."
     },
+    "status_conflict": {
+        "message": "Kinokontrol ang ibang tab"
+    },
     "toggle_label": {
         "message": "Naka-on ang extension"
     },
@@ -41,26 +44,8 @@
     "settings_title": {
         "message": "Settings"
     },
-    "status_conflict": {
-        "message": "Kinokontrol ang ibang tab"
-    },
     "settings_language_label": {
         "message": "Wika"
-    },
-    "footer_buy_coffee": {
-        "message": "Ilibre ako ng kape"
-    },
-    "footer_made_with": {
-        "message": "Gawa nang may ❤️ ni"
-    },
-    "about_title": {
-        "message": "Tungkol sa"
-    },
-    "about_app_name": {
-        "message": "Chrome EQ & Volume"
-    },
-    "about_subtitle": {
-        "message": "Isang mundo sa perpektong harmonya."
     },
     "settings_dark_mode": {
         "message": "Dark Mode"
@@ -92,14 +77,17 @@
     "placeholder_new_theme": {
         "message": "Pangalan ng Bagong Tema"
     },
+    "placeholder_select_preset": {
+        "message": "Pumili ng preset..."
+    },
+    "placeholder_new_preset": {
+        "message": "Pangalan ng Bagong Preset"
+    },
     "button_save": {
         "message": "I-save"
     },
     "button_reset_defaults": {
         "message": "Ibalik sa Default"
-    },
-    "button_replace": {
-        "message": "Palitan"
     },
     "button_confirm": {
         "message": "Kumpirmahin"
@@ -107,17 +95,14 @@
     "button_cancel": {
         "message": "Kanselahin"
     },
-    "modal_delete_title": {
-        "message": "Burahin ang Tema?"
+    "button_delete": {
+        "message": "Burahin"
     },
-    "modal_delete_msg": {
-        "message": "Sigurado ka bang gusto mong burahin ang {{NAME}}?"
+    "button_close": {
+        "message": "Isara"
     },
-    "modal_overwrite_title": {
-        "message": "Palitan ang Tema?"
-    },
-    "modal_overwrite_msg": {
-        "message": "Mayroon nang \"{{NAME}}\". Palitan ito?"
+    "button_back": {
+        "message": "Bumalik"
     },
     "feedback_saved": {
         "message": "Na-save na!"
@@ -136,5 +121,116 @@
     },
     "label_support": {
         "message": "Suporta"
+    },
+    "aria_presets": {
+        "message": "Mga Preset"
+    },
+    "about_title": {
+        "message": "Tungkol sa"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Isang mundo sa perpektong harmonya."
+    },
+    "footer_buy_coffee": {
+        "message": "Ilibre ako ng kape"
+    },
+    "footer_made_with": {
+        "message": "Gawa nang may ❤️ ni"
+    },
+    "title_update_preset": {
+        "message": "I-update ang Preset"
+    },
+    "title_delete_preset": {
+        "message": "Burahin ang Preset"
+    },
+    "title_revert_preset": {
+        "message": "Ibalik ang Pagbabago"
+    },
+    "title_new_preset": {
+        "message": "Gumawa ng Bagong Preset"
+    },
+    "title_edit_theme": {
+        "message": "I-edit ang Tema"
+    },
+    "title_delete_theme": {
+        "message": "Burahin ang Tema"
+    },
+    "modal_theme_delete_title": {
+        "message": "Burahin ang Tema?"
+    },
+    "modal_theme_delete_msg": {
+        "message": "Sigurado ka bang gusto mong burahin nang tuluyan ang temang '{{NAME}}'?"
+    },
+    "modal_theme_overwrite_title": {
+        "message": "Palitan ang Tema?"
+    },
+    "modal_theme_overwrite_msg": {
+        "message": "Mayroon nang temang '{{NAME}}'. Palitan ito?"
+    },
+    "modal_preset_delete_title": {
+        "message": "Burahin ang Preset?"
+    },
+    "modal_preset_delete_msg": {
+        "message": "Sigurado ka bang gusto mong burahin nang tuluyan ang preset na '{{NAME}}'?"
+    },
+    "modal_preset_overwrite_title": {
+        "message": "Palitan ang Preset?"
+    },
+    "modal_preset_overwrite_msg": {
+        "message": "Sigurado ka bang gusto mong palitan ang '{{NAME}}' gamit ang kasalukuyan mong settings?"
+    },
+    "button_replace": {
+        "message": "Palitan"
+    },
+    "modal_delete_msg": {
+        "message": "Sigurado ka ba?"
+    },
+    "preset_flat": {
+        "message": "Flat"
+    },
+    "preset_pop": {
+        "message": "Pop"
+    },
+    "preset_rock": {
+        "message": "Rock"
+    },
+    "preset_rb_hip_hop": {
+        "message": "R&B / Hip-Hop"
+    },
+    "preset_electronic": {
+        "message": "Electronic"
+    },
+    "preset_deep_bass": {
+        "message": "Malalim na Bass"
+    },
+    "preset_indie_alt": {
+        "message": "Indie / Alt"
+    },
+    "preset_vocaloid_j_pop": {
+        "message": "Vocaloid / J-Pop"
+    },
+    "preset_jazz_blues": {
+        "message": "Jazz / Blues"
+    },
+    "preset_acoustic": {
+        "message": "Acoustic"
+    },
+    "preset_classical": {
+        "message": "Classical"
+    },
+    "preset_hi_fi_master": {
+        "message": "Hi-Fi Master"
+    },
+    "preset_cinema": {
+        "message": "Cinema"
+    },
+    "preset_vocal_booster": {
+        "message": "Pampalakas ng Boses"
+    },
+    "preset_late_night": {
+        "message": "Gabing-gabi"
     }
 }

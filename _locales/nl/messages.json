@@ -11,6 +11,9 @@
     "status_waiting": {
         "message": "Wachten op audio..."
     },
+    "status_conflict": {
+        "message": "Bestuurt ander tabblad"
+    },
     "toggle_label": {
         "message": "Extensie ingeschakeld"
     },
@@ -41,26 +44,8 @@
     "settings_title": {
         "message": "Instellingen"
     },
-    "status_conflict": {
-        "message": "Bestuurt ander tabblad"
-    },
     "settings_language_label": {
         "message": "Taal"
-    },
-    "footer_buy_coffee": {
-        "message": "Trakteer me op koffie"
-    },
-    "footer_made_with": {
-        "message": "Gemaakt met ❤️ door"
-    },
-    "about_title": {
-        "message": "Over"
-    },
-    "about_app_name": {
-        "message": "Chrome EQ & Volume"
-    },
-    "about_subtitle": {
-        "message": "Eén wereld in perfecte harmonie."
     },
     "settings_dark_mode": {
         "message": "Donkere modus"
@@ -90,7 +75,13 @@
         "message": "Kies een thema..."
     },
     "placeholder_new_theme": {
-        "message": "Nieuwe theamanaam"
+        "message": "Nieuwe themanaam"
+    },
+    "placeholder_select_preset": {
+        "message": "Selecteer preset..."
+    },
+    "placeholder_new_preset": {
+        "message": "Nieuwe presetnaam"
     },
     "button_save": {
         "message": "Opslaan"
@@ -98,26 +89,20 @@
     "button_reset_defaults": {
         "message": "Herstel standaard"
     },
-    "button_replace": {
-        "message": "Vervangen"
-    },
     "button_confirm": {
         "message": "Bevestigen"
     },
     "button_cancel": {
         "message": "Annuleren"
     },
-    "modal_delete_title": {
-        "message": "Thema verwijderen?"
+    "button_delete": {
+        "message": "Verwijderen"
     },
-    "modal_delete_msg": {
-        "message": "Weet je zeker dat je {{NAME}} wilt verwijderen?"
+    "button_close": {
+        "message": "Sluiten"
     },
-    "modal_overwrite_title": {
-        "message": "Thema overschrijven?"
-    },
-    "modal_overwrite_msg": {
-        "message": "\"{{NAME}}\" bestaat al. Vervangen?"
+    "button_back": {
+        "message": "Terug"
     },
     "feedback_saved": {
         "message": "Opgeslagen!"
@@ -136,5 +121,116 @@
     },
     "label_support": {
         "message": "Ondersteuning"
+    },
+    "aria_presets": {
+        "message": "Presets"
+    },
+    "about_title": {
+        "message": "Over"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Eén wereld in perfecte harmonie."
+    },
+    "footer_buy_coffee": {
+        "message": "Trakteer me op koffie"
+    },
+    "footer_made_with": {
+        "message": "Gemaakt met ❤️ door"
+    },
+    "title_update_preset": {
+        "message": "Preset updaten"
+    },
+    "title_delete_preset": {
+        "message": "Preset verwijderen"
+    },
+    "title_revert_preset": {
+        "message": "Wijzigingen ongedaan maken"
+    },
+    "title_new_preset": {
+        "message": "Nieuwe preset maken"
+    },
+    "title_edit_theme": {
+        "message": "Thema bewerken"
+    },
+    "title_delete_theme": {
+        "message": "Thema verwijderen"
+    },
+    "modal_theme_delete_title": {
+        "message": "Thema verwijderen?"
+    },
+    "modal_theme_delete_msg": {
+        "message": "Weet je zeker dat je het thema '{{NAME}}' permanent wilt verwijderen?"
+    },
+    "modal_theme_overwrite_title": {
+        "message": "Thema overschrijven?"
+    },
+    "modal_theme_overwrite_msg": {
+        "message": "Het thema '{{NAME}}' bestaat al. Vervangen?"
+    },
+    "modal_preset_delete_title": {
+        "message": "Preset verwijderen?"
+    },
+    "modal_preset_delete_msg": {
+        "message": "Weet je zeker dat je de preset '{{NAME}}' permanent wilt verwijderen?"
+    },
+    "modal_preset_overwrite_title": {
+        "message": "Preset overschrijven?"
+    },
+    "modal_preset_overwrite_msg": {
+        "message": "Weet je zeker dat je '{{NAME}}' wilt overschrijven met je huidige instellingen?"
+    },
+    "button_replace": {
+        "message": "Vervangen"
+    },
+    "modal_delete_msg": {
+        "message": "Weet je het zeker?"
+    },
+    "preset_flat": {
+        "message": "Vlak"
+    },
+    "preset_pop": {
+        "message": "Pop"
+    },
+    "preset_rock": {
+        "message": "Rock"
+    },
+    "preset_rb_hip_hop": {
+        "message": "R&B / Hip-Hop"
+    },
+    "preset_electronic": {
+        "message": "Electronic"
+    },
+    "preset_deep_bass": {
+        "message": "Diepe bas"
+    },
+    "preset_indie_alt": {
+        "message": "Indie / Alt"
+    },
+    "preset_vocaloid_j_pop": {
+        "message": "Vocaloid / J-Pop"
+    },
+    "preset_jazz_blues": {
+        "message": "Jazz / Blues"
+    },
+    "preset_acoustic": {
+        "message": "Akoestisch"
+    },
+    "preset_classical": {
+        "message": "Klassiek"
+    },
+    "preset_hi_fi_master": {
+        "message": "Hi-Fi Master"
+    },
+    "preset_cinema": {
+        "message": "Bioscoop"
+    },
+    "preset_vocal_booster": {
+        "message": "Vocal Booster"
+    },
+    "preset_late_night": {
+        "message": "Late nacht"
     }
 }
