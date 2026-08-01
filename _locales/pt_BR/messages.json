@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "Aguardando áudio..."
   },
+  "status_conflict": {
+    "message": "Controlando outra guia"
+  },
   "toggle_label": {
     "message": "Extensão habilitada"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "Configurações"
   },
-  "status_conflict": {
-    "message": "Controlando outra guia"
-  },
   "settings_language_label": {
     "message": "Idioma"
-  },
-  "footer_buy_coffee": {
-    "message": "Me pague um café"
-  },
-  "footer_made_with": {
-    "message": "Feito com ❤️ por"
-  },
-  "about_title": {
-    "message": "Sobre"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "Um mundo em perfeita harmonia."
   },
   "settings_dark_mode": {
     "message": "Modo escuro"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "Nome do novo tema"
   },
+  "placeholder_select_preset": {
+    "message": "Selecionar predefinição..."
+  },
+  "placeholder_new_preset": {
+    "message": "Nome da nova predefinição"
+  },
   "button_save": {
     "message": "Salvar"
   },
   "button_reset_defaults": {
     "message": "Restaurar Padrões"
-  },
-  "button_replace": {
-    "message": "Substituir"
   },
   "button_confirm": {
     "message": "Confirmar"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "Cancelar"
   },
-  "modal_delete_title": {
-    "message": "Excluir tema?"
+  "button_delete": {
+    "message": "Excluir"
   },
-  "modal_delete_msg": {
-    "message": "Tem certeza que deseja excluir {{NAME}}?"
+  "button_close": {
+    "message": "Fechar"
   },
-  "modal_overwrite_title": {
-    "message": "Sobrescrever tema?"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" já existe. Substituir?"
+  "button_back": {
+    "message": "Voltar"
   },
   "feedback_saved": {
     "message": "Salvo!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "Suporte"
+  },
+  "aria_presets": {
+    "message": "Predefinições"
+  },
+  "about_title": {
+    "message": "Sobre"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Um mundo em perfeita harmonia."
+  },
+  "footer_buy_coffee": {
+    "message": "Me pague um café"
+  },
+  "footer_made_with": {
+    "message": "Feito com ❤️ por"
+  },
+  "title_update_preset": {
+    "message": "Atualizar Predefinição"
+  },
+  "title_delete_preset": {
+    "message": "Excluir Predefinição"
+  },
+  "title_revert_preset": {
+    "message": "Desfazer Alterações"
+  },
+  "title_new_preset": {
+    "message": "Criar Nova Predefinição"
+  },
+  "title_edit_theme": {
+    "message": "Editar Tema"
+  },
+  "title_delete_theme": {
+    "message": "Excluir Tema"
+  },
+  "modal_theme_delete_title": {
+    "message": "Excluir tema?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Tem certeza de que deseja excluir permanentemente o tema '{{NAME}}'?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Sobrescrever tema?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "O tema '{{NAME}}' já existe. Substituir?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Excluir predefinição?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Tem certeza de que deseja excluir permanentemente a predefinição '{{NAME}}'?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Sobrescrever predefinição?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Tem certeza de que deseja sobrescrever '{{NAME}}' com suas configurações atuais?"
+  },
+  "button_replace": {
+    "message": "Substituir"
+  },
+  "modal_delete_msg": {
+    "message": "Você tem certeza?"
+  },
+  "preset_flat": {
+    "message": "Plano"
+  },
+  "preset_pop": {
+    "message": "Pop"
+  },
+  "preset_rock": {
+    "message": "Rock"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
+  },
+  "preset_electronic": {
+    "message": "Eletrônica"
+  },
+  "preset_deep_bass": {
+    "message": "Grave Profundo"
+  },
+  "preset_indie_alt": {
+    "message": "Indie / Alt"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Acústico"
+  },
+  "preset_classical": {
+    "message": "Clássico"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi Master"
+  },
+  "preset_cinema": {
+    "message": "Cinema"
+  },
+  "preset_vocal_booster": {
+    "message": "Amplificador de Voz"
+  },
+  "preset_late_night": {
+    "message": "Tarde da noite"
   }
 }

@@ -11,6 +11,9 @@
     "status_waiting": {
         "message": "Очікування аудіо..."
     },
+    "status_conflict": {
+        "message": "Керування іншою вкладкою"
+    },
     "toggle_label": {
         "message": "Розширення увімкнено"
     },
@@ -41,26 +44,8 @@
     "settings_title": {
         "message": "Налаштування"
     },
-    "status_conflict": {
-        "message": "Керування іншою вкладкою"
-    },
     "settings_language_label": {
         "message": "Мова"
-    },
-    "footer_buy_coffee": {
-        "message": "Пригости кавою"
-    },
-    "footer_made_with": {
-        "message": "Зроблено з ❤️"
-    },
-    "about_title": {
-        "message": "Про програму"
-    },
-    "about_app_name": {
-        "message": "Chrome EQ & Volume"
-    },
-    "about_subtitle": {
-        "message": "Один світ у досконалій гармонії."
     },
     "settings_dark_mode": {
         "message": "Темна тема"
@@ -92,14 +77,17 @@
     "placeholder_new_theme": {
         "message": "Назва нової теми"
     },
+    "placeholder_select_preset": {
+        "message": "Оберіть пресет..."
+    },
+    "placeholder_new_preset": {
+        "message": "Назва нового пресету"
+    },
     "button_save": {
         "message": "Зберегти"
     },
     "button_reset_defaults": {
         "message": "Скинути до стандартних"
-    },
-    "button_replace": {
-        "message": "Замінити"
     },
     "button_confirm": {
         "message": "Підтвердити"
@@ -107,17 +95,14 @@
     "button_cancel": {
         "message": "Скасувати"
     },
-    "modal_delete_title": {
-        "message": "Видалити тему?"
+    "button_delete": {
+        "message": "Видалити"
     },
-    "modal_delete_msg": {
-        "message": "Ви впевнені, що хочете видалити {{NAME}}?"
+    "button_close": {
+        "message": "Закрити"
     },
-    "modal_overwrite_title": {
-        "message": "Перезаписати тему?"
-    },
-    "modal_overwrite_msg": {
-        "message": "\"{{NAME}}\" вже існує. Замінити?"
+    "button_back": {
+        "message": "Назад"
     },
     "feedback_saved": {
         "message": "Збережено!"
@@ -136,5 +121,116 @@
     },
     "label_support": {
         "message": "Підтримка"
+    },
+    "aria_presets": {
+        "message": "Пресети"
+    },
+    "about_title": {
+        "message": "Про програму"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Один світ у досконалій гармонії."
+    },
+    "footer_buy_coffee": {
+        "message": "Пригости кавою"
+    },
+    "footer_made_with": {
+        "message": "Зроблено з ❤️ від "
+    },
+    "title_update_preset": {
+        "message": "Оновити пресет"
+    },
+    "title_delete_preset": {
+        "message": "Видалити пресет"
+    },
+    "title_revert_preset": {
+        "message": "Скасувати зміни"
+    },
+    "title_new_preset": {
+        "message": "Створити пресет"
+    },
+    "title_edit_theme": {
+        "message": "Редагувати тему"
+    },
+    "title_delete_theme": {
+        "message": "Видалити тему"
+    },
+    "modal_theme_delete_title": {
+        "message": "Видалити тему?"
+    },
+    "modal_theme_delete_msg": {
+        "message": "Ви впевнені, що хочете назавжди видалити тему «{{NAME}}»?"
+    },
+    "modal_theme_overwrite_title": {
+        "message": "Перезаписати тему?"
+    },
+    "modal_theme_overwrite_msg": {
+        "message": "Тема «{{NAME}}» вже існує. Замінити?"
+    },
+    "modal_preset_delete_title": {
+        "message": "Видалити пресет?"
+    },
+    "modal_preset_delete_msg": {
+        "message": "Ви впевнені, що хочете назавжди видалити пресет «{{NAME}}»?"
+    },
+    "modal_preset_overwrite_title": {
+        "message": "Перезаписати пресет?"
+    },
+    "modal_preset_overwrite_msg": {
+        "message": "Ви впевнені, що хочете перезаписати пресет «{{NAME}}» поточними налаштуваннями?"
+    },
+    "button_replace": {
+        "message": "Замінити"
+    },
+    "modal_delete_msg": {
+        "message": "Ви впевнені?"
+    },
+    "preset_flat": {
+        "message": "Плоский"
+    },
+    "preset_pop": {
+        "message": "Поп"
+    },
+    "preset_rock": {
+        "message": "Рок"
+    },
+    "preset_rb_hip_hop": {
+        "message": "R&B / Хіп-хоп"
+    },
+    "preset_electronic": {
+        "message": "Електроніка"
+    },
+    "preset_deep_bass": {
+        "message": "Глибокий бас"
+    },
+    "preset_indie_alt": {
+        "message": "Інді / Альтернатива"
+    },
+    "preset_vocaloid_j_pop": {
+        "message": "Вокалоїд / J-Pop"
+    },
+    "preset_jazz_blues": {
+        "message": "Джаз / Блюз"
+    },
+    "preset_acoustic": {
+        "message": "Акустика"
+    },
+    "preset_classical": {
+        "message": "Класика"
+    },
+    "preset_hi_fi_master": {
+        "message": "Хай-Фай Майстер"
+    },
+    "preset_cinema": {
+        "message": "Кіно"
+    },
+    "preset_vocal_booster": {
+        "message": "Підсилювач вокалу"
+    },
+    "preset_late_night": {
+        "message": "Пізня ніч"
     }
 }

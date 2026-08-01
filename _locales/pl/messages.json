@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "Oczekiwanie na dźwięk..."
   },
+  "status_conflict": {
+    "message": "Sterowanie inną kartą"
+  },
   "toggle_label": {
     "message": "Rozszerzenie włączone"
   },
@@ -21,7 +24,7 @@
     "message": "Głośność (Preamp)"
   },
   "section_eq": {
-    "message": "Ekvalaizer (-15dB do +15dB)"
+    "message": "Korektor (-15dB do +15dB)"
   },
   "label_bass": {
     "message": "Niskie (80 Hz)"
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "Ustawienia"
   },
-  "status_conflict": {
-    "message": "Sterowanie inną kartą"
-  },
   "settings_language_label": {
     "message": "Język"
-  },
-  "footer_buy_coffee": {
-    "message": "Postaw mi kawę"
-  },
-  "footer_made_with": {
-    "message": "Stworzone z ❤️ przez"
-  },
-  "about_title": {
-    "message": "O programie"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "Jeden świat w doskonałej harmonii."
   },
   "settings_dark_mode": {
     "message": "Tryb ciemny"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "Nazwa nowego motywu"
   },
+  "placeholder_select_preset": {
+    "message": "Wybierz profil..."
+  },
+  "placeholder_new_preset": {
+    "message": "Nazwa nowego profilu"
+  },
   "button_save": {
     "message": "Zapisz"
   },
   "button_reset_defaults": {
     "message": "Przywróć domyślne"
-  },
-  "button_replace": {
-    "message": "Zastąp"
   },
   "button_confirm": {
     "message": "Potwierdź"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "Anuluj"
   },
-  "modal_delete_title": {
-    "message": "Usunąć motyw?"
+  "button_delete": {
+    "message": "Usuń"
   },
-  "modal_delete_msg": {
-    "message": "Czy na pewno chcesz usunąć {{NAME}}?"
+  "button_close": {
+    "message": "Zamknij"
   },
-  "modal_overwrite_title": {
-    "message": "Nadpisać motyw?"
-  },
-  "modal_overwrite_msg": {
-    "message": "„{{NAME}}” już istnieje. Zastąpić?"
+  "button_back": {
+    "message": "Wstecz"
   },
   "feedback_saved": {
     "message": "Zapisano!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "Wsparcie"
+  },
+  "aria_presets": {
+    "message": "Profile"
+  },
+  "about_title": {
+    "message": "O programie"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Jeden świat w doskonałej harmonii."
+  },
+  "footer_buy_coffee": {
+    "message": "Postaw mi kawę"
+  },
+  "footer_made_with": {
+    "message": "Stworzone z ❤️ przez"
+  },
+  "title_update_preset": {
+    "message": "Zaktualizuj profil"
+  },
+  "title_delete_preset": {
+    "message": "Usuń profil"
+  },
+  "title_revert_preset": {
+    "message": "Cofnij zmiany"
+  },
+  "title_new_preset": {
+    "message": "Utwórz nowy profil"
+  },
+  "title_edit_theme": {
+    "message": "Edytuj motyw"
+  },
+  "title_delete_theme": {
+    "message": "Usuń motyw"
+  },
+  "modal_theme_delete_title": {
+    "message": "Usunąć motyw?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Czy na pewno chcesz trwale usunąć motyw „{{NAME}}”?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Nadpisać motyw?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Motyw „{{NAME}}” już istnieje. Zastąpić?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Usunąć profil?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Czy na pewno chcesz trwale usunąć profil „{{NAME}}”?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Nadpisać profil?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Czy na pewno chcesz nadpisać profil „{{NAME}}” bieżącymi ustawieniami?"
+  },
+  "button_replace": {
+    "message": "Zastąp"
+  },
+  "modal_delete_msg": {
+    "message": "Czy na pewno?"
+  },
+  "preset_flat": {
+    "message": "Płaski"
+  },
+  "preset_pop": {
+    "message": "Pop"
+  },
+  "preset_rock": {
+    "message": "Rock"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
+  },
+  "preset_electronic": {
+    "message": "Elektroniczna"
+  },
+  "preset_deep_bass": {
+    "message": "Głęboki bas"
+  },
+  "preset_indie_alt": {
+    "message": "Indie / Alt"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Akustyczna"
+  },
+  "preset_classical": {
+    "message": "Klasyczna"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi Master"
+  },
+  "preset_cinema": {
+    "message": "Kino"
+  },
+  "preset_vocal_booster": {
+    "message": "Wzmocnienie wokalu"
+  },
+  "preset_late_night": {
+    "message": "Późna noc"
   }
 }

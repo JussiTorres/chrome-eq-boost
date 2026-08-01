@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "Odotetaan ääntä..."
   },
+  "status_conflict": {
+    "message": "Hallitsee toista välilehteä"
+  },
   "toggle_label": {
     "message": "Laajennus käytössä"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "Asetukset"
   },
-  "status_conflict": {
-    "message": "Hallitsee toista välilehteä"
-  },
   "settings_language_label": {
     "message": "Kieli"
-  },
-  "footer_buy_coffee": {
-    "message": "Tue kahvilla"
-  },
-  "footer_made_with": {
-    "message": "Tehty ❤️:llä"
-  },
-  "about_title": {
-    "message": "Tietoja"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "Yksi maailma täydellisessä harmoniassa."
   },
   "settings_dark_mode": {
     "message": "Tumma tila"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "Uuden teeman nimi"
   },
+  "placeholder_select_preset": {
+    "message": "Valitse esiasetus..."
+  },
+  "placeholder_new_preset": {
+    "message": "Uuden esiasetuksen nimi"
+  },
   "button_save": {
     "message": "Tallenna"
   },
   "button_reset_defaults": {
     "message": "Palauta oletusasetukset"
-  },
-  "button_replace": {
-    "message": "Korvaa"
   },
   "button_confirm": {
     "message": "Vahvista"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "Peruuta"
   },
-  "modal_delete_title": {
-    "message": "Poistetaanko teema?"
+  "button_delete": {
+    "message": "Poista"
   },
-  "modal_delete_msg": {
-    "message": "Haluatko varmasti poistaa teeman {{NAME}} pysyvästi?"
+  "button_close": {
+    "message": "Sulje"
   },
-  "modal_overwrite_title": {
-    "message": "Korvataanko teema?"
-  },
-  "modal_overwrite_msg": {
-    "message": "”{{NAME}}” on jo olemassa. Korvataanko se?"
+  "button_back": {
+    "message": "Takaisin"
   },
   "feedback_saved": {
     "message": "Tallennettu!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "Tuki"
+  },
+  "aria_presets": {
+    "message": "Esiasetukset"
+  },
+  "about_title": {
+    "message": "Tietoja"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Yksi maailma täydellisessä harmoniassa."
+  },
+  "footer_buy_coffee": {
+    "message": "Tue kahvilla"
+  },
+  "footer_made_with": {
+    "message": "Valmistanut ❤️:llä"
+  },
+  "title_update_preset": {
+    "message": "Päivitä esiasetus"
+  },
+  "title_delete_preset": {
+    "message": "Poista esiasetus"
+  },
+  "title_revert_preset": {
+    "message": "Kumoa muutokset"
+  },
+  "title_new_preset": {
+    "message": "Luo uusi esiasetus"
+  },
+  "title_edit_theme": {
+    "message": "Muokkaa teemaa"
+  },
+  "title_delete_theme": {
+    "message": "Poista teema"
+  },
+  "modal_theme_delete_title": {
+    "message": "Poistetaanko teema?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Haluatko varmasti poistaa teeman '{{NAME}}' pysyvästi?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Korvataanko teema?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Teema '{{NAME}}' on jo olemassa. Korvataanko se?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Poistetaanko esiasetus?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Haluatko varmasti poistaa esiasetuksen '{{NAME}}' pysyvästi?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Korvataanko esiasetus?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Haluatko varmasti korvata esiasetuksen '{{NAME}}' nykyisillä asetuksillasi?"
+  },
+  "button_replace": {
+    "message": "Korvaa"
+  },
+  "modal_delete_msg": {
+    "message": "Oletko varma?"
+  },
+  "preset_flat": {
+    "message": "Tasainen"
+  },
+  "preset_pop": {
+    "message": "Pop"
+  },
+  "preset_rock": {
+    "message": "Rock"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
+  },
+  "preset_electronic": {
+    "message": "Elektroninen"
+  },
+  "preset_deep_bass": {
+    "message": "Syvä basso"
+  },
+  "preset_indie_alt": {
+    "message": "Indie / Alt"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Akustinen"
+  },
+  "preset_classical": {
+    "message": "Klassinen"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi Master"
+  },
+  "preset_cinema": {
+    "message": "Elokuva"
+  },
+  "preset_vocal_booster": {
+    "message": "Laulukorostus"
+  },
+  "preset_late_night": {
+    "message": "Myöhäisilta"
   }
 }

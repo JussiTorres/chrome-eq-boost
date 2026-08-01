@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "En attente d'audio..."
   },
+  "status_conflict": {
+    "message": "Contrôle un autre onglet"
+  },
   "toggle_label": {
     "message": "Extension activée"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "Paramètres"
   },
-  "status_conflict": {
-    "message": "Contrôle un autre onglet"
-  },
   "settings_language_label": {
     "message": "Langue"
-  },
-  "footer_buy_coffee": {
-    "message": "Offrez-moi un café"
-  },
-  "footer_made_with": {
-    "message": "Fait avec ❤️ par"
-  },
-  "about_title": {
-    "message": "À propos"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "Un monde en parfaite harmonie."
   },
   "settings_dark_mode": {
     "message": "Mode sombre"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "Nom du nouveau thème"
   },
+  "placeholder_select_preset": {
+    "message": "Sélectionner un préréglage..."
+  },
+  "placeholder_new_preset": {
+    "message": "Nom du nouveau préréglage"
+  },
   "button_save": {
     "message": "Enregistrer"
   },
   "button_reset_defaults": {
-    "message": "Rétablir les défauts"
-  },
-  "button_replace": {
-    "message": "Remplacer"
+    "message": "Réinitialiser aux valeurs par défaut"
   },
   "button_confirm": {
     "message": "Confirmer"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "Annuler"
   },
-  "modal_delete_title": {
-    "message": "Supprimer le thème ?"
+  "button_delete": {
+    "message": "Supprimer"
   },
-  "modal_delete_msg": {
-    "message": "Voulez-vous vraiment supprimer {{NAME}} ?"
+  "button_close": {
+    "message": "Fermer"
   },
-  "modal_overwrite_title": {
-    "message": "Écraser le thème ?"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" existe déjà. Le remplacer ?"
+  "button_back": {
+    "message": "Retour"
   },
   "feedback_saved": {
     "message": "Enregistré !"
@@ -132,9 +117,120 @@
     "message": "Déjà par défaut"
   },
   "alert_invalid_name": {
-    "message": "Nom de thème invalide."
+    "message": "Nom invalide."
   },
   "label_support": {
     "message": "Support"
+  },
+  "aria_presets": {
+    "message": "Préréglages"
+  },
+  "about_title": {
+    "message": "À propos"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Un monde en parfaite harmonie."
+  },
+  "footer_buy_coffee": {
+    "message": "Offrez-moi un café"
+  },
+  "footer_made_with": {
+    "message": "Fait avec ❤️ par"
+  },
+  "title_update_preset": {
+    "message": "Mettre à jour le préréglage"
+  },
+  "title_delete_preset": {
+    "message": "Supprimer le préréglage"
+  },
+  "title_revert_preset": {
+    "message": "Annuler les modifications"
+  },
+  "title_new_preset": {
+    "message": "Créer un nouveau préréglage"
+  },
+  "title_edit_theme": {
+    "message": "Modifier le thème"
+  },
+  "title_delete_theme": {
+    "message": "Supprimer le thème"
+  },
+  "modal_theme_delete_title": {
+    "message": "Supprimer le thème ?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Voulez-vous vraiment supprimer définitivement le thème '{{NAME}}' ?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Écraser le thème ?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Le thème '{{NAME}}' existe déjà. Le remplacer ?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Supprimer le préréglage ?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Voulez-vous vraiment supprimer définitivement le préréglage '{{NAME}}' ?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Écraser le préréglage ?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Voulez-vous vraiment écraser '{{NAME}}' avec vos paramètres actuels ?"
+  },
+  "button_replace": {
+    "message": "Remplacer"
+  },
+  "modal_delete_msg": {
+    "message": "Êtes-vous sûr ?"
+  },
+  "preset_flat": {
+    "message": "Plat"
+  },
+  "preset_pop": {
+    "message": "Pop"
+  },
+  "preset_rock": {
+    "message": "Rock"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
+  },
+  "preset_electronic": {
+    "message": "Électronique"
+  },
+  "preset_deep_bass": {
+    "message": "Basses profondes"
+  },
+  "preset_indie_alt": {
+    "message": "Indé / Alternatif"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Acoustique"
+  },
+  "preset_classical": {
+    "message": "Classique"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi Master"
+  },
+  "preset_cinema": {
+    "message": "Cinéma"
+  },
+  "preset_vocal_booster": {
+    "message": "Amplificateur vocal"
+  },
+  "preset_late_night": {
+    "message": "Tard la nuit"
   }
 }

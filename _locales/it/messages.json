@@ -1,140 +1,236 @@
 {
   "status_loading": {
-    "message": "Inizializzazione..."
+    "message": "Memulai..."
   },
   "status_active": {
-    "message": "Equalizzatore attivo"
+    "message": "Equalizer aktif"
   },
   "status_disabled": {
-    "message": "Estensione disattivata"
+    "message": "Ekstensi nonaktif"
   },
   "status_waiting": {
-    "message": "In attesa di audio..."
+    "message": "Menunggu audio..."
+  },
+  "status_conflict": {
+    "message": "Mengontrol tab lain"
   },
   "toggle_label": {
-    "message": "Estensione abilitata"
+    "message": "Ekstensi aktif"
   },
   "button_reset": {
-    "message": "Reimposta EQ & Vol."
+    "message": "Reset EQ & Volume"
   },
   "section_volume": {
     "message": "Volume (Preamp)"
   },
   "section_eq": {
-    "message": "Equalizzatore (-15dB a +15dB)"
+    "message": "Equalizer (-15dB sampai +15dB)"
   },
   "label_bass": {
-    "message": "Bassi (80 Hz)"
+    "message": "Bass (80 Hz)"
   },
   "label_mids": {
-    "message": "Medi (2500 Hz)"
+    "message": "Mid (2500 Hz)"
   },
   "label_treble": {
-    "message": "Alti (8000 Hz)"
+    "message": "Treble (8000 Hz)"
   },
   "conflict_warning": {
-    "message": "🔊 Un'altra scheda è amplificata."
+    "message": "🔊 Tab lain sedang diamplifikasi."
   },
   "button_takeover": {
-    "message": "Usa su questa scheda"
+    "message": "Gunakan di tab ini"
   },
   "settings_title": {
-    "message": "Impostazioni"
-  },
-  "status_conflict": {
-    "message": "Controllo di un'altra scheda"
+    "message": "Pengaturan"
   },
   "settings_language_label": {
-    "message": "Lingua"
+    "message": "Bahasa"
   },
-  "footer_buy_coffee": {
-    "message": "Offrimi un caffè"
+  "settings_dark_mode": {
+    "message": "Mode gelap"
   },
-  "footer_made_with": {
-    "message": "Fatto con ❤️ da"
+  "settings_marquee": {
+    "message": "Judul Bergulir"
+  },
+  "settings_custom_theme": {
+    "message": "Tema Kustom"
+  },
+  "custom_theme_title": {
+    "message": "Editor Tema"
+  },
+  "label_bg_body": {
+    "message": "Latar Aplikasi"
+  },
+  "label_bg_card": {
+    "message": "Latar Kartu"
+  },
+  "label_text_accent": {
+    "message": "Teks & Aksen"
+  },
+  "label_library": {
+    "message": "Pustaka"
+  },
+  "placeholder_select_theme": {
+    "message": "Pilih tema..."
+  },
+  "placeholder_new_theme": {
+    "message": "Nama Tema Baru"
+  },
+  "placeholder_select_preset": {
+    "message": "Pilih preset..."
+  },
+  "placeholder_new_preset": {
+    "message": "Nama Preset Baru"
+  },
+  "button_save": {
+    "message": "Simpan"
+  },
+  "button_reset_defaults": {
+    "message": "Reset ke Awal"
+  },
+  "button_confirm": {
+    "message": "Konfirmasi"
+  },
+  "button_cancel": {
+    "message": "Batal"
+  },
+  "button_delete": {
+    "message": "Hapus"
+  },
+  "button_close": {
+    "message": "Tutup"
+  },
+  "button_back": {
+    "message": "Kembali"
+  },
+  "feedback_saved": {
+    "message": "Disimpan!"
+  },
+  "feedback_reset_success": {
+    "message": "Berhasil Direset!"
+  },
+  "feedback_no_changes": {
+    "message": "Tidak ada perubahan"
+  },
+  "feedback_already_default": {
+    "message": "Sudah Default"
+  },
+  "alert_invalid_name": {
+    "message": "Nama tidak valid."
+  },
+  "label_support": {
+    "message": "Dukungan"
+  },
+  "aria_presets": {
+    "message": "Preset"
   },
   "about_title": {
-    "message": "Informazioni"
+    "message": "Tentang"
   },
   "about_app_name": {
     "message": "Chrome EQ & Volume"
   },
   "about_subtitle": {
-    "message": "Un mondo in perfetta armonia."
+    "message": "Satu dunia dalam harmoni yang sempurna."
   },
-  "settings_dark_mode": {
-    "message": "Modalità scura"
+  "footer_buy_coffee": {
+    "message": "Traktir saya kopi"
   },
-  "settings_marquee": {
-    "message": "Titolo scorrevole"
+  "footer_made_with": {
+    "message": "Dibuat dengan ❤️ oleh"
   },
-  "settings_custom_theme": {
-    "message": "Tema personalizzato"
+  "title_update_preset": {
+    "message": "Perbarui Preset"
   },
-  "custom_theme_title": {
-    "message": "Editor temi"
+  "title_delete_preset": {
+    "message": "Hapus Preset"
   },
-  "label_bg_body": {
-    "message": "Sfondo app"
+  "title_revert_preset": {
+    "message": "Batalkan Perubahan"
   },
-  "label_bg_card": {
-    "message": "Sfondo scheda"
+  "title_new_preset": {
+    "message": "Buat Preset Baru"
   },
-  "label_text_accent": {
-    "message": "Testo e accento"
+  "title_edit_theme": {
+    "message": "Edit Tema"
   },
-  "label_library": {
-    "message": "Libreria"
+  "title_delete_theme": {
+    "message": "Hapus Tema"
   },
-  "placeholder_select_theme": {
-    "message": "Seleziona un tema..."
+  "modal_theme_delete_title": {
+    "message": "Hapus Tema?"
   },
-  "placeholder_new_theme": {
-    "message": "Nome nuovo tema"
+  "modal_theme_delete_msg": {
+    "message": "Apakah Anda yakin ingin menghapus tema '{{NAME}}' secara permanen?"
   },
-  "button_save": {
-    "message": "Salva"
+  "modal_theme_overwrite_title": {
+    "message": "Timpa Tema?"
   },
-  "button_reset_defaults": {
-    "message": "Ripristina predefiniti"
+  "modal_theme_overwrite_msg": {
+    "message": "Tema '{{NAME}}' sudah ada. Ganti?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Hapus Preset?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Apakah Anda yakin ingin menghapus preset '{{NAME}}' secara permanen?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Timpa Preset?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Apakah Anda yakin ingin menimpa '{{NAME}}' dengan pengaturan Anda saat ini?"
   },
   "button_replace": {
-    "message": "Sostituisci"
-  },
-  "button_confirm": {
-    "message": "Conferma"
-  },
-  "button_cancel": {
-    "message": "Annulla"
-  },
-  "modal_delete_title": {
-    "message": "Eliminare il tema?"
+    "message": "Ganti"
   },
   "modal_delete_msg": {
-    "message": "Vuoi davvero eliminare {{NAME}}?"
+    "message": "Apakah Anda yakin?"
   },
-  "modal_overwrite_title": {
-    "message": "Sovrascrivere tema?"
+  "preset_flat": {
+    "message": "Datar"
   },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" esiste già. Sostituirlo?"
+  "preset_pop": {
+    "message": "Pop"
   },
-  "feedback_saved": {
-    "message": "Salvato!"
+  "preset_rock": {
+    "message": "Rock"
   },
-  "feedback_reset_success": {
-    "message": "Ripristino riuscito!"
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
   },
-  "feedback_no_changes": {
-    "message": "Nessuna modifica"
+  "preset_electronic": {
+    "message": "Elektronik"
   },
-  "feedback_already_default": {
-    "message": "Già predefinito"
+  "preset_deep_bass": {
+    "message": "Bass Mendalam"
   },
-  "alert_invalid_name": {
-    "message": "Nome non valido."
+  "preset_indie_alt": {
+    "message": "Indie / Alt"
   },
-  "label_support": {
-    "message": "Supporto"
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Akustik"
+  },
+  "preset_classical": {
+    "message": "Klasik"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi Master"
+  },
+  "preset_cinema": {
+    "message": "Bioskop"
+  },
+  "preset_vocal_booster": {
+    "message": "Peningkat Vokal"
+  },
+  "preset_late_night": {
+    "message": "Larut Malam"
   }
 }

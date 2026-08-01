@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "等待音訊..."
   },
+  "status_conflict": {
+    "message": "正在控制另一個分頁"
+  },
   "toggle_label": {
     "message": "擴充功能已啟用"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "設定"
   },
-  "status_conflict": {
-    "message": "正在控制另一個分頁"
-  },
   "settings_language_label": {
     "message": "語言"
-  },
-  "footer_buy_coffee": {
-    "message": "請我喝杯咖啡"
-  },
-  "footer_made_with": {
-    "message": "用 ❤️ 製作："
-  },
-  "about_title": {
-    "message": "關於"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "一個完美和諧的世界。"
   },
   "settings_dark_mode": {
     "message": "深色模式"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "新主題名稱"
   },
+  "placeholder_select_preset": {
+    "message": "選擇預設檔..."
+  },
+  "placeholder_new_preset": {
+    "message": "新預設檔名稱"
+  },
   "button_save": {
     "message": "儲存"
   },
   "button_reset_defaults": {
     "message": "恢復預設值"
-  },
-  "button_replace": {
-    "message": "取代"
   },
   "button_confirm": {
     "message": "確認"
@@ -107,23 +95,20 @@
   "button_cancel": {
     "message": "取消"
   },
-  "modal_delete_title": {
-    "message": "刪除主題？"
+  "button_delete": {
+    "message": "刪除"
   },
-  "modal_delete_msg": {
-    "message": "確定要永久刪除 {{NAME}} 嗎？"
+  "button_close": {
+    "message": "關閉"
   },
-  "modal_overwrite_title": {
-    "message": "覆寫主題？"
-  },
-  "modal_overwrite_msg": {
-    "message": "「{{NAME}}」已存在。是否取代？"
+  "button_back": {
+    "message": "返回"
   },
   "feedback_saved": {
     "message": "已儲存！"
   },
   "feedback_reset_success": {
-    "message": "已恢復預設！"
+    "message": "已恢復預設值！"
   },
   "feedback_no_changes": {
     "message": "無變更"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "支援"
+  },
+  "aria_presets": {
+    "message": "音效預設檔"
+  },
+  "about_title": {
+    "message": "關於"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "一個完美和諧的世界。"
+  },
+  "footer_buy_coffee": {
+    "message": "請我喝杯咖啡"
+  },
+  "footer_made_with": {
+    "message": "用 ❤️ 製作："
+  },
+  "title_update_preset": {
+    "message": "更新預設檔"
+  },
+  "title_delete_preset": {
+    "message": "刪除預設檔"
+  },
+  "title_revert_preset": {
+    "message": "復原變更"
+  },
+  "title_new_preset": {
+    "message": "建立新預設檔"
+  },
+  "title_edit_theme": {
+    "message": "編輯主題"
+  },
+  "title_delete_theme": {
+    "message": "刪除主題"
+  },
+  "modal_theme_delete_title": {
+    "message": "刪除主題？"
+  },
+  "modal_theme_delete_msg": {
+    "message": "確定要永久刪除主題「{{NAME}}」嗎？"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "覆寫主題？"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "「{{NAME}}」已存在。是否取代？"
+  },
+  "modal_preset_delete_title": {
+    "message": "刪除預設檔？"
+  },
+  "modal_preset_delete_msg": {
+    "message": "確定要永久刪除預設檔「{{NAME}}」嗎？"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "覆寫預設檔？"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "確定要使用目前設定覆寫預設檔「{{NAME}}」嗎？"
+  },
+  "button_replace": {
+    "message": "取代"
+  },
+  "modal_delete_msg": {
+    "message": "確定嗎？"
+  },
+  "preset_flat": {
+    "message": "平直"
+  },
+  "preset_pop": {
+    "message": "流行"
+  },
+  "preset_rock": {
+    "message": "搖滾"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / 嘻哈"
+  },
+  "preset_electronic": {
+    "message": "電子"
+  },
+  "preset_deep_bass": {
+    "message": "重低音"
+  },
+  "preset_indie_alt": {
+    "message": "獨立 / 另類"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "爵士 / 藍調"
+  },
+  "preset_acoustic": {
+    "message": "原聲"
+  },
+  "preset_classical": {
+    "message": "古典"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi 母帶"
+  },
+  "preset_cinema": {
+    "message": "影院"
+  },
+  "preset_vocal_booster": {
+    "message": "人聲增強"
+  },
+  "preset_late_night": {
+    "message": "深夜模式"
   }
 }

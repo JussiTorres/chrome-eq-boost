@@ -38,16 +38,23 @@ function hexToRgba(hex, alpha) {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-// --- NEW HELPER: Calculates Black or White text based on background ---
-function getContrastColor(hex) {
+// --- UPGRADED HELPER: Euclidean Luminance with Theme-Aware Dark Fallback ---
+function getContrastColor(hex, darkFallback = '#000000', lightFallback = '#ffffff') {
     hex = hex.replace(/^\s*#|\s*$/g, '');
     if (hex.length === 3) hex = hex.replace(/(.)/g, '$1$1');
     const r = parseInt(hex.substr(0, 2), 16);
     const g = parseInt(hex.substr(2, 2), 16);
     const b = parseInt(hex.substr(4, 2), 16);
-    // Calculate YIQ brightness (Human Eye perception)
-    const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-    return (yiq >= 128) ? '#000000' : '#ffffff';
+
+    // Euclidean luminance weights perceived energy, fixing the "hot pink/magenta" blind spot
+    const perceivedBrightness = Math.sqrt(
+        0.299 * (r * r) +
+        0.587 * (g * g) +
+        0.114 * (b * b)
+    );
+
+    // 135 threshold ensures royal blues stay crisp with white text, while neons get dark text
+    return (perceivedBrightness >= 135) ? darkFallback : lightFallback;
 }
 
 export const themeEngine = {
@@ -77,7 +84,12 @@ export const themeEngine = {
 
             root.style.setProperty('--bg-hover', adjustBrightness(t.bgCard, -5));
             root.style.setProperty('--primary-hover', adjustBrightness(t.accentColor, -20));
+
+            // ⭐ UPGRADED: High-contrast alphas prevent dark-background desaturation
             root.style.setProperty('--shadow-soft', hexToRgba(t.accentColor, 0.15));
+            root.style.setProperty('--shadow-preset', hexToRgba(t.accentColor, 0.88));
+            root.style.setProperty('--border-preset', hexToRgba(t.textPrimary, 0.77));
+
             root.style.setProperty('--bg-disabled', hexToRgba(t.textPrimary, 0.14));
             root.style.setProperty('--border-light', hexToRgba(t.textPrimary, 0.15));
             root.style.setProperty('--slider-track', hexToRgba(t.textPrimary, 0.2));
@@ -99,18 +111,18 @@ export const themeEngine = {
             root.style.setProperty('--text-active', t.accentColor);
             root.style.setProperty('--text-conflict', t.accentColor);
 
-            // --- THE FIX: Intelligent Button Text Color ---
-            // If the accent is bright (like White), this returns Black.
-            root.style.setProperty('--text-button', getContrastColor(t.accentColor));
+            root.style.setProperty('--text-button', getContrastColor(t.accentColor, t.bgBody, '#ffffff'));
 
         } else if (mode === 'dark') {
             body.classList.add('dark-mode');
-            // Standard themes use standard White text on colored buttons
             root.style.removeProperty('--text-button');
+            root.style.removeProperty('--border-preset');
+            root.style.removeProperty('--shadow-preset');
         } else {
             body.classList.add('default-theme');
-            // Standard themes use standard White text on colored buttons
             root.style.removeProperty('--text-button');
+            root.style.removeProperty('--border-preset');
+            root.style.removeProperty('--shadow-preset');
         }
     }
 };

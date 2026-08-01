@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "در انتظار صدا..."
   },
+  "status_conflict": {
+    "message": "در حال کنترل تب دیگر"
+  },
   "toggle_label": {
     "message": "افزونه فعال است"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "تنظیمات"
   },
-  "status_conflict": {
-    "message": "در حال کنترل تب دیگر"
-  },
   "settings_language_label": {
     "message": "زبان"
-  },
-  "footer_buy_coffee": {
-    "message": "برایم قهوه بخر"
-  },
-  "footer_made_with": {
-    "message": "ساخته شده با ❤️ توسط"
-  },
-  "about_title": {
-    "message": "درباره"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "یک جهان در هارمونی کامل."
   },
   "settings_dark_mode": {
     "message": "حالت تاریک"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "نام تم جدید"
   },
+  "placeholder_select_preset": {
+    "message": "انتخاب پیش‌تنظیم..."
+  },
+  "placeholder_new_preset": {
+    "message": "نام پیش‌تنظیم جدید"
+  },
   "button_save": {
     "message": "ذخیره"
   },
   "button_reset_defaults": {
     "message": "بازنشانی به پیش‌فرض"
-  },
-  "button_replace": {
-    "message": "جایگزینی"
   },
   "button_confirm": {
     "message": "تایید"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "لغو"
   },
-  "modal_delete_title": {
-    "message": "حذف تم؟"
+  "button_delete": {
+    "message": "حذف"
   },
-  "modal_delete_msg": {
-    "message": "آیا مطمئن هستید که می‌خواهید تم {{NAME}} را برای همیشه حذف کنید؟"
+  "button_close": {
+    "message": "بستن"
   },
-  "modal_overwrite_title": {
-    "message": "جایگزینی تم؟"
-  },
-  "modal_overwrite_msg": {
-    "message": "تم \"{{NAME}}\" از قبل وجود دارد. جایگزین شود؟"
+  "button_back": {
+    "message": "بازگشت"
   },
   "feedback_saved": {
     "message": "ذخیره شد!"
@@ -132,9 +117,120 @@
     "message": "از قبل پیش‌فرض است"
   },
   "alert_invalid_name": {
-    "message": "نام تم نامعتبر است."
+    "message": "نام نامعتبر است."
   },
   "label_support": {
     "message": "پشتیبانی"
+  },
+  "aria_presets": {
+    "message": "پیش‌تنظیم‌ها"
+  },
+  "about_title": {
+    "message": "درباره"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "یک جهان در هارمونی کامل."
+  },
+  "footer_buy_coffee": {
+    "message": "برایم قهوه بخر"
+  },
+  "footer_made_with": {
+    "message": "ساخته شده با ❤️ توسط"
+  },
+  "title_update_preset": {
+    "message": "بروزرسانی پیش‌تنظیم"
+  },
+  "title_delete_preset": {
+    "message": "حذف پیش‌تنظیم"
+  },
+  "title_revert_preset": {
+    "message": "لغو تغییرات"
+  },
+  "title_new_preset": {
+    "message": "ایجاد پیش‌تنظیم جدید"
+  },
+  "title_edit_theme": {
+    "message": "ویرایش تم"
+  },
+  "title_delete_theme": {
+    "message": "حذف تم"
+  },
+  "modal_theme_delete_title": {
+    "message": "حذف تم؟"
+  },
+  "modal_theme_delete_msg": {
+    "message": "آیا مطمئن هستید که می‌خواهید تم '{{NAME}}' را برای همیشه حذف کنید؟"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "جایگزینی تم؟"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "تم '{{NAME}}' از قبل وجود دارد. جایگزین شود؟"
+  },
+  "modal_preset_delete_title": {
+    "message": "حذف پیش‌تنظیم؟"
+  },
+  "modal_preset_delete_msg": {
+    "message": "آیا مطمئن هستید که می‌خواهید پیش‌تنظیم '{{NAME}}' را برای همیشه حذف کنید؟"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "جایگزینی پیش‌تنظیم؟"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "آیا مطمئن هستید که می‌خواهید تنظیمات فعلی را روی '{{NAME}}' ذخیره کنید؟"
+  },
+  "button_replace": {
+    "message": "جایگزینی"
+  },
+  "modal_delete_msg": {
+    "message": "آیا مطمئن هستید؟"
+  },
+  "preset_flat": {
+    "message": "صاف"
+  },
+  "preset_pop": {
+    "message": "پاپ"
+  },
+  "preset_rock": {
+    "message": "راک"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / هیپ‌هاپ"
+  },
+  "preset_electronic": {
+    "message": "الکترونیک"
+  },
+  "preset_deep_bass": {
+    "message": "باس عمیق"
+  },
+  "preset_indie_alt": {
+    "message": "ایندی / آلترناتیو"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "وکالوید / جی‌پاپ"
+  },
+  "preset_jazz_blues": {
+    "message": "جاز / بلوز"
+  },
+  "preset_acoustic": {
+    "message": "آکوستیک"
+  },
+  "preset_classical": {
+    "message": "کلاسیک"
+  },
+  "preset_hi_fi_master": {
+    "message": "های‌فای مستر"
+  },
+  "preset_cinema": {
+    "message": "سینما"
+  },
+  "preset_vocal_booster": {
+    "message": "تقویت صدا"
+  },
+  "preset_late_night": {
+    "message": "اواخر شب"
   }
 }

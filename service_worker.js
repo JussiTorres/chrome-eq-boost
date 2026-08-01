@@ -34,16 +34,15 @@ async function ensureOffscreen() {
 // -----------------------------------------------------------------------------
 async function executeCleanTeardown() {
     chrome.storage.local.remove("capturingTabId");
-    chrome.storage.local.set({ isEnabled: false });
+    chrome.storage.local.set({
+        isEnabled: false,
+        isPresetDeckOpen: false // Kills preset view on browser exit or teardown
+    });
 
     const hasDoc = await chrome.offscreen.hasDocument?.();
     if (hasDoc) {
-        // 1. Tell offscreen to stop hardware tracks NOW.
-        // AWAIT this so the document isn't killed mid-execution, preventing stuck icons.
-        await chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => {});
-        
-        // 2. NOW we can safely drop the document from memory.
-        await chrome.offscreen.closeDocument().catch(() => {});
+        await chrome.runtime.sendMessage({ type: "STOP_CAPTURE" }).catch(() => { });
+        await chrome.offscreen.closeDocument().catch(() => { });
     }
 }
 
@@ -90,8 +89,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // we bypass the await chain and just kill the document frame.
     if (["STREAM_ENDED_EXTERNALLY", "SILENCE_TIMEOUT"].includes(message.type)) {
         chrome.storage.local.remove("capturingTabId");
-        chrome.storage.local.set({ isEnabled: false });
-        chrome.offscreen.closeDocument().catch(() => {}); 
+        chrome.storage.local.set({
+            isEnabled: false,
+            isPresetDeckOpen: false
+        });
+        chrome.offscreen.closeDocument().catch(() => { });
         sendResponse({ status: "cleaned" });
         return false;
     }
@@ -123,4 +125,23 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 });
 
 chrome.runtime.onStartup.addListener(executeCleanTeardown);
-chrome.runtime.onInstalled.addListener(executeCleanTeardown);
+
+// =============================================================================
+// LIFECYCLE & STORAGE SCHEMA BOOTSTRAP
+// Seeds essential data structures on install/update while executing teardowns.
+// =============================================================================
+chrome.runtime.onInstalled.addListener((details) => {
+    executeCleanTeardown();
+
+    if (details.reason === "install" || details.reason === "update") {
+        chrome.storage.local.get(["customPresets", "hiddenBuiltInIds"], (result) => {
+            const initialData = {};
+            if (!result.customPresets) initialData.customPresets = [];
+            if (!result.hiddenBuiltInIds) initialData.hiddenBuiltInIds = [];
+
+            if (Object.keys(initialData).length > 0) {
+                chrome.storage.local.set(initialData);
+            }
+        });
+    }
+});

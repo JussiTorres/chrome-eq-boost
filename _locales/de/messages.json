@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "Warten auf Audio..."
   },
+  "status_conflict": {
+    "message": "Steuert anderen Tab"
+  },
   "toggle_label": {
     "message": "Erweiterung aktiviert"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "Einstellungen"
   },
-  "status_conflict": {
-    "message": "Steuert anderen Tab"
-  },
   "settings_language_label": {
     "message": "Sprache"
-  },
-  "footer_buy_coffee": {
-    "message": "Spendier mir einen Kaffee"
-  },
-  "footer_made_with": {
-    "message": "Mit ❤️ gemacht von"
-  },
-  "about_title": {
-    "message": "Über"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "Eine Welt in perfekter Harmonie."
   },
   "settings_dark_mode": {
     "message": "Dunkelmodus"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "Neuer Design-Name"
   },
+  "placeholder_select_preset": {
+    "message": "Preset auswählen..."
+  },
+  "placeholder_new_preset": {
+    "message": "Neuer Preset-Name"
+  },
   "button_save": {
     "message": "Speichern"
   },
   "button_reset_defaults": {
     "message": "Auf Standard zurücksetzen"
-  },
-  "button_replace": {
-    "message": "Ersetzen"
   },
   "button_confirm": {
     "message": "Bestätigen"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "Abbrechen"
   },
-  "modal_delete_title": {
-    "message": "Design löschen?"
+  "button_delete": {
+    "message": "Löschen"
   },
-  "modal_delete_msg": {
-    "message": "Möchten Sie {{NAME}} wirklich löschen?"
+  "button_close": {
+    "message": "Schließen"
   },
-  "modal_overwrite_title": {
-    "message": "Design überschreiben?"
-  },
-  "modal_overwrite_msg": {
-    "message": "„{{NAME}}“ existiert bereits. Ersetzen?"
+  "button_back": {
+    "message": "Zurück"
   },
   "feedback_saved": {
     "message": "Gespeichert!"
@@ -129,12 +114,123 @@
     "message": "Keine Änderungen"
   },
   "feedback_already_default": {
-    "message": "Standard"
+    "message": "Bereits Standard"
   },
   "alert_invalid_name": {
     "message": "Ungültiger Name."
   },
   "label_support": {
     "message": "Support"
+  },
+  "aria_presets": {
+    "message": "Presets"
+  },
+  "about_title": {
+    "message": "Über"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Eine Welt in perfekter Harmonie."
+  },
+  "footer_buy_coffee": {
+    "message": "Spendier mir einen Kaffee"
+  },
+  "footer_made_with": {
+    "message": "Mit ❤️ gemacht von"
+  },
+  "title_update_preset": {
+    "message": "Preset aktualisieren"
+  },
+  "title_delete_preset": {
+    "message": "Preset löschen"
+  },
+  "title_revert_preset": {
+    "message": "Änderungen rückgängig machen"
+  },
+  "title_new_preset": {
+    "message": "Neues Preset erstellen"
+  },
+  "title_edit_theme": {
+    "message": "Design bearbeiten"
+  },
+  "title_delete_theme": {
+    "message": "Design löschen"
+  },
+  "modal_theme_delete_title": {
+    "message": "Design löschen?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Möchten Sie das Design '{{NAME}}' wirklich dauerhaft löschen?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Design überschreiben?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Das Design '{{NAME}}' existiert bereits. Ersetzen?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Preset löschen?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Möchten Sie das Preset '{{NAME}}' wirklich dauerhaft löschen?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Preset überschreiben?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Möchten Sie '{{NAME}}' wirklich mit Ihren aktuellen Einstellungen überschreiben?"
+  },
+  "button_replace": {
+    "message": "Ersetzen"
+  },
+  "modal_delete_msg": {
+    "message": "Sind Sie sicher?"
+  },
+  "preset_flat": {
+    "message": "Flach"
+  },
+  "preset_pop": {
+    "message": "Pop"
+  },
+  "preset_rock": {
+    "message": "Rock"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
+  },
+  "preset_electronic": {
+    "message": "Elektronisch"
+  },
+  "preset_deep_bass": {
+    "message": "Tiefbass"
+  },
+  "preset_indie_alt": {
+    "message": "Indie / Alt"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Akustisch"
+  },
+  "preset_classical": {
+    "message": "Klassik"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi-Mastering"
+  },
+  "preset_cinema": {
+    "message": "Kino"
+  },
+  "preset_vocal_booster": {
+    "message": "Stimmenhervorhebung"
+  },
+  "preset_late_night": {
+    "message": "Späte Nacht"
   }
 }

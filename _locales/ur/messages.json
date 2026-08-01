@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "آڈیو کا انتظار ہے..."
   },
+  "status_conflict": {
+    "message": "دوسرے ٹیب کو کنٹرول کر رہا ہے"
+  },
   "toggle_label": {
     "message": "ایکسٹینشن فعال ہے"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "ترتیبات"
   },
-  "status_conflict": {
-    "message": "دوسرے ٹیب کو کنٹرول کر رہا ہے"
-  },
   "settings_language_label": {
     "message": "زبان"
-  },
-  "footer_buy_coffee": {
-    "message": "میرے لیے ایک کافی خریدیں"
-  },
-  "footer_made_with": {
-    "message": "❤️ کے ساتھ بنایا گیا"
-  },
-  "about_title": {
-    "message": "تعارف"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "ایک دنیا کامل ہم آہنگی میں۔"
   },
   "settings_dark_mode": {
     "message": "ڈارک موڈ"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "نیا تھیم کا نام"
   },
+  "placeholder_select_preset": {
+    "message": "پری سیٹ منتخب کریں..."
+  },
+  "placeholder_new_preset": {
+    "message": "نیا پری سیٹ نام"
+  },
   "button_save": {
     "message": "محفوظ کریں"
   },
   "button_reset_defaults": {
     "message": "ڈیفالٹ پر ری سیٹ کریں"
-  },
-  "button_replace": {
-    "message": "تبدیل کریں"
   },
   "button_confirm": {
     "message": "تصدیق کریں"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "منسوخ کریں"
   },
-  "modal_delete_title": {
-    "message": "تھیم ڈیلیٹ کریں؟"
+  "button_delete": {
+    "message": "حذف کریں"
   },
-  "modal_delete_msg": {
-    "message": "کیا آپ واقعی {{NAME}} کو مستقل طور پر حذف کرنا چاہتے ہیں؟"
+  "button_close": {
+    "message": "بند کریں"
   },
-  "modal_overwrite_title": {
-    "message": "تھیم اوور رائٹ کریں؟"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" پہلے سے موجود ہے۔ کیا اسے تبدیل کریں؟"
+  "button_back": {
+    "message": "واپس"
   },
   "feedback_saved": {
     "message": "محفوظ ہو گیا!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "سپورٹ"
+  },
+  "aria_presets": {
+    "message": "پری سیٹس"
+  },
+  "about_title": {
+    "message": "تعارف"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "ایک دنیا کامل ہم آہنگی میں۔"
+  },
+  "footer_buy_coffee": {
+    "message": "میرے لیے ایک کافی خریدیں"
+  },
+  "footer_made_with": {
+    "message": "❤️ کے ساتھ تیار کردہ از "
+  },
+  "title_update_preset": {
+    "message": "پری سیٹ اپ ڈیٹ کریں"
+  },
+  "title_delete_preset": {
+    "message": "پری سیٹ حذف کریں"
+  },
+  "title_revert_preset": {
+    "message": "تبدیلیاں واپس لیں"
+  },
+  "title_new_preset": {
+    "message": "نیا پری سیٹ بنائیں"
+  },
+  "title_edit_theme": {
+    "message": "تھیم ایڈٹ کریں"
+  },
+  "title_delete_theme": {
+    "message": "تھیم حذف کریں"
+  },
+  "modal_theme_delete_title": {
+    "message": "تھیم ڈیلیٹ کریں؟"
+  },
+  "modal_theme_delete_msg": {
+    "message": "کیا آپ واقعی '{{NAME}}' تھیم کو مستقل طور پر حذف کرنا چاہتے ہیں؟"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "تھیم اوور رائٹ کریں؟"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "تھیم '{{NAME}}' پہلے سے موجود ہے۔ کیا اسے تبدیل کریں؟"
+  },
+  "modal_preset_delete_title": {
+    "message": "پری سیٹ ڈیلیٹ کریں؟"
+  },
+  "modal_preset_delete_msg": {
+    "message": "کیا آپ واقعی '{{NAME}}' پری سیٹ کو مستقل طور پر حذف کرنا چاہتے ہیں؟"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "پری سیٹ اوور رائٹ کریں؟"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "کیا آپ واقعی '{{NAME}}' پری سیٹ کو موجودہ ترتیبات کے ساتھ اوور رائٹ کرنا چاہتے ہیں؟"
+  },
+  "button_replace": {
+    "message": "تبدیل کریں"
+  },
+  "modal_delete_msg": {
+    "message": "کیا آپ کو یقین ہے؟"
+  },
+  "preset_flat": {
+    "message": "فلیٹ"
+  },
+  "preset_pop": {
+    "message": "پاپ"
+  },
+  "preset_rock": {
+    "message": "راک"
+  },
+  "preset_rb_hip_hop": {
+    "message": "آر اینڈ بی / ہپ ہاپ"
+  },
+  "preset_electronic": {
+    "message": "الیکٹرانک"
+  },
+  "preset_deep_bass": {
+    "message": "ڈیپ بیس"
+  },
+  "preset_indie_alt": {
+    "message": "انڈی / آلٹ"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "ووکلائڈ / جے پاپ"
+  },
+  "preset_jazz_blues": {
+    "message": "جاز / بلوز"
+  },
+  "preset_acoustic": {
+    "message": "اکوسٹک"
+  },
+  "preset_classical": {
+    "message": "کلاسیکل"
+  },
+  "preset_hi_fi_master": {
+    "message": "ہائی فائی ماسٹر"
+  },
+  "preset_cinema": {
+    "message": "سنیما"
+  },
+  "preset_vocal_booster": {
+    "message": "آواز بڑھانے والا"
+  },
+  "preset_late_night": {
+    "message": "دیر رات"
   }
 }

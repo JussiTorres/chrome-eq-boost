@@ -8,13 +8,9 @@
 
 export const storage = {
     async getAll() {
-        return await chrome.storage.local.get([
-            "darkMode", "preferredLocale", "volumeLevel",
-            "bassLevel", "midLevel", "trebleLevel",
-            "isEnabled", "capturingTabId", "marqueeEnabled",
-            "customThemeEnabled", "customTheme", "savedThemes",
-            "activeThemeName" 
-        ]);
+        // Al pasar 'null', Chrome devuelve TODAS las llaves guardadas.
+        // Así nunca más olvidarás agregar una variable a la lista.
+        return await chrome.storage.local.get(null);
     },
 
     async set(key, value) {
