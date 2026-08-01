@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "音声待機中..."
   },
+  "status_conflict": {
+    "message": "別のタブを制御中"
+  },
   "toggle_label": {
     "message": "拡張機能を有効化"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "設定"
   },
-  "status_conflict": {
-    "message": "別のタブを制御中"
-  },
   "settings_language_label": {
     "message": "言語"
-  },
-  "footer_buy_coffee": {
-    "message": "コーヒーを奢って応援してください"
-  },
-  "footer_made_with": {
-    "message": "❤️を込めて"
-  },
-  "about_title": {
-    "message": "概要"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "完全な調和の中の一つの世界。"
   },
   "settings_dark_mode": {
     "message": "ダークモード"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "新しいテーマ名"
   },
+  "placeholder_select_preset": {
+    "message": "プリセットを選択..."
+  },
+  "placeholder_new_preset": {
+    "message": "新しいプリセット名"
+  },
   "button_save": {
     "message": "保存"
   },
   "button_reset_defaults": {
     "message": "初期設定に戻す"
-  },
-  "button_replace": {
-    "message": "置き換え"
   },
   "button_confirm": {
     "message": "確認"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "キャンセル"
   },
-  "modal_delete_title": {
-    "message": "テーマを削除？"
+  "button_delete": {
+    "message": "削除"
   },
-  "modal_delete_msg": {
-    "message": "本当に {{NAME}} を削除しますか？"
+  "button_close": {
+    "message": "閉じる"
   },
-  "modal_overwrite_title": {
-    "message": "テーマを上書き？"
-  },
-  "modal_overwrite_msg": {
-    "message": "「{{NAME}}」は既に存在します。置き換えますか？"
+  "button_back": {
+    "message": "戻る"
   },
   "feedback_saved": {
     "message": "保存しました！"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "サポート"
+  },
+  "aria_presets": {
+    "message": "プリセット"
+  },
+  "about_title": {
+    "message": "概要"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "完全な調和の中の一つの世界。"
+  },
+  "footer_buy_coffee": {
+    "message": "コーヒーを奢って応援"
+  },
+  "footer_made_with": {
+    "message": "❤️を込めて制作："
+  },
+  "title_update_preset": {
+    "message": "プリセットを更新"
+  },
+  "title_delete_preset": {
+    "message": "プリセットを削除"
+  },
+  "title_revert_preset": {
+    "message": "変更を元に戻す"
+  },
+  "title_new_preset": {
+    "message": "新しいプリセットを作成"
+  },
+  "title_edit_theme": {
+    "message": "テーマを編集"
+  },
+  "title_delete_theme": {
+    "message": "テーマを削除"
+  },
+  "modal_theme_delete_title": {
+    "message": "テーマを削除？"
+  },
+  "modal_theme_delete_msg": {
+    "message": "本当にテーマ「{{NAME}}」を完全に削除しますか？"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "テーマを上書き？"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "テーマ「{{NAME}}」は既に存在します。置き換えますか？"
+  },
+  "modal_preset_delete_title": {
+    "message": "プリセットを削除？"
+  },
+  "modal_preset_delete_msg": {
+    "message": "本当にプリセット「{{NAME}}」を完全に削除しますか？"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "プリセットを上書き？"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "「{{NAME}}」を現在の設定で上書きしてもよろしいですか？"
+  },
+  "button_replace": {
+    "message": "置き換え"
+  },
+  "modal_delete_msg": {
+    "message": "よろしいですか？"
+  },
+  "preset_flat": {
+    "message": "フラット"
+  },
+  "preset_pop": {
+    "message": "ポップ"
+  },
+  "preset_rock": {
+    "message": "ロック"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / ヒップホップ"
+  },
+  "preset_electronic": {
+    "message": "エレクトロニック"
+  },
+  "preset_deep_bass": {
+    "message": "重低音"
+  },
+  "preset_indie_alt": {
+    "message": "インディー / オルタナティブ"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "ボーカロイド / J-POP"
+  },
+  "preset_jazz_blues": {
+    "message": "ジャズ / ブルース"
+  },
+  "preset_acoustic": {
+    "message": "アコースティック"
+  },
+  "preset_classical": {
+    "message": "クラシック"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi マスター"
+  },
+  "preset_cinema": {
+    "message": "シネマ"
+  },
+  "preset_vocal_booster": {
+    "message": "ボーカル強調"
+  },
+  "preset_late_night": {
+    "message": "深夜モード"
   }
 }

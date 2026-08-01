@@ -1,140 +1,236 @@
 {
-    "status_loading": {
-        "message": "កំពុងផ្ទុក..."
-    },
-    "status_active": {
-        "message": "Equalizer កំពុងដំណើរការ"
-    },
-    "status_disabled": {
-        "message": "បានបិទ Extension"
-    },
-    "status_waiting": {
-        "message": "កំពុងរង់ចាំសំឡេង..."
-    },
-    "toggle_label": {
-        "message": "បើក Extension"
-    },
-    "button_reset": {
-        "message": "កំណត់ EQ និងសំឡេងឡើងវិញ"
-    },
-    "section_volume": {
-        "message": "កម្រិតសំឡេង (Preamp)"
-    },
-    "section_eq": {
-        "message": "Equalizer (-15dB ទៅ +15dB)"
-    },
-    "label_bass": {
-        "message": "Bass (80 Hz)"
-    },
-    "label_mids": {
-        "message": "Mids (2500 Hz)"
-    },
-    "label_treble": {
-        "message": "Treble (8000 Hz)"
-    },
-    "conflict_warning": {
-        "message": "🔊 ផ្ទាំងផ្សេងកំពុងបង្កើនសំឡេង"
-    },
-    "button_takeover": {
-        "message": "ប្រើនៅផ្ទាំងនេះ"
-    },
-    "settings_title": {
-        "message": "ការកំណត់"
-    },
-    "status_conflict": {
-        "message": "កំពុងគ្រប់គ្រងផ្ទាំងផ្សេង"
-    },
-    "settings_language_label": {
-        "message": "ភាសា"
-    },
-    "footer_buy_coffee": {
-        "message": "ទិញកាហ្វេឱ្យខ្ញុំ"
-    },
-    "footer_made_with": {
-        "message": "បង្កើតឡើងដោយ ❤️ ដោយ"
-    },
-    "about_title": {
-        "message": "អំពី"
-    },
-    "about_app_name": {
-        "message": "Chrome EQ & Volume"
-    },
-    "about_subtitle": {
-        "message": "ពិភពលោកតែមួយក្នុងភាពចុះសម្រុងគ្នាយ៉ាងល្អឥតខ្ចោះ。"
-    },
-    "settings_dark_mode": {
-        "message": "របៀបងងឹត"
-    },
-    "settings_marquee": {
-        "message": "ចំណងជើងរំកិល"
-    },
-    "settings_custom_theme": {
-        "message": "Theme ផ្ទាល់ខ្លួន"
-    },
-    "custom_theme_title": {
-        "message": "កម្មវិធីកែ Theme"
-    },
-    "label_bg_body": {
-        "message": "ផ្ទៃខាងក្រោយកម្មវិធី"
-    },
-    "label_bg_card": {
-        "message": "ផ្ទៃខាងក្រោយកាត"
-    },
-    "label_text_accent": {
-        "message": "អក្សរ និងពណ៌លេចធ្លោ"
-    },
-    "label_library": {
-        "message": "បណ្ណាល័យ"
-    },
-    "placeholder_select_theme": {
-        "message": "ជ្រើសរើស Theme..."
-    },
-    "placeholder_new_theme": {
-        "message": "ឈ្មោះ Theme ថ្មី"
-    },
-    "button_save": {
-        "message": "រក្សាទុក"
-    },
-    "button_reset_defaults": {
-        "message": "កំណត់ឡើងវិញទៅលំនាំដើម"
-    },
-    "button_replace": {
-        "message": "ជំនួស"
-    },
-    "button_confirm": {
-        "message": "យល់ព្រម"
-    },
-    "button_cancel": {
-        "message": "បោះបង់"
-    },
-    "modal_delete_title": {
-        "message": "លុប Theme?"
-    },
-    "modal_delete_msg": {
-        "message": "តើអ្នកពិតជាចង់លុប {{NAME}} មែនទេ?"
-    },
-    "modal_overwrite_title": {
-        "message": "សរសេរជាន់លើ Theme?"
-    },
-    "modal_overwrite_msg": {
-        "message": "\"{{NAME}}\" មានរួចហើយ។ ចង់ជំនួសវាឬ?"
-    },
-    "feedback_saved": {
-        "message": "បានរក្សាទុក!"
-    },
-    "feedback_reset_success": {
-        "message": "បានកំណត់ឡើងវិញ!"
-    },
-    "feedback_no_changes": {
-        "message": "គ្មានការផ្លាស់ប្តូរ"
-    },
-    "feedback_already_default": {
-        "message": "ជាលំនាំដើមរួចហើយ"
-    },
-    "alert_invalid_name": {
-        "message": "ឈ្មោះមិនត្រឹមត្រូវ។"
-    },
-    "label_support": {
-        "message": "ជំនួយ"
-    }
+  "status_loading": {
+    "message": "កំពុងផ្ទុក..."
+  },
+  "status_active": {
+    "message": "Equalizer កំពុងដំណើរការ"
+  },
+  "status_disabled": {
+    "message": "បានបិទ Extension"
+  },
+  "status_waiting": {
+    "message": "កំពុងរង់ចាំសំឡេង..."
+  },
+  "status_conflict": {
+    "message": "កំពុងគ្រប់គ្រងផ្ទាំងផ្សេង"
+  },
+  "toggle_label": {
+    "message": "បើក Extension"
+  },
+  "button_reset": {
+    "message": "កំណត់ EQ និងសំឡេងឡើងវិញ"
+  },
+  "section_volume": {
+    "message": "កម្រិតសំឡេង (Preamp)"
+  },
+  "section_eq": {
+    "message": "Equalizer (-15dB ទៅ +15dB)"
+  },
+  "label_bass": {
+    "message": "Bass (80 Hz)"
+  },
+  "label_mids": {
+    "message": "Mids (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "Treble (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 ផ្ទាំងផ្សេងកំពុងបង្កើនសំឡេង"
+  },
+  "button_takeover": {
+    "message": "ប្រើនៅផ្ទាំងនេះ"
+  },
+  "settings_title": {
+    "message": "ការកំណត់"
+  },
+  "settings_language_label": {
+    "message": "ភាសា"
+  },
+  "settings_dark_mode": {
+    "message": "របៀបងងឹត"
+  },
+  "settings_marquee": {
+    "message": "ចំណងជើងរំកិល"
+  },
+  "settings_custom_theme": {
+    "message": "Theme ផ្ទាល់ខ្លួន"
+  },
+  "custom_theme_title": {
+    "message": "កម្មវិធីកែ Theme"
+  },
+  "label_bg_body": {
+    "message": "ផ្ទៃខាងក្រោយកម្មវិធី"
+  },
+  "label_bg_card": {
+    "message": "ផ្ទៃខាងក្រោយកាត"
+  },
+  "label_text_accent": {
+    "message": "អក្សរ និងពណ៌លេចធ្លោ"
+  },
+  "label_library": {
+    "message": "បណ្ណាល័យ"
+  },
+  "placeholder_select_theme": {
+    "message": "ជ្រើសរើស Theme..."
+  },
+  "placeholder_new_theme": {
+    "message": "ឈ្មោះ Theme ថ្មី"
+  },
+  "placeholder_select_preset": {
+    "message": "ជ្រើសរើស Preset..."
+  },
+  "placeholder_new_preset": {
+    "message": "ឈ្មោះ Preset ថ្មី"
+  },
+  "button_save": {
+    "message": "រក្សាទុក"
+  },
+  "button_reset_defaults": {
+    "message": "កំណត់ឡើងវិញទៅលំនាំដើម"
+  },
+  "button_confirm": {
+    "message": "យល់ព្រម"
+  },
+  "button_cancel": {
+    "message": "បោះបង់"
+  },
+  "button_delete": {
+    "message": "លុប"
+  },
+  "button_close": {
+    "message": "បិទ"
+  },
+  "button_back": {
+    "message": "ត្រឡប់ក្រោយ"
+  },
+  "feedback_saved": {
+    "message": "បានរក្សាទុក!"
+  },
+  "feedback_reset_success": {
+    "message": "បានកំណត់ឡើងវិញ!"
+  },
+  "feedback_no_changes": {
+    "message": "គ្មានការផ្លាស់ប្តូរ"
+  },
+  "feedback_already_default": {
+    "message": "ជាលំនាំដើមរួចហើយ"
+  },
+  "alert_invalid_name": {
+    "message": "ឈ្មោះមិនត្រឹមត្រូវ។"
+  },
+  "label_support": {
+    "message": "ជំនួយ"
+  },
+  "aria_presets": {
+    "message": "Presets"
+  },
+  "about_title": {
+    "message": "អំពី"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "ពិភពលោកតែមួយក្នុងភាពចុះសម្រុងគ្នាយ៉ាងល្អឥតខ្ចោះ។"
+  },
+  "footer_buy_coffee": {
+    "message": "ទិញកាហ្វេឱ្យខ្ញុំ"
+  },
+  "footer_made_with": {
+    "message": "បង្កើតឡើងដោយ ❤️ ៖ "
+  },
+  "title_update_preset": {
+    "message": "ធ្វើបច្ចុប្បន្នភាព Preset"
+  },
+  "title_delete_preset": {
+    "message": "លុប Preset"
+  },
+  "title_revert_preset": {
+    "message": "ត្រឡប់ការផ្លាស់ប្តូរ"
+  },
+  "title_new_preset": {
+    "message": "បង្កើត Preset ថ្មី"
+  },
+  "title_edit_theme": {
+    "message": "កែសម្រួល Theme"
+  },
+  "title_delete_theme": {
+    "message": "លុប Theme"
+  },
+  "modal_theme_delete_title": {
+    "message": "លុប Theme?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "តើអ្នកពិតជាចង់លុបចោលជាអចិន្ត្រៃយ៍នូវ Theme '{{NAME}}' មែនទេ?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "សរសេរជាន់លើ Theme?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Theme '{{NAME}}' មានរួចហើយ។ ចង់ជំនួសវាឬ?"
+  },
+  "modal_preset_delete_title": {
+    "message": "លុប Preset?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "តើអ្នកពិតជាចង់លុបចោលជាអចិន្ត្រៃយ៍នូវ Preset '{{NAME}}' មែនទេ?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "សរសេរជាន់លើ Preset?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "តើអ្នកពិតជាចង់សរសេរជាន់លើ '{{NAME}}' ជាមួយការកំណត់បច្ចុប្បន្នរបស់អ្នកមែនទេ?"
+  },
+  "button_replace": {
+    "message": "ជំនួស"
+  },
+  "modal_delete_msg": {
+    "message": "តើអ្នកពិតជាប្រាកដមែនទេ?"
+  },
+  "preset_flat": {
+    "message": "រាបស្មើ"
+  },
+  "preset_pop": {
+    "message": "ប៉ុប"
+  },
+  "preset_rock": {
+    "message": "រ៉ុក"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / ហ៊ីបហប"
+  },
+  "preset_electronic": {
+    "message": "អេឡិចត្រូនិក"
+  },
+  "preset_deep_bass": {
+    "message": "បាសជ្រៅ"
+  },
+  "preset_indie_alt": {
+    "message": "អ៊ីនឌី / ជំនួស"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "វ៉ូកាឡូយដ៍ / ជេប៉ុប"
+  },
+  "preset_jazz_blues": {
+    "message": "ហ្សាស / ប៊្លូស៍"
+  },
+  "preset_acoustic": {
+    "message": "អាកូស្ទីក"
+  },
+  "preset_classical": {
+    "message": "ក្លាសិក"
+  },
+  "preset_hi_fi_master": {
+    "message": "ហៃហ្វាយ ម៉ាស្ទ័រ"
+  },
+  "preset_cinema": {
+    "message": "ភាពយន្ត"
+  },
+  "preset_vocal_booster": {
+    "message": "ពង្រឹងសំឡេងច្រៀង"
+  },
+  "preset_late_night": {
+    "message": "យប់យឺត"
+  }
 }

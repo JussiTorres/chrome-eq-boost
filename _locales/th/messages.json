@@ -11,6 +11,9 @@
     "status_waiting": {
         "message": "รอสัญญาณเสียง..."
     },
+    "status_conflict": {
+        "message": "กำลังควบคุมแท็บอื่น"
+    },
     "toggle_label": {
         "message": "เปิดใช้งานส่วนขยาย"
     },
@@ -41,26 +44,8 @@
     "settings_title": {
         "message": "การตั้งค่า"
     },
-    "status_conflict": {
-        "message": "กำลังควบคุมแท็บอื่น"
-    },
     "settings_language_label": {
         "message": "ภาษา"
-    },
-    "footer_buy_coffee": {
-        "message": "เลี้ยงกาแฟฉันสักแก้ว"
-    },
-    "footer_made_with": {
-        "message": "สร้างด้วย ❤️ โดย"
-    },
-    "about_title": {
-        "message": "เกี่ยวกับ"
-    },
-    "about_app_name": {
-        "message": "Chrome EQ & Volume"
-    },
-    "about_subtitle": {
-        "message": "โลกใบเดียวในความกลมกลืนที่สมบูรณ์แบบ"
     },
     "settings_dark_mode": {
         "message": "โหมดมืด"
@@ -92,14 +77,17 @@
     "placeholder_new_theme": {
         "message": "ชื่อธีมใหม่"
     },
+    "placeholder_select_preset": {
+        "message": "เลือกพรีเซ็ต..."
+    },
+    "placeholder_new_preset": {
+        "message": "ชื่อพรีเซ็ตใหม่"
+    },
     "button_save": {
         "message": "บันทึก"
     },
     "button_reset_defaults": {
         "message": "คืนค่าเริ่มต้น"
-    },
-    "button_replace": {
-        "message": "แทนที่"
     },
     "button_confirm": {
         "message": "ยืนยัน"
@@ -107,17 +95,14 @@
     "button_cancel": {
         "message": "ยกเลิก"
     },
-    "modal_delete_title": {
-        "message": "ลบธีม?"
+    "button_delete": {
+        "message": "ลบ"
     },
-    "modal_delete_msg": {
-        "message": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{NAME}}?"
+    "button_close": {
+        "message": "ปิด"
     },
-    "modal_overwrite_title": {
-        "message": "เขียนทับธีม?"
-    },
-    "modal_overwrite_msg": {
-        "message": "\"{{NAME}}\" มีอยู่แล้ว ต้องการแทนที่หรือไม่?"
+    "button_back": {
+        "message": "ย้อนกลับ"
     },
     "feedback_saved": {
         "message": "บันทึกแล้ว!"
@@ -136,5 +121,116 @@
     },
     "label_support": {
         "message": "สนับสนุน"
+    },
+    "aria_presets": {
+        "message": "พรีเซ็ต"
+    },
+    "about_title": {
+        "message": "เกี่ยวกับ"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "โลกใบเดียวในความกลมกลืนที่สมบูรณ์แบบ"
+    },
+    "footer_buy_coffee": {
+        "message": "เลี้ยงกาแฟฉันสักแก้ว"
+    },
+    "footer_made_with": {
+        "message": "สร้างด้วย ❤️ โดย"
+    },
+    "title_update_preset": {
+        "message": "อัปเดตพรีเซ็ต"
+    },
+    "title_delete_preset": {
+        "message": "ลบพรีเซ็ต"
+    },
+    "title_revert_preset": {
+        "message": "เลิกทำการเปลี่ยนแปลง"
+    },
+    "title_new_preset": {
+        "message": "สร้างพรีเซ็ตใหม่"
+    },
+    "title_edit_theme": {
+        "message": "แก้ไขธีม"
+    },
+    "title_delete_theme": {
+        "message": "ลบธีม"
+    },
+    "modal_theme_delete_title": {
+        "message": "ลบธีม?"
+    },
+    "modal_theme_delete_msg": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการลบธีม '{{NAME}}' อย่างถาวร?"
+    },
+    "modal_theme_overwrite_title": {
+        "message": "เขียนทับธีม?"
+    },
+    "modal_theme_overwrite_msg": {
+        "message": "ธีม '{{NAME}}' มีอยู่แล้ว ต้องการแทนที่หรือไม่?"
+    },
+    "modal_preset_delete_title": {
+        "message": "ลบพรีเซ็ต?"
+    },
+    "modal_preset_delete_msg": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการลบพรีเซ็ต '{{NAME}}' อย่างถาวร?"
+    },
+    "modal_preset_overwrite_title": {
+        "message": "เขียนทับพรีเซ็ต?"
+    },
+    "modal_preset_overwrite_msg": {
+        "message": "คุณแน่ใจหรือไม่ว่าต้องการเขียนทับพรีเซ็ต '{{NAME}}' ด้วยการตั้งค่าปัจจุบันของคุณ?"
+    },
+    "button_replace": {
+        "message": "แทนที่"
+    },
+    "modal_delete_msg": {
+        "message": "คุณแน่ใจหรือไม่?"
+    },
+    "preset_flat": {
+        "message": "แฟลต"
+    },
+    "preset_pop": {
+        "message": "ป๊อป"
+    },
+    "preset_rock": {
+        "message": "ร็อค"
+    },
+    "preset_rb_hip_hop": {
+        "message": "อาร์แอนด์บี / ฮิปฮอป"
+    },
+    "preset_electronic": {
+        "message": "อิเล็กทรอนิกส์"
+    },
+    "preset_deep_bass": {
+        "message": "เบสแน่น"
+    },
+    "preset_indie_alt": {
+        "message": "อินดี้ / อัลเทอร์เนทีฟ"
+    },
+    "preset_vocaloid_j_pop": {
+        "message": "โวคาลอยด์ / เจป๊อป"
+    },
+    "preset_jazz_blues": {
+        "message": "แจ๊ส / บลูส์"
+    },
+    "preset_acoustic": {
+        "message": "อคูสติก"
+    },
+    "preset_classical": {
+        "message": "คลาสสิก"
+    },
+    "preset_hi_fi_master": {
+        "message": "ไฮไฟ มาสเตอร์"
+    },
+    "preset_cinema": {
+        "message": "ภาพยนตร์"
+    },
+    "preset_vocal_booster": {
+        "message": "เสริมเสียงร้อง"
+    },
+    "preset_late_night": {
+        "message": "ดึกดื่น"
     }
 }

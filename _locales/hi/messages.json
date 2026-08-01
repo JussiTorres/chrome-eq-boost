@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "ऑडियो की प्रतीक्षा..."
   },
+  "status_conflict": {
+    "message": "दूसरे टैब को नियंत्रित कर रहा है"
+  },
   "toggle_label": {
     "message": "एक्सटेंशन सक्षम"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "सेटिंग्स"
   },
-  "status_conflict": {
-    "message": "दूसरे टैब को नियंत्रित कर रहा है"
-  },
   "settings_language_label": {
     "message": "भाषा"
-  },
-  "footer_buy_coffee": {
-    "message": "एक कॉफी पिलाएं"
-  },
-  "footer_made_with": {
-    "message": "❤️ से निर्मित:"
-  },
-  "about_title": {
-    "message": "परिचय"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "एक दुनिया पूर्ण सामंजस्य में।"
   },
   "settings_dark_mode": {
     "message": "डार्क मोड"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "नई थीम का नाम"
   },
+  "placeholder_select_preset": {
+    "message": "प्रीसेट चुनें..."
+  },
+  "placeholder_new_preset": {
+    "message": "नया प्रीसेट नाम"
+  },
   "button_save": {
     "message": "सेव करें"
   },
   "button_reset_defaults": {
     "message": "डिफ़ॉल्ट पर रीसेट करें"
-  },
-  "button_replace": {
-    "message": "बदलें"
   },
   "button_confirm": {
     "message": "पुष्टि करें"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "रद्द करें"
   },
-  "modal_delete_title": {
-    "message": "थीम हटाएं?"
+  "button_delete": {
+    "message": "हटाएं"
   },
-  "modal_delete_msg": {
-    "message": "क्या आप वाकई {{NAME}} को हटाना चाहते हैं?"
+  "button_close": {
+    "message": "बंद करें"
   },
-  "modal_overwrite_title": {
-    "message": "थीम ओवरराइट करें?"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" पहले से मौजूद है। क्या इसे बदलना है?"
+  "button_back": {
+    "message": "पीछे"
   },
   "feedback_saved": {
     "message": "सेव हो गया!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "सहायता"
+  },
+  "aria_presets": {
+    "message": "प्रीसेट्स"
+  },
+  "about_title": {
+    "message": "परिचय"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "एक दुनिया पूर्ण सामंजस्य में।"
+  },
+  "footer_buy_coffee": {
+    "message": "एक कॉफी पिलाएं"
+  },
+  "footer_made_with": {
+    "message": "❤️ से निर्मित:"
+  },
+  "title_update_preset": {
+    "message": "प्रीसेट अपडेट करें"
+  },
+  "title_delete_preset": {
+    "message": "प्रीसेट हटाएं"
+  },
+  "title_revert_preset": {
+    "message": "बदलाव पूर्ववत करें"
+  },
+  "title_new_preset": {
+    "message": "नया प्रीसेट बनाएं"
+  },
+  "title_edit_theme": {
+    "message": "थीम संपादित करें"
+  },
+  "title_delete_theme": {
+    "message": "थीम हटाएं"
+  },
+  "modal_theme_delete_title": {
+    "message": "थीम हटाएं?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "क्या आप वाकई थीम '{{NAME}}' को स्थायी रूप से हटाना चाहते हैं?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "थीम ओवरराइट करें?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "थीम '{{NAME}}' पहले से मौजूद है। क्या इसे बदलना है?"
+  },
+  "modal_preset_delete_title": {
+    "message": "प्रीसेट हटाएं?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "क्या आप वाकई प्रीसेट '{{NAME}}' को स्थायी रूप से हटाना चाहते हैं?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "प्रीसेट ओवरराइट करें?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "क्या आप वाकई '{{NAME}}' को अपनी वर्तमान सेटिंग्स से ओवरराइट करना चाहते हैं?"
+  },
+  "button_replace": {
+    "message": "बदलें"
+  },
+  "modal_delete_msg": {
+    "message": "क्या आप वाकई सहमत हैं?"
+  },
+  "preset_flat": {
+    "message": "सपाट"
+  },
+  "preset_pop": {
+    "message": "पॉप"
+  },
+  "preset_rock": {
+    "message": "रॉक"
+  },
+  "preset_rb_hip_hop": {
+    "message": "आर एंड बी / हिप-हॉप"
+  },
+  "preset_electronic": {
+    "message": "इलेक्ट्रॉनिक"
+  },
+  "preset_deep_bass": {
+    "message": "गहरा बास"
+  },
+  "preset_indie_alt": {
+    "message": "इंडी / ऑल्ट"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "वोकलॉइड / जे-पॉप"
+  },
+  "preset_jazz_blues": {
+    "message": "जैज़ / ब्लूज़"
+  },
+  "preset_acoustic": {
+    "message": "अकॉस्टिक"
+  },
+  "preset_classical": {
+    "message": "शास्त्रीय"
+  },
+  "preset_hi_fi_master": {
+    "message": "हाय-फाई मास्टर"
+  },
+  "preset_cinema": {
+    "message": "सिनेमा"
+  },
+  "preset_vocal_booster": {
+    "message": "स्वर बूस्टर"
+  },
+  "preset_late_night": {
+    "message": "देर रात"
   }
 }

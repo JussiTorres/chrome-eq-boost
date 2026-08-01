@@ -1,0 +1,236 @@
+{
+  "status_loading": {
+    "message": "Alustetaan..."
+  },
+  "status_active": {
+    "message": "Taajuuskorjain aktiivinen"
+  },
+  "status_disabled": {
+    "message": "Laajennus poistettu käytöstä"
+  },
+  "status_waiting": {
+    "message": "Odotetaan ääntä..."
+  },
+  "status_conflict": {
+    "message": "Hallitsee toista välilehteä"
+  },
+  "toggle_label": {
+    "message": "Laajennus käytössä"
+  },
+  "button_reset": {
+    "message": "Nollaa EQ & äänenvoimakkuus"
+  },
+  "section_volume": {
+    "message": "Äänenvoimakkuus (Esivahvistin)"
+  },
+  "section_eq": {
+    "message": "Taajuuskorjain (-15dB ... +15dB)"
+  },
+  "label_bass": {
+    "message": "Basso (80 Hz)"
+  },
+  "label_mids": {
+    "message": "Keskiäänet (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "Diskantti (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 Toisen välilehden ääntä vahvistetaan."
+  },
+  "button_takeover": {
+    "message": "Käytä tällä välilehdellä"
+  },
+  "settings_title": {
+    "message": "Asetukset"
+  },
+  "settings_language_label": {
+    "message": "Kieli"
+  },
+  "settings_dark_mode": {
+    "message": "Tumma tila"
+  },
+  "settings_marquee": {
+    "message": "Vierivä otsikko"
+  },
+  "settings_custom_theme": {
+    "message": "Mukautettu teema"
+  },
+  "custom_theme_title": {
+    "message": "Teemaeditori"
+  },
+  "label_bg_body": {
+    "message": "Sovelluksen tausta"
+  },
+  "label_bg_card": {
+    "message": "Kortin tausta"
+  },
+  "label_text_accent": {
+    "message": "Teksti & korostus"
+  },
+  "label_library": {
+    "message": "Kirjasto"
+  },
+  "placeholder_select_theme": {
+    "message": "Valitse teema..."
+  },
+  "placeholder_new_theme": {
+    "message": "Uuden teeman nimi"
+  },
+  "placeholder_select_preset": {
+    "message": "Valitse esiasetus..."
+  },
+  "placeholder_new_preset": {
+    "message": "Uuden esiasetuksen nimi"
+  },
+  "button_save": {
+    "message": "Tallenna"
+  },
+  "button_reset_defaults": {
+    "message": "Palauta oletusasetukset"
+  },
+  "button_confirm": {
+    "message": "Vahvista"
+  },
+  "button_cancel": {
+    "message": "Peruuta"
+  },
+  "button_delete": {
+    "message": "Poista"
+  },
+  "button_close": {
+    "message": "Sulje"
+  },
+  "button_back": {
+    "message": "Takaisin"
+  },
+  "feedback_saved": {
+    "message": "Tallennettu!"
+  },
+  "feedback_reset_success": {
+    "message": "Oletusasetukset palautettu!"
+  },
+  "feedback_no_changes": {
+    "message": "Ei muutoksia"
+  },
+  "feedback_already_default": {
+    "message": "On jo oletus"
+  },
+  "alert_invalid_name": {
+    "message": "Virheellinen teeman nimi."
+  },
+  "label_support": {
+    "message": "Tuki"
+  },
+  "aria_presets": {
+    "message": "Esiasetukset"
+  },
+  "about_title": {
+    "message": "Tietoja"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "Yksi maailma täydellisessä harmoniassa."
+  },
+  "footer_buy_coffee": {
+    "message": "Tue kahvilla"
+  },
+  "footer_made_with": {
+    "message": "Valmistanut ❤️:llä"
+  },
+  "title_update_preset": {
+    "message": "Päivitä esiasetus"
+  },
+  "title_delete_preset": {
+    "message": "Poista esiasetus"
+  },
+  "title_revert_preset": {
+    "message": "Kumoa muutokset"
+  },
+  "title_new_preset": {
+    "message": "Luo uusi esiasetus"
+  },
+  "title_edit_theme": {
+    "message": "Muokkaa teemaa"
+  },
+  "title_delete_theme": {
+    "message": "Poista teema"
+  },
+  "modal_theme_delete_title": {
+    "message": "Poistetaanko teema?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "Haluatko varmasti poistaa teeman '{{NAME}}' pysyvästi?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "Korvataanko teema?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "Teema '{{NAME}}' on jo olemassa. Korvataanko se?"
+  },
+  "modal_preset_delete_title": {
+    "message": "Poistetaanko esiasetus?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "Haluatko varmasti poistaa esiasetuksen '{{NAME}}' pysyvästi?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "Korvataanko esiasetus?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "Haluatko varmasti korvata esiasetuksen '{{NAME}}' nykyisillä asetuksillasi?"
+  },
+  "button_replace": {
+    "message": "Korvaa"
+  },
+  "modal_delete_msg": {
+    "message": "Oletko varma?"
+  },
+  "preset_flat": {
+    "message": "Tasainen"
+  },
+  "preset_pop": {
+    "message": "Pop"
+  },
+  "preset_rock": {
+    "message": "Rock"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / Hip-Hop"
+  },
+  "preset_electronic": {
+    "message": "Elektroninen"
+  },
+  "preset_deep_bass": {
+    "message": "Syvä basso"
+  },
+  "preset_indie_alt": {
+    "message": "Indie / Alt"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "Vocaloid / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "Jazz / Blues"
+  },
+  "preset_acoustic": {
+    "message": "Akustinen"
+  },
+  "preset_classical": {
+    "message": "Klassinen"
+  },
+  "preset_hi_fi_master": {
+    "message": "Hi-Fi Master"
+  },
+  "preset_cinema": {
+    "message": "Elokuva"
+  },
+  "preset_vocal_booster": {
+    "message": "Laulukorostus"
+  },
+  "preset_late_night": {
+    "message": "Myöhäisilta"
+  }
+}

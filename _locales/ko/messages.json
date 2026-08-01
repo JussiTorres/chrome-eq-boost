@@ -11,6 +11,9 @@
   "status_waiting": {
     "message": "오디오 대기 중..."
   },
+  "status_conflict": {
+    "message": "다른 탭 제어 중"
+  },
   "toggle_label": {
     "message": "확장 프로그램 활성"
   },
@@ -41,26 +44,8 @@
   "settings_title": {
     "message": "설정"
   },
-  "status_conflict": {
-    "message": "다른 탭 제어 중"
-  },
   "settings_language_label": {
     "message": "언어"
-  },
-  "footer_buy_coffee": {
-    "message": "커피 한 잔 사주기"
-  },
-  "footer_made_with": {
-    "message": "❤️로 제작"
-  },
-  "about_title": {
-    "message": "정보"
-  },
-  "about_app_name": {
-    "message": "Chrome EQ & Volume"
-  },
-  "about_subtitle": {
-    "message": "완벽한 조화를 이룬 하나의 세계."
   },
   "settings_dark_mode": {
     "message": "다크 모드"
@@ -92,14 +77,17 @@
   "placeholder_new_theme": {
     "message": "새 테마 이름"
   },
+  "placeholder_select_preset": {
+    "message": "프리셋 선택..."
+  },
+  "placeholder_new_preset": {
+    "message": "새 프리셋 이름"
+  },
   "button_save": {
     "message": "저장"
   },
   "button_reset_defaults": {
     "message": "기본값으로 초기화"
-  },
-  "button_replace": {
-    "message": "교체"
   },
   "button_confirm": {
     "message": "확인"
@@ -107,17 +95,14 @@
   "button_cancel": {
     "message": "취소"
   },
-  "modal_delete_title": {
-    "message": "테마 삭제?"
+  "button_delete": {
+    "message": "삭제"
   },
-  "modal_delete_msg": {
-    "message": "정말로 {{NAME}} 테마를 삭제하시겠습니까?"
+  "button_close": {
+    "message": "닫기"
   },
-  "modal_overwrite_title": {
-    "message": "테마 덮어쓰기?"
-  },
-  "modal_overwrite_msg": {
-    "message": "\"{{NAME}}\" 테마가 이미 존재합니다. 교체하시겠습니까?"
+  "button_back": {
+    "message": "뒤로"
   },
   "feedback_saved": {
     "message": "저장됨!"
@@ -136,5 +121,116 @@
   },
   "label_support": {
     "message": "지원"
+  },
+  "aria_presets": {
+    "message": "프리셋"
+  },
+  "about_title": {
+    "message": "정보"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "완벽한 조화를 이룬 하나의 세계."
+  },
+  "footer_buy_coffee": {
+    "message": "커피 한 잔 사주기"
+  },
+  "footer_made_with": {
+    "message": "❤️로 제작:"
+  },
+  "title_update_preset": {
+    "message": "프리셋 업데이트"
+  },
+  "title_delete_preset": {
+    "message": "프리셋 삭제"
+  },
+  "title_revert_preset": {
+    "message": "변경 사항 되돌리기"
+  },
+  "title_new_preset": {
+    "message": "새 프리셋 만들기"
+  },
+  "title_edit_theme": {
+    "message": "테마 편집"
+  },
+  "title_delete_theme": {
+    "message": "테마 삭제"
+  },
+  "modal_theme_delete_title": {
+    "message": "테마 삭제?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "정말로 '{{NAME}}' 테마를 영구적으로 삭제하시겠습니까?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "테마 덮어쓰기?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "'{{NAME}}' 테마가 이미 존재합니다. 교체하시겠습니까?"
+  },
+  "modal_preset_delete_title": {
+    "message": "프리셋 삭제?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "정말로 '{{NAME}}' 프리셋을 영구적으로 삭제하시겠습니까?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "프리셋 덮어쓰기?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "정말로 현재 설정으로 '{{NAME}}' 프리셋을 덮어쓰시겠습니까?"
+  },
+  "button_replace": {
+    "message": "교체"
+  },
+  "modal_delete_msg": {
+    "message": "정말이십니까?"
+  },
+  "preset_flat": {
+    "message": "평탄하게"
+  },
+  "preset_pop": {
+    "message": "팝"
+  },
+  "preset_rock": {
+    "message": "락"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / 힙합"
+  },
+  "preset_electronic": {
+    "message": "일렉트로닉"
+  },
+  "preset_deep_bass": {
+    "message": "딥 베이스"
+  },
+  "preset_indie_alt": {
+    "message": "인디 / 얼터너티브"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "보컬로이드 / J-Pop"
+  },
+  "preset_jazz_blues": {
+    "message": "재즈 / 블루스"
+  },
+  "preset_acoustic": {
+    "message": "어쿠스틱"
+  },
+  "preset_classical": {
+    "message": "클래식"
+  },
+  "preset_hi_fi_master": {
+    "message": "하이파이 마스터"
+  },
+  "preset_cinema": {
+    "message": "시네마"
+  },
+  "preset_vocal_booster": {
+    "message": "보컬 부스터"
+  },
+  "preset_late_night": {
+    "message": "심야 모드"
   }
 }

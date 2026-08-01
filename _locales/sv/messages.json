@@ -1,195 +1,195 @@
 {
   "status_loading": {
-    "message": "Initializing..."
+    "message": "Initierar..."
   },
   "status_active": {
-    "message": "Equalizer active"
+    "message": "Equalizern är aktiv"
   },
   "status_disabled": {
-    "message": "Extension disabled"
+    "message": "Tillägg inaktiverat"
   },
   "status_waiting": {
-    "message": "Waiting for audio..."
+    "message": "Väntar på ljud..."
   },
   "status_conflict": {
-    "message": "Controlling another tab"
+    "message": "Kontrollerar en annan flik"
   },
   "toggle_label": {
-    "message": "Extension enabled"
+    "message": "Tillägg aktiverat"
   },
   "button_reset": {
-    "message": "Reset EQ & Vol."
+    "message": "Återställ EQ & Vol."
   },
   "section_volume": {
-    "message": "Volume (Preamp)"
+    "message": "Volym (Preamp)"
   },
   "section_eq": {
-    "message": "Equalizer (-15dB to +15dB)"
+    "message": "Equalizer (-15dB till +15dB)"
   },
   "label_bass": {
-    "message": "Bass (80 Hz)"
+    "message": "Bas (80 Hz)"
   },
   "label_mids": {
-    "message": "Mids (2500 Hz)"
+    "message": "Mellanregister (2500 Hz)"
   },
   "label_treble": {
-    "message": "Treble (8000 Hz)"
+    "message": "Diskant (8000 Hz)"
   },
   "conflict_warning": {
-    "message": "🔊 Another tab is being amplified."
+    "message": "🔊 En annan flik förstärks."
   },
   "button_takeover": {
-    "message": "Use on this tab"
+    "message": "Använd på den här fliken"
   },
   "settings_title": {
-    "message": "Settings"
+    "message": "Inställningar"
   },
   "settings_language_label": {
-    "message": "Language"
+    "message": "Språk"
   },
   "settings_dark_mode": {
-    "message": "Dark Mode"
+    "message": "Mörkt läge"
   },
   "settings_marquee": {
-    "message": "Scrolling Title"
+    "message": "Rullande titel"
   },
   "settings_custom_theme": {
-    "message": "Custom Theme"
+    "message": "Anpassat tema"
   },
   "custom_theme_title": {
-    "message": "Theme Editor"
+    "message": "Temaredigerare"
   },
   "label_bg_body": {
-    "message": "App Background"
+    "message": "App-bakgrund"
   },
   "label_bg_card": {
-    "message": "Card Background"
+    "message": "Kortbakgrund"
   },
   "label_text_accent": {
-    "message": "Text & Accent"
+    "message": "Text & accent"
   },
   "label_library": {
-    "message": "Library"
+    "message": "Bibliotek"
   },
   "placeholder_select_theme": {
-    "message": "Select a theme..."
+    "message": "Välj ett tema..."
   },
   "placeholder_new_theme": {
-    "message": "New Theme Name"
+    "message": "Nytt temanamn"
   },
   "placeholder_select_preset": {
-    "message": "Select preset..."
+    "message": "Välj förinställning..."
   },
   "placeholder_new_preset": {
-    "message": "New Preset Name"
+    "message": "Nytt namn på förinställning"
   },
   "button_save": {
-    "message": "Save"
+    "message": "Spara"
   },
   "button_reset_defaults": {
-    "message": "Reset to Defaults"
+    "message": "Återställ till standardinställningar"
   },
   "button_confirm": {
-    "message": "Confirm"
+    "message": "Bekräfta"
   },
   "button_cancel": {
-    "message": "Cancel"
+    "message": "Avbryt"
   },
   "button_delete": {
-    "message": "Delete"
+    "message": "Radera"
   },
   "button_close": {
-    "message": "Close"
+    "message": "Stäng"
   },
   "button_back": {
-    "message": "Back"
+    "message": "Bakåt"
   },
   "feedback_saved": {
-    "message": "Saved!"
+    "message": "Sparat!"
   },
   "feedback_reset_success": {
-    "message": "Defaults Restored!"
+    "message": "Standardvärden återställda!"
   },
   "feedback_no_changes": {
-    "message": "No changes"
+    "message": "Inga ändringar"
   },
   "feedback_already_default": {
-    "message": "Already Default"
+    "message": "Redan standard"
   },
   "alert_invalid_name": {
-    "message": "Invalid name."
+    "message": "Ogiltigt temanamn."
   },
   "label_support": {
     "message": "Support"
   },
   "aria_presets": {
-    "message": "Presets"
+    "message": "Förinställningar"
   },
   "about_title": {
-    "message": "About"
+    "message": "Om"
   },
   "about_app_name": {
     "message": "Chrome EQ & Volume"
   },
   "about_subtitle": {
-    "message": "One world in perfect harmony."
+    "message": "En värld i perfekt harmoni."
   },
   "footer_buy_coffee": {
-    "message": "Buy me a coffee"
+    "message": "Bjud mig på en kaffe"
   },
   "footer_made_with": {
-    "message": "Made with ❤️ by"
+    "message": "Skapad med ❤️ av"
   },
   "title_update_preset": {
-    "message": "Update Preset"
+    "message": "Uppdatera förinställning"
   },
   "title_delete_preset": {
-    "message": "Delete Preset"
+    "message": "Ta bort förinställning"
   },
   "title_revert_preset": {
-    "message": "Undo Changes"
+    "message": "Ångra ändringar"
   },
   "title_new_preset": {
-    "message": "Create New Preset"
+    "message": "Skapa ny förinställning"
   },
   "title_edit_theme": {
-    "message": "Edit Theme"
+    "message": "Redigera tema"
   },
   "title_delete_theme": {
-    "message": "Delete Theme"
+    "message": "Ta bort tema"
   },
   "modal_theme_delete_title": {
-    "message": "Delete Theme?"
+    "message": "Radera tema?"
   },
   "modal_theme_delete_msg": {
-    "message": "Are you sure you want to permanently delete the theme '{{NAME}}'?"
+    "message": "Är du säker på att du vill radera temat '{{NAME}}' permanent?"
   },
   "modal_theme_overwrite_title": {
-    "message": "Overwrite Theme?"
+    "message": "Skriva över tema?"
   },
   "modal_theme_overwrite_msg": {
-    "message": "The theme '{{NAME}}' already exists. Replace it?"
+    "message": "Temat '{{NAME}}' finns redan. Vill du ersätta det?"
   },
   "modal_preset_delete_title": {
-    "message": "Delete Preset?"
+    "message": "Radera förinställning?"
   },
   "modal_preset_delete_msg": {
-    "message": "Are you sure you want to permanently delete the preset '{{NAME}}'?"
+    "message": "Är du säker på att du vill radera förinställningen '{{NAME}}' permanent?"
   },
   "modal_preset_overwrite_title": {
-    "message": "Overwrite Preset?"
+    "message": "Skriva över förinställning?"
   },
   "modal_preset_overwrite_msg": {
-    "message": "Are you sure you want to overwrite '{{NAME}}' with your current settings?"
+    "message": "Är du säker på att du vill skriva över '{{NAME}}' med dina nuvarande inställningar?"
   },
   "button_replace": {
-    "message": "Replace"
+    "message": "Ersätt"
   },
   "modal_delete_msg": {
-    "message": "Are you sure?"
+    "message": "Är du säker?"
   },
   "preset_flat": {
-    "message": "Flat"
+    "message": "Platt"
   },
   "preset_pop": {
     "message": "Pop"
@@ -201,10 +201,10 @@
     "message": "R&B / Hip-Hop"
   },
   "preset_electronic": {
-    "message": "Electronic"
+    "message": "Elektroniskt"
   },
   "preset_deep_bass": {
-    "message": "Deep Bass"
+    "message": "Djup bas"
   },
   "preset_indie_alt": {
     "message": "Indie / Alt"
@@ -216,21 +216,21 @@
     "message": "Jazz / Blues"
   },
   "preset_acoustic": {
-    "message": "Acoustic"
+    "message": "Akustiskt"
   },
   "preset_classical": {
-    "message": "Classical"
+    "message": "Klassiskt"
   },
   "preset_hi_fi_master": {
     "message": "Hi-Fi Master"
   },
   "preset_cinema": {
-    "message": "Cinema"
+    "message": "Biograf"
   },
   "preset_vocal_booster": {
-    "message": "Vocal Booster"
+    "message": "Röstförstärkare"
   },
   "preset_late_night": {
-    "message": "Late Night"
+    "message": "Sen kväll"
   }
 }

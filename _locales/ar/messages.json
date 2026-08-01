@@ -1,0 +1,236 @@
+{
+  "status_loading": {
+    "message": "جاري التهيئة..."
+  },
+  "status_active": {
+    "message": "مُعادل الصوت نشط"
+  },
+  "status_disabled": {
+    "message": "تم تعطيل الإضافة"
+  },
+  "status_waiting": {
+    "message": "في انتظار الصوت..."
+  },
+  "status_conflict": {
+    "message": "يتحكم في تبويب آخر"
+  },
+  "toggle_label": {
+    "message": "الإضافة مفعلة"
+  },
+  "button_reset": {
+    "message": "إعادة ضبط EQ والصوت"
+  },
+  "section_volume": {
+    "message": "مستوى الصوت (Preamp)"
+  },
+  "section_eq": {
+    "message": "مُعادل الصوت (-15dB إلى +15dB)"
+  },
+  "label_bass": {
+    "message": "البيس (80 Hz)"
+  },
+  "label_mids": {
+    "message": "المتوسطات (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "التريبل (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 يتم تضخيم تبويب آخر."
+  },
+  "button_takeover": {
+    "message": "استخدم على هذا التبويب"
+  },
+  "settings_title": {
+    "message": "الإعدادات"
+  },
+  "settings_language_label": {
+    "message": "اللغة"
+  },
+  "settings_dark_mode": {
+    "message": "الوضع الداكن"
+  },
+  "settings_marquee": {
+    "message": "عنوان متحرك"
+  },
+  "settings_custom_theme": {
+    "message": "مظهر مخصص"
+  },
+  "custom_theme_title": {
+    "message": "محرر المظهر"
+  },
+  "label_bg_body": {
+    "message": "خلفية التطبيق"
+  },
+  "label_bg_card": {
+    "message": "خلفية البطاقة"
+  },
+  "label_text_accent": {
+    "message": "النص والتمييز"
+  },
+  "label_library": {
+    "message": "المكتبة"
+  },
+  "placeholder_select_theme": {
+    "message": "اختر مظهرًا..."
+  },
+  "placeholder_new_theme": {
+    "message": "اسم المظهر الجديد"
+  },
+  "placeholder_select_preset": {
+    "message": "اختر إعدادًا مسبقًا..."
+  },
+  "placeholder_new_preset": {
+    "message": "اسم الإعداد المسبق الجديد"
+  },
+  "button_save": {
+    "message": "حفظ"
+  },
+  "button_reset_defaults": {
+    "message": "استعادة الافتراضيات"
+  },
+  "button_confirm": {
+    "message": "تأكيد"
+  },
+  "button_cancel": {
+    "message": "إلغاء"
+  },
+  "button_delete": {
+    "message": "حذف"
+  },
+  "button_close": {
+    "message": "إغلاق"
+  },
+  "button_back": {
+    "message": "رجوع"
+  },
+  "feedback_saved": {
+    "message": "تم الحفظ!"
+  },
+  "feedback_reset_success": {
+    "message": "تمت استعادة الافتراضيات!"
+  },
+  "feedback_no_changes": {
+    "message": "لا توجد تغييرات"
+  },
+  "feedback_already_default": {
+    "message": "افتراضي مسبقًا"
+  },
+  "alert_invalid_name": {
+    "message": "اسم غير صالح."
+  },
+  "label_support": {
+    "message": "الدعم"
+  },
+  "aria_presets": {
+    "message": "الإعدادات المسبقة"
+  },
+  "about_title": {
+    "message": "حول"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "عالم واحد في تناغم تام."
+  },
+  "footer_buy_coffee": {
+    "message": "اشترِ لي قهوة"
+  },
+  "footer_made_with": {
+    "message": "صُنع بـ ❤️ بواسطة"
+  },
+  "title_update_preset": {
+    "message": "تحديث الإعداد المسبق"
+  },
+  "title_delete_preset": {
+    "message": "حذف الإعداد المسبق"
+  },
+  "title_revert_preset": {
+    "message": "تراجع عن التغييرات"
+  },
+  "title_new_preset": {
+    "message": "إنشاء إعداد مسبق جديد"
+  },
+  "title_edit_theme": {
+    "message": "تعديل المظهر"
+  },
+  "title_delete_theme": {
+    "message": "حذف المظهر"
+  },
+  "modal_theme_delete_title": {
+    "message": "حذف المظهر؟"
+  },
+  "modal_theme_delete_msg": {
+    "message": "هل أنت متأكد أنك تريد حذف المظهر '{{NAME}}' نهائيًا؟"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "استبدال المظهر؟"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "المظهر '{{NAME}}' موجود مسبقًا. هل تريد استبداله؟"
+  },
+  "modal_preset_delete_title": {
+    "message": "حذف الإعداد المسبق؟"
+  },
+  "modal_preset_delete_msg": {
+    "message": "هل أنت متأكد أنك تريد حذف الإعداد المسبق '{{NAME}}' نهائيًا؟"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "استبدال الإعداد المسبق؟"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "هل أنت متأكد أنك تريد استبدال '{{NAME}}' بإعداداتك الحالية؟"
+  },
+  "button_replace": {
+    "message": "استبدال"
+  },
+  "modal_delete_msg": {
+    "message": "هل أنت متأكد؟"
+  },
+  "preset_flat": {
+    "message": "مسطح"
+  },
+  "preset_pop": {
+    "message": "بوب"
+  },
+  "preset_rock": {
+    "message": "روك"
+  },
+  "preset_rb_hip_hop": {
+    "message": "آر أند بي / هيب هوب"
+  },
+  "preset_electronic": {
+    "message": "إلكتروني"
+  },
+  "preset_deep_bass": {
+    "message": "بيس عميق"
+  },
+  "preset_indie_alt": {
+    "message": "إندي / بديل"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "فوكالوييد / جي-بوب"
+  },
+  "preset_jazz_blues": {
+    "message": "جاز / بلوز"
+  },
+  "preset_acoustic": {
+    "message": "أكوستيك"
+  },
+  "preset_classical": {
+    "message": "كلاسيكي"
+  },
+  "preset_hi_fi_master": {
+    "message": "هاي-فاي ماستر"
+  },
+  "preset_cinema": {
+    "message": "سينما"
+  },
+  "preset_vocal_booster": {
+    "message": "معزز الصوت"
+  },
+  "preset_late_night": {
+    "message": "وقت متأخر من الليل"
+  }
+}

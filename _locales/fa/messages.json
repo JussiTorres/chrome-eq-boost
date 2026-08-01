@@ -1,0 +1,236 @@
+{
+  "status_loading": {
+    "message": "در حال راه‌اندازی..."
+  },
+  "status_active": {
+    "message": "اکولایزر فعال است"
+  },
+  "status_disabled": {
+    "message": "افزونه غیرفعال است"
+  },
+  "status_waiting": {
+    "message": "در انتظار صدا..."
+  },
+  "status_conflict": {
+    "message": "در حال کنترل تب دیگر"
+  },
+  "toggle_label": {
+    "message": "افزونه فعال است"
+  },
+  "button_reset": {
+    "message": "بازنشانی EQ و صدا"
+  },
+  "section_volume": {
+    "message": "حجم صدا (Preamp)"
+  },
+  "section_eq": {
+    "message": "اکولایزر (-15dB تا +15dB)"
+  },
+  "label_bass": {
+    "message": "باس (80 Hz)"
+  },
+  "label_mids": {
+    "message": "میدز (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "تریبل (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 تب دیگری در حال تقویت است."
+  },
+  "button_takeover": {
+    "message": "استفاده در این تب"
+  },
+  "settings_title": {
+    "message": "تنظیمات"
+  },
+  "settings_language_label": {
+    "message": "زبان"
+  },
+  "settings_dark_mode": {
+    "message": "حالت تاریک"
+  },
+  "settings_marquee": {
+    "message": "عنوان متحرک"
+  },
+  "settings_custom_theme": {
+    "message": "تم سفارشی"
+  },
+  "custom_theme_title": {
+    "message": "ویرایشگر تم"
+  },
+  "label_bg_body": {
+    "message": "پس‌زمینه برنامه"
+  },
+  "label_bg_card": {
+    "message": "پس‌زمینه کارت"
+  },
+  "label_text_accent": {
+    "message": "متن و رنگ شاخص"
+  },
+  "label_library": {
+    "message": "کتابخانه"
+  },
+  "placeholder_select_theme": {
+    "message": "انتخاب تم..."
+  },
+  "placeholder_new_theme": {
+    "message": "نام تم جدید"
+  },
+  "placeholder_select_preset": {
+    "message": "انتخاب پیش‌تنظیم..."
+  },
+  "placeholder_new_preset": {
+    "message": "نام پیش‌تنظیم جدید"
+  },
+  "button_save": {
+    "message": "ذخیره"
+  },
+  "button_reset_defaults": {
+    "message": "بازنشانی به پیش‌فرض"
+  },
+  "button_confirm": {
+    "message": "تایید"
+  },
+  "button_cancel": {
+    "message": "لغو"
+  },
+  "button_delete": {
+    "message": "حذف"
+  },
+  "button_close": {
+    "message": "بستن"
+  },
+  "button_back": {
+    "message": "بازگشت"
+  },
+  "feedback_saved": {
+    "message": "ذخیره شد!"
+  },
+  "feedback_reset_success": {
+    "message": "پیش‌فرض‌ها بازیابی شدند!"
+  },
+  "feedback_no_changes": {
+    "message": "بدون تغییر"
+  },
+  "feedback_already_default": {
+    "message": "از قبل پیش‌فرض است"
+  },
+  "alert_invalid_name": {
+    "message": "نام نامعتبر است."
+  },
+  "label_support": {
+    "message": "پشتیبانی"
+  },
+  "aria_presets": {
+    "message": "پیش‌تنظیم‌ها"
+  },
+  "about_title": {
+    "message": "درباره"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "یک جهان در هارمونی کامل."
+  },
+  "footer_buy_coffee": {
+    "message": "برایم قهوه بخر"
+  },
+  "footer_made_with": {
+    "message": "ساخته شده با ❤️ توسط"
+  },
+  "title_update_preset": {
+    "message": "بروزرسانی پیش‌تنظیم"
+  },
+  "title_delete_preset": {
+    "message": "حذف پیش‌تنظیم"
+  },
+  "title_revert_preset": {
+    "message": "لغو تغییرات"
+  },
+  "title_new_preset": {
+    "message": "ایجاد پیش‌تنظیم جدید"
+  },
+  "title_edit_theme": {
+    "message": "ویرایش تم"
+  },
+  "title_delete_theme": {
+    "message": "حذف تم"
+  },
+  "modal_theme_delete_title": {
+    "message": "حذف تم؟"
+  },
+  "modal_theme_delete_msg": {
+    "message": "آیا مطمئن هستید که می‌خواهید تم '{{NAME}}' را برای همیشه حذف کنید؟"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "جایگزینی تم؟"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "تم '{{NAME}}' از قبل وجود دارد. جایگزین شود؟"
+  },
+  "modal_preset_delete_title": {
+    "message": "حذف پیش‌تنظیم؟"
+  },
+  "modal_preset_delete_msg": {
+    "message": "آیا مطمئن هستید که می‌خواهید پیش‌تنظیم '{{NAME}}' را برای همیشه حذف کنید؟"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "جایگزینی پیش‌تنظیم؟"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "آیا مطمئن هستید که می‌خواهید تنظیمات فعلی را روی '{{NAME}}' ذخیره کنید؟"
+  },
+  "button_replace": {
+    "message": "جایگزینی"
+  },
+  "modal_delete_msg": {
+    "message": "آیا مطمئن هستید؟"
+  },
+  "preset_flat": {
+    "message": "صاف"
+  },
+  "preset_pop": {
+    "message": "پاپ"
+  },
+  "preset_rock": {
+    "message": "راک"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / هیپ‌هاپ"
+  },
+  "preset_electronic": {
+    "message": "الکترونیک"
+  },
+  "preset_deep_bass": {
+    "message": "باس عمیق"
+  },
+  "preset_indie_alt": {
+    "message": "ایندی / آلترناتیو"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "وکالوید / جی‌پاپ"
+  },
+  "preset_jazz_blues": {
+    "message": "جاز / بلوز"
+  },
+  "preset_acoustic": {
+    "message": "آکوستیک"
+  },
+  "preset_classical": {
+    "message": "کلاسیک"
+  },
+  "preset_hi_fi_master": {
+    "message": "های‌فای مستر"
+  },
+  "preset_cinema": {
+    "message": "سینما"
+  },
+  "preset_vocal_booster": {
+    "message": "تقویت صدا"
+  },
+  "preset_late_night": {
+    "message": "اواخر شب"
+  }
+}

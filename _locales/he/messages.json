@@ -1,0 +1,236 @@
+{
+  "status_loading": {
+    "message": "מאתחל..."
+  },
+  "status_active": {
+    "message": "האקולייזר פעיל"
+  },
+  "status_disabled": {
+    "message": "התוסף מושבת"
+  },
+  "status_waiting": {
+    "message": "ממתין לשמע..."
+  },
+  "status_conflict": {
+    "message": "שולט בכרטיסייה אחרת"
+  },
+  "toggle_label": {
+    "message": "התוסף פעיל"
+  },
+  "button_reset": {
+    "message": "איפוס EQ ועוצמה"
+  },
+  "section_volume": {
+    "message": "עוצמת שמע (Preamp)"
+  },
+  "section_eq": {
+    "message": "אקולייזר (-15dB עד +15dB)"
+  },
+  "label_bass": {
+    "message": "באס (80 Hz)"
+  },
+  "label_mids": {
+    "message": "מידס (2500 Hz)"
+  },
+  "label_treble": {
+    "message": "טרבל (8000 Hz)"
+  },
+  "conflict_warning": {
+    "message": "🔊 כרטיסייה אחרת מוגברת כעת."
+  },
+  "button_takeover": {
+    "message": "השתמש בכרטיסייה זו"
+  },
+  "settings_title": {
+    "message": "הגדרות"
+  },
+  "settings_language_label": {
+    "message": "שפה"
+  },
+  "settings_dark_mode": {
+    "message": "מצב כהה"
+  },
+  "settings_marquee": {
+    "message": "כותרת נגללת"
+  },
+  "settings_custom_theme": {
+    "message": "ערכת עיצוב מותאמת אישית"
+  },
+  "custom_theme_title": {
+    "message": "עורך ערכות עיצוב"
+  },
+  "label_bg_body": {
+    "message": "רקע האפליקציה"
+  },
+  "label_bg_card": {
+    "message": "רקע הכרטיס"
+  },
+  "label_text_accent": {
+    "message": "טקסט והדגשה"
+  },
+  "label_library": {
+    "message": "ספרייה"
+  },
+  "placeholder_select_theme": {
+    "message": "בחר ערכת עיצוב..."
+  },
+  "placeholder_new_theme": {
+    "message": "שם ערכת עיצוב חדשה"
+  },
+  "placeholder_select_preset": {
+    "message": "בחר הגדרה קבועה מראש..."
+  },
+  "placeholder_new_preset": {
+    "message": "שם הגדרה קבועה חדשה"
+  },
+  "button_save": {
+    "message": "שמירה"
+  },
+  "button_reset_defaults": {
+    "message": "איפוס לברירת מחדל"
+  },
+  "button_confirm": {
+    "message": "אישור"
+  },
+  "button_cancel": {
+    "message": "ביטול"
+  },
+  "button_delete": {
+    "message": "מחיקה"
+  },
+  "button_close": {
+    "message": "סגירה"
+  },
+  "button_back": {
+    "message": "חזרה"
+  },
+  "feedback_saved": {
+    "message": "נשמר!"
+  },
+  "feedback_reset_success": {
+    "message": "ערכי ברירת המחדל שוחזרו!"
+  },
+  "feedback_no_changes": {
+    "message": "אין שינויים"
+  },
+  "feedback_already_default": {
+    "message": "כבר ברירת מחדל"
+  },
+  "alert_invalid_name": {
+    "message": "שם לא תקין."
+  },
+  "label_support": {
+    "message": "תמיכה"
+  },
+  "aria_presets": {
+    "message": "הגדרות קבועות מראש"
+  },
+  "about_title": {
+    "message": "אודות"
+  },
+  "about_app_name": {
+    "message": "Chrome EQ & Volume"
+  },
+  "about_subtitle": {
+    "message": "עולם אחד בהרמוניה מושלמת."
+  },
+  "footer_buy_coffee": {
+    "message": "קנה לי קפה"
+  },
+  "footer_made_with": {
+    "message": "נוצר עם ❤️ על ידי"
+  },
+  "title_update_preset": {
+    "message": "עדכון הגדרה קבועה מראש"
+  },
+  "title_delete_preset": {
+    "message": "מחיקת הגדרה קבועה מראש"
+  },
+  "title_revert_preset": {
+    "message": "ביטול שינויים"
+  },
+  "title_new_preset": {
+    "message": "יצירת הגדרה קבועה חדשה"
+  },
+  "title_edit_theme": {
+    "message": "עריכת ערכת עיצוב"
+  },
+  "title_delete_theme": {
+    "message": "מחיקת ערכת עיצוב"
+  },
+  "modal_theme_delete_title": {
+    "message": "למחוק את ערכת העיצוב?"
+  },
+  "modal_theme_delete_msg": {
+    "message": "האם אתה בטוח שברצונך למחוק לצמיתות את ערכת העיצוב '{{NAME}}'?"
+  },
+  "modal_theme_overwrite_title": {
+    "message": "לדרוס את ערכת העיצוב?"
+  },
+  "modal_theme_overwrite_msg": {
+    "message": "ערכת העיצוב '{{NAME}}' כבר קיימת. האם להחליף אותה?"
+  },
+  "modal_preset_delete_title": {
+    "message": "למחוק הגדרה קבועה מראש?"
+  },
+  "modal_preset_delete_msg": {
+    "message": "האם אתה בטוח שברצונך למחוק לצמיתות את ההגדרה '{{NAME}}'?"
+  },
+  "modal_preset_overwrite_title": {
+    "message": "לדרוס הגדרה קבועה מראש?"
+  },
+  "modal_preset_overwrite_msg": {
+    "message": "האם אתה בטוח שברצונך לדרוס את '{{NAME}}' עם ההגדרות הנוכחיות שלך?"
+  },
+  "button_replace": {
+    "message": "החלפה"
+  },
+  "modal_delete_msg": {
+    "message": "האם אתה בטוח?"
+  },
+  "preset_flat": {
+    "message": "שטוח"
+  },
+  "preset_pop": {
+    "message": "פופ"
+  },
+  "preset_rock": {
+    "message": "רוק"
+  },
+  "preset_rb_hip_hop": {
+    "message": "R&B / היפ הופ"
+  },
+  "preset_electronic": {
+    "message": "אלקטרוני"
+  },
+  "preset_deep_bass": {
+    "message": "באס עמוק"
+  },
+  "preset_indie_alt": {
+    "message": "אינדי / אלטרנטיבי"
+  },
+  "preset_vocaloid_j_pop": {
+    "message": "ווקאלויד / ג'יי-פופ"
+  },
+  "preset_jazz_blues": {
+    "message": "ג'אז / בלוז"
+  },
+  "preset_acoustic": {
+    "message": "אקוסטי"
+  },
+  "preset_classical": {
+    "message": "קלאסי"
+  },
+  "preset_hi_fi_master": {
+    "message": "היי-פיי מאסטר"
+  },
+  "preset_cinema": {
+    "message": "קולנוע"
+  },
+  "preset_vocal_booster": {
+    "message": "מגביר קול"
+  },
+  "preset_late_night": {
+    "message": "לילה מאוחר"
+  }
+}

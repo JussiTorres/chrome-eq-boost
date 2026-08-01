@@ -15,6 +15,27 @@
 }
 
 /* ==========================================================================
+   UNIVERSAL PROHIBITED CURSOR FOR ALL DISABLED UI
+   ========================================================================== */
+button:disabled:not(.is-flashing),
+input:disabled,
+select:disabled,
+details[disabled],
+details:has(summary[disabled]),
+.icon-button:disabled,
+.text-button:disabled {
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+}
+
+/* Neutralize clicks on disabled summaries so they pass through to the details box */
+summary[disabled],
+details[disabled] summary {
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+/* ==========================================================================
    1. REFINED COLOR SYSTEM (Venganza Edition)
    ========================================================================== */
 
@@ -25,7 +46,7 @@
     --bg-card: #FFFFFF;
     --bg-disabled: #F8FAFC;
     --border-light: #CBD5E1;
-    /* Stronger contrast for the "Hobbit" screen */
+    --border-preset: #A2B0C0;
 
     /* === TEXT HIERARCHY === */
     --text-primary: #1E293B;
@@ -45,10 +66,11 @@
     --slider-track: #E2E8F0;
     --slider-thumb: #2563EB;
     --status-success: #059669;
-    /* Emerald instead of generic green */
     --status-danger: #DC2626;
-    /* Crimson for the revenge vibe */
-    --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+
+    --shadow-soft: rgba(15, 23, 42, 0.18);
+    --shadow-preset: rgba(15, 23, 42, 0.32);
+    --shadow-delete: rgba(220, 38, 38, 0.32);
 
     /* === DYNAMIC STATUS SLOTS (Light Mode) === */
     --text-loading: #2563EB;
@@ -64,36 +86,38 @@
 body.dark-mode {
     /* === THE VOID (Dark Mode) === */
     --bg-body: #020617;
-    /* Deepest possible blue/black */
     --bg-card: #0F172A;
-    /* Midnight Slate */
     --bg-disabled: #1E293B;
-    --border-light: #1E293B;
+    --border-light: #334155;
+    --border-preset: #334155;
+
+    --shadow-soft: rgba(14, 165, 233, 0.28);
+    --shadow-preset: rgba(14, 165, 233, 0.50);
+    --shadow-delete: rgba(255, 149, 0, 0.50);
 
     /* === TEXT HIERARCHY === */
     --text-primary: #F1F5F9;
     --text-heading: #38BDF8;
-    /* Bright Sky/Cyan */
     --text-muted: #94A3B8;
-    --text-button: #FFFFFF;
 
-    /* === UNIFIED ACCENT (Neon Cobalt) === */
+    /* ALIGNED WITH getContrastColor(): Mapped to #020617 (Void Base). 
+       Eliminates white text halation/fatigue on bright cyan (#0EA5E9) and amber (#FF9500) hovers! */
+    --text-button: #020617;
+
+    /* === UNIFIED ACCENT (Eye-Care Edition) === */
     --primary: #0EA5E9;
-    /* Deeper Cyan for the main accent */
     --primary-hover: #38BDF8;
-    --bg-hover: #1E293B;
+    --bg-hover: rgba(14, 165, 233, 0.15);
 
     /* === SLOTS === */
     --slider-track: #334155;
     --slider-thumb: #3B82F6;
---status-success: #FF9500; /* Cyber Tangerine */
-
+    --status-success: #FF9500;
     --status-danger: #F87171;
 
     /* === STATUS === */
- /* === STATUS === */
-    --text-loading: #2DD4BF; /* Your Jade */
-    --text-waiting: #FF9500; 
+    --text-loading: #2DD4BF;
+    --text-waiting: #FF9500;
     --text-active: var(--status-success);
 }
 
@@ -105,12 +129,12 @@ body {
     width: 320px;
     padding: 16px 16px 8px 16px;
     margin: 0;
-    /* box-sizing: border-box;  <-- REMOVED (Handled by global reset above) */
     font-family: 'Inter', Arial, sans-serif;
     background-color: var(--bg-body);
     color: var(--text-primary);
     overflow-y: auto;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Put the smooth animation back */
+    transition: background-color 0.3s ease, color 0.3s ease, min-height 0.2s ease;
 }
 
 .container {
@@ -196,7 +220,9 @@ input[type="range"]::-webkit-slider-thumb {
     border: 2px solid var(--bg-card) !important;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 4px var(--shadow-soft);
+    /* TWEAKED: Pulled up to 1.5px drop, tightened blur to 3px, added -1px spread to kill the ring */
+    box-shadow: 0 1.5px 3px -1px var(--shadow-soft);
+    transition: box-shadow 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
 }
 
 /* === Header & Branding === */
@@ -269,7 +295,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* === Simplistic & Seamless Continuous Scroll === */
 .status-container {
-    margin: 7.1px auto 7.1px auto;
+    margin: 2.2px auto 10px auto;
     max-width: 185px;
     overflow: hidden;
     white-space: nowrap;
@@ -282,6 +308,8 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-user-select: none;
     pointer-events: auto;
     cursor: default;
+    display: block;
+    /* <-- THE FIX: Reverted back to block */
 }
 
 .status-container.mask-active {
@@ -302,9 +330,14 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 0.95em;
     font-weight: 600;
     color: var(--text-heading);
-    /* Changed from var(--primary) */
     text-align: center;
-    line-height: 1.4;
+    /* 1. Unificamos a 1 rígido para que coincida con el marquee y no haya salto */
+    line-height: 1;
+
+    min-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .text-active {
@@ -365,11 +398,10 @@ input[type="range"]::-webkit-slider-thumb {
     background: var(--bg-card);
     padding: 12px;
     border-radius: 10px;
-    box-shadow: 0 1px 3px var(--shadow-soft);
+    box-shadow: 0 0 2px var(--shadow-soft);
     margin-bottom: 10px;
-    transition: background-color 0.3s;
     border: 1px solid var(--border-light);
-    /* Constant 1px border */
+    /* REMOVED: transition: background-color 0.3s; */
 }
 
 .toggle-label {
@@ -439,7 +471,14 @@ input:checked+.slider:before {
    ========================================================================== */
 .reset-button {
     width: 100%;
-    padding: 10px;
+
+    /* FIX: Altura rígida para aniquilar los decimales y coincidir con Preset */
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     margin-top: 0;
     border-radius: 8px;
     font-weight: 800;
@@ -447,18 +486,17 @@ input:checked+.slider:before {
     font-size: 0.95em;
     border: none !important;
 
-    /* DYNAMIC COLORS: Pulls from your theme engine */
     background-color: var(--status-danger) !important;
     color: var(--text-button) !important;
-    
+
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: filter 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
 }
 
 .reset-button:hover:not(:disabled) {
     filter: brightness(1.1);
-    /* Dynamic shadow using your primary accent */
-    box-shadow: 0 4px 12px var(--shadow-soft); 
+    /* TWEAKED: The 3px/7px sweet spot — slightly more presence, zero bottom mud */
+    box-shadow: 0 3px 7px -1px var(--shadow-soft);
 }
 
 .reset-button:active:not(:disabled) {
@@ -467,7 +505,7 @@ input:checked+.slider:before {
 }
 
 /* ==========================================================================
-   RESET BUTTON: Venganza Disabled States (Lockdown Edition)
+   RESET BUTTON: Disabled States
    ========================================================================== */
 
 /* 1. LIGHT MODE: Sharp Silver */
@@ -475,21 +513,21 @@ body.default-theme .reset-button:disabled {
     background-color: #cbd5e1 !important;
     color: #1E293B !important;
     font-weight: 800 !important;
-    opacity: 0.9 !important;
+    opacity: 0.95 !important;
 }
 
 /* 2. DARK MODE: The Recessed Void Block */
 body.dark-mode .reset-button:disabled {
     background-color: #1e293b !important;
     color: #94a3b8 !important;
-    opacity: 0.9 !important;
+    opacity: 0.95 !important;
 }
 
 /* 3. CUSTOM MODE: Dynamic Fallback */
 body.custom-theme .reset-button:disabled {
     background-color: var(--bg-disabled) !important;
     color: var(--text-muted) !important;
-    opacity: 0.9 !important;
+    opacity: 0.95 !important;
     box-shadow: none !important;
     border: none !important;
     cursor: not-allowed !important;
@@ -558,7 +596,9 @@ input[type="range"]:disabled {
     flex-direction: column;
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s;
+    
+    /* Matched EXACTLY to the body transition to prevent lag */
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .settings-panel.hidden {
@@ -586,6 +626,17 @@ input[type="range"]:disabled {
 .settings-content {
     padding-top: 10px;
     flex-grow: 1;
+    /* REMOVED: max-height and overflow-y that caused the double scroll trap */
+}
+
+.settings-content::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+    background-color: var(--border-light);
+    border-radius: 3px;
 }
 
 /* Settings Inputs */
@@ -660,7 +711,12 @@ input[type="range"]:disabled {
 
 /* === Simplistic & Seamless Continuous Scroll === */
 .marquee-text {
-    display: inline-flex;
+    /* 2. Cambiamos inline-flex a flex + max-content para aniquilar el espacio base fantasma */
+    display: flex;
+    width: max-content;
+
+    align-items: center;
+    justify-content: flex-start;
     will-change: transform;
     animation: seamless-scroll 12s linear infinite;
     backface-visibility: hidden;
@@ -670,31 +726,37 @@ input[type="range"]:disabled {
 }
 
 .marquee-content {
-    display: inline-block;
-    padding-right: 2.5em;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    /* Aquí unificamos la regla de 5px */
+    padding-right: 1.7em;
 }
 
 .separator-icon {
     width: 12px;
     height: 12px;
-    vertical-align: middle;
-    margin: 0 8px 0 0;
     opacity: 0.7;
-    position: relative;
-    top: -1px;
     border-radius: 2px;
     user-select: none;
     -webkit-user-select: none;
     pointer-events: none;
+    flex-shrink: 0;
+    display: block;
+    /* ELIMINADO: transform: translateY(1.5px); */
+}
+
+.static-wrapper .separator-icon {
+    margin: 0 !important;
 }
 
 @keyframes seamless-scroll {
     from {
-        transform: translateX(0);
+        transform: translateX(0px);
     }
 
     to {
-        transform: translateX(-50%);
+        transform: translateX(var(--marquee-travel, -50%));
     }
 }
 
@@ -744,11 +806,13 @@ input[type="color"]::-webkit-color-swatch {
     text-transform: uppercase;
 }
 
-/* === THEME EDITOR: "Reset to Defaults" Button === */
+/* ==========================================================================
+   FIXED: RESET THEME BUTTON
+   ========================================================================== */
 #resetThemeBtn {
     background-color: transparent;
-    color: var(--danger);
-    border: 1px solid var(--danger);
+    color: var(--status-danger);
+    border: 1px solid var(--status-danger);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
     padding: 8px 16px;
@@ -756,18 +820,10 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 #resetThemeBtn:hover {
-    background-color: var(--danger) !important;
-    color: var(--bg-card) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--shadow-soft);
-}
-
-body #resetThemeBtn:hover {
     background-color: var(--status-danger) !important;
-    color: var(--bg-card) !important;
+    color: var(--text-button) !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px var(--shadow-soft);
-    opacity: 1 !important;
 }
 
 /* ==========================================================================
@@ -852,9 +908,8 @@ body.custom-theme #mainControls.controls-muted .eq-control input[type="range"] {
 body.custom-theme #mainControls.controls-muted .section-title,
 body.custom-theme .status-message.text-disabled,
 body.custom-theme #mainToggleContainer .toggle-label.label-disabled {
-    opacity: 0.9 !important;
+    opacity: 0.87 !important;
     color: var(--text-primary) !important;
-    /* Fixed from #1E293B */
     cursor: not-allowed !important;
     filter: none !important;
 }
@@ -863,37 +918,76 @@ body.custom-theme #mainToggleContainer .toggle-label.label-disabled {
    UNIFIED DISABLED UI FADE (Applies to all modes)
    ========================================================================== */
 
-/* 1. Unify all headings, labels, and values when the extension is toggled OFF */
-body:has(#toggleEnabled:not(:checked)) .eq-control label,
-body:has(#toggleEnabled:not(:checked)) .value-display,
-body:has(#toggleEnabled:not(:checked)) .section-title {
+/* 1. Sliders & Values: Gets slate text color */
+body:has(#toggleEnabled:not(:checked)) input[type="range"] {
     color: var(--text-primary) !important;
-    opacity: 0.9 !important;
+    opacity: 0.66 !important;
     cursor: not-allowed !important;
+    pointer-events: auto !important;
     filter: none !important;
 }
 
+/* 1a. EQ Labels: Independent opacity control */
+body:has(#toggleEnabled:not(:checked)) .eq-control label {
+    color: var(--text-primary) !important;
+    opacity: 0.77 !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+    filter: none !important;
+}
+
+/* 1b. Section Titles*/
 body:has(#toggleEnabled:not(:checked)) .section-title {
     color: var(--primary) !important;
-    opacity: 0.9 !important;
+    opacity: 0.93 !important;
     cursor: not-allowed !important;
+    pointer-events: auto !important;
     filter: none !important;
+}
+
+/* 1c. Value Display*/
+body:has(#toggleEnabled:not(:checked)) .value-display {
+    color: var(--text-primary) !important;
+    opacity: 0.89 !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+    filter: none !important;
+}
+
+/* 6. REMOVE KNOB BOX SHADOW WHEN DISABLED
+   Flattens the volume, bass, mid, and treble thumbs into the track */
+body:has(#toggleEnabled:not(:checked)) input[type="range"]::-webkit-slider-thumb {
+    box-shadow: none !important;
+    cursor: not-allowed !important;
 }
 
 /* 2. Slightly recess the main Toggle Card (Custom Themes Only) */
 body.custom-theme:has(#toggleEnabled:not(:checked)) .toggle-switch {
     background-color: var(--bg-card) !important;
-    filter: brightness(0.93) !important;
+    filter: brightness(0.95) !important;
     box-shadow: none !important;
 }
 
-/* 4. Toggle Card: Recessed Look */
+/* 3. Toggle Card: Recessed Look */
 body.custom-theme #mainToggleContainer.toggle-muted {
     background-color: var(--bg-card) !important;
-    filter: brightness(0.93) !important;
-    /* Slightly "sunken" appearance */
+    filter: brightness(0.95) !important;
     border: 1px solid var(--border-light) !important;
     box-shadow: none !important;
+}
+
+/* 4. HEADER PRESET BUTTON: STRICT CSS LOCK
+   Hides the preset button completely when extension is OFF */
+body:has(#toggleEnabled:not(:checked)) #presetToggleBtn {
+    display: none !important;
+}
+
+/* When the preset drawer is actually open */
+#presetToggleBtn.active-mode {
+    background-color: var(--bg-hover);
+    color: var(--status-success) !important;
+    /* Cambia a verde de éxito al estar activo */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* ==========================================================================
@@ -910,7 +1004,7 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 }
 
 /* ==========================================================================
-   CUSTOM MODAL STYLING (Compact Fix)
+   CUSTOM MODAL STYLING (High-Density Micro-Card)
    ========================================================================== */
 .modal-overlay {
     position: fixed;
@@ -918,14 +1012,14 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.62);
     z-index: 300;
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
     opacity: 1;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.18s ease;
 }
 
 .modal-overlay.hidden {
@@ -937,67 +1031,88 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 .modal-content {
     background-color: var(--bg-card);
     padding: 16px;
+    /* Razor-sharp 16px perimeter */
     border-radius: 12px;
-    width: auto;
-    min-width: 200px;
-    max-width: 240px;
+    width: 264px;
+    /* Leaves an intentional 28px margin on each side of the 320px body */
     text-align: center;
     border: 1px solid var(--border-light);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.32);
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.modal-content h3 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-size: 1.1rem;
+.modal-overlay.hidden .modal-content {
+    transform: scale(0.94);
+}
+
+#modalTitle {
+    margin: 0 0 4px 0;
+    /* Snapped tight to the message */
     color: var(--text-heading);
+    font-size: 1.04em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    /* Modern SaaS tracking */
 }
 
-.modal-content p {
-    font-size: 0.9rem;
-    margin-bottom: 16px;
-    line-height: 1.4;
+#modalMessage {
     color: var(--text-muted);
+    font-size: 0.86em;
+    margin: 0 0 12px 0;
+    /* The 12px Proximity Sweet Spot */
+    line-height: 1.35;
+    padding: 0 4px;
 }
 
 .modal-actions {
     display: flex;
     gap: 8px;
+    width: 100%;
+}
+
+.modal-btn {
+    flex: 1;
+    /* Strictly enforced 50/50 balance */
+    height: 32px;
+    /* LOCKED to your extension's 32px global grid standard */
+    border-radius: 7px;
+    font-size: 0.84em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    padding: 0 8px;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-.modal-actions button {
-    padding: 6px 12px;
-    font-size: 0.85rem;
-    min-width: 70px;
+.modal-btn-cancel {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
 }
 
-.modal-overlay.hidden .modal-content {
-    transform: scale(0.9);
+.modal-btn-cancel:hover {
+    background: var(--bg-hover);
+    border-color: var(--text-muted);
 }
 
-#modalTitle {
-    margin: 0 0 8px 0;
-    color: var(--text-heading);
-    font-size: 1.1em;
-    font-weight: 700;
-    text-wrap: balance;
+.modal-btn-confirm {
+    background: var(--status-danger);
+    border: 1px solid var(--status-danger);
+    color: var(--text-button);
 }
 
-#modalMessage {
-    color: var(--text-muted);
-    font-size: 0.9em;
-    margin: 0 0 16px 0;
-    line-height: 1.4;
-    text-wrap: pretty;
+.modal-btn-confirm:hover {
+    filter: brightness(1.12);
 }
 
 /* ==========================================================================
    SYNC ICONS TO PRIMARY TEXT
    ========================================================================== */
-.icon-button:not(#deleteThemeBtn) {
+.icon-button:not(#deleteThemeBtn):not(#deletePresetBtn):not(#updatePresetBtn):not(#revertPresetBtn):not(#newPresetBtn) {
     color: var(--primary) !important;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
     filter: none;
 }
 
@@ -1011,7 +1126,7 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     color: var(--primary) !important;
 }
 
-.icon-button:not(#deleteThemeBtn):hover,
+.icon-button:not(#deleteThemeBtn):not(#deletePresetBtn):not(#updatePresetBtn):not(#revertPresetBtn):not(#newPresetBtn):hover,
 .settings-label:hover svg {
     color: var(--primary) !important;
     filter: none !important;
@@ -1021,21 +1136,35 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
    STRICT FIX FOR THE "EDIT THEME" PENCIL JUMP
    ========================================================================== */
 #editThemeBtn {
-    /* 1. Force strict dimensions to match the adjacent switch (26px) */
     width: 26px !important;
     height: 26px !important;
-
-    /* 2. Remove default padding that expands the box */
     padding: 0 !important;
-
-    /* 3. Ensure border doesn't add pixels */
     border: none !important;
-
-    /* 4. Center the icon perfectly */
-    /* REMOVED !important HERE so the .hidden class can actually work */
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* ==========================================================================
+   COMPACT HEADER BUTTONS LOCK (Pixel-Perfect Size & Visibility Patch)
+   ========================================================================== */
+/* Usamos :not(.hidden) para que el display !important no rompa el estado oculto de la extensión */
+#presetToggleBtn:not(.hidden),
+#settingsBtn {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    border: none !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajustamos el SVG a 20px para mantener la proporción limpia en la caja de 30px */
+#presetToggleBtn svg,
+#settingsBtn svg {
+    width: 20px !important;
+    height: 20px !important;
 }
 
 /* ==========================================================================
@@ -1071,7 +1200,6 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     margin-left: 8px;
 }
 
-/* Utilities */
 ::-webkit-scrollbar {
     display: none;
 }
@@ -1091,6 +1219,9 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     line-height: normal;
 }
 
+/* ==========================================================================
+   SAVE THEME BUTTON
+   ========================================================================== */
 #saveThemeBtn {
     height: 36px !important;
     width: 100px;
@@ -1098,7 +1229,7 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-hover);
+    background: transparent;
     color: var(--primary);
     border: 1px solid var(--primary);
     border-radius: 6px;
@@ -1111,7 +1242,9 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 
 #saveThemeBtn:hover {
     background: var(--primary);
-    color: var(--bg-card);
+    color: var(--text-button) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-soft);
 }
 
 /* ==========================================================================
@@ -1260,7 +1393,7 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 }
 
 .about-link-row.coffee-row .link-icon-box span {
-    font-size: 1.5em; /* Slightly larger emoji to stand out */
+    font-size: 1.5em;
 }
 
 .about-link-row.coffee-row:hover {
@@ -1279,16 +1412,15 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
 /*DARK MODE BODY*/
 
 body.dark-mode .about-link-row.coffee-row .link-icon-box {
-    background: #451a03; /* Deep coffee brown */
-    color: #FF7A00;      /* Electric Orange Cup */
+    background: #451a03;
+    color: #FF7A00;
     opacity: 1 !important;
 }
 
-/* DARK MODE: Coffee Row Hover Fix */
 body.dark-mode .about-link-row.coffee-row:hover {
-    background: rgba(255, 122, 0, 0.15); /* Match your Electric Orange #FF7A00 */
+    background: rgba(255, 122, 0, 0.15);
     border-color: #FF7A00;
-    opacity: 1 !important; /* Forces it to stay bright */
+    opacity: 1 !important;
 }
 
 body.dark-mode .text-loading {
@@ -1305,11 +1437,9 @@ body.dark-mode .text-active {
 
 /* ==========================================================================
    DARK MODE: ACTIVE (ENABLED) STATE
-   Stops the text from turning blue when you turn the extension on
    ========================================================================== */
 body.dark-mode .eq-control label {
     color: var(--text-primary) !important;
-    /* Pulls your #F1F5F9 White */
 }
 
 /* ==========================================================================
@@ -1317,9 +1447,7 @@ body.dark-mode .eq-control label {
    ========================================================================== */
 body.dark-mode .status-message:not(.text-disabled):not(.text-waiting):not(.text-loading) {
     color: var(--status-success) !important;
-    /* Pulls the Emerald Green */
     text-shadow: 0 0 10px rgba(52, 211, 153, 0.2);
-    /* Adds a very subtle "active" glow */
 }
 
 /* ==========================================================================
@@ -1327,12 +1455,10 @@ body.dark-mode .status-message:not(.text-disabled):not(.text-waiting):not(.text-
    ========================================================================== */
 body.dark-mode .status-message.text-disabled {
     color: var(--text-waiting) !important;
-    /* Pulls your #FBBF24 Amber */
 }
 
 /* ==========================================================================
    DARK MODE: ACTIVE TOGGLE LABEL FIX 
-   (Syncs the toggle text to the exact same blue as your section titles)
    ========================================================================== */
 body.dark-mode .label-enabled {
     color: var(--primary) !important;
@@ -1347,7 +1473,6 @@ body.dark-mode .value-display {
    ========================================================================== */
 body.dark-mode:has(#toggleEnabled:not(:checked)) .value-display {
     color: var(--text-waiting) !important;
-    /* Pulls the Amber color */
     opacity: 0.9 !important;
     cursor: not-allowed !important;
     filter: none !important;
@@ -1355,7 +1480,6 @@ body.dark-mode:has(#toggleEnabled:not(:checked)) .value-display {
 
 /* ==========================================================================
    DARK MODE: DISABLED STATE
-   Keeps it white but applies the unified 0.9 opacity fade
    ========================================================================== */
 body.dark-mode:has(#toggleEnabled:not(:checked)) .eq-control label {
     color: var(--text-primary) !important;
@@ -1372,8 +1496,772 @@ body.dark-mode:has(#toggleEnabled:not(:checked)) .eq-control label {
     filter: none !important;
 }
 
-.toggle-switch,
-.reset-button,
-.eq-control label {
+/* REMOVED .toggle-switch from this rule so it doesn't animate background-color on load */
+.reset-button, .eq-control label {
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ==========================================================================
+   --- Custom Scrollable Dropdown Engine ---
+   ========================================================================== */
+/* ==========================================================================
+   --- Custom Scrollable Dropdown Engine ---
+   ========================================================================== */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+/* NATIVE COMPATIBILITY: Settings dropdowns (Language & Themes) stay left-aligned with arrow on right */
+.custom-dropdown summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* NEW: Increase breathing room on left edge strictly for Language and Saved Themes */
+#languageDropdown summary,
+#savedThemesDropdown summary {
+    padding-left: 12px !important;
+}
+
+.custom-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.custom-dropdown summary::after {
+    content: '▼';
+    font-size: 0.7em;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+    pointer-events: none;
+}
+
+.custom-dropdown[open] summary::after {
+    transform: rotate(180deg);
+}
+
+/* PRESET OVERRIDE: Apply CSS Grid centering exclusively to the Preset deck */
+#presetDropdown summary {
+    display: grid !important;
+    grid-template-columns: 1fr;
+}
+
+.dropdown-options,
+#presetOptionsContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 243px;
+    overflow-y: auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 7px !important;
+    /* LOCKED: Mapped to match the 7px deck buttons */
+    z-index: 999;
+
+    /* THE TWEAK: 4px vertical push combined with a -2px spread pulls the shadow 
+       completely off the top edge while leaving left, right, and bottom intact */
+    box-shadow: 0 4px 8px -2px var(--shadow-soft);
+
+    margin-top: 4px;
+}
+
+.dropdown-options .option {
+    padding: 10px;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 0.95em;
+    text-align: left;
+    font-weight: 500;
+    /* NEW: Smoothly fades text color and background on hover */
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-options .option:hover {
+    background-color: var(--bg-hover);
+    color: var(--primary);
+}
+
+.dropdown-options::-webkit-scrollbar {
+    width: 6px !important;
+    display: block !important;
+}
+
+.dropdown-options::-webkit-scrollbar-thumb {
+    background-color: var(--border-light) !important;
+    border-radius: 3px !important;
+}
+
+.dropdown-options .option.selected {
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    background-color: var(--bg-hover);
+}
+
+/* ==========================================================================
+   HOTFIX: DYNAMIC POPUP EXPANSION (Double Scrollbar Fix)
+   ========================================================================== */
+/* Forces the physical Chrome Extension window to grow just enough to house 
+   the floating absolute dropdown without triggering the parent's scrollbar */
+body:has(.custom-dropdown[open]) {
+    min-height: 480px;
+}
+
+/* ==========================================================================
+   RTL (RIGHT-TO-LEFT) LAYOUT & HOTFIX CONFIGURATION
+   ========================================================================== */
+
+/* 1. Typography & Global Containment */
+html[dir="rtl"] body {
+    font-family: 'Segoe UI', Tahoma, sans-serif !important;
+}
+
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] label,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .toggle-label,
+html[dir="rtl"] .value-display,
+html[dir="rtl"] .status-message,
+html[dir="rtl"] .footer-made-by {
+    line-height: 1.15 !important;
+}
+
+/* 2. Text Alignment & Layout Direction Shifts */
+html[dir="rtl"] .value-display {
+    text-align: left;
+}
+
+html[dir="rtl"] .link-text-group {
+    text-align: right;
+}
+
+html[dir="rtl"] #themeNameInput {
+    text-align: right;
+}
+
+html[dir="rtl"] .color-stack label {
+    text-align: right;
+}
+
+html[dir="rtl"] .color-hex-input {
+    text-align: left;
+}
+
+/* HOTFIX: Custom Dropdown RTL text alignment */
+html[dir="rtl"] .dropdown-options .option {
+    text-align: right;
+}
+
+/* 3. Custom Toggle Switch Mechanics */
+html[dir="rtl"] .slider:before {
+    right: 2px;
+    left: auto;
+}
+
+html[dir="rtl"] input:checked+.slider:before {
+    transform: translateX(-22px);
+}
+
+/* 4. Status Container & Marquee — THE JAVASCRIPT/PIXEL FIX */
+
+/* 4a. Default state */
+html[dir="rtl"] .status-container {
+    text-align: center !important;
+    margin-top: 6.8px !important;
+    display: block !important;
+}
+
+html[dir="rtl"] .status-message {
+    text-align: center !important;
+    width: 100%;
+}
+
+/* 4b. Active: just prevent RTL from reversing the scroll direction */
+html[dir="rtl"] .status-container:has(.marquee-text:not(.hidden)) {
+    direction: ltr !important;
+}
+
+/* 4c. RTL marquee — pixel travel set by JS, no transform percentage conflict */
+html[dir="rtl"] .marquee-text {
+    display: flex !important;
+    width: max-content !important;
+    direction: ltr !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    animation: seamless-scroll 12s linear infinite !important;
+}
+
+html[dir="rtl"] .marquee-content {
+    display: inline-flex !important;
+    padding-left: 0 !important;
+    padding-right: 1.6em !important;
+}
+
+/* ==========================================================================
+   5. THE MICRO-NUDGE & UNIFIED TITLE ALIGNMENT
+   Guarantees 1:1 pixel parity between Marquee Mode and Static Mode
+   ========================================================================== */
+.marquee-content,
+.static-wrapper {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    max-width: 100%;
+}
+
+.marquee-content {
+    padding-right: 1.7em;
+}
+
+/* Enforces consistent baseline calculation regardless of overflow clipping */
+.marquee-content span[dir="auto"],
+.static-wrapper span[dir="auto"] {
+    line-height: 1;
+    display: block;
+    /* Prevents inline-flex BFC baseline shifts */
+    padding-top: 1px;
+    /* The ACTUAL 1px micro-nudge to align capital letters with the icon */
+}
+
+/* Clean ellipsis handling without max-width calculation conflicts */
+.static-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex: 0 1 auto;
+}
+
+/* 6. ICON SPACING FIX (Flip physical margins for logical RTL flow) */
+html[dir="rtl"] .settings-label svg,
+html[dir="rtl"] .text-button svg {
+    margin-right: 0 !important;
+    margin-left: 6px !important;
+}
+
+/* ==========================================================================
+   Z-INDEX FIX: PRESET DROPDOWN OVERLAPPING
+   ========================================================================== */
+#presetControlsBlock {
+    position: relative;
+    z-index: 100;
+    /* Forces the dropdown to render OVER the EQ sliders below it */
+}
+
+.isometric-viewport {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.isometric-viewport>* {
+    grid-area: 1 / 1;
+    /* Forces both blocks to occupy the exact same space */
+}
+
+.isometric-viewport>.hidden {
+    display: block !important;
+    visibility: hidden;
+    /* Makes it invisible */
+    pointer-events: none;
+    /* Makes it unclickable */
+    z-index: -1;
+}
+
+/* ==========================================================================
+   PRESET DROPDOWN TEXT WEIGHT & ALIGNMENT LOGIC
+   ========================================================================== */
+#presetDropdownText {
+    /* NEW: Sit in the exact same grid space, spanning edge-to-edge */
+    grid-area: 1 / 1;
+    width: 100%;
+
+    display: block;
+    text-align: center;
+    font-weight: 700;
+
+    /* NEW: Add a subtle right padding so long names truncate with ellipsis BEFORE hitting the triangle */
+    padding-right: 18px;
+    padding-left: 18px;
+    /* Balanced left padding maintains exact mathematical centering */
+}
+
+/* ==========================================================================
+   PRESET DROPDOWN: MENU OPTIONS FIX
+   ========================================================================== */
+#presetOptionsContainer .option {
+    padding: 10px;
+    /* Restored the airy, comfortable spacing */
+    font-size: 0.9em;
+    /* Locked to match the input box to prevent the visual jump */
+}
+
+/* Custom Vertical Length strictly for the Preset Menu */
+#presetOptionsContainer {
+    max-height: 194px !important;
+    box-shadow: 0 4px 8px -2px var(--shadow-soft) !important;
+}
+
+/* Safety net: Collapses the dropdown container completely if it has no child items */
+#presetOptionsContainer:empty {
+    display: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* ==========================================================================
+   DIMENSIONAL LOCK (Prevents Window Jump & Respects .hidden Toggle)
+   ========================================================================== */
+/* 1. STRICT HIDDEN OVERRIDE: Guarantees the toggle button can hide the blocks */
+#generalControlsBlock.hidden,
+#presetControlsBlock.hidden {
+    display: none !important;
+}
+
+/* 2. GENERAL CONTROLS LOCK: Retains the space-between vertical distribution */
+#generalControlsBlock:not(.hidden) {
+    height: 94px !important;
+    min-height: 94px !important;
+    max-height: 94px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+}
+
+/* 3. UNIFIED PRESET DECK LOCK: Perfectly centers the rows and eliminates window jump */
+#presetControlsBlock:not(.hidden) {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    height: 94px !important;
+    min-height: 94px !important;
+    max-height: 94px !important;
+    padding: 14px 12px !important;
+    margin-bottom: 10px !important;
+    
+    /* Moved from inline HTML: */
+    background: var(--bg-card) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--border-light) !important;
+    box-shadow: 0 0 2px var(--shadow-soft) !important;
+}
+
+/* Remove hardcoded bottom margins when inside the flex-locked container */
+#mainToggleContainer,
+#presetControlsBlock>div:first-child {
+    margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   BUG 1 FIX: DROPDOWN & INPUT SHADOW CLASH
+   ========================================================================== */
+#presetControlsBlock:has(#presetDropdown[open]) #presetNameInput {
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* ==========================================================================
+   PRESET MANAGER UI (Strict Variable-Driven 3D Tactile Deck)
+   ========================================================================== */
+/* 1. Base Tactile Geometry: Synced easing and anchored shadow */
+#updatePresetBtn,
+#deletePresetBtn,
+#revertPresetBtn,
+#newPresetBtn,
+#savePresetBtn {
+    position: relative;
+    border-radius: 7px !important;
+    height: 28px !important;
+    background-color: var(--bg-card) !important;
+    color: var(--primary) !important;
+    border: 1px solid var(--border-preset) !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    box-shadow: 0 1px 2px -1px var(--shadow-preset) !important;
+    user-select: none;
+    -webkit-user-select: none;
+    will-change: transform;
+    /* ALL properties move in lockstep with ease-out */
+    transition:
+        transform 0.15s ease-out,
+        box-shadow 0.15s ease-out,
+        background-color 0.15s ease-out,
+        border-color 0.15s ease-out,
+        filter 0.15s ease-out,
+        color 0.15s ease-out !important;
+}
+
+/* 2. Hover States: Y-axis Anchored, Seamless Border, Lit Fill */
+#updatePresetBtn.is-hover:not(:disabled),
+#revertPresetBtn.is-hover:not(:disabled),
+#newPresetBtn.is-hover:not(:disabled),
+#savePresetBtn.is-hover:not(:disabled) {
+    background-color: var(--primary) !important;
+    color: var(--text-button) !important;
+    border-color: var(--primary) !important;
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+    /* Shadow anchor */
+    box-shadow: 0 1px 3px -1px var(--shadow-preset) !important;
+}
+
+/* 2a. Dark Mode Hover Overrides */
+body.dark-mode #updatePresetBtn.is-hover:not(:disabled),
+body.dark-mode #revertPresetBtn.is-hover:not(:disabled),
+body.dark-mode #newPresetBtn.is-hover:not(:disabled),
+body.dark-mode #savePresetBtn.is-hover:not(:disabled) {
+    background-color: var(--primary) !important;
+    color: var(--text-button) !important;
+    border-color: var(--border-preset) !important;
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px -1px var(--shadow-preset) !important;
+}
+
+#deletePresetBtn.is-hover:not(:disabled) {
+    background-color: var(--status-danger) !important;
+    color: var(--text-button) !important;
+    border-color: var(--border-preset) !important;
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px -1px var(--shadow-preset) !important;
+}
+
+body.dark-mode #deletePresetBtn.is-hover:not(:disabled) {
+    background-color: #FF9500 !important;
+    color: var(--text-button) !important;
+    border-color: #FF9500 !important;
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px -1px var(--shadow-preset) !important;
+}
+
+/* Dark Mode Delete Button Overrides */
+body.dark-mode #deletePresetBtn {
+    color: #FF9500 !important;
+    border-color: var(--border-preset) !important;
+    /* Restored clean, muted dark slate border! */
+}
+
+/* Dark Mode: Shrink Amber shadow to match deck baseline */
+body.dark-mode:not(.custom-theme) #deletePresetBtn {
+    box-shadow: 0 1px 2px -1px var(--shadow-delete) !important;
+}
+
+body.dark-mode:not(.custom-theme) #deletePresetBtn.is-hover:not(:disabled) {
+    box-shadow: 0 1px 3px -1px var(--shadow-delete) !important;
+}
+
+/* THE FLICKER ANNIHILATOR: Shut off hit-testing on the invisible apron */
+#updatePresetBtn::after,
+#deletePresetBtn::after,
+#revertPresetBtn::after,
+#newPresetBtn::after,
+#savePresetBtn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    background: transparent;
+    pointer-events: none !important;
+    /* CRITICAL: Stops apron from triggering hover oscillations */
+}
+
+/* Square footprint for icon buttons, full grid span for Save */
+#updatePresetBtn,
+#deletePresetBtn,
+#revertPresetBtn,
+#newPresetBtn {
+    width: 28px !important;
+}
+
+#savePresetBtn {
+    width: 100% !important;
+    padding: 0 !important;
+    font-weight: 700 !important;
+    font-size: 0.85em !important;
+    cursor: pointer !important;
+    letter-spacing: 0.3px;
+    user-select: none;
+    /* Blocks standard text highlighting */
+    -webkit-user-select: none;
+    /* Blocks WebKit/Chrome text highlighting */
+}
+
+/* 3. ONLY DELETE IS RED (Light / Custom Mode) */
+#deletePresetBtn {
+    color: var(--status-danger) !important;
+    border-color: var(--border-preset) !important;
+    /* Restored clean, muted slate border! */
+}
+
+/* Light Mode: Shrink Red shadow to match deck baseline */
+body:not(.custom-theme) #deletePresetBtn {
+    box-shadow: 0 1px 2px -1px var(--shadow-delete) !important;
+}
+
+/* Normal Light/Dark Mode Delete Hover Shadows */
+body:not(.custom-theme) #deletePresetBtn.is-hover:not(:disabled) {
+    box-shadow: 0 1px 3px -1px var(--shadow-delete) !important;
+}
+
+/* 4. ACTIVE TACTILE SNAP */
+#updatePresetBtn:active:not(:disabled),
+#deletePresetBtn:active:not(:disabled),
+#revertPresetBtn:active:not(:disabled),
+#newPresetBtn:active:not(:disabled),
+#savePresetBtn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.96);
+    filter: brightness(0.92);
+    box-shadow: 0 1px 2px -1px var(--shadow-preset) !important;
+}
+
+/* 5. DISABLED STATES FOR THE ENTIRE DECK */
+#presetDropdown:has(summary[disabled]),
+#presetDropdown[disabled] {
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+}
+
+#presetDropdown summary[disabled],
+#presetDropdown summary[disabled]:focus,
+#updatePresetBtn:disabled,
+#updatePresetBtn:disabled:focus,
+#deletePresetBtn:disabled,
+#deletePresetBtn:disabled:focus,
+#revertPresetBtn:disabled,
+#revertPresetBtn:disabled:focus,
+#newPresetBtn:disabled,
+#newPresetBtn:disabled:focus,
+#savePresetBtn:disabled:not(.is-flashing),
+#savePresetBtn:disabled:focus:not(.is-flashing) {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background-color: var(--bg-disabled) !important;
+    color: var(--text-muted) !important;
+    border: 1px solid var(--border-preset) !important;
+    filter: grayscale(40%) !important;
+    height: 28px !important;
+    transition: none !important;
+}
+
+/* ==========================================================================
+   FLASHING STATE (Saved! Animation Lock)
+   ========================================================================== */
+#savePresetBtn.is-flashing,
+button.is-flashing:disabled {
+    cursor: default !important;
+    pointer-events: none !important;
+}
+
+/* Override the summary back to pointer-events: none so clicks fall through to the parent box */
+#presetDropdown summary[disabled],
+#presetDropdown summary[disabled]:focus {
+    pointer-events: none !important;
+}
+
+/* Absolute Safety Net: Physically annihilate the dropdown list container when disabled */
+#presetDropdown:has(summary[disabled]) .dropdown-options,
+#presetDropdown[disabled] .dropdown-options,
+#presetDropdown summary[disabled]+.dropdown-options {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* ==========================================================================
+   PRESET MANAGER: SURFACES & ACCENT DYNAMICS
+   ========================================================================== */
+/* 1. Base Surface State: Synced easing and anchored shadow */
+#presetDropdown summary:not([disabled]),
+#presetNameInput {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-preset) !important;
+    color: var(--text-primary) !important;
+    border-radius: 7px !important;
+    height: 28px !important;
+    box-shadow: 0 1px 2px -1px var(--shadow-preset) !important;
+    will-change: transform;
+    /* Easing sync */
+    transition:
+        transform 0.15s ease-out,
+        box-shadow 0.15s ease-out,
+        background-color 0.15s ease-out,
+        border-color 0.15s ease-out,
+        filter 0.15s ease-out,
+        color 0.15s ease-out !important;
+}
+
+/* 2. Placeholder text styling */
+#presetNameInput::placeholder,
+#presetNameInput::-webkit-input-placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.75;
+}
+
+/* 3. Dropdown Arrow */
+#presetDropdown summary::after {
+    grid-area: 1 / 1;
+    justify-self: end;
+}
+
+/* 4. Hover State: Colored border & Y-axis Anchored */
+#presetDropdown summary.is-hover:not([disabled]),
+#presetNameInput.is-hover:not(:disabled) {
+    border-color: var(--primary) !important;
+    transform: translateY(-1px);
+    /* Shadow anchor */
+    box-shadow: 0 1px 3px -1px var(--shadow-preset) !important;
+}
+
+#presetDropdown summary.is-hover:not([disabled])::after,
+#presetDropdown[open] summary:not([disabled])::after {
+    color: var(--primary) !important;
+}
+
+/* 4a. Dark Mode Hover */
+body.dark-mode #presetDropdown summary.is-hover:not([disabled]),
+body.dark-mode #presetNameInput.is-hover:not(:disabled) {
+    border-color: var(--primary-hover) !important;
+    transform: translateY(-1px);
+    /* Shadow anchor */
+    box-shadow: 0 1px 3px -1px var(--shadow-preset) !important;
+}
+
+/* 5. Focus & Open States */
+#presetDropdown summary:focus:not([disabled]),
+#presetDropdown[open] summary:not([disabled]),
+#presetNameInput:focus:not(:disabled),
+#presetDropdown summary:focus:hover:not([disabled]),
+#presetDropdown[open] summary:hover:not([disabled]),
+#presetNameInput:focus:hover:not(:disabled) {
+    border-color: var(--bg-card) !important;
+    transform: translateY(0) !important;
+    box-shadow:
+        /* HD TWEAK: Matches base 1px drop beneath the focus ring */
+        0 1px 2px -1px var(--shadow-preset),
+        0 0 0 1.25px var(--primary) !important;
+    outline: none !important;
+}
+
+/* 5a. Dark Mode Focus Ring Color Override */
+body.dark-mode #presetDropdown summary:focus:not([disabled]),
+body.dark-mode #presetDropdown[open] summary:not([disabled]),
+body.dark-mode #presetNameInput:focus:not(:disabled),
+body.dark-mode #presetDropdown summary:focus:hover:not([disabled]),
+body.dark-mode #presetDropdown[open] summary:hover:not([disabled]),
+body.dark-mode #presetNameInput:focus:hover:not(:disabled) {
+    border-color: var(--bg-card) !important;
+    transform: translateY(0) !important;
+    box-shadow:
+        /* HD TWEAK */
+        0 1px 2px -1px var(--shadow-preset),
+        0 0 0 1.25px var(--primary-hover) !important;
+}
+
+/* 6. Custom Theme Override (FIXED: Separated unfocused from focused!) */
+body.custom-theme #presetDropdown summary:not([disabled]),
+body.custom-theme #presetDropdown summary.is-hover:not([disabled]),
+body.custom-theme #presetNameInput,
+body.custom-theme #presetNameInput.is-hover:not(:disabled) {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    /* Keeps the standard border when unfocused */
+    border: 1px solid var(--border-preset) !important;
+}
+
+/* 6a. Ensure Custom Themes respect the background-colored focus border */
+body.custom-theme #presetDropdown summary:focus:not([disabled]),
+body.custom-theme #presetDropdown[open] summary:not([disabled]),
+body.custom-theme #presetNameInput:focus:not(:disabled) {
+    border-color: var(--bg-card) !important;
+}
+
+body.custom-theme #updatePresetBtn:not(:disabled),
+body.custom-theme #deletePresetBtn:not(:disabled),
+body.custom-theme #revertPresetBtn:not(:disabled),
+body.custom-theme #newPresetBtn:not(:disabled),
+body.custom-theme #savePresetBtn:not(:disabled) {
+    border-color: var(--border-preset) !important;
+}
+
+/* 7. Centers text */
+#presetNameInput {
+    text-align: center;
+}
+
+/* ==========================================================================
+   Custom Vertical Length strictly for the Themes Menu
+   ========================================================================== */
+#savedThemesOptionsContainer {
+    max-height: 169px !important;
+}
+
+/* ==========================================================================
+   CLEAN #deleteThemeBtn (Matches #resetThemeBtn & #saveThemeBtn simplicity)
+   ========================================================================== */
+#deleteThemeBtn {
+    background-color: transparent;
+    color: var(--status-danger) !important;
+    border: 1px solid var(--status-danger) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#deleteThemeBtn:hover {
+    background-color: var(--status-danger) !important;
+    color: var(--text-button) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-soft);
+}
+
+/* ==========================================================================
+   TACTILE SNAP & CLICKABILITY LOCK FOR THEME EDITOR BUTTONS
+   ========================================================================== */
+/* Ensure Theme Save and Reset buttons never show a prohibited cursor or become unclickable */
+#saveThemeBtn,
+#resetThemeBtn,
+#saveThemeBtn:disabled,
+#resetThemeBtn:disabled {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+}
+
+/* Unified 3D Tactile Shrink Animation (Matches EQ Reset & Preset Deck) */
+#deleteThemeBtn:active,
+#saveThemeBtn:active,
+#resetThemeBtn:active {
+    transform: scale(0.96) !important;
+    filter: brightness(0.92);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Allow Custom Themes to control the resting border color */
+body.custom-theme .about-link-row.coffee-row {
+    border-color: var(--border-light) !important;
+}
+
+/* ==========================================================================
+   RTL MARQUEE ANNIHILATION
+   Forces static ("still") mode and completely hides the toggle in settings.
+   ========================================================================== */
+html[dir="rtl"] .setting-row:has(#marqueeToggle) {
+    display: none !important;
 }

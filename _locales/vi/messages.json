@@ -11,6 +11,9 @@
     "status_waiting": {
         "message": "Đang chờ âm thanh..."
     },
+    "status_conflict": {
+        "message": "Đang điều khiển tab khác"
+    },
     "toggle_label": {
         "message": "Tiện ích đã bật"
     },
@@ -41,26 +44,8 @@
     "settings_title": {
         "message": "Cài đặt"
     },
-    "status_conflict": {
-        "message": "Đang điều khiển tab khác"
-    },
     "settings_language_label": {
         "message": "Ngôn ngữ"
-    },
-    "footer_buy_coffee": {
-        "message": "Mời tôi một ly cà phê"
-    },
-    "footer_made_with": {
-        "message": "Được làm bằng ❤️ bởi"
-    },
-    "about_title": {
-        "message": "Về"
-    },
-    "about_app_name": {
-        "message": "Chrome EQ & Volume"
-    },
-    "about_subtitle": {
-        "message": "Một thế giới trong sự hài hòa hoàn hảo."
     },
     "settings_dark_mode": {
         "message": "Chế độ tối"
@@ -92,14 +77,17 @@
     "placeholder_new_theme": {
         "message": "Tên chủ đề mới"
     },
+    "placeholder_select_preset": {
+        "message": "Chọn bộ cài đặt sẵn..."
+    },
+    "placeholder_new_preset": {
+        "message": "Tên bộ cài đặt sẵn mới"
+    },
     "button_save": {
         "message": "Lưu"
     },
     "button_reset_defaults": {
         "message": "Khôi phục mặc định"
-    },
-    "button_replace": {
-        "message": "Thay thế"
     },
     "button_confirm": {
         "message": "Xác nhận"
@@ -107,17 +95,14 @@
     "button_cancel": {
         "message": "Hủy"
     },
-    "modal_delete_title": {
-        "message": "Xóa chủ đề?"
+    "button_delete": {
+        "message": "Xóa"
     },
-    "modal_delete_msg": {
-        "message": "Bạn có chắc muốn xóa {{NAME}} không?"
+    "button_close": {
+        "message": "Đóng"
     },
-    "modal_overwrite_title": {
-        "message": "Ghi đè chủ đề?"
-    },
-    "modal_overwrite_msg": {
-        "message": "\"{{NAME}}\" đã tồn tại. Thay thế nó?"
+    "button_back": {
+        "message": "Quay lại"
     },
     "feedback_saved": {
         "message": "Đã lưu!"
@@ -136,5 +121,116 @@
     },
     "label_support": {
         "message": "Hỗ trợ"
+    },
+    "aria_presets": {
+        "message": "Cài đặt sẵn"
+    },
+    "about_title": {
+        "message": "Về"
+    },
+    "about_app_name": {
+        "message": "Chrome EQ & Volume"
+    },
+    "about_subtitle": {
+        "message": "Một thế giới trong sự hài hòa hoàn hảo."
+    },
+    "footer_buy_coffee": {
+        "message": "Mời tôi một ly cà phê"
+    },
+    "footer_made_with": {
+        "message": "Được làm bằng ❤️ bởi"
+    },
+    "title_update_preset": {
+        "message": "Cập nhật bộ cài đặt"
+    },
+    "title_delete_preset": {
+        "message": "Xóa bộ cài đặt"
+    },
+    "title_revert_preset": {
+        "message": "Hoàn tác thay đổi"
+    },
+    "title_new_preset": {
+        "message": "Tạo bộ cài đặt mới"
+    },
+    "title_edit_theme": {
+        "message": "Chỉnh sửa chủ đề"
+    },
+    "title_delete_theme": {
+        "message": "Xóa chủ đề"
+    },
+    "modal_theme_delete_title": {
+        "message": "Xóa chủ đề?"
+    },
+    "modal_theme_delete_msg": {
+        "message": "Bạn có chắc muốn xóa vĩnh viễn chủ đề '{{NAME}}' không?"
+    },
+    "modal_theme_overwrite_title": {
+        "message": "Ghi đè chủ đề?"
+    },
+    "modal_theme_overwrite_msg": {
+        "message": "Chủ đề '{{NAME}}' đã tồn tại. Thay thế nó?"
+    },
+    "modal_preset_delete_title": {
+        "message": "Xóa bộ cài đặt sẵn?"
+    },
+    "modal_preset_delete_msg": {
+        "message": "Bạn có chắc muốn xóa vĩnh viễn bộ cài đặt sẵn '{{NAME}}' không?"
+    },
+    "modal_preset_overwrite_title": {
+        "message": "Ghi đè bộ cài đặt sẵn?"
+    },
+    "modal_preset_overwrite_msg": {
+        "message": "Bạn có chắc chắn muốn ghi đè lên bộ cài đặt '{{NAME}}' bằng cài đặt hiện tại không?"
+    },
+    "button_replace": {
+        "message": "Thay thế"
+    },
+    "modal_delete_msg": {
+        "message": "Bạn có chắc chắn không?"
+    },
+    "preset_flat": {
+        "message": "Phẳng"
+    },
+    "preset_pop": {
+        "message": "Pop"
+    },
+    "preset_rock": {
+        "message": "Rock"
+    },
+    "preset_rb_hip_hop": {
+        "message": "R&B / Hip-Hop"
+    },
+    "preset_electronic": {
+        "message": "Điện tử"
+    },
+    "preset_deep_bass": {
+        "message": "Siêu trầm"
+    },
+    "preset_indie_alt": {
+        "message": "Indie / Alt"
+    },
+    "preset_vocaloid_j_pop": {
+        "message": "Vocaloid / J-Pop"
+    },
+    "preset_jazz_blues": {
+        "message": "Jazz / Blues"
+    },
+    "preset_acoustic": {
+        "message": "Nhạc mộc"
+    },
+    "preset_classical": {
+        "message": "Cổ điển"
+    },
+    "preset_hi_fi_master": {
+        "message": "Hi-Fi Master"
+    },
+    "preset_cinema": {
+        "message": "Điện ảnh"
+    },
+    "preset_vocal_booster": {
+        "message": "Tăng cường Giọng hát"
+    },
+    "preset_late_night": {
+        "message": "Đêm khuya"
     }
 }

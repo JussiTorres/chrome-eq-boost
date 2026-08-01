@@ -24,16 +24,21 @@ export const uiStatus = {
 
         if (toggle) toggle.checked = isToggleOn;
 
+        // 1. Calculate active state EARLY so Smart Reset recognizes "waiting" mode
+        if (isActive && isAudioDetected) lastAudioTime = Date.now();
+        const showActiveState = isActive && (isAudioDetected || (Date.now() - lastAudioTime < 5000));
+
         // --- SMART RESET ---
         // Only wipe the UI if we are changing major states to prevent flickering
         const currentType = statusMsg.getAttribute("data-ui-type");
-        const nextType = !isToggleOn ? "disabled" : (!isActive ? "loading" : "active");
+        // 2. Updated nextType to distinguish between active playing and waiting
+        const nextType = !isToggleOn ? "disabled" : (!isActive ? "loading" : (showActiveState ? "active" : "waiting"));
 
         if (currentType !== nextType) {
             statusMsg.classList.remove('text-disabled', 'text-waiting', 'text-loading', 'text-active', 'text-conflict', 'marquee-text');
             container.classList.remove('mask-active');
             statusMsg.style.animationDelay = "";
-            statusMsg.textContent = ""; 
+            statusMsg.textContent = "";
             statusMsg.setAttribute("data-ui-type", nextType);
         }
 
@@ -69,10 +74,9 @@ export const uiStatus = {
         }
 
         if (isActive) {
-            if (isAudioDetected) lastAudioTime = Date.now();
-            const showActiveState = isAudioDetected || (Date.now() - lastAudioTime < 5000);
-
             if (showActiveState) {
+                // 3. Explicit safeguard: strip text-waiting when rendering active audio
+                statusMsg.classList.remove('text-waiting');
                 await this._renderActiveState(statusMsg, container, isMarqueeEnabled);
             } else {
                 const waitMsg = i18n.t("status_waiting") || "Waiting for audio...";
@@ -98,18 +102,20 @@ export const uiStatus = {
         try {
             const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
             if (!tab) return;
-
             const currentTitle = statusMsg.getAttribute("data-last-title");
             const titleChanged = currentTitle !== tab.title;
 
+            // FIX: Force "Still Mode" (Static) by overriding the marquee flag for RTL languages
+            const isRTL = document.documentElement.dir === "rtl";
+            const applyMarquee = isRTL ? false : isMarqueeEnabled;
+
             // Check if we need to switch between Marquee and Static mode
             const hasMarqueeHTML = !!statusMsg.querySelector('.marquee-content');
-            const modeChanged = isMarqueeEnabled !== hasMarqueeHTML;
+            const modeChanged = applyMarquee !== hasMarqueeHTML;
 
             // ONLY update the DOM if the title or mode actually changed
             if (titleChanged || modeChanged || !statusMsg.hasChildNodes()) {
-
-                if (isMarqueeEnabled) {
+                if (applyMarquee) {
                     statusMsg.classList.add('marquee-text');
                     container.classList.add('mask-active');
                 } else {
@@ -119,12 +125,27 @@ export const uiStatus = {
                 }
 
                 const iconUrl = tab.favIconUrl || '';
-                const content = isMarqueeEnabled
-                    ? `<span class="marquee-content"><img src="${iconUrl}" class="separator-icon"><span>${tab.title}</span></span>`.repeat(4)
-                    : `<span class="static-wrapper" style="display:inline-flex;align-items:center;justify-content:center;max-width:100%;"><img src="${iconUrl}" class="separator-icon" style="margin-right:6px;"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${tab.title}</span></span>`;
+                const content = applyMarquee
+                    ? `<span class="marquee-content"><img src="${iconUrl}" class="separator-icon" style="flex-shrink:0;"><span dir="auto">${tab.title}</span></span>`.repeat(4)
+                    : `<span class="static-wrapper"><img src="${iconUrl}" class="separator-icon" style="flex-shrink:0;"><span class="static-title" dir="auto">${tab.title}</span></span>`;
 
                 statusMsg.innerHTML = content;
                 statusMsg.setAttribute("data-last-title", tab.title);
+
+                // --- LA OPCIÓN NUCLEAR: Cálculo Javascript de Píxeles ---
+                if (applyMarquee) {
+                    // 1. Forzar reflow para que el navegador dimensione el contenido
+                    statusMsg.style.animation = 'none';
+                    statusMsg.offsetWidth;
+                    // 2. Extraer el ancho real absoluto en píxeles
+                    const totalWidth = statusMsg.scrollWidth;
+                    const halfWidth = totalWidth / 2;
+                    // 3. Inyectar la variable CSS personalizada
+                    statusMsg.style.setProperty('--marquee-travel', `-${halfWidth}px`);
+                    // 4. Reactivar la animación
+                    statusMsg.style.animation = '';
+                }
+                // --------------------------------------------------------
             }
         } catch (e) {
             statusMsg.textContent = i18n.t("status_active") || "Active";

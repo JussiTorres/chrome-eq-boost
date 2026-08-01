@@ -2,6 +2,21 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [2.0.0] - 2026-07-31
+
+### ✨ Major Features
+* **EQ Preset Management System:** Integrated `presetManager.js` with localized dynamic key resolution (`getPresetName`), allowing users to toggle, customize, and save EQ curves seamlessly.
+* **Expanded Global Footprint (28 Locales):** Scaled native localization from 22 to **28 languages**, introducing Finnish (`fi`), Swedish (`sv`), and full native Right-To-Left (RTL) support for Arabic (`ar`), Farsi (`fa`), Hebrew (`he`), and Urdu (`ur`).
+* **Fused RTL Engine & Layout Mirroring:** Integrated dynamic document-level direction injection (`dir="rtl"`) in `i18n.js`. Prevents visual clipping and automatically handles layout mirroring across all 4 RTL languages.
+
+### 💄 UI & Visual Polish
+* **Chameleon Reset Button:** Upgraded the dynamic contrast engine for the "Reset EQ & Vol" button, implementing a new mathematical equation to perfectly adapt to active accent colors while maintaining maximum high-contrast legibility.
+
+### 🏗️ Architectural Overhaul & Refactoring
+* **Decoupled Modal Engine:** Extracted the modal confirmation engine out of `themeEditor.js` into a shared, reusable UI module serving both theme deletion/overwriting and EQ preset management.
+* **Stale UI Teardown:** Added an aggressive `unload` listener in `popup.js` to automatically clear transient UI states (such as active dropdowns and open preset decks) on close.
+* **Version Alignment:** Bumped all manifest tags and UI components to version `2.0.0`.
+
 ## [1.10.0] - 2026-06-06
 
 ### 🏗️ Architectural Overhaul (Core Engine)
