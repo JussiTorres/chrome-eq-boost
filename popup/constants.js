@@ -104,10 +104,10 @@ export const DEFAULT_PRESETS = {
 
     // --- GLOBAL & SPECIALIZED GENRES ---
     // Warm, textured atmosphere designed for synths, reverb, and vocal intimacy
-    "Indie / Alt": { volume: 1.0, bass: 3.5, mids: 3.0, treble: 4.5 },
+    "Indie / Alt": { volume: 1.0, bass: 4.0, mids: 3.0, treble: 4.5 },
 
     // High-energy sparkle, agile bass, and forward vocals for dense, fast-paced tracks
-    "Vocaloid / J-Pop": { volume: 1.0, bass: 4.0, mids: 4.5, treble: 6.5 },
+    "Vocaloid / J-Pop": { volume: 1.0, bass: 5.0, mids: 4.5, treble: 6.5 },
 
     // Rich upright bass warmth, articulate brass mids, and detailed cymbal brushwork
     "Jazz / Blues": { volume: 1.0, bass: 3.5, mids: 2.5, treble: 3.5 },
