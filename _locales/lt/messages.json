@@ -232,5 +232,20 @@
     },
     "preset_late_night": {
         "message": "Vėlyva naktis"
+    },
+    "settings_auto_startup": {
+        "message": "Automatiškai įjungti atidarius"
+    },
+    "preset_reggaeton": {
+        "message": "Reggaeton"
+    },
+    "preset_house_afro_house": {
+        "message": "House / Afro House"
+    },
+    "preset_post_punk": {
+        "message": "Post-Punk"
+    },
+    "preset_phonk": {
+        "message": "Phonk"
     }
 }

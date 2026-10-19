@@ -232,5 +232,20 @@
   },
   "preset_late_night": {
     "message": "深夜モード"
+  },
+  "settings_auto_startup": {
+    "message": "開いたときに自動で有効化"
+  },
+  "preset_reggaeton": {
+    "message": "レゲトン"
+  },
+  "preset_house_afro_house": {
+    "message": "ハウス / アフロハウス"
+  },
+  "preset_post_punk": {
+    "message": "ポストパンク"
+  },
+  "preset_phonk": {
+    "message": "フォンク"
   }
 }

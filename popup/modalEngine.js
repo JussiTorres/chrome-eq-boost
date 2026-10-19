@@ -10,6 +10,7 @@ import { i18n } from './i18n.js';
 
 let activeConfirmAction = null;
 let previousFocusElement = null;
+let isInitialized = false;
 
 // Cached DOM Elements
 const els = {
@@ -23,6 +24,8 @@ const els = {
 export const confirmModal = {
     // --- 1. INITIALIZATION & EVENT BINDING ---
     init() {
+        if (isInitialized) return;
+
         els.overlay = document.getElementById('customModal');
         els.title = document.getElementById('modalTitle');
         els.message = document.getElementById('modalMessage');
@@ -53,11 +56,13 @@ export const confirmModal = {
                 this.close();
             }
         });
+
+        isInitialized = true;
     },
 
     // --- 2. OPEN MODAL EXECUTION ---
     open({ title, message, confirmText, cancelText, onConfirm }) {
-        if (!els.overlay) this.init(); // Self-healing fallback if called before init
+        if (!isInitialized) this.init();
         if (!els.overlay) return;
 
         // Save currently focused UI element for accessibility restoration
@@ -72,8 +77,7 @@ export const confirmModal = {
         }
         if (els.confirmBtn) {
             const defaultConfirm = i18n ? (i18n.t("button_confirm") || "Confirm") : "Confirm";
-            // Uses provided confirmText, falls back to whatever was manually set, or defaults to i18n
-            els.confirmBtn.textContent = confirmText || els.confirmBtn.textContent || defaultConfirm;
+            els.confirmBtn.textContent = confirmText || defaultConfirm;
         }
         if (els.cancelBtn) {
             const defaultCancel = i18n ? (i18n.t("button_cancel") || "Cancel") : "Cancel";

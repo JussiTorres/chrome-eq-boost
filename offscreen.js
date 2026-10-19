@@ -6,19 +6,17 @@
  * Developed by Jussi Torres
  */
 
-// =========================================================================
-// COMPLIANCE VALIDATOR
-// Actively invoking localStorage here justifies the "LOCAL_STORAGE" reason 
-// declared in service_worker.js.
-// =========================================================================
-localStorage.setItem('engine_initialized', Date.now().toString());
-
-let bass, mid, treble, compressor, audioContext = null,
+let bass = null,
+    mid = null,
+    treble = null,
+    compressor = null,
+    audioContext = null,
     sourceNode = null,
     gainNode = null,
     analyser = null,
     silenceInterval = null,
-    silenceSeconds = 0;
+    silenceSeconds = 0,
+    isInitializing = false;
 
 let pristineMediaStreamHandle = null;
 
@@ -26,10 +24,18 @@ function createFilter(type, frequency) {
     const filter = audioContext.createBiquadFilter();
     filter.type = type;
     filter.frequency.value = frequency;
-    // Q value of 0.7 provides a smooth "musical" curve
-    filter.Q.value = "peaking" === type ? 0.7 : 0.0001;
+    if ("peaking" === type) {
+        filter.Q.value = 0.7; // Smooth musical bandwidth for mids
+    }
     filter.gain.value = 0;
     return filter;
+}
+
+function setSmoothParam(param, targetValue) {
+    if (!param || !audioContext) return;
+    const now = audioContext.currentTime;
+    param.cancelScheduledValues(now);
+    param.setTargetAtTime(targetValue, now, 0.015);
 }
 
 // =========================================================================
@@ -39,20 +45,53 @@ function createFilter(type, frequency) {
 // =========================================================================
 function stopHardwareTracks() {
     if (pristineMediaStreamHandle) {
-        pristineMediaStreamHandle.getTracks().forEach(track => track.stop());
+        pristineMediaStreamHandle.getTracks().forEach(track => {
+            // 🚨 CRITICAL FIX: Nullify `onended` before stopping the track manually.
+            // Otherwise, stopping a previous stream during a takeover or restart
+            // fires `STREAM_ENDED_EXTERNALLY` and kills the newly created stream.
+            track.onended = null;
+            try { track.stop(); } catch (e) { }
+        });
         pristineMediaStreamHandle = null;
     }
-    if (audioContext) {
-        audioContext.close().catch(() => {});
-        audioContext = null;
-    }
+
     if (silenceInterval) {
         clearInterval(silenceInterval);
         silenceInterval = null;
     }
+
+    if (sourceNode) {
+        try { sourceNode.disconnect(); } catch (e) { }
+        sourceNode = null;
+    }
+
+    if (gainNode) {
+        try { gainNode.disconnect(); } catch (e) { }
+        gainNode = null;
+    }
+
+    if (compressor) {
+        try { compressor.disconnect(); } catch (e) { }
+        compressor = null;
+    }
+
+    if (audioContext) {
+        audioContext.onstatechange = null;
+        if (audioContext.state !== "closed") {
+            audioContext.close().catch(() => { });
+        }
+        audioContext = null;
+    }
+
+    bass = null;
+    mid = null;
+    treble = null;
+    analyser = null;
+    silenceSeconds = 0;
 }
 
 async function startProcessing(streamId, savedSettings = {}) {
+    isInitializing = true;
     stopHardwareTracks(); // Enforce a clean slate before allocating new memory
     silenceSeconds = 0;
 
@@ -66,11 +105,17 @@ async function startProcessing(streamId, savedSettings = {}) {
             }
         });
 
-        pristineMediaStreamHandle.getAudioTracks()[0].onended = () => {
-            console.log("Stream cut externally");
-            stopHardwareTracks(); // Halt local processing immediately
-            chrome.runtime.sendMessage({ type: "STREAM_ENDED_EXTERNALLY" }).catch(() => { });
-        };
+        const tracks = pristineMediaStreamHandle.getAudioTracks();
+        if (tracks.length > 0) {
+            const activeTrack = tracks[0];
+            activeTrack.onended = () => {
+                // Guard: Only trigger teardown if this track still belongs to the active stream
+                if (pristineMediaStreamHandle && pristineMediaStreamHandle.getAudioTracks()[0] === activeTrack) {
+                    stopHardwareTracks();
+                    chrome.runtime.sendMessage({ type: "STREAM_ENDED_EXTERNALLY" }).catch(() => { });
+                }
+            };
+        }
 
         audioContext = new AudioContext();
 
@@ -87,35 +132,36 @@ async function startProcessing(streamId, savedSettings = {}) {
         analyser.fftSize = 256;
         analyser.smoothingTimeConstant = 0.0;
 
-        // HD FREQUENCIES
+        // HD FREQUENCIES (Synced with UI and constants: 80Hz / 2500Hz / 8000Hz)
         bass = createFilter("lowshelf", 80);
         mid = createFilter("peaking", 2500);
         treble = createFilter("highshelf", 8000);
         gainNode = audioContext.createGain();
 
-        // HD COMPRESSOR SETTINGS
-        // Prevents clipping while maintaining dynamic range safely at the end of the chain
+        // HD COMPRESSOR SETTINGS (Dense harmonic body & dynamic safety limit)
         compressor = audioContext.createDynamicsCompressor();
-        compressor.threshold.value = -24; // Start compressing early
+        compressor.threshold.value = -24; // Start compressing early for dense harmonic body
         compressor.knee.value = 30;       // Soft knee for transparent transition
-        compressor.ratio.value = 3;       // 3:1 ratio (Audiophile standard)
-        compressor.attack.value = 0.003;  // Fast attack (3ms)
-        compressor.release.value = 0.25;  // Natural release (250ms)
+        compressor.ratio.value = 3;       // 3:1 ratio
+        compressor.attack.value = 0.003;  // Fast 3ms attack prevents bass from masking mids
+        compressor.release.value = 0.25;  // 250ms release
+
+        // 🚨 CRITICAL FIX: Connect analyser directly to `sourceNode` (pre-EQ/pre-Gain)
+        // as well as post-compressor so low volume sliders or negative EQ presets
+        // (like "Late Night") never trick the watchdog into thinking the tab is silent.
+        sourceNode.connect(analyser);
 
         // AUDIO GRAPH: Source -> EQ -> Gain -> Compressor -> Output
-        // Applying the heavy volume boost BEFORE the compressor allows the compressor 
-        // to act as a Master Limiter, preventing harsh digital clipping at the output.
         sourceNode.connect(bass)
             .connect(mid)
             .connect(treble)
             .connect(gainNode)
             .connect(compressor);
 
-        // Route compressor to both the analyzer and the final output
-        compressor.connect(analyser);
+        // Route compressor to the final output
         compressor.connect(audioContext.destination);
 
-        // Apply cached settings immediately
+        // Apply cached settings immediately on startup
         gainNode.gain.value = savedSettings.volumeLevel ?? 1.0;
         bass.gain.value = savedSettings.bassLevel ?? 0.0;
         mid.gain.value = savedSettings.midLevel ?? 0.0;
@@ -130,10 +176,15 @@ async function startProcessing(streamId, savedSettings = {}) {
             let isCurrentSilence = true;
 
             if (audioContext && audioContext.state !== "closed" && analyser) {
+                // Proactively wake suspended AudioContext during long background sessions
+                if (audioContext.state === "suspended") {
+                    audioContext.resume().catch(() => { });
+                }
+
                 const dataArray = new Uint8Array(analyser.frequencyBinCount);
                 analyser.getByteFrequencyData(dataArray);
                 const volumeSum = dataArray.reduce((acc, val) => acc + val, 0);
-                isCurrentSilence = volumeSum <= 100;
+                isCurrentSilence = volumeSum <= 50;
             }
 
             if (isCurrentSilence) {
@@ -142,19 +193,21 @@ async function startProcessing(streamId, savedSettings = {}) {
                 silenceSeconds = 0;
             }
 
-            // Exactly 30-minute grace period buffer
+            // Exactly 30-minute grace period buffer (1800 seconds)
             if (silenceSeconds >= 1800) {
-                stopHardwareTracks(); // Close local handles before notifying runtime
+                stopHardwareTracks();
                 chrome.runtime.sendMessage({ type: "SILENCE_TIMEOUT" }).catch(() => { });
                 silenceSeconds = 0;
             }
         }, 1000);
 
+        isInitializing = false;
         chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: true }).catch(() => { });
         return true;
 
     } catch (error) {
         console.error("Capture error:", error);
+        isInitializing = false;
         stopHardwareTracks();
         chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: false }).catch(() => { });
         return false;
@@ -162,46 +215,62 @@ async function startProcessing(streamId, savedSettings = {}) {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if ("INCOMING_STREAM" === message.type) {
-        // PROPER ASYNC HANDLING
-        startProcessing(message.streamId, message.settings).then(success => {
-            sendResponse({ success: success });
-        });
-        return true; // Tells Chrome to keep the message channel open for the async response
-    }
+    switch (message.type) {
+        case "INCOMING_STREAM":
+            startProcessing(message.streamId, message.settings)
+                .then(success => sendResponse({ success }));
+            return true;
 
-    if ("TARGET_OFFSCREEN_PING" === message.type) {
-        const isContextActive = audioContext && audioContext.state !== "closed";
+        case "TARGET_OFFSCREEN_PING": {
+            const isContextActive = !!(
+                isInitializing ||
+                (audioContext &&
+                    audioContext.state !== "closed" &&
+                    pristineMediaStreamHandle &&
+                    pristineMediaStreamHandle.active)
+            );
 
-        if (audioContext && audioContext.state === "suspended") {
-            audioContext.resume().catch((err) => console.error("Failed to resume:", err));
+            if (audioContext && audioContext.state === "suspended") {
+                audioContext.resume().catch(() => { });
+            }
+
+            let isAudioDetected = false;
+            if (!isInitializing && isContextActive && analyser) {
+                const d = new Uint8Array(analyser.frequencyBinCount);
+                analyser.getByteFrequencyData(d);
+                isAudioDetected = d.reduce((a, v) => a + v, 0) > 50;
+            }
+
+            sendResponse({ success: isContextActive, audioDetected: isAudioDetected });
+            return false;
         }
 
-        let isAudioDetected = false;
-        if (isContextActive && analyser) {
-            const dataArray = new Uint8Array(analyser.frequencyBinCount);
-            analyser.getByteFrequencyData(dataArray);
-            const volumeSum = dataArray.reduce((acc, val) => acc + val, 0);
-            isAudioDetected = volumeSum > 100;
-        }
+        case "UPDATE_GAIN":
+            if (gainNode) setSmoothParam(gainNode.gain, parseFloat(message.value));
+            sendResponse({ ok: true });
+            return false;
 
-        sendResponse({ success: isContextActive, audioDetected: isAudioDetected });
-        return false;
+        case "UPDATE_BASS":
+            if (bass) setSmoothParam(bass.gain, parseFloat(message.value));
+            sendResponse({ ok: true });
+            return false;
+
+        case "UPDATE_MID":
+            if (mid) setSmoothParam(mid.gain, parseFloat(message.value));
+            sendResponse({ ok: true });
+            return false;
+
+        case "UPDATE_TREBLE":
+            if (treble) setSmoothParam(treble.gain, parseFloat(message.value));
+            sendResponse({ ok: true });
+            return false;
+
+        case "OFFSCREEN_STOP":
+        case "STOP_CAPTURE":
+            stopHardwareTracks();
+            sendResponse({ status: "ok" });
+            return false;
     }
 
-    if ("UPDATE_GAIN" === message.type && gainNode) gainNode.gain.value = parseFloat(message.value);
-    if ("UPDATE_BASS" === message.type && bass) bass.gain.value = parseFloat(message.value);
-    if ("UPDATE_MID" === message.type && mid) mid.gain.value = parseFloat(message.value);
-    if ("UPDATE_TREBLE" === message.type && treble) treble.gain.value = parseFloat(message.value);
-
-    // Handles the explicit stop commands generated by executeCleanTeardown()
-    if (("TOGGLE_ENABLED" === message.type && false === message.value) || "STOP_CAPTURE" === message.type) {
-        stopHardwareTracks();
-        chrome.runtime.sendMessage({ type: "STATUS_UPDATE", success: false }).catch(() => { });
-        sendResponse({ status: "ok" });
-        return false;
-    }
-    
-    sendResponse({ received: true });
-    return false;
+    return false; // Not addressed to offscreen: never intercept or answer!
 });

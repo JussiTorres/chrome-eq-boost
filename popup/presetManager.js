@@ -33,20 +33,34 @@ export const presetManager = {
         const hiddenBuiltInIds = Array.isArray(data.hiddenBuiltInIds) ? data.hiddenBuiltInIds : [];
         let needsUpdate = false;
 
-        // Force-merge default presets ONLY if they haven't been explicitly deleted by the user
+        // --- STRICT ORDERING ENGINE ---
+        const orderedPresets = {};
+
+        // 1. Lock in all built-in defaults first, exactly in the order of DEFAULT_PRESETS
         Object.keys(DEFAULT_PRESETS).forEach(name => {
-            if (!savedPresets[name] && !hiddenBuiltInIds.includes(name)) {
-                savedPresets[name] = { ...DEFAULT_PRESETS[name] };
-                needsUpdate = true;
+            if (!hiddenBuiltInIds.includes(name)) {
+                if (!savedPresets[name]) {
+                    orderedPresets[name] = { ...DEFAULT_PRESETS[name] };
+                    needsUpdate = true;
+                } else {
+                    orderedPresets[name] = savedPresets[name];
+                }
             }
         });
 
-        if (needsUpdate) {
-            await storage.setMultiple({ savedPresets });
+        // 2. Append any custom user presets underneath the defaults
+        Object.keys(savedPresets).forEach(name => {
+            if (!DEFAULT_PRESETS[name]) {
+                orderedPresets[name] = savedPresets[name];
+            }
+        });
+
+        if (needsUpdate || Object.keys(savedPresets).join(',') !== Object.keys(orderedPresets).join(',')) {
+            await storage.setMultiple({ savedPresets: orderedPresets });
         }
 
-        // Lock state in memory
-        libraryPresets = savedPresets;
+        // Lock strictly ordered state into memory
+        libraryPresets = orderedPresets;
         currentActivePreset = data.activePresetName || "";
 
         // Render UI
@@ -125,14 +139,19 @@ export const presetManager = {
 
         if (els.presetDropdownText && currentActivePreset) {
             const displayTitle = i18n.getPresetName(currentActivePreset);
-            els.presetDropdownText.textContent = isDirty ? `${displayTitle} *` : displayTitle;
+            const finalTitle = isDirty ? `${displayTitle} *` : displayTitle;
+            els.presetDropdownText.textContent = finalTitle;
+
+            // Maintain synchronous display hydration cache
+            try {
+                const cur = JSON.parse(localStorage.getItem("syncAudioSettings")) || {};
+                cur.activePresetTitle = finalTitle;
+                localStorage.setItem("syncAudioSettings", JSON.stringify(cur));
+            } catch (e) { }
         }
 
         if (els.updateBtn) els.updateBtn.disabled = !isDirty;
         if (els.revertBtn) els.revertBtn.disabled = !isDirty;
-
-        // REMOVED: The SMART LOCK block that disabled saveBtn when input was empty.
-        // Now saveBtn stays enabled so clicking it when empty focuses the input box!
     },
 
     // --- 5. EVENT LISTENERS & MODAL HANDLERS ---
@@ -254,7 +273,6 @@ export const presetManager = {
             this.openConfirmModal("overwrite", name, async () => {
                 els.updateBtn.blur();
                 await this.performSave(els, name, currentValues);
-                // REMOVED: this.flashSuccessStyle(els.updateBtn);
             });
         });
 
@@ -324,6 +342,16 @@ export const presetManager = {
         ['volume', 'bass', 'mids', 'treble'].forEach(id => {
             if (els[id]) els[id].dispatchEvent(new Event('input', { bubbles: true }));
         });
+
+        // Hydrate synchronous storage immediately on preset apply
+        try {
+            const cur = JSON.parse(localStorage.getItem("syncAudioSettings")) || {};
+            cur.volumeLevel = preset.volume;
+            cur.bassLevel = preset.bass;
+            cur.midLevel = preset.mids;
+            cur.trebleLevel = preset.treble;
+            localStorage.setItem("syncAudioSettings", JSON.stringify(cur));
+        } catch (e) { }
     },
 
     refreshPresetList(container) {
@@ -379,11 +407,32 @@ export const presetManager = {
         if (!labelEl) return;
         if (currentActivePreset && libraryPresets[currentActivePreset]) {
             const displayTitle = i18n.getPresetName(currentActivePreset);
-            labelEl.textContent = isDirty ? `${displayTitle} *` : displayTitle;
+            const finalTitle = isDirty ? `${displayTitle} *` : displayTitle;
+            labelEl.textContent = finalTitle;
             labelEl.removeAttribute("data-i18n");
+
+            // Sync preset title and audio parameters directly to 0ms synchronous cache
+            try {
+                const cur = JSON.parse(localStorage.getItem("syncAudioSettings")) || {};
+                cur.activePresetTitle = finalTitle;
+                const vals = libraryPresets[currentActivePreset];
+                if (vals) {
+                    cur.volumeLevel = vals.volume;
+                    cur.bassLevel = vals.bass;
+                    cur.midLevel = vals.mids;
+                    cur.trebleLevel = vals.treble;
+                }
+                localStorage.setItem("syncAudioSettings", JSON.stringify(cur));
+            } catch (e) { }
         } else {
             labelEl.textContent = i18n.t("placeholder_select_preset") || "Select preset...";
             labelEl.setAttribute("data-i18n", "placeholder_select_preset");
+
+            try {
+                const cur = JSON.parse(localStorage.getItem("syncAudioSettings")) || {};
+                delete cur.activePresetTitle;
+                localStorage.setItem("syncAudioSettings", JSON.stringify(cur));
+            } catch (e) { }
         }
     },
 

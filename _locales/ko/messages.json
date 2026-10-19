@@ -232,5 +232,20 @@
   },
   "preset_late_night": {
     "message": "심야 모드"
+  },
+  "settings_auto_startup": {
+    "message": "열 때 자동 활성화"
+  },
+  "preset_reggaeton": {
+    "message": "레게톤"
+  },
+  "preset_house_afro_house": {
+    "message": "하우스 / 아프로 하우스"
+  },
+  "preset_post_punk": {
+    "message": "포스트 펑크"
+  },
+  "preset_phonk": {
+    "message": "폰크"
   }
 }

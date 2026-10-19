@@ -13,20 +13,27 @@ import { themeEngine } from './themeEngine.js';
 import { uiStatus } from './uiStatus.js';
 import { themeEditor } from './themeEditor.js';
 import { presetManager } from './presetManager.js';
-import { confirmModal } from './modalEngine.js'; // <-- The Stateless Engine
+import { confirmModal } from './modalEngine.js';
 
 let isMarqueeEnabled = true;
 let copyTimeout = null;
+let rejectionTimeout = null;
+let isToggleTransitioning = false;
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // --- 0. GLOBAL MESSAGING UTILITY ---
-    // Safely communicates with background/offscreen workers without throwing unhandled port errors
     const safeSend = (message, callback = () => { }) => {
         chrome.runtime.sendMessage(message, (response) => {
             if (chrome.runtime.lastError) { return; }
             callback(response);
         });
     };
+
+    const send = (message) => new Promise((resolve) => {
+        chrome.runtime.sendMessage(message, (res) => {
+            if (chrome.runtime.lastError || !res) return resolve(null);
+            resolve(res);
+        });
+    });
 
     // --- 1. 0ms SYNCHRONOUS UI & THEME LOCK ---
     const dropdown = document.getElementById("languageDropdown");
@@ -41,36 +48,148 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // Immediate Dark Mode & Custom Theme DOM Lock (Eliminates White Flash)
+    // 0ms Synchronous Dark Mode Lock
+    if (localStorage.getItem("syncDarkMode") === "true") {
+        document.body.classList.add('dark-mode');
+    }
+
     chrome.storage.local.get(['darkMode', 'customThemeEnabled', 'customTheme'], (result) => {
         if (result.customThemeEnabled && result.customTheme) {
             themeEngine.apply('custom', result.customTheme);
         } else if (result.darkMode) {
             document.body.classList.add('dark-mode');
+            try { localStorage.setItem("syncDarkMode", "true"); } catch (e) { }
+        } else {
+            document.body.classList.remove('dark-mode');
+            try { localStorage.setItem("syncDarkMode", "false"); } catch (e) { }
         }
     });
 
-    // --- 2. INITIALIZE DATA & THEMES IMMEDIATELY ---
+    // --- 0ms SYNCHRONOUS PRE-WARM: MARQUEE & AUDIO HUD ---
+    const earlyStatusMsg = document.getElementById("statusMessage");
+    const earlyContainer = document.getElementById("statusContainer");
+    const cachedEnabled = localStorage.getItem("syncEnabledState") === "true";
+    const cachedTab = (() => {
+        try { return JSON.parse(localStorage.getItem("cachedTabInfo")); } catch (e) { return null; }
+    })();
+
+    if (cachedEnabled && cachedTab?.title && earlyStatusMsg && earlyContainer) {
+        earlyStatusMsg.setAttribute("data-ui-type", "active");
+        earlyStatusMsg.setAttribute("data-last-title", cachedTab.title);
+        earlyStatusMsg.classList.remove('text-disabled', 'text-waiting', 'text-loading');
+
+        if (cachedTab.travelPx && document.documentElement.dir !== "rtl") {
+            earlyStatusMsg.style.setProperty('--marquee-travel', `-${cachedTab.travelPx}px`);
+            earlyStatusMsg.classList.add('marquee-text');
+            earlyContainer.classList.add('mask-active');
+            earlyStatusMsg.innerHTML = `<span class="marquee-content"><img src="${cachedTab.iconUrl || ''}" class="separator-icon" style="flex-shrink:0;"><span dir="auto">${cachedTab.title}</span></span>`.repeat(4);
+        } else {
+            earlyStatusMsg.classList.remove('marquee-text');
+            earlyContainer.classList.remove('mask-active');
+            earlyStatusMsg.innerHTML = `<span class="static-wrapper"><img src="${cachedTab.iconUrl || ''}" class="separator-icon" style="flex-shrink:0;"><span class="static-title" dir="auto">${cachedTab.title}</span></span>`;
+        }
+    }
+
+    // --- 0ms SYNCHRONOUS SLIDER & PRESET HYDRATION ---
+    const cachedAudio = (() => {
+        try { return JSON.parse(localStorage.getItem("syncAudioSettings")); } catch (e) { return null; }
+    })();
+
+    if (cachedAudio) {
+        const sliderMap = [
+            { id: "volumeSlider", display: "volumeValue", val: cachedAudio.volumeLevel, mult: 100, suf: "%" },
+            { id: "bassSlider", display: "bassValue", val: cachedAudio.bassLevel, mult: 1, suf: " dB" },
+            { id: "midSlider", display: "midValue", val: cachedAudio.midLevel, mult: 1, suf: " dB" },
+            { id: "trebleSlider", display: "trebleValue", val: cachedAudio.trebleLevel, mult: 1, suf: " dB" }
+        ];
+
+        sliderMap.forEach(item => {
+            if (item.val !== undefined) {
+                const sl = document.getElementById(item.id);
+                const disp = document.getElementById(item.display);
+                if (sl) sl.value = item.val;
+                if (disp) {
+                    disp.textContent = item.mult === 100
+                        ? `${Math.round(item.val * item.mult)}%`
+                        : `${item.val.toFixed(1)}${item.suf}`;
+                }
+            }
+        });
+
+        const presetText = document.getElementById("presetDropdownText");
+        if (presetText && cachedAudio.activePresetTitle) {
+            presetText.textContent = cachedAudio.activePresetTitle;
+            presetText.removeAttribute("data-i18n");
+        }
+    }
+
+    // --- 2. ASYNC STATE INITIALIZATION & TAB CHECK ---
+    const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const data = await storage.getAll();
 
-    // --- SYNCHRONOUS STATE LOCK ---
+    // Reality first, storage second: ping offscreen to wipe any zombie/stale state
+    const ping = await send({ type: "TARGET_OFFSCREEN_PING" });
+    const alive = ping?.success === true;
+
+    if (!alive && (data.isEnabled || data.capturingTabId)) {
+        await storage.setMultiple({ isEnabled: false, capturingTabId: null });
+        data.isEnabled = false;
+        data.capturingTabId = null;
+        try {
+            localStorage.setItem("syncEnabledState", "false");
+            localStorage.removeItem("cachedTabInfo");
+        } catch (e) { }
+
+        if (earlyStatusMsg) {
+            earlyStatusMsg.textContent = "";
+            earlyStatusMsg.removeAttribute("data-ui-type");
+            earlyStatusMsg.removeAttribute("data-last-title");
+            earlyStatusMsg.classList.remove('marquee-text');
+        }
+        if (earlyContainer) {
+            earlyContainer.classList.remove('mask-active');
+        }
+    }
+
+    // Purge cached preview if active tab differs
+    if (cachedTab && cachedTab.tabId && activeTab?.id && cachedTab.tabId !== activeTab.id) {
+        if (earlyStatusMsg) {
+            earlyStatusMsg.textContent = "";
+            earlyStatusMsg.removeAttribute("data-ui-type");
+            earlyStatusMsg.removeAttribute("data-last-title");
+            earlyStatusMsg.classList.remove('marquee-text');
+        }
+        if (earlyContainer) {
+            earlyContainer.classList.remove('mask-active');
+        }
+    }
+
+    const isEnabled = alive && data.isEnabled === true;
+    const isCapturingAnotherTab = alive && !!(data.capturingTabId && activeTab?.id && data.capturingTabId !== activeTab.id);
+    const isCapturingThisTab = alive && isEnabled && data.capturingTabId === activeTab?.id;
+    const shouldEnableOnThisTab = isCapturingThisTab || (!alive && !isCapturingAnotherTab && data.autoStartupEnabled === true);
+
     const earlyToggle = document.getElementById("toggleEnabled");
     const earlyResetBtn = document.getElementById("resetButton");
-
-    // FIX: Hoist these UI references so they are initialized before the function call
     const presetToggleBtn = document.getElementById("presetToggleBtn");
     const generalControlsBlock = document.getElementById("generalControlsBlock");
     const presetControlsBlock = document.getElementById("presetControlsBlock");
+    const container = document.getElementById("statusContainer");
+    const statusMsg = document.getElementById("statusMessage");
+    const takeOverBtn = document.getElementById("takeOverBtn");
 
-    if (earlyToggle) earlyToggle.checked = data.isEnabled === true;
-    if (earlyResetBtn) earlyResetBtn.disabled = data.isEnabled !== true;
+    if (earlyToggle) earlyToggle.checked = shouldEnableOnThisTab;
+    if (earlyResetBtn) earlyResetBtn.disabled = !shouldEnableOnThisTab;
 
-    // PATCH: Evaluate preset deck state synchronously to prevent layout jumping
-    if (data.isEnabled === true && data.isPresetDeckOpen === true) {
+    syncPresetUIButton(shouldEnableOnThisTab);
+
+    // Persist preset deck state
+    if (shouldEnableOnThisTab && data.isPresetDeckOpen === true) {
         setPresetDeckState(true);
+    } else {
+        setPresetDeckState(false);
     }
 
-    // Apply themes instantly BEFORE waiting for translation files to download over the network
     themeEngine.init(data);
 
     let currentLocale = i18n.detectLocale(data.preferredLocale);
@@ -78,20 +197,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const editThemeBtn = document.getElementById("editThemeBtn");
 
-    // Bulletproof baseline sync: verify highlights line up with asynchronous storage accuracy
     if (dropdown) {
         dropdown.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
         const actualActive = dropdown.querySelector(`.option[data-value="${currentLocale}"]`);
         if (actualActive) {
             actualActive.classList.add('selected');
-            if (summary) summary.textContent = actualActive.textContent; // <-- PATCH 4 APPLIED
+            if (summary) summary.textContent = actualActive.textContent;
         }
     }
 
     await i18n.load(currentLocale);
 
     // --- 3. INITIALIZE VISUALS & ENGINES ---
-    confirmModal.init(); // <-- Initialize the Modal Engine
+    confirmModal.init();
     await themeEditor.init();
     await presetManager.init();
 
@@ -116,16 +234,19 @@ document.addEventListener("DOMContentLoaded", async () => {
                 updateDisplay(display, val, config);
                 safeSend({ type: config.type, value: val });
                 storage.set(config.storageKey, val);
+
+                try {
+                    const cur = JSON.parse(localStorage.getItem("syncAudioSettings")) || {};
+                    cur[config.storageKey] = val;
+                    localStorage.setItem("syncAudioSettings", JSON.stringify(cur));
+                } catch (err) { }
             });
         }
     });
 
     // --- 5. UI REFERENCES & PANELS ---
-    const toggle = document.getElementById("toggleEnabled");
-    const container = document.getElementById("statusContainer");
-    const statusMsg = document.getElementById("statusMessage");
-    const takeOverBtn = document.getElementById("takeOverBtn");
     const marqueeToggle = document.getElementById("marqueeToggle");
+    const autoStartupToggle = document.getElementById("autoStartupToggle");
     const resetBtn = document.getElementById("resetButton");
     const darkModeToggle = document.getElementById("darkModeToggle");
 
@@ -147,10 +268,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         settingsPanel.classList.remove("hidden");
     });
 
-    // ==========================================================================
-    // PURE HARDWARE HOVER STATE LOCK (Bug 2 Fix)
-    // Replaces browser :hover hit-testing to eliminate 3D transform edge-flicker
-    // ==========================================================================
     const tactileEls = document.querySelectorAll(
         '#updatePresetBtn, #deletePresetBtn, #revertPresetBtn, #newPresetBtn, #savePresetBtn, #presetDropdown summary, #presetNameInput'
     );
@@ -160,21 +277,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         el.addEventListener('mouseleave', () => el.classList.remove('is-hover'));
     });
 
-    // ==========================================================================
-    // UNIVERSAL DROPDOWN ENGINE (Auto-Centering & Global Click-Outside)
-    // Applies instant centering & visual feedback to Language, Presets, and Themes
-    // ==========================================================================
     document.querySelectorAll('.custom-dropdown').forEach(customDrop => {
         customDrop.addEventListener('toggle', () => {
             if (customDrop.hasAttribute('open')) {
-                // 1. Mutual Exclusivity: Close any other open dropdowns so menus don't overlap
                 document.querySelectorAll('.custom-dropdown').forEach(other => {
                     if (other !== customDrop && other.hasAttribute('open')) {
                         other.removeAttribute('open');
                     }
                 });
 
-                // 2. Instant Vertical Centering
                 const optionsContainer = customDrop.querySelector('.dropdown-options');
                 const currentSelection = customDrop.querySelector('.option.selected') ||
                     customDrop.querySelector(`.option[data-value="${currentLocale}"]`);
@@ -185,14 +296,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                     optionsContainer.scrollTop = currentSelection.offsetTop - (containerHeight / 2) + (targetHeight / 2);
                 }
             } else {
-                // 3. Clean focus removal when closing
                 const summaryEl = customDrop.querySelector("summary");
                 if (summaryEl) summaryEl.blur();
             }
         });
     });
 
-    // Global Click-Outside Closer for ALL custom dropdowns
     document.addEventListener('click', (e) => {
         document.querySelectorAll('.custom-dropdown').forEach(customDrop => {
             if (customDrop.hasAttribute('open') && !customDrop.contains(e.target)) {
@@ -204,7 +313,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // --- 6. PRESET / GENERAL CONTROLS TOGGLE ---
     if (presetToggleBtn && generalControlsBlock && presetControlsBlock) {
         presetToggleBtn.addEventListener("click", () => {
-            if (!toggle.checked) return;
+            if (!earlyToggle.checked) return;
 
             const isHidden = presetControlsBlock.classList.contains("hidden");
             if (isHidden) {
@@ -212,13 +321,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 presetControlsBlock.classList.remove("hidden");
                 presetToggleBtn.classList.add("active-mode");
                 presetToggleBtn.style.backgroundColor = "var(--bg-hover)";
-                storage.set("isPresetDeckOpen", true); // Save open state
+                storage.set("isPresetDeckOpen", true);
+                data.isPresetDeckOpen = true;
             } else {
                 generalControlsBlock.classList.remove("hidden");
                 presetControlsBlock.classList.add("hidden");
                 presetToggleBtn.classList.remove("active-mode");
                 presetToggleBtn.style.backgroundColor = "";
-                storage.set("isPresetDeckOpen", false); // Save closed state
+                storage.set("isPresetDeckOpen", false);
+                data.isPresetDeckOpen = false;
             }
         });
     }
@@ -242,15 +353,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                     statusMsg.removeAttribute("data-last-title");
                 }
 
-                // Load the new language dictionary
                 await i18n.load(newLang);
 
-                // Force presetManager to re-render localized text immediately
                 if (presetManager && presetManager.render) {
                     presetManager.render();
                 }
 
-                // Force themeEditor to re-render selected theme or localized placeholder immediately
                 if (themeEditor && themeEditor.render) {
                     themeEditor.render();
                 }
@@ -261,7 +369,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // --- 8. THEME & MARQUEE LISTENERS ---
+    // --- 8. THEME, MARQUEE & SETTINGS LISTENERS ---
     if (darkModeToggle) {
         if (!data.customThemeEnabled) {
             darkModeToggle.checked = !!data.darkMode;
@@ -270,6 +378,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         darkModeToggle.addEventListener("change", (e) => {
             const enabled = e.target.checked;
             storage.set("darkMode", enabled);
+            try { localStorage.setItem("syncDarkMode", enabled ? "true" : "false"); } catch (err) { }
 
             if (enabled) {
                 const customToggle = document.getElementById("customThemeToggle");
@@ -294,21 +403,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // --- 9. AUDIO RESET & CLIPBOARD COPY ---
-    if (resetBtn) {
-        resetBtn.addEventListener("click", () => {
-            SLIDER_CONFIGS.forEach(config => {
-                const el = document.getElementById(config.id);
-                if (el) {
-                    el.value = config.default;
-                    updateDisplay(document.getElementById(config.display), config.default, config);
-                    safeSend({ type: config.type, value: config.default });
-                    storage.set(config.storageKey, config.default);
-                }
-            });
-            presetManager.setDirty(true);
+    if (autoStartupToggle) {
+        autoStartupToggle.checked = !!data.autoStartupEnabled;
+        autoStartupToggle.addEventListener("change", (e) => {
+            storage.set("autoStartupEnabled", e.target.checked);
+            data.autoStartupEnabled = e.target.checked;
         });
     }
+
+    // --- 9. CLIPBOARD COPY ---
+    // 🚨 NOTE: The `#resetButton` click listener was removed from here because
+    // `presetManager.setupListeners()` already binds to `#resetButton`, resets all
+    // 4 sliders, dispatches their 'input' events (which trigger `popup.js` slider
+    // listeners to send messages and update storage), and clears `activePresetName`.
+    // Having a second listener here caused duplicate messages and conflicting dirty states.
 
     if (statusMsg) {
         statusMsg.addEventListener("dblclick", async () => {
@@ -318,7 +426,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     await navigator.clipboard.writeText(titleToCopy);
                     if (copyTimeout) clearTimeout(copyTimeout);
                     statusMsg.style.transition = "color 0.2s";
-                    statusMsg.style.color = "var(--status-success)"; // <-- PATCH 3 APPLIED
+                    statusMsg.style.color = "var(--status-success)";
                     copyTimeout = setTimeout(() => { statusMsg.style.color = ""; }, 1400);
                 } catch (err) {
                     console.error("Failed to copy text:", err);
@@ -327,68 +435,57 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // --- 10. MAIN TOGGLE & STATE BOOTSTRAP ---
-    toggle.addEventListener("change", async () => {
-        if (toggle.checked) {
-            if (container.classList.contains("conflict")) {
-                await forceTakeover();
+    // --- 10. MAIN TOGGLE & CONFLICT RESOLUTION ---
+    earlyToggle.addEventListener("change", async () => {
+        if (isToggleTransitioning) return;
+        isToggleTransitioning = true;
+
+        try {
+            if (earlyToggle.checked) {
+                if (container.classList.contains("conflict")) {
+                    await forceTakeover();
+                } else {
+                    await startCapture();
+                }
             } else {
-                storage.set("isEnabled", true);
-                syncPresetUIButton(true);
-                startCapture();
+                await handleManualDisable();
             }
-        } else {
-            handleManualDisable();
+        } finally {
+            isToggleTransitioning = false;
         }
     });
 
-    const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    const isEnabled = data.isEnabled === true;
-    const capturingTabId = data.capturingTabId;
-
-    syncPresetUIButton(isEnabled);
-
-    if (isEnabled && capturingTabId && capturingTabId !== activeTab.id) {
-        safeSend({ type: "TARGET_OFFSCREEN_PING" }, async (res) => {
-            if (res && res.success) {
-                container.classList.add("conflict");
-                takeOverBtn.classList.remove("hidden");
-                takeOverBtn.textContent = i18n.t("button_takeover") || "Use on this tab";
-                toggle.checked = false;
-                syncPresetUIButton(false);
-                await uiStatus.update(true, false);
-                takeOverBtn.onclick = forceTakeover;
-            } else {
-                storage.set("isEnabled", false);
-                await uiStatus.update(false, false);
-                syncPresetUIButton(false);
+    if (alive && isCapturingAnotherTab) {
+        // Conflict has priority over auto-enable
+        container.classList.add("conflict");
+        takeOverBtn.classList.remove("hidden");
+        takeOverBtn.textContent = i18n.t("button_takeover") || "Use on this tab";
+        earlyToggle.checked = false;
+        syncPresetUIButton(false);
+        setPresetDeckState(false);
+        await uiStatus.update(true, false);
+        takeOverBtn.onclick = async () => {
+            if (isToggleTransitioning) return;
+            isToggleTransitioning = true;
+            try {
+                await forceTakeover();
+            } finally {
+                isToggleTransitioning = false;
             }
-        });
-    } else if (isEnabled) {
-        safeSend({ type: "TARGET_OFFSCREEN_PING" }, async (res) => {
-            if (res && res.success) {
-                await uiStatus.update(true, true, res.audioDetected, isMarqueeEnabled);
-
-                // REMOVE THESE LINES:
-                // FAIL-SAFE RESTORE: Only reopen if enabled AND stream is verified
-                // if (data.isPresetDeckOpen === true) {
-                //     setPresetDeckState(true);
-                // }
-
-                startWatchdog();
-            } else {
-                // Keep this: it safely wipes state if the offscreen document crashed
-                storage.set("isEnabled", false);
-                storage.set("capturingTabId", null);
-                storage.set("isPresetDeckOpen", false);
-                await uiStatus.update(false, false);
-                syncPresetUIButton(false);
-                setPresetDeckState(false);
-            }
-        });
+        };
+    } else if (alive && isCapturingThisTab) {
+        await uiStatus.update(true, true, ping.audioDetected, isMarqueeEnabled);
+        syncPresetUIButton(true);
+        if (data.isPresetDeckOpen === true) setPresetDeckState(true);
+        startWatchdog();
+    } else if (data.autoStartupEnabled) {
+        earlyToggle.checked = true;
+        await startCapture();
     } else {
         await uiStatus.update(false, false);
+        syncPresetUIButton(false);
         setPresetDeckState(false);
+        storage.set("isPresetDeckOpen", false);
     }
 
     // --- 11. HELPER FUNCTIONS ---
@@ -400,8 +497,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             presetToggleBtn.style.opacity = "1";
             presetToggleBtn.style.cursor = "pointer";
         } else {
-            // PATCH: Removed presetToggleBtn.classList.add("hidden");
-            // We now rely exclusively on your popup.css :has() pseudo-class to render the disabled visual state.
+            presetToggleBtn.classList.add("hidden");
             if (generalControlsBlock && presetControlsBlock) {
                 presetControlsBlock.classList.add("hidden");
                 generalControlsBlock.classList.remove("hidden");
@@ -411,33 +507,54 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    function handleManualDisable() {
+    async function handleManualDisable() {
+        if (rejectionTimeout) {
+            clearTimeout(rejectionTimeout);
+            rejectionTimeout = null;
+        }
         uiStatus.stopPolling();
-        container.classList.remove("conflict");
+        container.classList.remove("conflict", "mask-active");
+        statusMsg.classList.remove("marquee-text");
         takeOverBtn.classList.add("hidden");
         syncPresetUIButton(false);
-        setPresetDeckState(false); // Force back to default deck
-        safeSend({ type: "STOP_CAPTURE" });
-        safeSend({ type: "TOGGLE_ENABLED", value: false });
-        uiStatus.update(false, false);
-        storage.set("isEnabled", false);
-        storage.set("isPresetDeckOpen", false); // Wipe stale state
+        setPresetDeckState(false);
+
+        // Await STOP_CAPTURE so teardown finishes cleanly before any rapid re-enable
+        await send({ type: "STOP_CAPTURE" });
+        await uiStatus.update(false, false);
+
+        await storage.setMultiple({
+            isEnabled: false,
+            isPresetDeckOpen: false,
+            capturingTabId: null
+        });
+
+        data.isEnabled = false;
+        data.isPresetDeckOpen = false;
+
+        try {
+            localStorage.setItem("syncEnabledState", "false");
+            localStorage.removeItem("cachedTabInfo");
+        } catch (e) { }
     }
 
     async function forceTakeover() {
+        if (rejectionTimeout) {
+            clearTimeout(rejectionTimeout);
+            rejectionTimeout = null;
+        }
         container.classList.remove("conflict");
         takeOverBtn.classList.add("hidden");
         document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = false);
         if (resetBtn) resetBtn.disabled = false;
 
-        safeSend({ type: "STOP_CAPTURE" }, () => {
-            setTimeout(async () => {
-                toggle.checked = true;
-                storage.set("isEnabled", true);
-                syncPresetUIButton(true);
-                await startCapture();
-            }, 200);
-        });
+        // Await full teardown before starting capture on the new tab
+        await send({ type: "STOP_CAPTURE" });
+        earlyToggle.checked = true;
+        setPresetDeckState(false);
+        await storage.set("isPresetDeckOpen", false);
+        data.isPresetDeckOpen = false;
+        await startCapture();
     }
 
     function updateDisplay(el, val, config) {
@@ -455,8 +572,21 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else if (status.initializing) {
                 uiStatus.update(false, true);
             } else if (status.disabled) {
-                storage.set("isEnabled", false);
-                if (toggle) toggle.checked = false;
+                storage.setMultiple({ isEnabled: false, capturingTabId: null });
+                data.isEnabled = false;
+
+                if (!data.autoStartupEnabled) {
+                    storage.set("isPresetDeckOpen", false);
+                    setPresetDeckState(false);
+                    data.isPresetDeckOpen = false;
+                }
+
+                try {
+                    localStorage.setItem("syncEnabledState", "false");
+                    localStorage.removeItem("cachedTabInfo");
+                } catch (e) { }
+
+                if (earlyToggle) earlyToggle.checked = false;
                 syncPresetUIButton(false);
                 uiStatus.stopPolling();
                 uiStatus.update(false, false);
@@ -465,21 +595,71 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     async function startCapture() {
+        if (rejectionTimeout) {
+            clearTimeout(rejectionTimeout);
+            rejectionTimeout = null;
+        }
+
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        if (tab) {
-            await uiStatus.update(false, true);
+        if (!tab) return;
+
+        await uiStatus.update(false, true);
+        const res = await send({ type: "START_CAPTURE", tabId: tab.id });
+
+        if (res?.success) {
+            await storage.setMultiple({ isEnabled: true, capturingTabId: tab.id });
+            try { localStorage.setItem("syncEnabledState", "true"); } catch (e) { }
+            syncPresetUIButton(true);
+            const currentData = await storage.getAll();
+            if (currentData.isPresetDeckOpen === true) {
+                setPresetDeckState(true);
+            }
             startWatchdog();
-            safeSend({ type: "START_CAPTURE", tabId: tab.id });
+        } else {
+            // 1. IMMEDIATELY hide the preset UI
+            syncPresetUIButton(false);
+            setPresetDeckState(false);
+
+            if (earlyToggle) {
+                earlyToggle.checked = true; // Force it visually ON
+
+                // 2. Clear any existing timer if they are spamming the toggle
+                if (rejectionTimeout) clearTimeout(rejectionTimeout);
+
+                // 3. Start a fresh 2-second countdown (No disabled lock!)
+                rejectionTimeout = setTimeout(async () => {
+                    rejectionTimeout = null;
+                    earlyToggle.checked = false; // Trigger smooth slide "OFF"
+
+                    // 4. Clean up storage
+                    await storage.setMultiple({ isEnabled: false, capturingTabId: null });
+                    try {
+                        localStorage.setItem("syncEnabledState", "false");
+                        localStorage.removeItem("cachedTabInfo");
+                    } catch (e) { }
+                    uiStatus.stopPolling();
+                    await uiStatus.update(false, false);
+                }, 2000);
+            }
         }
     }
 
     function refreshUI() {
+        // Guard: If currently in tab conflict mode, preserve the Take Over button & conflict state
+        if (container && container.classList.contains("conflict")) {
+            if (takeOverBtn) {
+                takeOverBtn.textContent = i18n.t("button_takeover") || "Use on this tab";
+                takeOverBtn.classList.remove("hidden");
+            }
+            return;
+        }
+
         safeSend({ type: "TARGET_OFFSCREEN_PING" }, async (res) => {
-            const isEnabled = toggle.checked;
-            if (isEnabled && res && res.success) {
+            const isCurrentEnabled = earlyToggle.checked;
+            if (isCurrentEnabled && res && res.success) {
                 await uiStatus.update(true, true, res.audioDetected, isMarqueeEnabled);
             } else {
-                await uiStatus.update(false, isEnabled);
+                await uiStatus.update(false, isCurrentEnabled);
             }
         });
     }
@@ -503,13 +683,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     // --- 12. STORAGE SYNCHRONIZATION ---
     chrome.storage.onChanged.addListener(async (changes, area) => {
         if (area === "local") {
-            const editThemeBtn = document.getElementById("editThemeBtn");
+            const editBtn = document.getElementById("editThemeBtn");
 
             if (changes.customThemeEnabled) {
                 const isCustom = changes.customThemeEnabled.newValue;
-                if (editThemeBtn) {
-                    isCustom ? editThemeBtn.classList.remove("hidden") : editThemeBtn.classList.add("hidden");
+                if (editBtn) {
+                    isCustom ? editBtn.classList.remove("hidden") : editBtn.classList.add("hidden");
                 }
+            }
+
+            if (changes.darkMode) {
+                const isDark = changes.darkMode.newValue;
+                try { localStorage.setItem("syncDarkMode", isDark ? "true" : "false"); } catch (err) { }
             }
 
             if (changes.darkMode || changes.customTheme || changes.customThemeEnabled) {
@@ -524,10 +709,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // --- 13. UI LIFECYCLE TEARDOWN (PATCH) ---
-    // Intercepts forceful popup closures and wipes the deck state
-    // preventing the Preset Deck from resurrecting on the next open.
-    window.addEventListener("unload", () => {
-        storage.set("isPresetDeckOpen", false);
+    // --- 13. REMOVE NO-TRANSITIONS ---
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            document.body.classList.remove('no-transitions');
+        });
     });
-}); // <-- End of DOMContentLoaded
+});
