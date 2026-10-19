@@ -232,5 +232,20 @@
   },
   "preset_late_night": {
     "message": "دیر رات"
+  },
+  "settings_auto_startup": {
+    "message": "کھولنے پر خودکار فعال کریں"
+  },
+  "preset_reggaeton": {
+    "message": "Reggaeton"
+  },
+  "preset_house_afro_house": {
+    "message": "ہاؤس / افرو ہاؤس"
+  },
+  "preset_post_punk": {
+    "message": "پوسٹ پنک"
+  },
+  "preset_phonk": {
+    "message": "Phonk"
   }
 }

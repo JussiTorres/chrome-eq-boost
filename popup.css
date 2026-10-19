@@ -14,6 +14,12 @@
     /* Locks padding/borders inside width/height */
 }
 
+/* Previene cualquier animación o flash durante el render inicial */
+body.no-transitions,
+body.no-transitions * {
+    transition: none !important;
+}
+
 /* ==========================================================================
    UNIVERSAL PROHIBITED CURSOR FOR ALL DISABLED UI
    ========================================================================== */
@@ -309,7 +315,6 @@ input[type="range"]::-webkit-slider-thumb {
     pointer-events: auto;
     cursor: default;
     display: block;
-    /* <-- THE FIX: Reverted back to block */
 }
 
 .status-container.mask-active {
@@ -331,13 +336,67 @@ input[type="range"]::-webkit-slider-thumb {
     font-weight: 600;
     color: var(--text-heading);
     text-align: center;
-    /* 1. Unificamos a 1 rígido para que coincida con el marquee y no haya salto */
     line-height: 1;
-
     min-height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* When in marquee mode, let the inner track handle the infinite loop */
+.marquee-text {
+    display: flex !important;
+    width: max-content !important;
+    justify-content: flex-start !important;
+    animation: seamless-scroll 12s linear infinite !important;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+.marquee-content {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    padding-right: 28px;
+    /* Strict fixed spacing between cloned loops */
+    flex-shrink: 0;
+}
+
+.separator-icon {
+    width: 12px;
+    height: 12px;
+    opacity: 0.7;
+    border-radius: 2px;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+    flex-shrink: 0;
+    display: block;
+}
+
+.static-wrapper .separator-icon {
+    margin: 0 !important;
+}
+
+/* 100% seamless mathematical reset: half is identical to the first half */
+@keyframes seamless-scroll {
+    from {
+        transform: translateX(0px);
+    }
+
+    to {
+        transform: translateX(var(--marquee-travel, -50%));
+    }
+}
+
+/* Force left-anchoring immediately if marquee-text is present or transitioning */
+.status-message.marquee-text,
+.status-container.mask-active .status-message {
+    justify-content: flex-start !important;
+    text-align: left !important;
 }
 
 .text-active {
@@ -596,7 +655,7 @@ input[type="range"]:disabled {
     flex-direction: column;
     opacity: 1;
     visibility: visible;
-    
+
     /* Matched EXACTLY to the body transition to prevent lag */
     transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
@@ -709,55 +768,12 @@ input[type="range"]:disabled {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* === Simplistic & Seamless Continuous Scroll === */
-.marquee-text {
-    /* 2. Cambiamos inline-flex a flex + max-content para aniquilar el espacio base fantasma */
-    display: flex;
-    width: max-content;
-
-    align-items: center;
-    justify-content: flex-start;
-    will-change: transform;
-    animation: seamless-scroll 12s linear infinite;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-}
-
 .marquee-content {
     display: inline-flex !important;
     align-items: center;
     gap: 5px;
     /* Aquí unificamos la regla de 5px */
     padding-right: 1.7em;
-}
-
-.separator-icon {
-    width: 12px;
-    height: 12px;
-    opacity: 0.7;
-    border-radius: 2px;
-    user-select: none;
-    -webkit-user-select: none;
-    pointer-events: none;
-    flex-shrink: 0;
-    display: block;
-    /* ELIMINADO: transform: translateY(1.5px); */
-}
-
-.static-wrapper .separator-icon {
-    margin: 0 !important;
-}
-
-@keyframes seamless-scroll {
-    from {
-        transform: translateX(0px);
-    }
-
-    to {
-        transform: translateX(var(--marquee-travel, -50%));
-    }
 }
 
 /* Color Picker Styling */
@@ -1497,7 +1513,8 @@ body.dark-mode:has(#toggleEnabled:not(:checked)) .eq-control label {
 }
 
 /* REMOVED .toggle-switch from this rule so it doesn't animate background-color on load */
-.reset-button, .eq-control label {
+.reset-button,
+.eq-control label {
     transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -1717,10 +1734,6 @@ html[dir="rtl"] .marquee-content {
     max-width: 100%;
 }
 
-.marquee-content {
-    padding-right: 1.7em;
-}
-
 /* Enforces consistent baseline calculation regardless of overflow clipping */
 .marquee-content span[dir="auto"],
 .static-wrapper span[dir="auto"] {
@@ -1847,7 +1860,7 @@ html[dir="rtl"] .text-button svg {
     max-height: 94px !important;
     padding: 14px 12px !important;
     margin-bottom: 10px !important;
-    
+
     /* Moved from inline HTML: */
     background: var(--bg-card) !important;
     border-radius: 10px !important;

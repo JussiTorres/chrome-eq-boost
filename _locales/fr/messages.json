@@ -232,5 +232,20 @@
   },
   "preset_late_night": {
     "message": "Tard la nuit"
+  },
+  "settings_auto_startup": {
+    "message": "Activer automatiquement à l'ouverture"
+  },
+  "preset_reggaeton": {
+    "message": "Reggaeton"
+  },
+  "preset_house_afro_house": {
+    "message": "House / Afro house"
+  },
+  "preset_post_punk": {
+    "message": "Post-punk"
+  },
+  "preset_phonk": {
+    "message": "Phonk"
   }
 }

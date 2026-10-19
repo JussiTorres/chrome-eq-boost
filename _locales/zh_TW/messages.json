@@ -232,5 +232,20 @@
   },
   "preset_late_night": {
     "message": "深夜模式"
+  },
+  "settings_auto_startup": {
+    "message": "開啟時自動啟用"
+  },
+  "preset_reggaeton": {
+    "message": "雷鬼頓"
+  },
+  "preset_house_afro_house": {
+    "message": "浩室 / 非洲浩室"
+  },
+  "preset_post_punk": {
+    "message": "後龐克"
+  },
+  "preset_phonk": {
+    "message": "Phonk"
   }
 }

@@ -232,5 +232,20 @@
   },
   "preset_late_night": {
     "message": "وقت متأخر من الليل"
+  },
+  "settings_auto_startup": {
+    "message": "تفعيل تلقائي عند الفتح"
+  },
+  "preset_reggaeton": {
+    "message": "ريغيتون"
+  },
+  "preset_house_afro_house": {
+    "message": "هاوس / أفرو هاوس"
+  },
+  "preset_post_punk": {
+    "message": "بوست بانك"
+  },
+  "preset_phonk": {
+    "message": "فونك"
   }
 }

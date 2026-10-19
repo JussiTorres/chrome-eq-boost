@@ -2,6 +2,26 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+**[2.1.0] - 2026-10-18**
+
+**🎧 Audio Engine & DSP Overhaul**
+
+* **Analog-Style Parameter Smoothing:** Replaced instantaneous slider assignments with 15ms exponential time-constant smoothing (`setTargetAtTime`). Adjusting sliders or switching presets now glides seamlessly, completely eliminating digital "zipper noise," clicks, and pops.
+* **Expanded & Re-Tuned Library:** Added 4 new built-in genre profiles: *Reggaeton*, *House / Afro House*, *Post-Punk*, and *Phonk*. Completely re-tuned all existing presets (Pop, Rock, Deep Bass, Hi-Fi Master, etc.) for superior dynamic range, punch, and spatial clarity.
+* **Strict Q-Factor Adherence:** Removed the global `0.0001` Q-factor override on shelving filters, applying the `0.7` musical bandwidth exclusively to the peaking filter (mids). This aligns perfectly with Web Audio API specifications for much cleaner frequency slopes.
+
+**🚀 Performance & UX**
+
+* **Strict Preset Ordering:** Rewrote the preset initialization engine to enforce a strict visual hierarchy. Built-in default profiles are now permanently locked to the top of the dropdown menu, with custom user presets appended below.
+* **Anti-Flicker Marquee Engine:** Implemented an in-place "Soft Update" algorithm for the scrolling status text. Track titles and favicons now update without rebuilding the DOM, eliminating visual stutter during track transitions.
+* **SPA Continuous Playback:** Removed the `chrome.tabs.onUpdated` listener. URL changes on Single Page Applications (like YouTube and Spotify) no longer prematurely tear down the audio context, relying exclusively on the native `MediaStream.onended` event.
+
+**🛠️ Stability & Security**
+
+* **Silence Watchdog Fix:** Re-routed the `AnalyserNode` to tap the audio stream directly from the pre-EQ `sourceNode`. Low volume levels or negative EQ profiles (like "Late Night") no longer trick the silence detector into falsely shutting down the extension.
+* **Concurrency Crash Prevention:** Implemented strict Mutex locks (`creatingOffscreenPromise`, `teardownPromise`, `isCapturingBusy`) in the service worker and an `isToggleTransitioning` lock in the UI to prevent crashes caused by rapid toggle spamming.
+* **Theme Editor Security:** Added validation to block prototype pollution (e.g., `__proto__`, `constructor`) when users create custom theme names.
+
 ## [2.0.0] - 2026-07-31
 
 ### ✨ Major Features

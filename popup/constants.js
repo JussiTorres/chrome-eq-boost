@@ -81,6 +81,7 @@ export const PRESET_THEMES = {
 
 // ==========================================================================
 // IMMERSIVE AUDIOPHILE PRESETS (Engineered for depth, power & clarity)
+// Calibrated for 80 Hz Lowshelf / 2500 Hz Peaking / 8000 Hz Highshelf
 // ==========================================================================
 export const DEFAULT_PRESETS = {
     // Reference standard for untampered studio playback
@@ -88,46 +89,62 @@ export const DEFAULT_PRESETS = {
 
     // --- UNIVERSAL MAINSTREAM GENRES ---
     // Polished commercial vibrancy with punchy rhythm and sparkling vocal clarity
-    "Pop": { volume: 1.0, bass: 4.5, mids: 2.5, treble: 5.0 },
+    "Pop": { volume: 1.0, bass: 6.5, mids: 2.0, treble: 6.5 },
 
     // Powerful, driving rhythm section with biting mid-range guitar crunch
-    "Rock": { volume: 1.0, bass: 5.0, mids: 2.0, treble: 4.0 },
+    "Rock": { volume: 1.0, bass: 6.0, mids: 3.0, treble: 6.0 },
 
-    // Heavy, rolling 808 sub-rumble paired with smooth vocal intimacy
-    "R&B / Hip-Hop": { volume: 1.0, bass: 7.5, mids: 1.5, treble: 3.5 },
+    // Heavy, rolling 808 sub-rumble paired with crisp modern hi-hat air
+    "R&B / Hip-Hop": { volume: 1.0, bass: 7.5, mids: 1.5, treble: 7.0 },
 
     // Massive sub-bass punch and sparkling highs for modern synths and drops
-    "Electronic": { volume: 1.0, bass: 7.0, mids: 1.0, treble: 5.5 },
+    "Electronic": { volume: 1.0, bass: 7.0, mids: 1.0, treble: 7.5 },
 
-    // Uncompromised heavy low-end with a touch of treble air for clarity
-    "Deep Bass": { volume: 1.0, bass: 8.0, mids: 0.0, treble: 2.0 },
+    // Heavy, punchy dembow bounce, clear forward vocals, and crisp percussion snap
+    "Reggaeton": { volume: 1.0, bass: 6.5, mids: 2.5, treble: 6.5 },
+
+    // Uncompromised heavy low-end with subtle top-end sheen for spatial clarity
+    "Deep Bass": { volume: 1.0, bass: 8.0, mids: 0.0, treble: 3.5 },
 
     // --- GLOBAL & SPECIALIZED GENRES ---
     // Warm, textured atmosphere designed for synths, reverb, and vocal intimacy
-    "Indie / Alt": { volume: 1.0, bass: 4.0, mids: 3.0, treble: 4.5 },
+    "Indie / Alt": { volume: 1.0, bass: 5.5, mids: 1.5, treble: 6.5 },
 
     // High-energy sparkle, agile bass, and forward vocals for dense, fast-paced tracks
-    "Vocaloid / J-Pop": { volume: 1.0, bass: 5.0, mids: 4.5, treble: 6.5 },
+    "Vocaloid / J-Pop": { volume: 1.0, bass: 5.0, mids: 4.5, treble: 8.0 },
 
     // Rich upright bass warmth, articulate brass mids, and detailed cymbal brushwork
-    "Jazz / Blues": { volume: 1.0, bass: 3.5, mids: 2.5, treble: 3.5 },
+    "Jazz / Blues": { volume: 1.0, bass: 4.5, mids: 2.0, treble: 6.0 },
 
-    // Brings out the organic resonance of wooden instruments and strings
-    "Acoustic": { volume: 1.0, bass: 2.0, mids: 4.0, treble: 5.0 },
+    // Brings out the organic resonance of wooden instruments and string shimmer
+    "Acoustic": { volume: 1.0, bass: 2.0, mids: 4.0, treble: 6.5 },
 
     // Natural concert hall acoustics and dynamic headroom for orchestral fidelity
-    "Classical": { volume: 1.0, bass: 3.0, mids: 1.5, treble: 4.0 },
+    "Classical": { volume: 1.0, bass: 4.0, mids: 1.5, treble: 7.0 },
+
+    // --- UNDERGROUND & CONTEMPORARY GENRES ---
+    // Punchy 4/4 kick foundation, organic polyrhythmic percussion, and open club highs
+    "House / Afro House": { volume: 1.0, bass: 7.0, mids: 1.5, treble: 7.5 },
+
+    // Driving metallic bass guitar, hollowed cold vocals, and sharp drum machine snap
+    "Post-Punk": { volume: 1.0, bass: 6.0, mids: 1.0, treble: 6.5 },
+
+    // Deep resonant acoustic bass chords, ethereal strings, and expansive cinematic reverb
+    // "Dethwave": { volume: 1.0, bass: 6.0, mids: 3.0, treble: 7.0 },
+
+    // Tight 808 punch, controlled low-end saturation, and razor-sharp cowbell highs
+    "Phonk": { volume: 1.0, bass: 5.0, mids: 0.0, treble: 7.0 },
 
     // --- MASTERING & FUNCTIONAL UTILITIES ---
-    // The classic audiophile "V-Curve" for rich, full-spectrum immersion
-    "Hi-Fi Master": { volume: 1.0, bass: 6.0, mids: -1.0, treble: 6.0 },
+    // Balanced audiophile contour with expansive sub-rumble, pure natural mids, and airy top-end shimmer
+    "Hi-Fi Master": { volume: 1.0, bass: 6.5, mids: 0.0, treble: 7.5 },
 
-    // Deep theatrical sub-rumble paired with crystal-clear dialogue presence
-    "Cinema": { volume: 1.0, bass: 6.5, mids: 1.5, treble: 4.5 },
+    // Deep theatrical sub-rumble, forward dialogue intelligibility, and crisp cinematic foley air
+    "Cinema": { volume: 1.0, bass: 6.5, mids: 2.5, treble: 6.5 },
 
-    // Crisp vocal presence for podcasts, YouTube essays, and lectures
-    "Vocal Booster": { volume: 1.0, bass: -1.5, mids: 5.0, treble: 3.0 },
+    // High-pass vocal clarity for podcasts and essays; eliminates mic boom while enhancing speech articulation
+    "Vocal Booster": { volume: 1.0, bass: -3.0, mids: 3.5, treble: 4.5 },
 
-    // Smooth, fatigue-free listening curve for late-night background study
-    "Late Night": { volume: 0.85, bass: -2.0, mids: 2.0, treble: -2.0 }
+    // Warm, fatigue-free tonal profile for late-night study and quiet background listening
+    "Late Night": { volume: 0.85, bass: 1.0, mids: 0.0, treble: -2.5 }
 };

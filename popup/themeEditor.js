@@ -10,6 +10,7 @@ import { storage } from './storageHelpers.js';
 import { themeEngine } from './themeEngine.js';
 import { PRESET_THEMES } from './constants.js';
 import { i18n } from './i18n.js';
+import { confirmModal } from './modalEngine.js';
 
 let currentCustomTheme = {};
 let originalThemeState = ""; // The "Brain" baseline for comparison
@@ -88,16 +89,9 @@ export const themeEditor = {
             resetBtn: document.getElementById("resetThemeBtn"),
             nameInput: document.getElementById("themeNameInput"),
 
-            // Replaced native select with custom dropdown DOM elements
             themeDropdown: document.getElementById("savedThemesDropdown"),
             themeDropdownText: document.getElementById("savedThemesDropdownText"),
-            themeOptionsContainer: document.getElementById("savedThemesOptionsContainer"),
-
-            modal: document.getElementById("customModal"),
-            modalTitle: document.getElementById("modalTitle"),
-            modalMsg: document.getElementById("modalMessage"),
-            modalConfirm: document.getElementById("modalConfirmBtn"),
-            modalCancel: document.getElementById("modalCancelBtn")
+            themeOptionsContainer: document.getElementById("savedThemesOptionsContainer")
         };
     },
 
@@ -107,7 +101,6 @@ export const themeEditor = {
         const placeholder = i18n.t("placeholder_select_theme") || "Select a theme...";
         els.themeDropdownText.textContent = themeName || placeholder;
 
-        // Prevent i18n from overwriting an active theme name with the placeholder
         if (themeName) {
             els.themeDropdownText.removeAttribute("data-i18n");
         } else {
@@ -145,7 +138,7 @@ export const themeEditor = {
 
         btn.textContent = tempText;
         btn.disabled = true;
-        btn.classList.add("is-flashing"); // Flags the animation state for CSS so prohibited cursor is ignored
+        btn.classList.add("is-flashing");
         btn.style.opacity = "0.7";
 
         setTimeout(() => {
@@ -161,9 +154,6 @@ export const themeEditor = {
         const els = this.getElements();
         const current = this.normalizeTheme(this.getCurrentPickerValues());
         const currentJson = JSON.stringify(current);
-
-        // REMOVED: Disabling logic for saveBtn and resetBtn.
-        // Both buttons remain clickable at all times so user actions (like focusing the input box or early returns) work seamlessly without showing a prohibited cursor!
 
         const placeholder = i18n.t("placeholder_select_theme") || "Select a theme...";
         const currentSelection = els.themeDropdownText?.textContent === placeholder ? "" : els.themeDropdownText?.textContent;
@@ -263,7 +253,6 @@ export const themeEditor = {
 
         // --- Shared Save Handler (Used by Button Click & Enter Key) ---
         const handleSave = async () => {
-            // PATCH: Ignore Enter key spam if a save is already in progress
             if (els.saveBtn.disabled) return;
 
             const name = els.nameInput.value.trim();
@@ -287,8 +276,13 @@ export const themeEditor = {
                 const msgText = (i18n.t("modal_theme_overwrite_msg") || `The theme '${name}' already exists. Replace it?`).replace("{{NAME}}", name);
                 const btnText = i18n.t("button_replace") || "Replace";
 
-                this.showModal(els, titleText, msgText, btnText, async () => {
-                    await this.performSave(els, name, libraryThemes, currentValues);
+                confirmModal.open({
+                    title: titleText,
+                    message: msgText,
+                    confirmText: btnText,
+                    onConfirm: async () => {
+                        await this.performSave(els, name, libraryThemes, currentValues);
+                    }
                 });
             } else {
                 await this.performSave(els, name, libraryThemes, currentValues);
@@ -301,13 +295,13 @@ export const themeEditor = {
         // 2. Trigger save via Enter Key in the theme name input box
         els.nameInput.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
-                e.preventDefault(); // Stops form submission / page jumps
-                els.nameInput.blur(); // Drops the focus ring just like clicking with a mouse
+                e.preventDefault();
+                els.nameInput.blur();
                 handleSave();
             }
         });
 
-        // 3. STEP 2: Update button state immediately as the user types
+        // 3. Update button state immediately as user types
         els.nameInput.addEventListener("input", () => {
             this.updateButtonStates();
         });
@@ -316,7 +310,7 @@ export const themeEditor = {
             const currentJson = JSON.stringify(this.normalizeTheme(this.getCurrentPickerValues()));
 
             if (currentJson === originalThemeState) {
-                return; // Do nothing when no changes have been made
+                return;
             }
 
             const baseline = JSON.parse(originalThemeState);
@@ -325,7 +319,6 @@ export const themeEditor = {
             themeEngine.apply('custom', currentCustomTheme);
 
             this.flashButtonText("resetThemeBtn", i18n.t("feedback_reset_success") || "Reset!", i18n.t("button_reset_defaults") || "Reset to Defaults");
-
             this.updateButtonStates();
         });
 
@@ -338,20 +331,15 @@ export const themeEditor = {
             const msgText = (i18n.t("modal_theme_delete_msg") || `Are you sure you want to permanently delete '${name}'?`).replace("{{NAME}}", name);
             const btnText = i18n.t("button_delete") || "Delete";
 
-            this.showModal(
-                els,
-                titleText,
-                msgText,
-                btnText,
-                async () => {
-                    // 1. Delete from memory & storage
+            confirmModal.open({
+                title: titleText,
+                message: msgText,
+                confirmText: btnText,
+                onConfirm: async () => {
                     delete libraryThemes[name];
                     await storage.set("savedThemes", libraryThemes);
-
-                    // 2. Refresh the dropdown list
                     await this.refreshThemeList(els);
 
-                    // 3. Intelligent switch to the first available theme
                     const remainingNames = Object.keys(libraryThemes);
 
                     if (remainingNames.length > 0) {
@@ -377,7 +365,7 @@ export const themeEditor = {
 
                     this.updateButtonStates();
                 }
-            );
+            });
         });
 
         els.closeBtn.addEventListener("click", () => {
@@ -392,7 +380,6 @@ export const themeEditor = {
     },
 
     async performSave(els, name, themes, themeToSave) {
-        // PATCH: Lock the UI immediately to prevent rapid-fire race conditions
         if (els.saveBtn) els.saveBtn.disabled = true;
 
         themes[name] = themeToSave;
@@ -409,24 +396,9 @@ export const themeEditor = {
         this.setSelectedThemeUI(els, name);
         els.nameInput.value = "";
 
-        // The flasher handles the unlock after the animation
         this.flashButtonText("saveThemeBtn", i18n.t("feedback_saved") || "Saved!", i18n.t("button_save") || "Save");
         themeEngine.apply('custom', themeToSave);
         this.updateButtonStates();
-    },
-
-    showModal(els, title, msg, confirmText, onConfirm) {
-        els.modalConfirm.textContent = confirmText || i18n.t("button_confirm");
-        els.modalCancel.classList.remove("hidden");
-        els.modalTitle.textContent = title;
-        els.modalMsg.textContent = msg;
-        els.modal.classList.remove("hidden");
-
-        els.modalConfirm.onclick = () => {
-            onConfirm();
-            els.modal.classList.add("hidden");
-        };
-        els.modalCancel.onclick = () => els.modal.classList.add("hidden");
     },
 
     updatePickerUI(theme) {

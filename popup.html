@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="popup.css">
 </head>
 
-<body>
+<body class="no-transitions">
     <div class="container" style="position: relative;">
         <div class="header-bar">
             <img src="icons/logo-horizontal.png" alt="EQ & Volume Boost Logo" class="brand-logo">
@@ -44,8 +44,8 @@
         </div>
 
         <div id="statusContainer" class="status-container">
-            <p id="statusMessage" class="status-message" data-i18n="status_disabled">Extension disabled.</p> <button
-                id="takeOverBtn" class="takeover-button hidden" data-i18n="button_takeover">
+            <p id="statusMessage" class="status-message"></p>
+            <button id="takeOverBtn" class="takeover-button hidden" data-i18n="button_takeover">
                 Use on this tab
             </button>
         </div>
@@ -78,7 +78,7 @@
                     </details>
 
                     <button id="revertPresetBtn" class="icon-button" title="Undo Changes"
-                        data-i18n-title="title_revert_preset" style="width: 100%; padding: 0;">
+                        data-i18n-title="title_revert_preset" style="width: 100%; padding: 0;" disabled>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" style="width: 14px; height: 14px; display: block;">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -87,7 +87,7 @@
                     </button>
 
                     <button id="updatePresetBtn" class="icon-button" title="Update/Overwrite"
-                        data-i18n-title="title_update_preset" style="width: 100%; padding: 0;">
+                        data-i18n-title="title_update_preset" style="width: 100%; padding: 0;" disabled>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" style="width: 14px; height: 14px; display: block;">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -240,6 +240,7 @@
                         <span class="slider round"></span>
                     </label>
                 </div>
+
                 <div class="setting-row"
                     style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <label for="customThemeToggle" class="settings-label"
@@ -270,7 +271,25 @@
                         </label>
                     </div>
                 </div>
+
+                <div class="setting-row"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <label for="autoStartupToggle" class="settings-label"
+                        style="margin: 0; cursor:pointer; display: flex; align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" style="width: 18px; height: 18px; margin-right: 6px;">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
+                        </svg>
+                        <span data-i18n="settings_auto_startup">Auto-Start on Open</span>
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="autoStartupToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
+
             <div class="settings-footer" style="text-align: center;">
                 <hr class="settings-divider">
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 5px;">
@@ -283,7 +302,7 @@
                         </svg>
                         <span data-i18n="about_title">About</span>
                     </button>
-                    <p style="color: var(--text-muted); font-size: 0.75em; margin: 0;">v2.0.0</p>
+                    <p style="color: var(--text-muted); font-size: 0.75em; margin: 0;">v2.1.0</p>
                 </div>
             </div>
         </div>
@@ -394,7 +413,7 @@
                 <div class="about-header">
                     <img src="icons/icon128.png" alt="Logo" class="about-app-icon">
                     <h3 class="about-app-title" data-i18n="about_app_name">Chrome EQ & Volume</h3>
-                    <span class="about-version-badge">v2.0.0</span>
+                    <span class="about-version-badge">v2.1.0</span>
                     <p class="about-app-desc" data-i18n="about_subtitle">One world in perfect harmony.</p>
                 </div>
 
