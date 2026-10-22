@@ -46,9 +46,6 @@ function setSmoothParam(param, targetValue) {
 function stopHardwareTracks() {
     if (pristineMediaStreamHandle) {
         pristineMediaStreamHandle.getTracks().forEach(track => {
-            // 🚨 CRITICAL FIX: Nullify `onended` before stopping the track manually.
-            // Otherwise, stopping a previous stream during a takeover or restart
-            // fires `STREAM_ENDED_EXTERNALLY` and kills the newly created stream.
             track.onended = null;
             try { track.stop(); } catch (e) { }
         });
@@ -109,7 +106,6 @@ async function startProcessing(streamId, savedSettings = {}) {
         if (tracks.length > 0) {
             const activeTrack = tracks[0];
             activeTrack.onended = () => {
-                // Guard: Only trigger teardown if this track still belongs to the active stream
                 if (pristineMediaStreamHandle && pristineMediaStreamHandle.getAudioTracks()[0] === activeTrack) {
                     stopHardwareTracks();
                     chrome.runtime.sendMessage({ type: "STREAM_ENDED_EXTERNALLY" }).catch(() => { });
@@ -132,36 +128,33 @@ async function startProcessing(streamId, savedSettings = {}) {
         analyser.fftSize = 256;
         analyser.smoothingTimeConstant = 0.0;
 
-        // HD FREQUENCIES (Synced with UI and constants: 80Hz / 2500Hz / 8000Hz)
+        // HD FREQUENCIES (Synced with UI: 80Hz / 2500Hz / 8000Hz)
         bass = createFilter("lowshelf", 80);
         mid = createFilter("peaking", 2500);
         treble = createFilter("highshelf", 8000);
         gainNode = audioContext.createGain();
 
-        // HD COMPRESSOR SETTINGS (Dense harmonic body & dynamic safety limit)
+        // THE V2.0.0 SUCCESSOR
         compressor = audioContext.createDynamicsCompressor();
-        compressor.threshold.value = -24; // Start compressing early for dense harmonic body
-        compressor.knee.value = 30;       // Soft knee for transparent transition
-        compressor.ratio.value = 3;       // 3:1 ratio
-        compressor.attack.value = 0.003;  // Fast 3ms attack prevents bass from masking mids
-        compressor.release.value = 0.25;  // 250ms release
+        compressor.threshold.value = -16.0; // Sweet spot: high enough to keep normal volume, low enough to catch bass spikes
+        compressor.knee.value = 24.0;       // Ultra-soft knee: smoothly glues bass and vocals together
+        compressor.ratio.value = 5.0;       // Strong enough to catch heavy EQ boosts without brickwalling
+        compressor.attack.value = 0.003;    // 3ms: The exact v2.0.0 punch
+        compressor.release.value = 0.25;    // 250ms: The exact v2.0.0 depth
 
-        // 🚨 CRITICAL FIX: Connect analyser directly to `sourceNode` (pre-EQ/pre-Gain)
-        // as well as post-compressor so low volume sliders or negative EQ presets
-        // (like "Late Night") never trick the watchdog into thinking the tab is silent.
+        // Watchdog input tap (pre-EQ/pre-gain)
         sourceNode.connect(analyser);
 
-        // AUDIO GRAPH: Source -> EQ -> Gain -> Compressor -> Output
+        // AUDIO GRAPH: Source -> EQ -> Gain -> Limiter -> Output
         sourceNode.connect(bass)
             .connect(mid)
             .connect(treble)
             .connect(gainNode)
             .connect(compressor);
 
-        // Route compressor to the final output
         compressor.connect(audioContext.destination);
 
-        // Apply cached settings immediately on startup
+        // Apply cached settings
         gainNode.gain.value = savedSettings.volumeLevel ?? 1.0;
         bass.gain.value = savedSettings.bassLevel ?? 0.0;
         mid.gain.value = savedSettings.midLevel ?? 0.0;
@@ -176,7 +169,6 @@ async function startProcessing(streamId, savedSettings = {}) {
             let isCurrentSilence = true;
 
             if (audioContext && audioContext.state !== "closed" && analyser) {
-                // Proactively wake suspended AudioContext during long background sessions
                 if (audioContext.state === "suspended") {
                     audioContext.resume().catch(() => { });
                 }
@@ -193,7 +185,6 @@ async function startProcessing(streamId, savedSettings = {}) {
                 silenceSeconds = 0;
             }
 
-            // Exactly 30-minute grace period buffer (1800 seconds)
             if (silenceSeconds >= 1800) {
                 stopHardwareTracks();
                 chrome.runtime.sendMessage({ type: "SILENCE_TIMEOUT" }).catch(() => { });
@@ -272,5 +263,5 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             return false;
     }
 
-    return false; // Not addressed to offscreen: never intercept or answer!
+    return false;
 });

@@ -2,6 +2,13 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [2.1.1] - 2026-10-21
+
+### 🐛 Bug Fixes & Audio Tuning
+- **"Anti-Booster" Volume Drop Fix:** Raised the master compressor threshold from `-24.0dB` to `-16.0dB`. This prevents the audio graph from aggressively squashing standard-volume streams when the extension is first enabled, directly resolving reports of the volume dropping instead of boosting.
+- **EQ Distortion Prevention:** Calibrated the compressor with a `5.0` ratio and an ultra-soft `24.0` knee. This safely glues the frequencies together and prevents harsh digital clipping when applying heavy +15dB bass boosts.
+- **Restored Transient Punch:** Reverted the compressor attack and release times back to their v2.0.0 magic numbers (`0.003s` attack, `0.25s` release). This ensures the initial "thump" of heavy bass notes retains its physical punch and deep sustain without causing the vocals to aggressively pump or duck.
+
 **[2.1.0] - 2026-10-18**
 
 **🎧 Audio Engine & DSP Overhaul**
