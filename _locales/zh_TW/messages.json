@@ -12,7 +12,7 @@
     "message": "等待音訊..."
   },
   "status_conflict": {
-    "message": "正在控制另一個分頁"
+    "message": "音訊被其他應用程式佔用"
   },
   "toggle_label": {
     "message": "擴充功能已啟用"

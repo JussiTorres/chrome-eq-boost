@@ -12,7 +12,7 @@
     "message": "Oczekiwanie na dźwięk..."
   },
   "status_conflict": {
-    "message": "Sterowanie inną kartą"
+    "message": "Inna aplikacja używa dźwięku"
   },
   "toggle_label": {
     "message": "Rozszerzenie włączone"

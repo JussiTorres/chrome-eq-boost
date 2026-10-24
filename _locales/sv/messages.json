@@ -12,7 +12,7 @@
     "message": "Väntar på ljud..."
   },
   "status_conflict": {
-    "message": "Kontrollerar en annan flik"
+    "message": "Ljud blockerat av annan app"
   },
   "toggle_label": {
     "message": "Tillägg aktiverat"

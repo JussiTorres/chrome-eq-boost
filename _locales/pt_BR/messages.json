@@ -12,7 +12,7 @@
     "message": "Aguardando áudio..."
   },
   "status_conflict": {
-    "message": "Controlando outra guia"
+    "message": "Bloqueado por outro app"
   },
   "toggle_label": {
     "message": "Extensão habilitada"

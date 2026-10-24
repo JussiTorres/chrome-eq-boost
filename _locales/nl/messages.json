@@ -12,7 +12,7 @@
         "message": "Wachten op audio..."
     },
     "status_conflict": {
-        "message": "Bestuurt ander tabblad"
+        "message": "Geblokkeerd door andere app"
     },
     "toggle_label": {
         "message": "Extensie ingeschakeld"

@@ -12,7 +12,7 @@
         "message": "Laukiama garso..."
     },
     "status_conflict": {
-        "message": "Valdomas kitas skirtukas"
+        "message": "Garsą blokuoja kita programa"
     },
     "toggle_label": {
         "message": "Įjungti plėtinį"

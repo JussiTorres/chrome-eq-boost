@@ -10,34 +10,36 @@ A professional-grade, privacy-focused audio suite for Chrome. Boost your volume 
 
 ### 🔊 High-Fidelity Audio Engineering
 
-* **Pro-Level Preamp:** Clean digital gain boost up to **400%** without distorting your source.
-* **HD 3-Band Equalizer:** Re-tuned for audiophile transparency with a range of **+/- 15dB**.
-* **Sub-Bass (80Hz):** Deep, resonant lows with a musical 0.7 Q-factor.
-* **Vocal Clarity (2500Hz):** Enhanced presence and intelligibility for speech and vocals.
-* **Air/Brilliance (8000Hz):** Crisp high-end definition for an airy, open soundstage.
-* **Linear Signal Path:** Optimized architecture routing the visualizer and watchdog post-compression for high-fidelity signal analysis.
-* **Dynamics Processing:** Built-in **3:1 Compressor** with a -24dB threshold and soft-knee transition acting as a master limiter to prevent digital clipping while preserving dynamic range.
+- **Pro-Level Preamp:** Clean digital gain boost up to **400%** without distorting your source.
+- **HD 3-Band Equalizer:** Re-tuned for audiophile transparency with a range of **+/- 15dB**.
+- **Analog-Style Parameter Smoothing:** Eliminates digital "zipper noise" and audio clicks using exponential time-constant adjustments for seamless preset transitions.
+- **Sub-Bass (80Hz):** Deep, resonant lows with a musical 0.7 Q-factor.
+- **Vocal Clarity (2500Hz):** Enhanced presence and intelligibility for speech and vocals.
+- **Air/Brilliance (8000Hz):** Crisp high-end definition for an airy, open soundstage.
+- **Linear Signal Path:** Optimized architecture routing the visualizer and watchdog post-compression for high-fidelity signal analysis.
+- **Dynamics Processing:** Built-in **5:1 Compressor** with a **-16.0dB threshold** and soft-knee transition, acting as a master limiter to prevent digital clipping while preserving transient punch and dynamic range.
 
 ### 🎨 Next-Gen UI & Personalization
 
-* **EQ Preset Management System:** Save, load, and manage custom equalizer profiles seamlessly alongside built-in default presets.
-* **Custom Theme Editor:** Create and save your own UI designs with a professional **3-color picker system**.
-* **Dynamic Contrast Engine:** Intelligent UI logic that automatically adjusts text color (Black/White) and makes the Reset button a chameleon that adapts to your chosen accent colors.
-* **Unified "Light-Up" Logic:** Smart state management via CSS `:has()` that applies a subtle opacity fade when disabled and a high-luminance glow when active.
-* **Retro Marquee Mode:** A scrolling "ticker" display for song titles.
-* **Dark Mode:** Persistent, high-integrity dark theme for late-night sessions.
+- **EQ Preset Management System:** Save, load, and manage custom equalizer profiles seamlessly alongside an expansive built-in library of genre-specific presets (including Reggaeton, House, Post-Punk, and Phonk).
+- **Custom Theme Editor:** Create and save your own UI designs with a professional **3-color picker system**.
+- **Dynamic Contrast Engine:** Intelligent UI logic that automatically adjusts text color (Black/White) and makes the Reset button a chameleon that adapts to your chosen accent colors.
+- **Unified "Light-Up" Logic:** Smart state management via CSS `:has()` that strictly binds disabled states and opacity fades to logical UI locks.
+- **Anti-Flicker Marquee Mode:** A scrolling "ticker" display for song titles featuring in-place DOM updates for perfectly seamless track transitions.
+- **Dark Mode:** Persistent, high-integrity dark theme for late-night sessions.
 
 ### 🧠 Intelligent Audio Engine
 
-* **Fused RTL Engine:** Full layout parity for Right-To-Left languages featuring dynamic document-level mirroring.
-* **Stale UI Teardown:** Aggressive `unload` event listeners automatically clear transient states (like open preset decks) from memory when the popup closes.
-* **Decoupled Modal Engine:** A centralized, reusable UI module for handling all confirmation dialogues (theme deletion, preset overwriting).
-* **Auto-Healing Watchdog:** Proactively catches unexpected Chromium context suspensions (system sleep, tab discarding) via `onstatechange` events and executes programmatic recovery.
-* **Concurrency-Safe Operations:** Implemented an atomic mutex lock (`creatingOffscreenPromise`) to prevent race condition crashes during rapid UI toggle interactions.
-* **Centralized Teardown Pipeline:** Orchestrates clean resource disposal via `executeCleanTeardown()` and `stopHardwareTracks()`, strictly ensuring instantaneous track termination and forcing the blue casting icon to drop immediately.
-* **Slider Routing Middleware:** Intercepts real-time modification events during background worker wake-cycles, safely piping adjustments to the offscreen canvas with fallback recovery.
-* **Extended Silence Grace Period:** Background silence detection features an expanded 30-minute grace period buffer before executing proactive teardown to conserve system resources.
-* **Zero-Latency Response:** Instant visual and auditory reaction to play/pause events with an optimized 500ms UI polling rate.
+- **Conflict Resolution Engine:** Gracefully detects `tabCapture` API lockouts and blocked audio streams, providing immediate visual feedback and locking UI states without freezing the extension.
+- **Fused RTL Engine:** Full layout parity for Right-To-Left languages featuring dynamic document-level mirroring and pixel-perfect icon alignments.
+- **Stale UI Teardown:** Aggressive `unload` event listeners automatically clear transient states (like open preset decks) from memory when the popup closes.
+- **Decoupled Modal Engine:** A centralized, reusable UI module for handling all confirmation dialogues (theme deletion, preset overwriting).
+- **Auto-Healing Watchdog:** Proactively catches unexpected Chromium context suspensions (system sleep, tab discarding) via `onstatechange` events and executes programmatic recovery.
+- **Concurrency-Safe Operations:** Implemented strict Mutex locks (`creatingOffscreenPromise`) and centralized UI state managers (`uiStatus.js`) to prevent race condition crashes during rapid toggle interactions.
+- **Centralized Teardown Pipeline:** Orchestrates clean resource disposal via `executeCleanTeardown()` and `stopHardwareTracks()`, strictly ensuring instantaneous track termination and forcing the blue casting icon to drop immediately.
+- **Slider Routing Middleware:** Intercepts real-time modification events during background worker wake-cycles, safely piping adjustments to the offscreen canvas with fallback recovery.
+- **Extended Silence Grace Period:** Background silence detection features an expanded 30-minute grace period buffer before executing proactive teardown to conserve system resources.
+- **Zero-Latency Response:** Instant visual and auditory reaction to play/pause events with an optimized 500ms UI polling rate.
 
 ---
 
@@ -51,9 +53,9 @@ The extension features **Auto-Language Detection** and is fully localized in **2
 
 Built with **Manifest V3** and the principle of **Least Privilege**:
 
-* **No Script Injection:** Unlike competitors, we never inject code into your webpages, keeping your data safe.
-* **Sandboxed Processing:** Audio is processed in a secure, isolated **Offscreen Document** using the `tabCapture` API.
-* **Minimal Permissions:** We only ask for the permissions required to process your audio—nothing more (`activeTab`, `tabCapture`, `offscreen`, `storage`).
+- **No Script Injection:** Unlike competitors, we never inject code into your webpages, keeping your data safe.
+- **Sandboxed Processing:** Audio is processed in a secure, isolated **Offscreen Document** using the `tabCapture` API.
+- **Minimal Permissions:** We only ask for the permissions required to process your audio—nothing more (`activeTab`, `tabCapture`, `offscreen`, `storage`).
 
 ---
 
@@ -75,9 +77,9 @@ The most secure and easiest method:
 
 ## 🛠️ Technical Stack
 
-* **Engine:** Web Audio API (`BiquadFilterNode`, `DynamicsCompressorNode`, `AnalyserNode`) wired into a linear node chain.
-* **Architecture:** Modular ES6 Javascript (`themeEngine.js`, `uiStatus.js`, `storageHelpers.js`, `themeEditor.js`, `presetManager.js`, `modalEngine.js`) for high performance and maintainability.
-* **Communication:** Asynchronous Service Worker orchestration, atomic promise gates, and cross-context message routing.
+- **Engine:** Web Audio API (`BiquadFilterNode`, `DynamicsCompressorNode`, `AnalyserNode`) wired into a linear node chain.
+- **Architecture:** Modular ES6 Javascript (`themeEngine.js`, `uiStatus.js`, `storageHelpers.js`, `themeEditor.js`, `presetManager.js`, `modalEngine.js`) for high performance and maintainability.
+- **Communication:** Asynchronous Service Worker orchestration, atomic promise gates, and cross-context message routing.
 
 ---
 

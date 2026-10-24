@@ -12,7 +12,7 @@
     "message": "오디오 대기 중..."
   },
   "status_conflict": {
-    "message": "다른 탭 제어 중"
+    "message": "다른 앱이 오디오 사용 중"
   },
   "toggle_label": {
     "message": "확장 프로그램 활성"

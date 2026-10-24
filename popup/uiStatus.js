@@ -73,14 +73,28 @@ export const uiStatus = {
 
         // --- CASE 2: ENABLED ---
         if (takeOverBtn) takeOverBtn.classList.add('hidden');
-        if (container && !container.classList.contains("conflict")) {
+
+        // 🚀 CENTRALIZED LOCK: Only wake up the controls & label if the audio engine is fully active
+        if (isActive && container && !container.classList.contains("conflict")) {
             sliders.forEach(s => s.disabled = false);
             if (resetBtn) resetBtn.disabled = false;
-        }
-        if (toggleLabel) {
-            toggleLabel.textContent = i18n.t("toggle_label") || "Extension Enabled";
-            toggleLabel.classList.remove('label-disabled');
-            toggleLabel.classList.add('label-enabled');
+
+            if (toggleLabel) {
+                toggleLabel.textContent = i18n.t("toggle_label") || "Extension Enabled";
+                toggleLabel.classList.remove('label-disabled');
+                toggleLabel.classList.add('label-enabled');
+            }
+        } else {
+            // Keep them safely locked (disabled) during "Initializing..." or conflicts
+            sliders.forEach(s => s.disabled = true);
+            if (resetBtn) resetBtn.disabled = true;
+
+            if (toggleLabel) {
+                const msg = i18n.t("status_disabled") || "Extension disabled";
+                toggleLabel.textContent = msg.replace(/\.$/, "");
+                toggleLabel.classList.add('label-disabled');
+                toggleLabel.classList.remove('label-enabled');
+            }
         }
 
         if (isActive) {

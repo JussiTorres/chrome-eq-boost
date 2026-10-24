@@ -2,6 +2,19 @@
 
 All notable changes to the "Chrome EQ Boost" extension will be documented in this file.
 
+## [2.1.2] - 2026-10-23
+
+### 🐛 UX & Logic Hardening
+- **Conflict Resolution Engine:** Replaced the silent `tabCapture` rejection with a dedicated error state. If another app or extension is blocking audio, the UI temporarily locks, flashes red, and explains the blockage before gracefully resetting.
+- **Centralized UI Lock:** Moved slider and reset button enablement logic inside a strict centralized state manager (`uiStatus.js`). Controls now require full audio engine connection before unlocking, eliminating "ghost clicks" during the "Initializing..." phase.
+- **Race Condition Eradicated:** Stopped stripping the marquee animation class before background worker shutdown, allowing the DOM to clean up in a single synchronous frame and preventing overlapping text artifacts when toggling off.
+- **Takeover Flash Fix:** Removed legacy manual UI overrides during tab takeover, allowing the centralized lock to handle state transitions without causing the reset button to visually flash.
+
+### 💄 CSS & Localization Polish
+- **Anti-Squish Flexbox:** Applied strict `flex-shrink: 0` constraints to the main toggle switch and settings icons, ensuring they maintain their exact dimensions even when displaying extremely long translated strings (like German).
+- **Decoupled Disabled State:** Shifted the CSS fade-out trigger from the physical checkbox to a logical label class (`.label-disabled`). This prevents the UI from lighting up or "color popping" while the switch physically animates a rejection.
+- **Native Error Translations:** Injected character-width optimized translations for the new "Audio blocked by another app" error across all 28 supported locales, ensuring perfect pixel alignment for Latin, Cyrillic, and CJK text.
+
 ## [2.1.1] - 2026-10-21
 
 ### 🐛 Bug Fixes & Audio Tuning

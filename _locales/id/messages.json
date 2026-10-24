@@ -12,7 +12,7 @@
     "message": "Menunggu audio..."
   },
   "status_conflict": {
-    "message": "Mengontrol tab lain"
+    "message": "Audio diblokir aplikasi lain"
   },
   "toggle_label": {
     "message": "Ekstensi aktif"

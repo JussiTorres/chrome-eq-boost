@@ -12,7 +12,7 @@
     "message": "In attesa di audio…"
   },
   "status_conflict": {
-    "message": "Controllata da un'altra scheda"
+    "message": "Bloccato da un'altra app"
   },
   "toggle_label": {
     "message": "Estensione attivata"
