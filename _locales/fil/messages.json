@@ -12,7 +12,7 @@
         "message": "Naghihintay ng audio..."
     },
     "status_conflict": {
-        "message": "Kinokontrol ang ibang tab"
+        "message": "Audio: ginagamit ng ibang app"
     },
     "toggle_label": {
         "message": "Naka-on ang extension"

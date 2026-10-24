@@ -12,7 +12,7 @@
     "message": "Waiting for audio..."
   },
   "status_conflict": {
-    "message": "Controlling another tab"
+    "message": "Audio blocked by another app"
   },
   "toggle_label": {
     "message": "Extension enabled"

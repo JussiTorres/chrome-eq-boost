@@ -12,7 +12,7 @@
     "message": "音声待機中..."
   },
   "status_conflict": {
-    "message": "別のタブを制御中"
+    "message": "他のアプリが音声を使用中"
   },
   "toggle_label": {
     "message": "拡張機能を有効化"

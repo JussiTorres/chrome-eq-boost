@@ -12,7 +12,7 @@
     "message": "Warten auf Audio..."
   },
   "status_conflict": {
-    "message": "Steuert anderen Tab"
+    "message": "Audio von anderer App belegt"
   },
   "toggle_label": {
     "message": "Erweiterung aktiviert"

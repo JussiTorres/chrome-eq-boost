@@ -513,14 +513,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             rejectionTimeout = null;
         }
         uiStatus.stopPolling();
-        container.classList.remove("conflict", "mask-active");
-        statusMsg.classList.remove("marquee-text");
+
+        // Only clear conflict early. Let uiStatus handle mask-active and marquee-text
+        container.classList.remove("conflict");
+
         takeOverBtn.classList.add("hidden");
         syncPresetUIButton(false);
         setPresetDeckState(false);
 
-        // Await STOP_CAPTURE so teardown finishes cleanly before any rapid re-enable
+        // Await STOP_CAPTURE so teardown finishes cleanly
         await send({ type: "STOP_CAPTURE" });
+
+        // The UI now updates cleanly in a single frame AFTER the wait
         await uiStatus.update(false, false);
 
         await storage.setMultiple({
@@ -545,8 +549,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         container.classList.remove("conflict");
         takeOverBtn.classList.add("hidden");
-        document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = false);
-        if (resetBtn) resetBtn.disabled = false;
+
+        // Removed the manual manual slider/resetBtn overrides here
+        // We now let uiStatus.js handle the locking automatically.
 
         // Await full teardown before starting capture on the new tab
         await send({ type: "STOP_CAPTURE" });
@@ -554,6 +559,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         setPresetDeckState(false);
         await storage.set("isPresetDeckOpen", false);
         data.isPresetDeckOpen = false;
+
+        // startCapture will naturally set the "Initializing..." lock
         await startCapture();
     }
 
@@ -599,11 +606,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             clearTimeout(rejectionTimeout);
             rejectionTimeout = null;
         }
-
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         if (!tab) return;
-
-        await uiStatus.update(false, true);
+        await uiStatus.update(false, true); // Sets to "Initializing..."
         const res = await send({ type: "START_CAPTURE", tabId: tab.id });
 
         if (res?.success) {
@@ -619,14 +624,33 @@ document.addEventListener("DOMContentLoaded", async () => {
             // 1. IMMEDIATELY hide the preset UI
             syncPresetUIButton(false);
             setPresetDeckState(false);
-
             if (earlyToggle) {
-                earlyToggle.checked = true; // Force it visually ON
+                earlyToggle.checked = true; // Force it visually ON, preserving the spam animation
 
                 // 2. Clear any existing timer if they are spamming the toggle
                 if (rejectionTimeout) clearTimeout(rejectionTimeout);
 
-                // 3. Start a fresh 2-second countdown (No disabled lock!)
+                // 🚀 THE FIX: Manually lock the UI so "Extension enabled" never shows and sliders stay dead
+                document.querySelectorAll('input[type="range"]').forEach(e => e.disabled = true);
+                if (resetBtn) resetBtn.disabled = true;
+
+                const toggleLabel = document.querySelector(".toggle-label");
+                if (toggleLabel) {
+                    toggleLabel.textContent = i18n.t("status_disabled") || "Extension disabled";
+                    toggleLabel.classList.add('label-disabled');
+                    toggleLabel.classList.remove('label-enabled');
+                }
+
+                // 🚀 NEW: Instantly show the conflict warning in red
+                const statusMsg = document.getElementById("statusMessage");
+                if (statusMsg) {
+                    // Repurpose the existing translation key
+                    statusMsg.textContent = i18n.t("status_conflict") || "Audio blocked by another app";
+                    statusMsg.className = "status-message text-conflict"; // Applies the bold red styling
+                    document.getElementById("statusContainer")?.classList.remove("mask-active");
+                }
+
+                // 3. Start a fresh 4-second countdown (No disabled lock!)
                 rejectionTimeout = setTimeout(async () => {
                     rejectionTimeout = null;
                     earlyToggle.checked = false; // Trigger smooth slide "OFF"
@@ -638,8 +662,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                         localStorage.removeItem("cachedTabInfo");
                     } catch (e) { }
                     uiStatus.stopPolling();
+
+                    // This will wipe the red conflict text and return it to the standard disabled state
                     await uiStatus.update(false, false);
-                }, 2000);
+                }, 4000);
             }
         }
     }

@@ -12,7 +12,7 @@
     "message": "ממתין לשמע..."
   },
   "status_conflict": {
-    "message": "שולט בכרטיסייה אחרת"
+    "message": "אפליקציה אחרת משתמשת באודיו"
   },
   "toggle_label": {
     "message": "התוסף פעיל"

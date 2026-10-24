@@ -12,7 +12,7 @@
         "message": "Ses bekleniyor..."
     },
     "status_conflict": {
-        "message": "Başka bir sekmeyi kontrol ediyor"
+        "message": "Başka uygulama sesi kullanıyor"
     },
     "toggle_label": {
         "message": "Uzantı etkin"

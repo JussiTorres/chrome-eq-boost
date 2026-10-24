@@ -12,7 +12,7 @@
     "message": "Esperando audio..."
   },
   "status_conflict": {
-    "message": "Controlando otra pestaña"
+    "message": "Audio bloqueado por otra app"
   },
   "toggle_label": {
     "message": "Extensión habilitada"

@@ -12,7 +12,7 @@
     "message": "Odotetaan ääntä..."
   },
   "status_conflict": {
-    "message": "Hallitsee toista välilehteä"
+    "message": "Toinen sovellus estää äänen"
   },
   "toggle_label": {
     "message": "Laajennus käytössä"

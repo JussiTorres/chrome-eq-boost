@@ -478,6 +478,7 @@ input[type="range"]::-webkit-slider-thumb {
     display: inline-block;
     width: 48px;
     height: 26px;
+    flex-shrink: 0; /* 🚀 PREVENTS LONG TEXT FROM SQUISHING THE TOGGLE */
 }
 
 .switch input {
@@ -935,7 +936,7 @@ body.custom-theme #mainToggleContainer .toggle-label.label-disabled {
    ========================================================================== */
 
 /* 1. Sliders & Values: Gets slate text color */
-body:has(#toggleEnabled:not(:checked)) input[type="range"] {
+body:has(.label-disabled) input[type="range"] {
     color: var(--text-primary) !important;
     opacity: 0.66 !important;
     cursor: not-allowed !important;
@@ -944,7 +945,7 @@ body:has(#toggleEnabled:not(:checked)) input[type="range"] {
 }
 
 /* 1a. EQ Labels: Independent opacity control */
-body:has(#toggleEnabled:not(:checked)) .eq-control label {
+body:has(.label-disabled) .eq-control label {
     color: var(--text-primary) !important;
     opacity: 0.77 !important;
     cursor: not-allowed !important;
@@ -953,7 +954,7 @@ body:has(#toggleEnabled:not(:checked)) .eq-control label {
 }
 
 /* 1b. Section Titles*/
-body:has(#toggleEnabled:not(:checked)) .section-title {
+body:has(.label-disabled) .section-title {
     color: var(--primary) !important;
     opacity: 0.93 !important;
     cursor: not-allowed !important;
@@ -962,7 +963,7 @@ body:has(#toggleEnabled:not(:checked)) .section-title {
 }
 
 /* 1c. Value Display*/
-body:has(#toggleEnabled:not(:checked)) .value-display {
+body:has(.label-disabled) .value-display {
     color: var(--text-primary) !important;
     opacity: 0.89 !important;
     cursor: not-allowed !important;
@@ -972,13 +973,13 @@ body:has(#toggleEnabled:not(:checked)) .value-display {
 
 /* 6. REMOVE KNOB BOX SHADOW WHEN DISABLED
    Flattens the volume, bass, mid, and treble thumbs into the track */
-body:has(#toggleEnabled:not(:checked)) input[type="range"]::-webkit-slider-thumb {
+body:has(.label-disabled) input[type="range"]::-webkit-slider-thumb {
     box-shadow: none !important;
     cursor: not-allowed !important;
 }
 
 /* 2. Slightly recess the main Toggle Card (Custom Themes Only) */
-body.custom-theme:has(#toggleEnabled:not(:checked)) .toggle-switch {
+body.custom-theme:has(.label-disabled) .toggle-switch {
     background-color: var(--bg-card) !important;
     filter: brightness(0.95) !important;
     box-shadow: none !important;
@@ -994,7 +995,7 @@ body.custom-theme #mainToggleContainer.toggle-muted {
 
 /* 4. HEADER PRESET BUTTON: STRICT CSS LOCK
    Hides the preset button completely when extension is OFF */
-body:has(#toggleEnabled:not(:checked)) #presetToggleBtn {
+body:has(.label-disabled) #presetToggleBtn {
     display: none !important;
 }
 
@@ -1136,6 +1137,7 @@ body:not(.custom-theme) #mainToggleContainer.toggle-muted {
     color: var(--primary) !important;
     transition: color 0.2s ease;
     filter: none;
+    flex-shrink: 0; /* 🚀 Keeps icons perfectly square */
 }
 
 .text-button svg {
@@ -1487,7 +1489,7 @@ body.dark-mode .value-display {
 /* ==========================================================================
    DARK MODE: DISABLED VALUES (Amber)
    ========================================================================== */
-body.dark-mode:has(#toggleEnabled:not(:checked)) .value-display {
+body.dark-mode:has(.label-disabled) .value-display {
     color: var(--text-waiting) !important;
     opacity: 0.9 !important;
     cursor: not-allowed !important;
@@ -1497,7 +1499,7 @@ body.dark-mode:has(#toggleEnabled:not(:checked)) .value-display {
 /* ==========================================================================
    DARK MODE: DISABLED STATE
    ========================================================================== */
-body.dark-mode:has(#toggleEnabled:not(:checked)) .eq-control label {
+body.dark-mode:has(.label-disabled) .eq-control label {
     color: var(--text-primary) !important;
     opacity: 0.9 !important;
     cursor: not-allowed !important;

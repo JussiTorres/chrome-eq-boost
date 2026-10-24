@@ -12,7 +12,7 @@
     "message": "في انتظار الصوت..."
   },
   "status_conflict": {
-    "message": "يتحكم في تبويب آخر"
+    "message": "تطبيق آخر يستخدم الصوت"
   },
   "toggle_label": {
     "message": "الإضافة مفعلة"

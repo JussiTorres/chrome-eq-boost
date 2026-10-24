@@ -12,7 +12,7 @@
         "message": "Đang chờ âm thanh..."
     },
     "status_conflict": {
-        "message": "Đang điều khiển tab khác"
+        "message": "Bị ứng dụng khác chặn"
     },
     "toggle_label": {
         "message": "Tiện ích đã bật"

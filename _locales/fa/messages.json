@@ -12,7 +12,7 @@
     "message": "در انتظار صدا..."
   },
   "status_conflict": {
-    "message": "در حال کنترل تب دیگر"
+    "message": "صدا توسط برنامه دیگری مسدود است"
   },
   "toggle_label": {
     "message": "افزونه فعال است"

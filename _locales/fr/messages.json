@@ -12,7 +12,7 @@
     "message": "En attente d'audio..."
   },
   "status_conflict": {
-    "message": "Contrôle un autre onglet"
+    "message": "Bloqué par une autre app"
   },
   "toggle_label": {
     "message": "Extension activée"

@@ -12,7 +12,7 @@
     "message": "等待音频..."
   },
   "status_conflict": {
-    "message": "正在控制另一个标签页"
+    "message": "音频被其他应用占用"
   },
   "toggle_label": {
     "message": "已启用"
